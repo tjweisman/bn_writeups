@@ -1,0 +1,406 @@
+\documentclass{amsart}
+
+\title{Facts and Conjectures:\\
+  a summer-y SUMRY summary}
+
+\input{../common/BN_common}
+
+\newenvironment{proof_short}
+{\emph{Proof idea:}}
+
+\newenvironment{evidence}
+{\emph{Evidence:}}
+
+\setcounter{section}{-1}
+
+\begin{document}
+\maketitle
+
+\section{Definitions}
+
+\begin{defn}
+  $B_n$, the \emph{banana graph on $n$ edges}, or the
+  \emph{$n$-banana}, is the graph with $V(B_n) = \{v_1, v_2\}$ and
+  edge set consisting of $n$ copies of $\{v_1, v_2\}$.
+\end{defn}
+
+\begin{defn}
+  Let $C = \{c_1, \ldots, c_m\}$ be a multiset of $m$ positive
+  integers. Define the quantities $S(C)$ and $P(C)$ by:
+
+  \begin{align}
+    S(C) &= \sum_{i=1}^mc_1 \ldots \hat{c_i} \ldots c_m\\
+    P(C) &= \prod_{i=1}^mc_i
+  \end{align}
+
+\end{defn}
+
+\begin{defn}
+  Call a prime $p$ \emph{$k$-decomposable} if there exists a finite
+  multiset of positive integers $C$ such that $p = S(C)$ and $P(C) =
+  k$. Call a prime \emph{nonresidue-decomposable} if $p$ is
+  $k$-decomposable for some $k$ that is a nonresidue modulo $p$.
+\end{defn}
+
+\begin{defn}
+  $t^*(v,g)$ is the smallest possible number of spanning trees on a
+  $2$-edge-connected graph $G$ with $|V(G)| = v$ and genus $g$.
+\end{defn}
+
+\section{Facts}
+
+\begin{fact}
+  Let $B_n$ be the banana graph on $n$ edges. Then $\Jac(B_n) \simeq
+  \Z/n\Z$.
+\end{fact}
+
+\begin{proof_short}
+  Check that $v_1 - v_2$ generates the Jacobian
+\end{proof_short}
+
+\begin{fact}
+  Let $B_{p^r}$ be the banana graph on $p^r$ edges, where $p$ is an
+  odd prime. The monodromy pairing on $\Jac(B_{p^r})$ is isomorphic to
+  the pairing $\langle \cdot, \cdot \rangle: \Z/p^r\Z \times \Z/p^r\Z
+  \to \Q/\Z$ given by
+
+  \begin{equation}
+    \langle x, y \rangle  = \frac{xy}{p^r}
+  \end{equation}
+
+  for $x,y \in \Z/p^r\Z$.
+
+\end{fact}
+\begin{proof_short}
+  Use piecewise linear functions to compute the pairing on the
+  generator of the group with itself
+\end{proof_short}
+
+\begin{fact}
+  Let $C = \{c_1, \ldots, c_m\}$ be a finite multiset of positive
+  integers, and let $B_C$ be the graph obtained by subdividing the
+  $i$th edge of an $m$-banana with $c_i - 1$ vertices (i.e. into $c_i$
+  edges). Then $|\Jac(B_C)| = S(C)$.
+\end{fact}
+
+\begin{proof_short}
+  Make a combinatorial argument to count the number of spanning trees.
+\end{proof_short}
+
+\begin{fact}
+  Let $C$ be a finite multiset of positive integers. If $S(C) = p^r$
+  for some prime $p$, then the monodromy pairing on $\Jac(B_C)$ is
+  isomorphic to the pairing on $\Z/p^r\Z$ given by
+
+  \begin{equation}
+    \langle x, y \rangle = \frac{P(C)xy}{p^r}
+  \end{equation}
+
+  Furthermore, if $P(C)$ is a nonresidue modulo $p$, then this pairing
+  is distinct from the pairing $\frac{xy}{p^r}$ given above.
+\end{fact}
+
+\begin{proof_short}
+  Use a piecewise linear function to compute the pairing of a
+  generator with itself.
+\end{proof_short}
+
+
+\begin{fact}
+  Let $p$ be an odd prime.
+  \begin{enumerate}
+  \item Suppose $p$ is not congruent to $1 \pmod 8$. Then $p$ is
+    nonresidue-decomposable.
+
+  \item Suppose $p$ is congruent to $1 \pmod 4$. Let $q$ be a prime with
+    $p \equiv k \pmod q$ and $\frac{q^2}{4} < p$. If $q$ is
+    $k$-decomposable, and $\left(\frac{q}{p}\right) = -1$, then $p$ is
+    nonresidue-decomposable.
+
+    In particular, if $\left(\frac{q}{p}\right) = -1$ for some prime $q
+    \equiv 3 \pmod 4$ and $\frac{q^2}{4} < p$, then $p$ is
+    nonresidue-decomposable.
+
+  \end{enumerate}
+\end{fact}
+
+\begin{proof_short}
+  Use quadratic reciprocity to construct explicit decompositions in
+  the various cases.
+\end{proof_short}
+
+\begin{fact}
+ Let $p$ be an odd prime, and let $r$ be an odd positive integer
+ \begin{enumerate}
+ \item Suppose $p$ is not congruent to $1\pmod 8$. Then $p$ is 
+  nonresidue-decomposable.
+ 
+ \item Suppose $p$ is congruent to $1\pmod 4$. Let $q$ be a prime
+  with $p\equiv k\pmod q$ and $\frac{q^{2}{4}<p$. If $q$ is 
+  $k$-decomposable, and $\left(\frac{q}{p}\right)=-1$, then $p^{r}$ is
+  nonresidue-decomposable.
+  
+  In particular, if $\left(\frac{q}{p}\right)=-1$ for some prime $q
+  \equiv 3 \pmod 4$ and $\frac{q^2}{4} < p$, then $p^{r}$ is
+  nonresidue-decomposable.
+  
+ \end{enumerate}
+\end{fact}
+
+\begin{proof_short}
+ Note that $p^{r}\equiv k^{r}\pmod q$, which is a non residue. 
+ The rest follows immediately from the proof for $r=1$.
+\end{proof_short}
+
+\begin{fact}
+  \label{fact_sum}
+  Let $G_1$, $G_2$ be graphs, and let $G_{12}$ be the graph made by
+  adjoining $G_1$ and $G_2$ together at a single vertex ($G_1 \wedge G_2
+  = G_{12}$). Then
+
+  $$\Jac(G_{12}) \simeq \Jac(G_1) \oplus \Jac(G_2)$$
+
+  where $\Jac(G)$ here denotes the Jacobian of the graph $G$ with the
+  associated monodromy pairing, and $\oplus$ denotes the orthogonal sum
+  on groups with pairing.
+\end{fact}
+
+\begin{proof_short}
+  Use the fact that the Laplacian matrix of a wedge of two graphs is
+  in block diagonal form, and show that the Smith Normal Form and a
+  pseudoinverse of a block diagonal matrix can be found by taking the
+  Smith Normal Form and pseudoinverse of the blocks.
+\end{proof_short}
+
+\begin{fact}
+  Let $G$ be a connected graph, and suppose that $\Jac(G) \simeq
+  (\Z/2\Z)^k$ for some $k > 0$. Then there are exactly $k$ pairs of
+  vertices in $G$ that have two edges between them, and no pair of
+  vertices is connected by more than two edges.
+
+  Furthermore, the simple graph $G'$ obtained by removing duplicate
+  edges from $G$ is a tree.
+\end{fact}
+
+\begin{proof_short}
+  Use the $2$-torsion of the group to show that there can be no more
+  than two paths between any pair of vertices, and then use Fact
+  \ref{fact_sum} to show that the Jacobian is a direct product of
+  Jacobians of cycles.
+\end{proof_short}
+
+\begin{fact}
+  Let $G$ be a graph with genus $g(G)$. If $\Jac(G)$ contains a
+  subgroup isomorphic to $(\Z/p\Z)^k$, then $g(G) \ge k$.
+\end{fact}
+
+\begin{proof_short}
+  Add edges to a tree one at a time, and use the fact that the
+  $p$-rank of the Jacobian changes by at most $1$ when an edge is
+  added.
+\end{proof_short}
+
+\begin{fact}
+  \label{fact_subdivide}
+  Let $G$ be a connected graph with genus $g$, and let $G_k$ be
+  the graph obtained by subdividing each edge of $G$ by $k-1$ vertices
+  (i.e. into $k$ edges). Then $\Jac(G)$ is isomorphic to a subgroup of
+  $\Jac(G_k)$.
+\end{fact}
+
+\begin{proof_short}
+  Show that principal divisors on $G_k$ map to principal divisors on
+  $G$ by multiplying the piecewise linear function we have on $G$ by
+  $k$.
+\end{proof_short}
+
+\begin{fact}
+  Let $G$ be a simple $2$-edge-connected graph on $n$ vertices. The
+  minimum number of spanning trees on $G$ is $n$, and the minimum is
+  achieved when $G$ is a cycle.
+\end{fact}
+
+\begin{proof_short}
+  If $G$ has genus at least $1$, then we can construct $n$ spanning
+  trees by choosing $n$ different edges not to include.
+\end{proof_short}
+
+\begin{fact}
+  Let $G$ be a graph on $n$ vertices, then $|\Jac(G)|>g$ where $g$ is 
+  the genus of $G$.
+\end{fact}
+
+\begin{proof_short}
+  Induct on $g$ and use the fact that $\tau(G) = \tau(G/e) +
+  \tau(G-e)$.  
+\end{proof_short}
+
+
+\begin{fact}
+  Let $G$ be a graph with genus $G$, and suppose
+
+  \begin{equation}
+    \Jac(G) \simeq
+    \Z/a_1\Z \times \Z/a_2\Z \times \ldots \times \Z/a_n\Z
+  \end{equation}
+  with $a_1 | a_2 | \ldots | a_n$. If $G'$ is the graph obtained from
+  $G$ by subdividing each edge of $G$ into $m$ edges, then
+  \begin{equation}
+    \Jac(G') \simeq \Z/ma_1\Z \times \ldots \Z/ma_n\Z
+    \times (\Z/m\Z)^{g - n}
+  \end{equation}
+\end{fact}
+\begin{proof_short}
+  Find generators for the invariant factors by putting a $1$ and $-1$
+  on adjacent vertices in both the old and new graph.
+\end{proof_short}
+
+
+\section{Conjectures}
+
+
+\begin{conj}
+  All odd primes are nonresidue-decomposable. (This would imply that
+  for any group with pairing $(\Gamma, \langle \cdot , \cdot \rangle)$
+  with $\Gamma \simeq \Z/p\Z$, there exists a graph $G$ with $\Jac(G)
+  \simeq \Gamma$ and monodromy pairing isomorphic to $\langle \cdot,
+  \cdot \rangle$).
+\end{conj}
+\begin{evidence}
+  checked for all primes $ < 10^9$, true for a substantial fraction of
+  all primes (anything not 1 modulo 24).
+\end{evidence}
+
+
+\begin{conj}
+  Let $G$ be a graph with vertex set $V(G)$. Let $v, w \in V(G)$, and
+  let $D \in \Div(G)$ be given by $v - w$. If $[D] \in \Jac(G)$ has
+  order $k$, then there at most $k$ independent paths between $v$ and
+  $w$ in $G$.
+\end{conj}
+
+\begin{evidence}
+  Burning algorithm intuition, true for $k = 2$
+\end{evidence}
+
+\begin{conj}
+  \label{nk_pairs}
+  There exist infinitely many pairs of integers $n \ge 3, k \ge 1$
+  such that there is no simple graph $G$ where
+
+  \begin{equation}
+    \Jac(G) \simeq (\Z/2\Z)^k \times \Z/n\Z
+  \end{equation}
+\end{conj}
+
+\begin{evidence}
+  There doesn't seem to be a simple graph with Jacobian $\Z/2\Z \times
+  \Z/4\Z$, and in general it seems hard to construct anything other
+  than specific examples of groups with this form (especially if $k >>
+  n$).
+\end{evidence}
+
+\begin{conj}
+  Let $G$ be a simple $2$-edge-connected graph with $n$ spanning
+  trees. If $G$ is not a cycle of length $n$, then $|V(G)| \le
+  \lfloor\frac{n+1}{2}\rfloor$.
+\end{conj}
+
+\begin{evidence}
+  Putting a chord in a cycle seems to be the only option here.
+\end{evidence}
+
+\begin{conj}
+  Let $G$ be a graph, and let $G'$ be the graph that results from
+  subdividing each edge of $G$ into two edges.
+
+  Suppose $\Jac(G') \simeq H \times K$ for $H \simeq (\Z/2\Z)^k$, $k
+  \ge 2$ and some finite abelian group $K$, and each of the generators
+  of $H$ is the equivalence class of some divisor of the form
+
+  $$\sum_{v \in V(G')\setminus V(G)}a_v \cdot v$$ 
+  
+  Then the monodromy pairing on $\Jac(G')$ restricted to $H$ is
+  isomorphic to following pairing on $(\Z/2\Z)^k$:
+
+  $$\langle x, y \rangle = 
+  \begin{cases}
+    0, & x + y = 0 \\
+    \frac{1}{2}, &\textrm{otherwise}
+  \end{cases}$$
+
+\end{conj}
+
+\begin{evidence}
+  If the vertices that generate the 2-group are on the subdivided
+  edges then they must be an even distance apart. Since slope must be
+  conserved, and as every new vertex in $G'$ not in $G$ must have
+  valency 2, for any function $f$ the difference of $f$ evaluated at
+  those vertices must be even. This means that the pairing of an
+  element in such a two group with itself is $0$. Since there are only
+  two pairings on 2-groups, and only on the hyperbolic pairing is this
+  true this must be the hyperbolic pairing.
+\end{evidence}
+
+\begin{conj}
+
+  $t^*(v,g) = \Omega(2^gv)$. 
+\end{conj}
+
+\begin{evidence}
+Seems to be (sort of) true for small numbers of vertices.
+
+This conjecture is sufficient to prove \ref{nk_pairs} above.
+\end{evidence}
+
+\begin{conj}
+  If $G$ is a graph with $|V(G)| = v$, genus $g$, and $t^*(v,g)$
+  spanning trees, then $G$ is a wedge of graphs isomorphic to either:
+  \begin{itemize}
+    \item a complete graph
+    \item a threshold graph
+    \item a cycle graph
+  \end{itemize}
+\end{conj}
+
+\begin{evidence}
+  True for graphs on few vertices ($< 10$)
+\end{evidence}
+
+\begin{conj}
+  Let $H$ be a finite abelian group. Then there exists $k_0$
+  (depending on $H$) such that for all $k > k_0$, there is no finite
+  simple graph $G$ such that
+
+\begin{equation}
+  \Jac(G) \simeq (\Z/2\Z)^k \times H
+\end{equation}
+\end{conj}
+
+\begin{evidence}
+  We can try and relate genus to the maximum order of elements on
+  2-vertex connected graphs, and induct on the order of $H$.
+\end{evidence}
+
+\begin{conj}
+  Let $G$ be a graph with genus $g$, and suppose that $\Jac(G) \simeq
+  \Z/a_1\Z \times \ldots \times \Z/a_g\Z$ with $a_i | a_{i+1}$ for all
+  $0 < i < g$ (i.e. $G$ has $g$ nontrivial invariant factors). Then
+  there exists a graph $G'$ such that if each edge of $G'$ is
+  subdivided into $a_1$ smaller edges, we obtain $G$.
+\end{conj}
+
+\begin{evidence}
+  View the Jacobian of $G$ as a lattice on the Jacobian of the
+  corresponding metric graph $\Gamma$. Any points of $p$-torsion on
+  $\Jac(G)$ should correspond to a subset of the $p^g$ points of
+  $p$-torsion on $\Jac(\Gamma)$, and if there are $p^g$ such points in
+  $\Jac(G)$ we should be able to ``scale down'' the lattice in some
+  way.
+\end{evidence}
+
+
+\vspace{1cm}
+Last updated \today.
+
+\end{document}
