@@ -1,0 +1,176 @@
+\documentclass{amsart}
+
+\input{../common/BN_common}
+
+\newcommand{\bv}[1]{\widehat{\mathbf{#1}}}
+
+\begin{document}
+\begin{thm}
+  \label{subdivide_thm}
+  Let $G$ be a graph with genus $g$, and suppose
+  \begin{equation}
+    \Jac(G) \simeq \Z/a_1\Z \times \Z/a_2\Z \times \ldots \times \Z/a_k\Z
+  \end{equation}
+
+  such that $a_i > 1$ and $a_{i-1} | a_i$ for all $1 < i \le k$. Let
+  $G_m$ be the graph obtained by subdividing each edge of $G$ into $m$
+  smaller edges. Then
+
+  \begin{equation}
+    \Jac(G_m) \simeq (\Z/m\Z)^{g-k} 
+    \times \Z/ma_1\Z \times \ldots \times \Z/ma_k\Z
+  \end{equation}
+
+\end{thm}
+
+\begin{prop}
+  The quantity $g - k$ is always nonnegative.
+\end{prop}
+\begin{proof}
+  We may construct the graph $G$ by adding $g$ edges to a spanning
+  tree for $G$. Each time an edge is added, the $p$-rank for any prime
+  $p$ changes by at most $1$, and consequently the number of invariant
+  factors of $\Jac(G)$ changes by at most $1$. So the total number of
+  invariant factors must be less than or equal to $g$.
+\end{proof}
+
+It suffices to prove Theorem \ref{subdivide_thm} for $m=p$ for prime
+$p$, since we may achieve a subdivision into $b_1 \cdot b_2$ edges by
+successively subdividing into $b_1$ and $b_2$ edges.
+
+We have shown previously that $\Jac(G)$ is isomorphic to a subgroup of
+$\Jac(G_p)$. As a consequence, if two divisors are equivalent in
+$\Div^0(G)$, they are also equivalent in $\Div^0(G_p)$.
+
+\begin{prop}
+  \label{p_surjective}
+  For each $D \in \Div^0(G)$, $\exists D' \in \Div^0(G_p)$ such that $p
+  \cdot D' \sim D$.
+\end{prop}
+\begin{proof}
+  Let $A \subseteq \Div^0(G)$ be the set of divisors of the form $v -
+  w$ for $\{v, w\} \in E(G)$. It is clear that the elements of $A$
+  generate $\Div^0(G)$, so it suffices to prove the proposition for
+  all $a \in A$.
+  
+  $a = v_0 - v_p$ for some pair of vertices $v_0, v_p \in V(G)$
+  connected by an edge. In $G_p$, $v_0$ and $v_p$ are connected by a
+  path of length $p$, where each vertex in the path has degree $2$.
+
+  Let the vertices in this path be $\{v_0, v_1, \ldots,
+  v_p\}$. Under this enumeration, the Laplacian matrix $Q$ of $G_p$
+  is of the form
+  $$Q = \begin{bmatrix}
+    k_1 & -1 \\
+    -1 &  2 & -1 \\
+    & -1 &  2 & -1 \\
+    &    &    &  \ddots  \\
+    &    &    &  -1 & k_2 \\ 
+    &    &    &     &    & \ddots
+  \end{bmatrix}$$
+
+  where $k_1, k_2$ are the degrees of $v_0$ and $v_p$.
+  
+  Since the equivalence relation on divisors is defined by the image
+  of the Laplacian map $\Delta$, the proposition is equivalent to the
+  statement that there exist $\mathbf{u},\mathbf{v} \in \Z^n$ such
+  that
+
+  \begin{equation}
+    \bv{v}_0 - \bv{v}_p  = p\mathbf{u} + Q\mathbf{v}
+  \end{equation}
+
+  where $\bv{v}_i$ represents the $i$th standard basis element for
+  $\Z^n$ (corresponding to the divisor with formal sum $v_i$). Choose
+  $\mathbf{u} = \bv{v}_0 - \bv{v}_1$, and $\mathbf{v} =
+  \sum_{i=1}^{p-1}(p - i)\bv{v}_i$. It is easy to check that the
+  required equality holds.
+\end{proof}
+
+Let $D \in \Div^0(G_p)$ be written $\sum_{i=1}^na_iv_i$, for $a_i \in
+\Z$. The proof of Proposition \ref{p_surjective} also demonstrates
+that if $a_1 = p$ and $a_j = 0$ for all $j \ne 0, p$, then $D \sim D'$
+for some $D' \in \Jac(G)$. This also holds more generally:
+
+\begin{prop}
+  \label{p_to_jac}
+  Let $D \in \Div^0(G_p)$ be written $\sum_{i=1}^na_iv_i$, and
+  suppose that for each $v_i \in V(G_p) \setminus V(G)$, $p |
+  a_i$. Then $D \sim D'$ for some $D' \in \Div^0(G)$. 
+\end{prop}
+\begin{proof}
+  As in Proposition \ref{p_surjective}, enumerate the first $p+1$
+  vertices on $G$ by letting $v_0, v_p$ be adjacent vertices in $G$,
+  and $v_1$ to $v_{p-1}$ be the vertices on the path between them in
+  $G_p$. It suffices to prove the proposition for $a_i = p$ for $1 \le
+  i < p$ and $a_j = 0$ for all $v_j \in V(G_p) \setminus V(G), j \ne
+  i$.
+
+  We proceed by induction on $i$. The case $i=1$ follows directly from
+  the proof of Proposition \ref{p_surjective} (the divisor $p \cdot
+  v_0 - p \cdot v_1$ is equivalent to $v_0 - v_p \in \Div^0(G)$).
+
+  For $i > 1$, it is clear from the form of the matrix $Q$ that the
+  divisor $p \cdot v_{i-2} - 2p \cdot v_{i-1} + p \cdot v_i$ is in
+  the image of the Laplacian map $\Delta$. By the induction
+  hypothesis, there are divisors $D_1, D_2 \in \Div(G)$ such that
+  $D_1 + p \cdot v_{i-2} \sim D_1'$ and $D_2 + p \cdot v_{i-1} \sim
+  D_2'$ for $D_1', D_2' \in \Div^0(G)$. 
+
+  We then have $-D_1' + 2D_2' \sim -D_1 + 2D_2 + p \cdot v_i$, so
+  $D + p \cdot v_i \sim D'$ for $D \in \Div(G)$, $D' \in \Div^0(G)$,
+  as required.
+\end{proof}
+
+\begin{cor}
+  \label{quotient_cor}
+  The quotient $\Jac(G_p) / \Jac(G)$ is isomorphic to $(\Z/p\Z)^g$,
+  where $g$ is the genus of $G$.
+\end{cor}
+\begin{proof}
+  We may first compute $|\Jac(G_p)|$ by noting that every possible way
+  of choosing $g$ edges to remove from $G$ to form a spanning tree on
+  $G$ corresponds to $p^g$ ways to remove $g$ edges from $G_p$ to form
+  a spanning tree on $G_p$---for each edge we remove from $G$, we have
+  a choice of $p$ edges to remove from $G_p$. Therefore $|\Jac(G_p)| =
+  p^g \cdot |\Jac(G)|$, and the order of the quotient is $p^g$.
+
+  Propositions \ref{p_surjective} and \ref{p_to_jac} together imply
+  that the map $\phi_p : \Jac(G_p) \to \Jac(G_p)$ defined by
+  $\phi_p(d) = p \cdot d$ has precisely $\Jac(G)$ as its image. So,
+  for any $d \in \Jac(G_p) / \Jac(G)$, we must have that $|d|$ divides
+  $p$, i.e. $|d| = 1$ or $|d| = p$. So the quotient is isomorphic to
+  $(\Z/p\Z)^b$ for some $b$, and by the above it must be
+  $(\Z/p\Z)^g$. 
+\end{proof}
+
+It follows from Proposition \ref{p_to_jac} that there is a set $D
+\subset \Jac(G_p)$, $D = \{d_1, \ldots, d_k\}$ such that $p \cdot d_i$
+is a generator for the invariant factor $\Z/a_i\Z$ in $\Jac(G)$.
+
+For each $d_i$, we must have either $|d_i| = pa_i$ or $|d_i| =
+a_i$. If $|d_i| = a_i$, then $\langle d_i \rangle$ is the same
+invariant factor $\Z/a_i\Z$ of $\Jac(G)$ generated by $p \cdot d_i$,
+and therefore $\gcd(p, a_i) = 1$. If $|d_i| = pa_i$, then $\langle d_i
+\rangle \simeq \Z/pa_i\Z$.
+
+So, if $j$ is the smallest integer such that $\gcd(p, a_i) = 1$ for
+all $i \le j$, then the set $D$ generates the group
+
+$$H \simeq \Z/a_1\Z \times \ldots \times \Z/a_j\Z \times \Z/pa_{j+1}\Z \times
+\ldots \times \Z/pa_k\Z$$
+
+Since $\Jac(G)$ is a subgroup of $H$, if $g \in \Jac(G_p)$ is not
+generated by $D$, Corollary \ref{quotient_cor} implies that $g$ has
+order $p$. So we have $\Jac(G_p) \simeq H \times (\Z/p\Z)^{g-k+j}$,
+since there are $p^{g-k+j}$ elements in $\Jac(G_p)$ not in $H$.
+
+However, since $a_1, \ldots, a_j$ are each coprime to $p$, we can
+simplify the product of cyclic groups and write
+
+\begin{equation}
+\Jac(G_p) \simeq \Z/pa_1\Z \times \ldots \times \Z/pa_k\Z \times (\Z/p\Z)^{g-k}
+\end{equation}
+
+as required.
+\end{document}

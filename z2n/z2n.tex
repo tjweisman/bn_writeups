@@ -1,0 +1,38 @@
+\documentclass{article}
+\input{../common/BN_common}
+
+\begin{document}
+
+\begin{prop}
+  Let $G$ be a simple graph. Then $\Jac(G)$ cannot be isomorphic to
+  $(\Z/2\Z)^n$ for any $n \ge 1$. 
+\end{prop}
+\begin{proof}
+  Let $G$ be a graph with Jacobian as above, with vertices $V(G)$ and
+  edge set $E(G)$.  Since the Jacobian is nontrivial, $G$ must contain
+  at least one cycle $C$. Let the vertex and edge sets of this cycle
+  be $V(C)$ and $E(C)$, respectively.
+
+  Suppose that there exists $v_1, v_2 \in V(C)$ such that there is a
+  path $P$ between $v_1$ and $v_2$ that contains edges in $E(G)
+  \setminus E(C)$.  WLOG, all of the edges in $P$ belong to $E(G)
+  \setminus E(C)$.
+
+  Let $D \in \Div(G)$ be equal to $v_1 - v_2$. By applying Dhar's
+  burning algorithm to $2D$, starting at $v_2$, it can be seen that
+  $2D$ is not equivalent to the zero divisor, and hence $[D]$ does not
+  have order $2$ as an element of $\Jac(G)$. Thus, no such path $P$
+  can exist.
+
+  As a consequence, for any $w \in V(G) \setminus V(C)$, there is a
+  unique $v \in V(C)$ such that $v,w$ are path-connected via edges in
+  $E(G) \setminus E(C)$. For each $v \in V(C)$, let $H(v) \subset
+  V(G)$ be subset of vertices in $V(G) \setminus V(C)$ connected to
+  $v$ via edges in $E(G) \setminus E(C)$. 
+
+  The induced subgraph $H_G(v)$ on $H(v) \cup \{v\}$ must be
+  connected, and is adjoined to $C$ at the vertex $v$. Since...
+
+\end{proof}
+
+\end{document}
