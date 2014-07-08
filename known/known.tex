@@ -334,7 +334,7 @@
   true this must be the hyperbolic pairing.
 \end{evidence}
 
-\begin{conj}
+\begin{conj}[Most likely false]
 
   $t^*(v,g) = \Omega(2^gv)$. 
 \end{conj}
@@ -360,6 +360,7 @@ This conjecture is sufficient to prove \ref{nk_pairs} above.
 \end{evidence}
 
 \begin{conj}
+  \label{H_no_2group}
   Let $H$ be a finite abelian group. Then there exists $k_0$
   (depending on $H$) such that for all $k > k_0$, there is no finite
   simple graph $G$ such that
@@ -372,6 +373,20 @@ This conjecture is sufficient to prove \ref{nk_pairs} above.
 \begin{evidence}
   We can try and relate genus to the maximum order of elements on
   2-vertex connected graphs, and induct on the order of $H$.
+\end{evidence}
+
+\begin{conj}
+  Let $G$ be a 2-vertex-connected simple graph of genus $g$. Then the
+  maximum order of any element in $\Jac(G)$ is at most $c \cdot
+  \sqrt{g}$ for some constant $c$.  
+\end{conj}
+
+\begin{evidence}
+  True if the complete graph (or something ``close'' to it) gives the
+  ``smallest possible order of elements'' for a given genus.
+
+  This conjecture probably implies conjecture \ref{H_no_2group}
+  above. 
 \end{evidence}
 
 \begin{conj}
@@ -390,7 +405,6 @@ This conjecture is sufficient to prove \ref{nk_pairs} above.
   $\Jac(G)$ we should be able to ``scale down'' the lattice in some
   way.
 \end{evidence}
-
 
 \vspace{1cm}
 Last updated \today.
