@@ -36,10 +36,11 @@
 \end{defn}
 
 \begin{defn}
-  Call a prime $p$ \emph{$k$-decomposable} if there exists a finite
-  multiset of positive integers $C$ such that $p = S(C)$ and $P(C) =
-  k$. Call a prime \emph{nonresidue-decomposable} if $p$ is
-  $k$-decomposable for some $k$ that is a nonresidue modulo $p$.
+  Let $p$ be a prime, and let $r > 0$. We say $p^r$ is
+  \emph{$k$-decomposable} if there exists a finite multiset of
+  positive integers $C$ such that $p^r = S(C)$ and $P(C) = k$. Call
+  $p^r$ \emph{nonresidue-decomposable} if $p^r$ is $k$-decomposable
+  for some $k$ that is a nonresidue modulo $p$.
 \end{defn}
 
 \begin{defn}
@@ -130,26 +131,15 @@
 \end{proof_short}
 
 \begin{fact}
- Let $p$ be an odd prime, and let $r$ be an odd positive integer
- \begin{enumerate}
- \item Suppose $p$ is not congruent to $1\pmod 8$. Then $p$ is 
-  nonresidue-decomposable.
- 
- \item Suppose $p$ is congruent to $1\pmod 4$. Let $q$ be a prime
-  with $p\equiv k\pmod q$ and $\frac{q^{2}}{4}<p$. If $q$ is 
-  $k$-decomposable, and $\left(\frac{q}{p}\right)=-1$, then $p^{r}$ is
-  nonresidue-decomposable.
-  
-  In particular, if $\left(\frac{q}{p}\right)=-1$ for some prime $q
-  \equiv 3 \pmod 4$ and $\frac{q^2}{4} < p$, then $p^{r}$ is
-  nonresidue-decomposable.
-  
- \end{enumerate}
+ Let $p$ be an odd prime, and let $r$ be an integer greater than $1$.
+ Then $p^r$ is nonresidue-decomposable.
 \end{fact}
 
 \begin{proof_short}
- Note that $p^{r}\equiv k^{r}\pmod q$, which is a non residue. 
- The rest follows immediately from the proof for $r=1$.
+  The decomposition is exactly the same as in the $r=1$ case (possibly
+  with a slightly different choice of $q$ if $r$ is even). The
+  required bound is somewhat weaker, so in this case we don't need
+  GRH.
 \end{proof_short}
 
 \begin{fact}
@@ -268,7 +258,9 @@
 \end{conj}
 \begin{evidence}
   checked for all primes $ < 10^9$, true for a substantial fraction of
-  all primes (anything not 1 modulo 24).
+  all primes (anything not 1 modulo 24). True (probably) assuming
+  GRH. Almost true unconditionally (bound is $O(p^{1/2 + \epsilon})$,
+  need $O(p^{1/2})$.
 \end{evidence}
 
 
