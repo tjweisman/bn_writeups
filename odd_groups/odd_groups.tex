@@ -1,0 +1,109 @@
+\documentclass{article}
+\input{../common/BN_common}
+
+\begin{document}
+
+\begin{defn}
+  Let $C = \{c_1, \ldots, c_k\}$ be a multiset of $k$ positive
+  integers. Define the quantities $S(C)$ and $P(C)$ by:
+
+  \begin{align}
+    S(C) &= \sum_{i=1}^kc_1 \ldots \hat{c_i} \ldots c_k\\
+    P(C) &= \prod_{i=1}^kc_i
+  \end{align}
+
+\end{defn}
+
+\begin{lem}
+  \label{decompose_q_non}
+  Let $q$ be a prime with $q \equiv 3 \pmod 4$. Then for any $k$
+  with $\left( \frac{k}{q} \right) = -1$, there exists $0 < m < q$
+  such that $m(q-m) \equiv k \pmod q$. 
+\end{lem}
+\begin{proof}
+  Let the set of nonresidues modulo $q$ be $R_q$. Consider the map
+  $\phi:\F_q \to \F_q$ given by $\phi(x) = -x^2$. The image of
+  $\phi$ is a subset of $R_q$, since (by quadratic reciprocity)
+  $-1$ is a nonresidue modulo $q$. Furthermore, since the polynomial
+  $-x^2 - a$ has at most two roots in $\F_q$ (for any $a$), and
+  $|R_q| = (q - 1)/2$, $\phi_k$ is onto $R_q$. 
+
+  Since $k \in R_q$, choose $m$ such that $\phi(m) = k$, and note
+  that $k \equiv -m^2 \equiv m(q-m) \pmod q$, as required.
+\end{proof}
+\begin{lem}
+  \label{decompose_q_res}
+  Let $q$ be a prime with $q \equiv 1 \pmod 4$. Then for any $k$
+  with $\left( \frac{k}{q} \right) = 1$, there exists $0 < m < q$
+  such that $m(q-m) \equiv k \pmod q$.
+\end{lem}
+\begin{proof}
+  Define $\phi$ as in Lemma \ref{decompose_q_non}, and note that in
+  this case quadratic reciprocity implies that $\phi$ is onto the
+  set of residues modulo $q$. $k$ is again in the image of $\phi$,
+  so its decomposition can be constructed as before.
+\end{proof}
+\begin{prop}
+  \label{exist_q}
+  Let $p$ be a prime with $p \equiv 1 \pmod 4$, and let $r > 1$ be any
+  integer. Then there exists a prime $q$, with $\left( \frac{q}{p^r}
+  \right) = -1$, and an integer $0 < m < q$ such that the quantity
+  $\frac{p^r - m(q-m)}{q}$ is a positive integer.
+\end{prop}
+\begin{proof}
+  First suppose $r$ is odd. We may assume that there exists a prime
+  $q \equiv 3 \pmod 4$ such that $\left( \frac{q}{p} \right) = -1$
+  and $q < p$. 
+
+  Since $r$ is odd, and $p \equiv 1 \pmod 4$, $p^r$ is a nonresidue
+  modulo $q$. Apply Lemma \ref{decompose_q_non} to find $m$ such
+  that $p^r \equiv m(q-m) \pmod q$. Since $q < p$ and $r > 1$,
+  $m(q-m) < p^r$. Therefore $p^r - m(q-m)$ is positive and divisible
+  by $q$, as required.
+
+  If $r$ is even, we may suppose there exists a prime $q$ with $q
+  \equiv 1 \pmod 4$ such that $\left( \frac{q}{p} \right) = -1$ and
+  $q < p$. Since $r$ is even, and $p \equiv 1 \pmod 4$, $p^r$ is a
+  residue modulo $q$. Apply Lemma \ref{decompose_q_res} to find an
+  $m < q$ such that $p^r - m(q-m)$ is divisible by $q$, and as in
+  the odd case, we must have $p^r - m(q-m) > 0$. 
+\end{proof}
+\begin{thm}
+  \label{exist_decomp}
+  Let $p$ be an odd prime, and let $r > 1$. Then there exists a
+  multiset of positive integers $C = \{c_1, \ldots c_k\}$ such that
+  $S(C) = p^r$ and $P(C)$ is a nonresidue modulo $p^r$.
+\end{thm}
+\begin{proof}
+  First consider the case that $p \equiv 3 \pmod 4$. Choose $k = 2$
+  and $C = \{1, p-1\}$. Clearly $S(C) = p$, and by quadratic
+  reciprocity, $P(C) \equiv -1 \pmod p$ is a nonresidue modulo $p$.
+
+  In the case that $p \equiv 1 \pmod 4$, choose $q,m$ as in
+  proposition \ref{exist_q}. Let $k=3$, and choose $c_1 = m, c_2 =
+  q-m$, and $c_3 = \frac{p^r - m(q-m)}{q}$. It is easy to check that
+  $S(C) = p^r$.
+
+  The quantity $P(C) = c_1c_2c_3$ is a nonresidue iff
+  $\frac{(-1)(m(q-m))^2}{q}$ is a nonresidue. Since $p \equiv 1 \pmod
+  4$, the numerator of this expression is a residue and hence $\left(
+    \frac{P(C)}{p^r} \right) = \left( \frac{q}{p^r} \right) = -1$, as
+  required.
+\end{proof}
+
+\begin{remark} For odd $r=1$, the proof of proposition \ref{exist_q}
+  only fails when we require the existence of some prime $q \equiv 3
+  \pmod 4$ such that $\left( \frac{q}{p} \right) = -1$, and $m(q-m) <
+  p^r$ for all $m$.
+
+  To prove Theorem \ref{exist_decomp} for the case $r=1$, it would
+  thus be sufficient to show that the smallest nonresidue modulo $p$
+  that is equivalent to $3 \pmod 4$ is less than $2\sqrt{p}$. Computer
+  search has verified that such a bound holds for all primes $p <
+  10^9$. The best known unconditional bound on such a prime $q$ is
+  $O(p^{1/2 + \epsilon})$ for any epsilon, but bounds that are
+  sufficient to prove the theorem hold under the assumption of the
+  Generalized Riemann Hypothesis.
+\end{remark}
+
+\end{document}
