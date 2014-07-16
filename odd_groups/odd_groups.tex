@@ -56,7 +56,7 @@
 \begin{proof}
   First suppose $r$ is odd. We may assume that there exists a prime
   $q \equiv 3 \pmod 4$ such that $\left( \frac{q}{p} \right) = -1$
-  and $q < p$\footnote{citation needed}. 
+  and $q < p$ (citation needed). 
 
   Since $r$ is odd, and $p \equiv 1 \pmod 4$, $p^r$ is a nonresidue
   modulo $q$. Apply Lemma \ref{decompose_q_non} to find $m$ such
@@ -66,7 +66,7 @@
 
   If $r$ is even, we may suppose there exists a prime $q$ with $q
   \equiv 1 \pmod 4$ such that $\left( \frac{q}{p} \right) = -1$ and $q
-  < p$\footnote{citation needed}. Since $r$ is even, and $p \equiv 1
+  < p$ (citation needed). Since $r$ is even, and $p \equiv 1
   \pmod 4$, $p^r$ is a residue modulo $q$. Apply Lemma
   \ref{decompose_q_res} to find an $m < q$ such that $p^r - m(q-m)$ is
   divisible by $q$, and as in the odd case, we must have $p^r - m(q-m)
@@ -80,8 +80,9 @@
 \end{thm}
 \begin{proof}
   First consider the case that $p \equiv 3 \pmod 4$. Choose $k = 2$
-  and $C = \{1, p-1\}$. Clearly $S(C) = p$, and by quadratic
-  reciprocity, $P(C) \equiv -1 \pmod p$ is a nonresidue modulo $p^r$.
+  and $C = \{1, p^r-1\}$. Clearly $S(C) = p^r$, and by quadratic
+  reciprocity, $P(C) \equiv -1 \pmod p^r$ is a nonresidue modulo
+  $p^r$.
 
   In the case that $p \equiv 1 \pmod 4$, choose $q,m$ as in
   Proposition \ref{exist_q}. Let $k=3$, and choose 
