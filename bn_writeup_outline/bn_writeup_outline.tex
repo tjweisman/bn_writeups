@@ -15,61 +15,94 @@
 \item definition of divisors
 \item definition of functions on graphs
 \item definition of the Laplacian map
-\item definition of the Jacobian (cokernel of Laplacian,
-invariant factors)
+\item definition of the Jacobian (cokernel of Laplacian, invariant
+factors)
 \item Dhar's burning algorithm
 \end{enumerate}
 
 \subsection{Results}
 
 \begin{enumerate}
-\item the Jacobian of a wedge sum is the direct product
-of the Jacobians
-\item Jacobians of basic graphs (cycles, bananas,
-complete graphs, etc.)
-\item can get all possible groups as Jacobians of
-multigraphs (via wedging bananas)
-\item define $\mu$, the maximum order of an element in
-the Jacobian of a graph (or equivalently the largest
-invariant factor of the Jacobian)
-\item if the multigraph $G$ is biconnected, then
-$\delta\le\mu$, where $\delta$ is the maximum degree
-of a vertex in $G$
-\item further, if $G$ is not a banana, then
-$\delta\le\mu-1$
-\item as a corollary, we get a lower bound on $|V(G)|$
-in terms of $\mu$ and $g$
-\item can't get $(\Z/2\Z)^n$, $n\ge1$ as the Jacobian
-of a simple graph
-\item can get $(\Z/3\Z)^n$, $n\ge1$ only by wedging
-3-cycles and 3-bananas
-\item number of invariant factors in the Jacobian is
-bounded by the genus
-\item if $G$ is biconnected and has a path $P$ of length $\ell$ and every vertex in $P$ (besides the endpoints) has valency 2, then $\Jac(G)$ has an element of order at least $\ell$
-\item if $\delta$ is bounded, $|V(G)|$ is bounded by the number of vertices with
-valency at least 3
-\item if $G$ is biconnected and $\Jac(G)\simeq(\Z/2\Z)^k\times H$, then there are at most $|H|$ vertices of valency at least 3
+\item the Jacobian of a wedge sum is the direct product of the
+Jacobians
+
+\item Jacobians of basic graphs (cycles, bananas, complete graphs,
+etc.)
+
+\item can get all possible groups as Jacobians of multigraphs (via
+wedging bananas)
+
+\item define $\mu$, the maximum order of an element in the Jacobian of
+a graph (or equivalently the largest invariant factor of the Jacobian)
+
+\item if the multigraph $G$ is biconnected, then $\delta\le\mu$, where
+$\delta$ is the maximum degree of a vertex in $G$
+
+\item further, if $G$ is not a banana, then $\delta\le\mu-1$
+
+\item as a corollary, we get a lower bound on $|V(G)|$ in terms of
+$\mu$ and $g$
+
+\item can't get $(\Z/2\Z)^n$, $n\ge1$ as the Jacobian of a simple
+graph
+
+\item can get $(\Z/3\Z)^n$, $n\ge1$ only by wedging 3-cycles and
+3-bananas
+
+\item number of invariant factors in the Jacobian is bounded by the
+genus
+
+\item if $G$ is biconnected and has a path $P$ of length $\ell$ and
+every vertex in $P$ (besides the endpoints) has valency 2, then
+$\Jac(G)$ has an element of order at least $\ell$
+
+\item if $\delta$ is bounded, $|V(G)|$ is bounded by the number of
+vertices with valency at least 3
+
+\item if $G$ is biconnected and $\Jac(G)\simeq(\Z/2\Z)^k\times H$,
+then there are at most $|H|$ vertices of valency at least 3
+
 \item if the Jacobian of a simple biconnected graph is $(\Z/2\Z)^k
 \times H$, then $k$ is bounded by a function of $H$
-\item inducting on the number of elementary divisors of $H$, we get a similar result to the previous one except the graph is not necessarily biconnected
+
+\item inducting on the number of elementary divisors of $H$, we get a
+similar result to the previous one except the graph is not necessarily
+biconnected
 \end{enumerate}
 
 \subsection{Conjectures}
 
 \begin{enumerate}
-\item For the $(\Z/2\Z)^k\times H$ thing, can we get a better bound on $k$?
-\item Suppose $G$ is biconnected. Then there is $k_0$ such that $k>k_0$ implies $\Jac(G)\not\simeq(\Z/n\Z)^k$.
-\item Suppose $G$ is biconnected and simple with genus $g$. Then there exists a constant $c$ such that $\mu\le c\sqrt{g}$ (maybe even $c=1$). (Because we're thinking along the lines of the complete graph being worst in this respect.)
+\item For the $(\Z/2\Z)^k\times H$ thing, can we get a better bound on
+$k$?
+
+\item Suppose $G$ is biconnected. Then there is $k_0$ such that
+$k>k_0$ implies $\Jac(G)\not\simeq(\Z/n\Z)^k$.
+
+\item Suppose $G$ is biconnected and simple with genus $g$. Then there
+exists a constant $c$ such that $\mu\le c\sqrt{g}$ (maybe even
+$c=1$). (Because we're thinking along the lines of the complete graph
+being worst in this respect.)
 \end{enumerate}
 
 \section{Relationship to Jacobians of metric graphs}
 
 \begin{itemize}
+
 \item define an $m$-subdivision
-\item if $G\mapsto G'$ from an $m$-subdivision, then we have a result of what $\Jac(G')$ is
-\item conjecture about ``un-subdivisions'': if you have maximal $m$-torsion with respect to the genus, then you're actually the $m$-subdivision of another graph
-\item the Jacobian of a finite graph has a natural embedding in the Jacobian of some metric graph
-\item think about this as a lattice in a torus, or something of that nature
+
+\item if $G\mapsto G'$ from an $m$-subdivision, then we have a result
+of what $\Jac(G')$ is
+
+\item conjecture about ``un-subdivisions'': if you have maximal
+$m$-torsion with respect to the genus, then you're actually the
+$m$-subdivision of another graph
+
+\item the Jacobian of a finite graph has a natural embedding in the
+Jacobian of some metric graph
+
+\item think about this as a lattice in a torus, or something of that
+nature
 \end{itemize}
 
 \section{The monodromy pairing on the Jacobian}
@@ -77,33 +110,62 @@ valency at least 3
 \subsection{Definitions and previous results}
 
 \begin{enumerate}
+
 \item definition of a pairing, definition of the monodromy pairing
+
 \item state classification theorem of groups with pairing
-\item Note: from here on out, always think of ``group'' as meaning ``group with pairing''
+
+\item Note: from here on out, always think of ``group'' as meaning
+  ``group with pairing'' (and isomorphism as isomorphism of groups
+  with pairings, etc.)
 \end{enumerate}
 
 \subsection{Results}
 
 \begin{enumerate}
-\item Jacobian with pairing of a wedge is the orthogonal sum of the Jacobians with their respective pairings
-\item pairings of basic graphs (subdivided bananas, cycles with extra edges)
-\item if $r>1$, $p$ any odd prime, and $\Gamma$ is any group with pairing isomorphic to $\Z/p^r\Z$; then there exists a multigraph $G$ with $\Jac(G)\simeq \Gamma$
-\item remark: with GRH, we can get the above claim for $r=1$ as well.
-\item if the order of $\Gamma$ is odd (and we have GRH), then there exists a multigraph $G$ with $\Jac(G) \simeq \Gamma$.
-\item lemma: if $a\equiv b\pmod 8$, then $axy/2^r$ and $bxy/2^r$ are isomorphic pairings on $\Z/2^r\Z$
-\item for each of the $A,B,C,D$ pairings on $\Z/2^r\Z$ (for any $r\ge1$), there's a graph $G$ that has Jacobian with pairing isomorphic to the desired group with pairing
+
+\item Jacobian with pairing of a wedge is the orthogonal sum of the
+Jacobians with their respective pairings
+
+\item pairings of basic graphs (subdivided bananas, cycles with extra
+edges)
+
+\item For any prime $p$ and $r>1$, there exist decompositions of $p^r$
+  into symmetric polynomials of $c_1, \ldots, c_k$ such that we can
+  get $\prod c_i$ as either a residue or nonresidue mod $p$.
+
+\item if $r>1$, $p$ any odd prime, and $\Gamma$ is any group with
+pairing isomorphic to $\Z/p^r\Z$; then there exists a multigraph $G$
+with $\Jac(G)\simeq \Gamma$
+
+\item remark: with GRH, we can get the above claims for $r=1$ as well.
+
+\item if the order of $\Gamma$ is odd (and we have GRH), then there
+exists a multigraph $G$ with $\Jac(G) \simeq \Gamma$.
+
+\item lemma: if $a\equiv b\pmod 8$, then $axy/2^r$ and $bxy/2^r$ are
+isomorphic pairings on $\Z/2^r\Z$
+
+\item for each of the $A,B,C,D$ pairings on $\Z/2^r\Z$ (for any
+$r\ge1$), there's a graph $G$ that has Jacobian with pairing
+isomorphic to the desired group with pairing
+
 \item $E_2$ is not a Jacobian with pairing for any multigraph
+
 \item if $G$ is simple, cannot get all pairings on $(\Z/3\Z)^n$
 \end{enumerate}
 
 \subsection{Conjectures}
 
 \begin{enumerate}
+
 \item for any $r\ge1$, $E_{2^r}$ is not the Jacobian of any multigraph
-\item Note: however, can get some $E_{2^r}$ pairings as subgroups with pairing given by restricting the monodromy pairing to certain divisor classes
+
+\item Note: however, can get some $E_{2^r}$ pairings as subgroups with
+pairing given by restricting the monodromy pairing to certain divisor
+classes
 \end{enumerate}
 
-\vspace{1cm}
-Last updated \today.
+\vspace{1cm} Last updated \today.
 
 \end{document}
