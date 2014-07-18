@@ -245,6 +245,31 @@
   on adjacent vertices in both the old and new graph.
 \end{proof_short}
 
+\begin{fact}
+  \label{H_no_2group}
+  Let $H$ be a finite abelian group. Then there exists $k_0$
+  (depending on $H$) such that for all $k > k_0$, there is no finite
+  simple graph $G$ such that
+
+\begin{equation}
+  \Jac(G) \simeq (\Z/2\Z)^k \times H
+\end{equation}
+\end{fact}
+
+\begin{proof_short}
+  Relate the max order of an element to the max degree of a vertex,
+  and the number of vertices of valency >2 to the size of $H$.
+\end{proof_short}
+
+\begin{fact}
+  Nick's facts about all the pairings on $2$-groups except the
+  $E$-pairing
+\end{fact}
+
+\begin{proof_short}
+  Banana constructions TO THE MAX
+\end{proof_short}
+
 
 \section{Conjectures}
 
@@ -263,6 +288,31 @@
   need $O(p^{1/2})$.
 \end{evidence}
 
+\begin{conj}
+  Let $G$ be a graph with genus $g$, and suppose that $\Jac(G) \simeq
+  \Z/a_1\Z \times \ldots \times \Z/a_g\Z$ with $a_i | a_{i+1}$ for all
+  $0 < i < g$ (i.e., $G$ has $g$ nontrivial invariant factors). Then
+  there exists a graph $G'$ such that if each edge of $G'$ is
+  subdivided into $a_1$ smaller edges, we obtain $G$.
+\end{conj}
+
+\begin{evidence}
+  View the Jacobian of $G$ as a lattice on the Jacobian of the
+  corresponding metric graph $\Gamma$. Any points of $p$-torsion on
+  $\Jac(G)$ should correspond to a subset of the $p^g$ points of
+  $p$-torsion on $\Jac(\Gamma)$, and if there are $p^g$ such points in
+  $\Jac(G)$ we should be able to ``scale down'' the lattice in some
+  way.
+\end{evidence}
+
+\begin{conj}
+  Nick's conjecture about the $E$-pairing
+\end{conj}
+\begin{proof_short}
+  No idea. Ask Nick.
+\end{proof_short}
+
+\section*{Conjectures we don't care about}
 
 \begin{conj}
   Let $G$ be a graph with vertex set $V(G)$. Let $v, w \in V(G)$, and
@@ -359,21 +409,6 @@ This conjecture is sufficient to prove \ref{nk_pairs} above.
   True for graphs on few vertices ($< 10$)
 \end{evidence}
 
-\begin{conj}
-  \label{H_no_2group}
-  Let $H$ be a finite abelian group. Then there exists $k_0$
-  (depending on $H$) such that for all $k > k_0$, there is no finite
-  simple graph $G$ such that
-
-\begin{equation}
-  \Jac(G) \simeq (\Z/2\Z)^k \times H
-\end{equation}
-\end{conj}
-
-\begin{evidence}
-  We can try and relate genus to the maximum order of elements on
-  2-vertex connected graphs, and induct on the order of $H$.
-\end{evidence}
 
 \begin{conj}
   Let $G$ be a 2-vertex-connected simple graph of genus $g$. Then the
@@ -385,25 +420,8 @@ This conjecture is sufficient to prove \ref{nk_pairs} above.
   True if the complete graph (or something ``close'' to it) gives the
   ``smallest possible order of elements'' for a given genus.
 
-  This conjecture probably implies conjecture \ref{H_no_2group}
-  above. 
-\end{evidence}
-
-\begin{conj}
-  Let $G$ be a graph with genus $g$, and suppose that $\Jac(G) \simeq
-  \Z/a_1\Z \times \ldots \times \Z/a_g\Z$ with $a_i | a_{i+1}$ for all
-  $0 < i < g$ (i.e., $G$ has $g$ nontrivial invariant factors). Then
-  there exists a graph $G'$ such that if each edge of $G'$ is
-  subdivided into $a_1$ smaller edges, we obtain $G$.
-\end{conj}
-
-\begin{evidence}
-  View the Jacobian of $G$ as a lattice on the Jacobian of the
-  corresponding metric graph $\Gamma$. Any points of $p$-torsion on
-  $\Jac(G)$ should correspond to a subset of the $p^g$ points of
-  $p$-torsion on $\Jac(\Gamma)$, and if there are $p^g$ such points in
-  $\Jac(G)$ we should be able to ``scale down'' the lattice in some
-  way.
+  If true, this conjecture would give a better bound in the proof of
+  fact \ref{H_no_2group} above.
 \end{evidence}
 
 \vspace{1cm}
