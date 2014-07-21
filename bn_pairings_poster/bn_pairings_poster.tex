@@ -1,0 +1,276 @@
+\documentclass[landscape,final,columns=3]{baposter}
+\usepackage{geometry}
+\geometry{left=1in,right=1in,top=1in,bottom=1in}
+\usepackage{times}
+\usepackage{calc}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{relsize}
+\usepackage{multirow}
+\usepackage{bm}
+\usepackage{color}
+
+\input{../common/BN_common}
+
+\usepackage{graphicx}
+\usepackage{multicol}
+
+\usepackage{pgfbaselayers}
+\pgfdeclarelayer{background}
+\pgfdeclarelayer{foreground}
+\pgfsetlayers{background,main,foreground}
+
+\usepackage{helvet}
+\usepackage{palatino}
+\pagestyle{empty}
+\newcommand{\captionfont}{\footnotesize}
+
+\usepackage{xcolor}
+\pagecolor[RGB]{255,254, 230}
+
+\selectcolormodel{cmyk}
+
+\graphicspath{{images/}}
+\setlength{\columnsep}{0.7em}
+\setlength{\columnseprule}{0mm}
+\newcommand{\compresslist}{%
+\setlength{\itemsep}{1pt}%
+\setlength{\parskip}{0pt}%
+\setlength{\parsep}{0pt}%
+}
+
+\begin{document}
+
+\typeout{Poster Starts}
+%by changing the values inside the curly brackets you can get new colors
+\definecolor{mit}{cmyk}{0,.667,.667,.4}
+\definecolor{wil}{cmyk}{0.5,1,0,.6}
+\definecolor{silver}{cmyk}{0,0,0,0.3}
+\definecolor{yellow}{cmyk}{0,0,0.9,0.0}
+\definecolor{reddishyellow}{cmyk}{0,0.22,1.0,0.0}
+\definecolor{black}{cmyk}{0,0,0.0,1.0}
+\definecolor{darkYellow}{cmyk}{0,0,1.0,0.5}
+\definecolor{darkSilver}{cmyk}{0,0,0,0.1}
+\definecolor{lightyellow}{cmyk}{0,0,0.3,0.0}
+\definecolor{lighteryellow}{cmyk}{0,0,0.1,0.0}
+\definecolor{lightestyellow}{cmyk}{0,0,0.05,0.0}
+\begin{poster}{
+  grid=no,
+  columns=3,
+   colspacing=1em,
+  bgColorOne=lighteryellow, %background inside the boxes
+  bgColorTwo=lightestyellow, %background color
+  borderColor=reddishyellow,
+  headerColorOne=yellow,
+  headerColorTwo=reddishyellow,
+  headerFontColor=black,
+  boxColorOne=lightyellow,
+  boxColorTwo=lighteryellow,
+  % Format of textbox
+  textborder=roundedleft,
+  % Format of text header
+  eyecatcher=no,
+  headerborder=open,
+  headerheight=0.08\textheight,
+  headershape=roundedright,
+  headershade=plain,
+  headerfont=\Large\textsf, %Sans Serif
+  boxshade=plain,
+  background=plain,
+  linewidth=2pt
+  }
+  {
+  }
+{\bf{\textcolor{mit}{This Shit is Bananas}} %title
+  % Authors
+{\rm \\ \large  Louis Gaudet, Nicholas Wawrykow, and Theodore Weisman \ \ \
+ \textbf{Advisor:} David Jensen\\
+ SUMRY 2014,\ Yale University
+  }}
+
+  % University logo: change the CMU.jpeg to whatever picture you want and then uncomment this section
+%  {
+%   \makebox[8em][r]{
+%      \begin{minipage}{16em}
+%        \hfill
+%        \includegraphics[height=6.5em]{mitsealY.eps}
+%            \end{minipage}
+%            \hspace{-1.35in}
+%        \begin{minipage}{16em}
+%        \hfill
+%        \includegraphics[height=5.8em]{wilsealY.eps}
+%            \end{minipage}
+%         \hspace{-1.35in}
+%        \begin{minipage}{16em}
+%        \hfill
+%        \includegraphics[height=5.8em]{cookie.eps}
+%            \end{minipage}
+%    }
+%  }
+
+  \tikzstyle{light shaded}=[top color=baposterBGtwo!30!white,bottom color=baposterBGone!30!white,shading=axis,shading angle=30]
+     \newlength{\leftimgwidth}
+     \setlength{\leftimgwidth}{0.78em+8.0em}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Now define the boxes that make up the poster
+%%%---------------------------------------------------------------------------
+%%% Each box has a name and can be placed absolutely or relatively.
+%%% The only inconvenience is that you can only specify a relative position
+%%% towards an already declared box. So if you have a box attached to the
+%%% bottom, one to the top and a third one which should be in between, you
+%%% have to specify the top and bottom boxes before you specify the middle
+%%% box.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %
+    % A colored circle useful as a bullet with an adjustably strong filling
+    \newcommand{\colouredcircle}[1]{%
+      \tikz{\useasboundingbox (-0.2em,-0.32em) rectangle(0.2em,0.32em); \draw[draw=black,fill=baposterBGone!80!black!#1!white,line width=0.03em] (0,0) circle(0.18em);}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \headerbox{{{\bf{Definitions}}}}{name=defs,column=0,row=0}{
+{}Fibonacci Numbers: $F_{n+1} = F_n + F_{n-1}$;\\
+$F_1 = 1$, $F_2 = 2$, $F_3=3$, $F_4=5,\dots$.
+
+\vspace{0.1in}
+
+{\textcolor{purple}{\large{\bf{Zeckendorf's Theorem}}}}\\
+Every positive integer can be written in a unique way as a sum of non-consecutive Fibonacci numbers.
+
+\vspace{0.1in}
+
+{\textcolor{purple}{\large{\bf{Lekkerkerker's Theorem}}}}\\
+The average number of summands in the Zeckendorf decomposition for integers in $[F_n, F_{n+1})$ tends to $\frac{n}{\varphi^2+1} \approx 0.276n$, where $\varphi = \frac{1+\sqrt{5}}2$ is the golden mean.
+
+ }
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \headerbox{{\bf{Classification theorem}}}{name=class,column=0,below=defs}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+{\textcolor{purple}{\large{\bf{Central Limit Type Theorem}}}}\\
+ As $n\rightarrow \infty$, the distribution of the number of summands in the Zeckendorf decomposition for integers in $[F_n, F_{n+1})$ is Gaussian.
+
+ \vspace{0.1in}
+
+%\scalebox{.8}{\includegraphics{GaussianBehaviorNumFibands.eps}}
+\centerline{Number of summands in $[F_{2010}, F_{2011})$}
+
+\vspace{0.22in}
+
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \headerbox{{\bf{Pairings on $\Z/p^r\Z$}}}{name=prpair,span=2,column=1,row=0}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Generalizing from Fibonacci numbers to \emph{linearly recursive sequences with arbitrary nonnegative coefficients}:
+
+%\begin{list}{\labelitemi}{\leftmargin=1em}
+
+%\vspace{-0.1in}
+
+%\item Recurrence relation:\\
+%$H_{n+1}=c_1 H_n + c_2 H_{n-1} + \cdots + c_L H_{n-L+1}$\\
+%for $n\geq L$.
+%\item
+
+%\vspace{-0.05in}
+%Initial conditions:
+%$H_1=1$ and\\
+% $H_{n+1} =c_1 H_n + c_2 H_{n-1} + \cdots + c_n H_{1}+1$
+% for $n< L$.
+%\end{list}
+
+%{\textcolor{purple}{\large{\bf{Generalized Zeckendorf's THM}}}}\\
+%Every positive integer can be written as a unique sum $\sum a_iH_i$ with natural constraints on the $a_i$'s (e.g., cannot use the recurrence relation to remove any summands).\\
+
+%{\textcolor{purple}{\large{\bf{Generalized Lekerkerker's THM}}}}\\
+%The average number of summands in the generalized Zeckendorf decomposition for integers in $[H_n, H_{n+1})$ tends to $Cn+d$, where $C$ and $d$ are computable constants determined by the $c_i$'s. The value of $C$ is
+%\vspace{-0.1in}
+%$$
+%\frac{\sum_{m=0}^{L-1}(s_m+s_{m+1}-1)(s_{m+1}-s_m)y^m(1)}{2\sum_{m=0}^{L-1}(m+1)(s_{m+1}-s_m)y^m(1)}$$
+
+%\vspace{-0.1in}
+
+%where $s_0=0$ and $s_m=c_1+c_2+\cdots+c_m$.\\
+
+%{\textcolor{purple}{\large{\bf{Central Limit Type THM}}}}\\
+%As $n\rightarrow \infty$, the distribution of the number of summands in the generalized Zeckendorf decomposition for integers in $[H_n, H_{n+1})$ is Gaussian.
+
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \headerbox{{\bf{Acknowledgements}}}{name=ack,column=0,span=2,above=bottom}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \smaller
+  This research was conducted as part of the 2014 SUMRY program at Yale University.
+}%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \headerbox{{\bf{Pairings on $\Z/2^r\Z$}}}{name=2rpair,column=1, span=2, above=ack,below=prpair}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{multicols}{2}
+
+Previous investigations were number theoretic, involving continued fractions, and were limited to results on existence and, in some cases, the mean.
+
+\ \ By recasting as a combinatorial problem and using generating functions and differentiating identities, we surmount the limitations inherent in the previous approaches.
+
+\ \ We take the case of Fibonacci numbers as an example to show how our approach works.
+
+\ \ Let $p(n,k)=$ \# $\{N\in [F_n, F_{n+1}):N$ has a $k$-summand
+Zeckendorf decomposition$\}$ and $K$ be the random variable associated with $k$ with probability density $p(n,k)$.
+
+
+\begin{list}{\labelitemi}{\leftmargin=1em}
+
+\vspace{-0.1in}
+
+\item {{\textcolor{blue}{\bf{Recurrence relation}}}}:\\
+$p(n+1,k+1)=p(n,k+1)+p(n,k)$.
+
+\vspace{-0.02in}
+
+\item {{\textcolor{blue}{\bf{Generating function}}}}: \\
+$\sum_{n,k>0}p(n,k)x^ky^n =\frac{y}{1-y-xy^2}$.
+
+\vspace{-0.02in}
+
+\item {{\textcolor{blue}{\bf{Partial fraction expansion}}}}: \\
+$\frac{y}{1-y-xy^2} =\frac{y}{y_2(x)-y_1(x)}\left[\frac{1}{y-y_1(x)}-\frac{1}{y-y_2(x)}\right]$
+
+where $y_1(x)$ and $y_2(x)$ are the roots of\\
+$1-y-xy^2=0$.
+
+{\bf{Coefficient of $y^n$}}: \\
+$g(x)=\sum_{n,k>0}p(n,k)x^k$.
+
+\vspace{-0.02in}
+
+\item {{\textcolor{blue}{\bf{Differentiating identities}}}}: \\
+$g(1)=F_{n+1}-F_n$,  $g'(1)=g(1)E[K]$,
+
+$\left(xg'(x)\right)'|_{x=1}=g(1)E[K^2]$,
+
+$\left(x\left(xg'(x)\right)'\right)'|_{x=1}=g(1)E[K^3]$, ...
+
+Similar results hold for the random variable $K-E[K]$, namely the centralized $K$.
+
+\vspace{-0.02in}
+
+\item {{\textcolor{blue}{\bf{Method of moments}}}}: \\
+$E[(K')^{2m}]/E[K'^2]\rightarrow (2m-1)!!$,
+
+$E[(K')^{2m-1}]/E[K'^2]\rightarrow 0$.
+\end{list}
+
+\vspace{0.1em}
+
+\end{multicols}
+
+}
+
+\end{poster}%
+%
+\end{document}
