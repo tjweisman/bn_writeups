@@ -1,0 +1,56 @@
+\documentclass{amsart}
+
+\title{Standard notation for Brill-Noether write-up: \\ ``This sh*t is bananas''}
+
+\input{../common/BN_common}
+
+\begin{document}
+
+\maketitle
+
+\begin{itemize}
+\item $G$ for a graph
+\item \emph{biconnected} (instead of 2-vertex-connected) to mean that if you remove any one vertex and its incident edges, resulting graph is still connected
+\item for specific graphs:
+\begin{itemize}
+\item $C_n$ for the $n$-cycle ($n$ vertices, $n$ edges)
+\item $B_e$ for the banana with $e$ edges
+\item $B_S$ for the subdivided banana corresponding to the multiset $S$ (see below)
+\item $C_S$ for the cycle with extra edges corresponding to the multiset $S$ (see below)
+\end{itemize}
+
+\item $S=\{s_1,\dots,s_m\}$ for a multiset of integers, $s_i\ge1$ for all $i$
+\begin{itemize}
+\item given $S$ as above, define $P(S)=\prod_{i=1}^ms_i$
+\item given $S$ as above, define $R(S)=\sum_{i=1}^mP(S)/s_i=\sum_{i=1}^ms_1\cdots\widehat{s_i}\cdots s_m$, where the hat indicates omitting that number from the sum
+\end{itemize}
+
+\item $V(G)$ for the vertex set of $G$
+\item $E(G)$ for the edge (multi)set of $G$
+\item $g=g(G)=|E(G)|-|V(G)|+1$ for the genus of $G$
+\item $n=|V(G)|$, the number of vertices
+\item $e=|E(G)|$, the number of edges
+\item $\delta=\delta(G)$, the maximum degree of a vertex in $G$
+\item $u,v,w$ for specific vertices
+\item $\val(v)$ for the valency\footnote{we specifically don't use the word ``degree'' here to avoid confusion with the degree of a divisor} of the vertex $v$
+\item ``naught'' subscript, say $v_0$, for a basepoint
+
+\item $D,E,F$ for divisors
+\item $\deg(D)$ for the degree of the divisor $D$
+\item $\Div(G)$ for the abelian group of divisors on $G$
+\item $\Div^d(G)$ for the coset of divisors of degree $d$ on $G$
+\item $\Delta$ for the Laplacian map
+\item $\sim$ for equivalence modulo $\im\Delta$ (chip-firing equivalence)
+\item $[D]$ for a divisor class under $\sim$
+\item $\Jac(G)$ for the Jacobian group of $G$
+\item $\mu=\mu(G)$ is the maximum order of an element in $\Jac(G)$
+
+\item $k$ for powers of groups
+\item $r$ for powers of primes
+\item mathcal capitals for (isomorphism classes of) groups with pairing ($\mathcal{A},\mathcal{B}$, etc.)
+
+\end{itemize}
+
+\vspace{1cm} Last updated \today.
+
+\end{document}
