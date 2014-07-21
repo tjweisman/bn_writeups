@@ -130,8 +130,10 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \headerbox{{{\bf{Definitions}}}}{name=defs,column=0,row=0}{
-{}Fibonacci Numbers: $F_{n+1} = F_n + F_{n-1}$;\\
-$F_1 = 1$, $F_2 = 2$, $F_3=3$, $F_4=5,\dots$.
+Let $\Gamma$ be a finite abelian group. A \textbf{pairing} on $\Gamma$ is a map
+\[
+\pair{\cdot}{\cdot}:\Gamma\times\Gamma\to\Q/\Z.
+\]
 
 \vspace{0.1in}
 
@@ -144,10 +146,16 @@ Every positive integer can be written in a unique way as a sum of non-consecutiv
 The average number of summands in the Zeckendorf decomposition for integers in $[F_n, F_{n+1})$ tends to $\frac{n}{\varphi^2+1} \approx 0.276n$, where $\varphi = \frac{1+\sqrt{5}}2$ is the golden mean.
 
  }
-
+ 
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \headerbox{{\bf{Acknowledgements}}}{name=ack,column=0,span=2,above=bottom}{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \smaller
+  This research was conducted as part of the 2014 SUMRY program at Yale University.
+}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- \headerbox{{\bf{Classification theorem}}}{name=class,column=0,below=defs}{
+ \headerbox{{\bf{Classification theorem}}}{name=class,column=0,below=defs, above=ack}{
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 {\textcolor{purple}{\large{\bf{Central Limit Type Theorem}}}}\\
  As $n\rightarrow \infty$, the distribution of the number of summands in the Zeckendorf decomposition for integers in $[F_n, F_{n+1})$ is Gaussian.
@@ -199,13 +207,6 @@ The average number of summands in the Zeckendorf decomposition for integers in $
 %As $n\rightarrow \infty$, the distribution of the number of summands in the generalized Zeckendorf decomposition for integers in $[H_n, H_{n+1})$ is Gaussian.
 
 }
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \headerbox{{\bf{Acknowledgements}}}{name=ack,column=0,span=2,above=bottom}{
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \smaller
-  This research was conducted as part of the 2014 SUMRY program at Yale University.
-}%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \headerbox{{\bf{Pairings on $\Z/2^r\Z$}}}{name=2rpair,column=1, span=2, above=ack,below=prpair}{
