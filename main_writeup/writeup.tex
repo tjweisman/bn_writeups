@@ -11,6 +11,8 @@ connected multigraph with no loops.
 
 
 \section{Jacobians of Finite Graphs}
+
+\subsection{The general graph case}
 It is natural to ask which finite abelian groups appear as Jacobians
 of graphs. The problem can be considerably reduced by applying the
 following lemma:
@@ -41,8 +43,8 @@ theorem for finite abelian groups, tells us that if, for all $n$,
 there exists a graph $G$ such that $\Jac(G)$ is cyclic of order $n$,
 then \emph{all} finite abelian groups are the Jacobian of some graph.
 
-For given $n$, we can give two possible constructions of $G$ with
-$\Jac(G) \simeq \Z/n\Z$.
+For given $n$, we give two possible constructions of $G$ with $\Jac(G)
+\simeq \Z/n\Z$.
 
 \begin{defn}
   $B_n$, the \emph{banana graph on $n$ edges}, is the graph with
@@ -72,12 +74,13 @@ $\Jac(G) \simeq \Z/n\Z$.
   order $n$ as required.
 \end{proof}
 
-This construction is sufficient to show that all finite abelian groups
-appear as the Jacobian of some graph. However, since banana graphs are
-only realizable as a multigraphs, we might also wish to find a
-construction for a simple graph $G$ with $\Jac(G) \simeq \Z/n\Z$ for
-given $n$. This is (almost) always possible, by the following
-proposition:
+\subsection{The multigraph case}
+The construction given above is sufficient to show that all finite
+abelian groups appear as the Jacobian of some graph. However, since
+banana graphs are only realizable as a multigraphs, we might also wish
+to find a construction for a simple graph $G$ with $\Jac(G) \simeq
+\Z/n\Z$ for given $n$. This is (almost) always possible, by the
+following proposition:
 
 \begin{prop}
   \label{prop:cycle_cyclic}
@@ -87,8 +90,8 @@ proposition:
 
 Each spanning tree on $C_n$ corresponds to a choice of $n-1$ edges to
 include in the tree, so $\Jac(C_n)$ has order $n$ and, as before, it
-suffices to find a single element of order at least $n$. We will
-instead prove a stronger claim that holds on a wider family of graphs:
+suffices to find a single element of $\Jac(C_n)$ of order at least
+$n$. We show that such an element exists on a wider family of graphs:
 
 \begin{lem}
   \label{lem:2valent_path}
@@ -301,7 +304,55 @@ upper bound on $k$.
   required.
 \end{proof}
 
+Applying Corollary \ref{cor:genus_v_mu} and Lemma
+\ref{lem:genus_cycle}, we see that for sufficiently large $k$, we must
+have $|V(G)| > v_0$. This in turn implies that for sufficiently large
+$k$, $(\Z/2\Z)^k \times H$ is not the Jacobian of any biconnected
+graph.
 
+We complete the proof of Theorem \ref{thm:2group_product} via
+induction on $|H|$\footnote{We could obtain a slightly better bound by
+  inducting on $\eta(H)$, the number of invariant factors of $H$. This
+  is slightly more cumbersome, and is left to the revisor as an
+  exercise}. When $|H| = 1$ or $2$, Theorem \ref{thm:2group} gives the
+bound $k_0 = 1$. For $|H| \ge 3$, there must exist (by Proposition
+\ref{prop:v_bound}) an integer $k'$ such that if $k > k'$, and
+$\Jac(G) \simeq (\Z/2\Z)^k \times H$, then $G$ is not biconnected.
+
+By the induction hypothesis, for any proper subgroup $H' \subset H$,
+there exists an integer $k(H')$ such that for all $k > k(H')$, no
+simple graph $G'$ has $\Jac(G') \simeq (\Z/2\Z)^k \times H'$. Now,
+since $H$ is finite, there are finitely many pairs of proper subgroups
+$H_1, H_2 \subset H$ such that $H_1 \times H_2 \simeq H$. Define
+
+\begin{equation}
+  k'' = \max\{k \in \N : k = k(H_1) + k(H_2), H_1 \times H_2 = H\}
+\end{equation}
+
+Now let $k_0 = \max(k', k'')$. We wish to show that for all $k > k_0$,
+if $\Jac(G) \simeq (\Z/2\Z)^k \times H$, then $G$ is not simple. Let
+$G$ be a graph with this Jacobian, and let $k > k_0$.  Since $k > k'$,
+$G$ is not biconnected, so it must be the wedge sum of two graphs
+$G_1$ and $G_2$. There must then exist integers $k_1, k_2$ with $k_1 +
+k_2 = k$ and groups $H_1, H_2$ with $H_1 \times H_2 \simeq H$ such
+that
+
+\begin{align}
+  \Jac(G_1) &\simeq (\Z/2\Z)^{k_1} \times H_1 \\
+  \Jac(G_2) &\simeq (\Z/2\Z)^{k_2} \times H_2
+\end{align}
+
+Without loss of generality, we may assume that neither $G_1$ nor $G_2$
+is a tree, and $\Jac(G_1)$ and $\Jac(G_2)$ are both proper subgroups
+of $\Jac(G)$. Furthermore, if either $H_1$ or $H_2$ were trivial, then
+$G_1$ (resp. $G_2$) would have Jacobian isomorphic to $(\Z/2\Z)^k$ for
+$k \ge 0$, implying that $G$ is not simple.
+
+Finally, since $k_1 + k_2 = k > k'' \ge k(H_1) + k(H_2)$, we must have
+that either $k_1 > k(H_1)$ or $k_2 > k(H_2)$. Then either $G_1$ or
+$G_2$ is not simple, so that $G$ is not simple, as required.
+
+\subsection{Further queries}
 
 \section{Relationship to Jacobians of Metric Graphs}
 \begin{lem}
