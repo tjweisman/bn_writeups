@@ -46,17 +46,18 @@
 
 \typeout{Poster Starts}
 %by changing the values inside the curly brackets you can get new colors
-\definecolor{mit}{cmyk}{0,.667,.667,.4}
+\definecolor{mit}{cmyk}{.34,.72,1,.33}
 \definecolor{wil}{cmyk}{0.5,1,0,.6}
 \definecolor{silver}{cmyk}{0,0,0,0.3}
 \definecolor{yellow}{cmyk}{0,0,0.9,0.0}
 \definecolor{reddishyellow}{cmyk}{0,0.22,1.0,0.0}
 \definecolor{black}{cmyk}{0,0,0.0,1.0}
+%\definecolor{black}{cmyk}{.34,.72,1,.33}
 \definecolor{darkYellow}{cmyk}{0,0,1.0,0.5}
 \definecolor{darkSilver}{cmyk}{0,0,0,0.1}
 \definecolor{lightyellow}{cmyk}{0,0,0.3,0.0}
 \definecolor{lighteryellow}{cmyk}{0,0,0.1,0.0}
-\definecolor{lightestyellow}{cmyk}{0,0,0.05,0.0}
+\definecolor{lightestyellow}{cmyk}{0,0,0.08,0.0}
 \begin{poster}{
   grid=no,
   columns=3,
@@ -133,10 +134,10 @@
 
  
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  \headerbox{{\bf{Acknowledgements}}}{name=ack,column=0,span=2,above=bottom}{
+  \headerbox{{\bf{Acknowledgements}}}{name=ack,column=0,span=3,above=bottom}{
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   \smaller
-  This research was conducted as part of the 2014 SUMRY program at Yale University. We would like to thank Sam Payne for our funding, and our mentors as well as Sam Payne, Nathan Kaplan, and Anup Rao for many helpful conversations and for their guidance.
+  This research was conducted as part of the 2014 SUMRY program at Yale University. We would like to thank our mentors as well as Sam Payne, Nathan Kaplan, Anup Rao, and Susie Kimport for many helpful conversations and suggestions.
 }%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -234,7 +235,7 @@ You can ``fire'' a vertex on a divisor to get a new divisor:
 \end{tikzpicture}
 \end{center}
 
-If you can get between two divisors $D$ and $D'$ via a sequence of chip-firing moves, then $D,D'$ are equivalent, $D\sim D'$.
+If you can get between two divisors $D$ and $D'$ via a sequence of chip-firing moves, then $D,D'$ are \textbf{equivalent}, $D\sim D'$.
 
 \vspace{0.1in}
 
@@ -247,7 +248,7 @@ Now we define the \textbf{Jacobian} group of the graph $G$:
 \[
 \Jac(G) = \Div^0(G)/\sim.
 \]
-For a finite graph $G$, $\Jac(G)$ is a finite abelian group.
+For any connected graph $G$, $\Jac(G)$ is a finite abelian group.
 
 \begin{fact*}
 $|\Jac(G)|=$ the number of spanning trees of $G$.
@@ -307,20 +308,20 @@ Given a graph $G$, $\Jac(G)$ is endowed with a canonical pairing called the \tex
 Which groups with pairing appear as the Jacobians of finite graphs?
 \end{quest*}
 
-Because of the classification theorem above, it suffices to find graphs with $\Jac(G)\simeq \Z/p^r\Z$ and with each of the two pairing isomorphism classes as listed above.
+We obtain the orthogonal sum of two Jacobians with pairing by taking the wedge sum of the corresponding graphs. Hence it suffices to find graphs with $\Jac(G)\simeq \Z/p^r\Z$ and with each of the two pairing isomorphism classes as listed above.
 
 \vspace{0.1in}
 {\textcolor{purple}{\large{\bf{The residue pairing}}}} \vspace{0.05in}\\
-Consider $B_{p^r}$, the \textbf{banana graph} on $p^r$ edges:
+Consider $B_{p^r}$, the \textbf{banana graph} (fig. 1) on $p^r$ edges:
 
 %r pairing for all p
 \begin{center}
 \begin{tikzpicture}[scale=.5]
 
-\draw (0,0) to [out=330,in=210] (6,0) ;
-\draw (0,0) to [out=345,in=195] (6,0) ;
-\draw (0,0) to [out=15,in=165] (6,0) ;
-\draw (0,0) to [out=30,in=150] (6,0) ;
+\draw (0,0) to [out=320,in=220] (6,0) ;
+\draw (0,0) to [out=335,in=205] (6,0) ;
+\draw (0,0) to [out=25,in=155] (6,0) ;
+\draw (0,0) to [out=40,in=140] (6,0) ;
 
 \node [right] at (2.95,.25) {$\vdots$} ;
 
@@ -329,6 +330,8 @@ Consider $B_{p^r}$, the \textbf{banana graph} on $p^r$ edges:
 \draw [fill=green] (0,0) circle [radius=0.1cm] ;
 \node [left] at (-.3,0) {$\;1$} ;
 
+\node at (8.5,-1) {\textbf{(fig. 1)}} ;
+
 \end{tikzpicture}
 \end{center}
 
@@ -336,14 +339,14 @@ For every $p$ and $r$, $\Jac(B_{p^r})\simeq\Z/p^r\Z$, and the pairing on $\Jac(B
 
 \vspace{0.1in}
 {\textcolor{purple}{\large{\bf{The nonresidue pairing}}}} \vspace{0.05in}\\
-A candidate for getting the nonresidue pairing is the \textbf{cycle graph} $C_{p^r}$. Indeed $\Jac(C_{p^r})=\Z/p^r\Z$, and the pairing is isomorphic to $\pair{x}{y}=(-1)xy/p^r$.
+A candidate for getting the nonresidue pairing is the \textbf{cycle graph} $C_{p^r}$ (fig. 2). Indeed $\Jac(C_{p^r})=\Z/p^r\Z$, and the pairing is isomorphic to $\pair{x}{y}=(-1)xy/p^r$.
 
 However, it is not true that $-1$ is always a nonresidue modulo $p^r$. This is only true when $p\equiv 3\pmod 4$, so we must consider another construction when $p\equiv 1\pmod 4$. For this, the following claim is sufficient. 
 
 \begin{claim*}
-There exists $q$, a nonresidue mod $p$, such that $q^2<p^r$ and $q\equiv 3\pmod 4$ if $r$ is odd and $q\equiv 1\pmod 4$ if $r$ is even.
+There exists $q$, a nonresidue mod $p$, such that $q^2/4<p^r$ and $q\equiv 3\pmod 4$ if $r$ is odd and $q\equiv 1\pmod 4$ if $r$ is even.
 \end{claim*}
-Given this claim, we pick $m$ such that $p^r\equiv m(q-m)\pmod q$, and construct the following \textbf{subdivided banana graph}:
+Given this claim, we pick $m$ such that $p^r\equiv m(q-m)\pmod q$, and construct the following \textbf{subdivided banana graph} (fig. 3):
 
 
 %nr pairing for p=3mod4
@@ -358,56 +361,59 @@ Given this claim, we pick $m$ such that $p^r\equiv m(q-m)\pmod q$, and construct
 \draw (3, -1) to (3, 1) ;
 
 \draw [fill=green] (3,1) circle [radius=.1cm] ;
-\node at (3.5, 1.4) {$\;p^r-1$} ;
+\node at (3.9, 1.6) {$\;p^r-1$} ;
 \draw [fill=green] (3,-1) circle [radius=.1cm] ;
-\node at (3.4, -1.3) {$\;0$} ;
+\node at (3.4, -1.3) {$0$} ;
 \draw [fill] (1.3,1.5) circle [radius=.1cm] ;
-\node at (1.3, 1.8) {$\;p^r-2$} ;
+\node at (1.3, 2) {$\;p^r-2$} ;
 \draw [fill] (1.3,-1.5) circle [radius=.1cm] ;
-\node at (1.3, -1.8) {$\;1$} ;
+\node at (1.3, -2) {$\;1$} ;
 \draw [fill] (0,0) circle [radius=.1cm] ;
-\node at (-.4,0) {$\;2$} ;
+\node at (-.5,0) {$\;2$} ;
 
 %subdivided banana
-\draw [shift={(7cm,0cm)}] (0,0) to (1,-1) ;
-\draw [shift={(7cm,0cm)}] (6,0) to (5,-1) ;
-\draw [shift={(7cm,0cm)}] [dashed] (1,-1) to (5, -1) ;
-\draw [shift={(7cm,0cm)}] (0,0) to (1.5,0) ;
-\draw [shift={(7cm,0cm)}] (4.5,0) to (6,0) ;
-\draw [shift={(7cm,0cm)}] [dashed] (1.5, 0) to (4.5, 0) ;
-\draw [shift={(7cm,0cm)}] (0,0) to  (.85,1) ;
-\draw [shift={(7cm,0cm)}] (.85,1) to (2,1.20) ;
-\draw [shift={(7cm,0cm)}] (5.15,1) to (6,0) ;
-\draw [shift={(7cm,0cm)}] (4,1.20) to (5.15,1) ;
-\draw [shift={(7cm,0cm)}] [dashed] (2,1.2) to (4,1.2);
-\draw [shift={(7cm,0cm)}] (.5, .1) to [out=90, in=-90] (3,.6) ; 
-\draw [shift={(7cm,0cm)}] (5.5, .1) to [out=90, in=-90] (3,.6) ; 
-\draw [shift={(7cm,0cm)}] (.5, -.7) to [out=-90, in=90] (3,-1.7) ; 
-\draw [shift={(7cm,0cm)}] (5.5, -.7) to [out=-90, in=90] (3,-1.7) ; 
-\draw [shift={(7cm,0cm)}] (.5, .9) to [out=90, in=-90] (3,1.9) ; 
-\draw [shift={(7cm,0cm)}] (5.5, .9) to [out=90, in=-90] (3,1.9) ; 
+\draw [shift={(6.5cm,0cm)}] (0,0) to (1,-1) ;
+\draw [shift={(6.5cm,0cm)}] (6,0) to (5,-1) ;
+\draw [shift={(6.5cm,0cm)}] [dashed] (1,-1) to (5, -1) ;
+\draw [shift={(6.5cm,0cm)}] (0,0) to (1.5,0) ;
+\draw [shift={(6.5cm,0cm)}] (4.5,0) to (6,0) ;
+\draw [shift={(6.5cm,0cm)}] [dashed] (1.5, 0) to (4.5, 0) ;
+\draw [shift={(6.5cm,0cm)}] (0,0) to  (.85,1) ;
+\draw [shift={(6.5cm,0cm)}] (.85,1) to (2,1.20) ;
+\draw [shift={(6.5cm,0cm)}] (5.15,1) to (6,0) ;
+\draw [shift={(6.5cm,0cm)}] (4,1.20) to (5.15,1) ;
+\draw [shift={(6.5cm,0cm)}] [dashed] (2,1.2) to (4,1.2);
+\draw [shift={(6.5cm,0cm)}] (.5, .1) to [out=90, in=-90] (3,.6) ; 
+\draw [shift={(6.5cm,0cm)}] (5.5, .1) to [out=90, in=-90] (3,.6) ; 
+\draw [shift={(6.5cm,0cm)}] (.5, -.7) to [out=-90, in=90] (3,-1.7) ; 
+\draw [shift={(6.5cm,0cm)}] (5.5, -.7) to [out=-90, in=90] (3,-1.7) ; 
+\draw [shift={(6.5cm,0cm)}] (.5, .9) to [out=90, in=-90] (3,1.9) ; 
+\draw [shift={(6.5cm,0cm)}] (5.5, .9) to [out=90, in=-90] (3,1.9) ; 
 
-\draw [shift={(7cm,0cm)}] [fill=green] (6,0) circle [radius=0.1cm] ;
-\draw [shift={(7cm,0cm)}] [fill] (1.5,0) circle [radius=0.1cm] ;
-\draw [shift={(7cm,0cm)}] [fill] (4.5,0) circle [radius=0.1cm] ;
-\draw [shift={(7cm,0cm)}] [fill=green] (0,0) circle [radius=0.1cm] ;
-\draw [shift={(7cm,0cm)}] [fill] (.85,1) circle [radius=0.1cm] ;
-\draw [shift={(7cm,0cm)}] [fill] (2,1.2) circle [radius=0.1cm] ;
-\draw [shift={(7cm,0cm)}] [fill] (4,1.2) circle [radius=0.1cm] ;
-\draw [shift={(7cm,0cm)}] [fill] (5.15,1) circle [radius=0.1cm] ;
-\draw [shift={(7cm,0cm)}] [fill] (1,-1) circle [radius=0.1cm] ;
-\draw [shift={(7cm,0cm)}] [fill] (5,-1) circle [radius=0.1cm]  ;
+\draw [shift={(6.5cm,0cm)}] [fill=green] (6,0) circle [radius=0.1cm] ;
+\draw [shift={(6.5cm,0cm)}] [fill] (1.5,0) circle [radius=0.1cm] ;
+\draw [shift={(6.5cm,0cm)}] [fill] (4.5,0) circle [radius=0.1cm] ;
+\draw [shift={(6.5cm,0cm)}] [fill=green] (0,0) circle [radius=0.1cm] ;
+\draw [shift={(6.5cm,0cm)}] [fill] (.85,1) circle [radius=0.1cm] ;
+\draw [shift={(6.5cm,0cm)}] [fill] (2,1.2) circle [radius=0.1cm] ;
+\draw [shift={(6.5cm,0cm)}] [fill] (4,1.2) circle [radius=0.1cm] ;
+\draw [shift={(6.5cm,0cm)}] [fill] (5.15,1) circle [radius=0.1cm] ;
+\draw [shift={(6.5cm,0cm)}] [fill] (1,-1) circle [radius=0.1cm] ;
+\draw [shift={(6.5cm,0cm)}] [fill] (5,-1) circle [radius=0.1cm]  ;
 
-\node [shift={(3.5cm,0cm)}] [left]  at (-.2,0) {$0$} ;
-\node [shift={(3.5cm,0cm)}] [right] at (6.1,0) {$\;\frac{m(q-m)(p^r-m(q-m))}{q}$} ;
-\node [shift={(3.5cm,0cm)}] at (3, .7) {$\;q-m$} ;
-\node [shift={(3.5cm,0cm)}] at (3, -1.9) {$\;m$} ;
-\node [shift={(3.5cm,0cm)}] at (3, 2.35) {$\;(p^r-m(q-m))/q$} ;
+\node [shift={(3.25cm,0cm)}] [left]  at (-.2,0) {$0$} ;
+\node [shift={(3.25cm,0cm)}] [right] at (6.1,0) {$\;\frac{m(q-m)(p^r-m(q-m))}{q}$} ;
+\node [shift={(3.25cm,0cm)}] at (3, .7) {$\;q-m$} ;
+\node [shift={(3.25cm,0cm)}] at (3, -2) {$\;m$} ;
+\node [shift={(3.25cm,0cm)}] at (3, 2.35) {$\;(p^r-m(q-m))/q$} ;
+
+\node at (4,-2.5) {\textbf{(fig. 2)}} ;
+\node at (15,-2.5) {\textbf{(fig. 3)}} ;
 
 \end{tikzpicture}
 \end{center}
 
-This construction gives us the nonresidue pairing on $\Z/p^r\Z$ with $p\equiv 1\pmod 4$, provided that the above claim holds. For $r\ge2$, we have a proof of this claim. In the case that $r=1$, the \textbf{Generalized Riemann Hypothesis} implies the result. 
+This construction gives us the nonresidue pairing on $\Z/p^r\Z$ with $p\equiv 1\pmod 4$, provided that the above claim holds. For $r\ge2$, we have a proof of this claim. In the case that $r=1$, the result is implied by the \textbf{Generalized Riemann Hypothesis}. 
 
 
 \end{multicols}
