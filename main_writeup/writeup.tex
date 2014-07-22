@@ -24,12 +24,14 @@ Let $G_1$ and $G_2$ be graphs. Then $\Jac(G_1 \vee G_2) \simeq
   ...Proof goes here...
 \end{proof}
 
+[This might be a good place for a picture]
+
 Note that in the case that $G_1$ is a tree (and therefore has just one
 spanning tree), $\Jac(G_1 \vee G_2) \simeq \Jac(G_2)$. As a result, we
 have the following corollary:
 \begin{cor}
   \label{cor:1_valent}
-  Let $G$ be a graph, and let $A = \{v \in V(G) : \val{v} > 1\}$. If
+  Let $G$ be a graph, and let $A = \{v \in V(G) : \val(v) > 1\}$. If
   $G'$ is the subgraph of $G$ induced by $A$, then $\Jac(G) \simeq
   \Jac(G')$.
 \end{cor}
@@ -47,6 +49,8 @@ $\Jac(G) \simeq \Z/n\Z$.
   $V(B_n) = \{v_1, v_2\}$ and edge set consisting of $n$ copies of
   $\{v_1, v_2\}$.
 \end{defn}
+
+[THIS WOULD BE A GOOD PLACE FOR A PICTURE]
 
 \begin{prop}
   \label{prop:banana_cyclic}
@@ -81,24 +85,33 @@ proposition:
   \Z/n\Z$.
 \end{prop}
 
+Each spanning tree on $C_n$ corresponds to a choice of $n-1$ edges to
+include in the tree, so $\Jac(C_n)$ has order $n$ and, as before, it
+suffices to find a single element of order at least $n$. We will
+instead prove a stronger claim that holds on a wider family of graphs:
+
+\begin{lem}
+  \label{lem:2valent_path}
+  Let $G$ be a biconnected graph, and suppose that for some path $P =
+  \{v_1, \ldots, v_\ell\}$ on $G$, $\val(v_i) = 2$ for all $1 < i <
+  \ell$. Then $\Jac(G)$ contains an element of order at least $\ell$.
+\end{lem}
 \begin{proof}
-  Each spanning tree on $C_n$ corresponds to a choice of $n-1$ edges
-  to include in the tree, so $\Jac(C_n)$ has order $n$ and it again
-  suffices to find a single element of order at least $n$. Enumerate
-  the vertices of $C_n$ as $\{v_1, \ldots, v_n\}$, with $v_i, v_{i+1}$
-  adjacent for all $1 \le i < n$, and consider the divisor $D = (v_2)
-  - (v_1)$. We claim that for any $1 \le m < n$, $mD$ is equivalent to
-  $(v_{m+1}) - (v_1)$.
+  Consider the divisor $D = (v_2) - (v_1)$. We claim that for any $1
+  \le m < \ell$, $mD$ is equivalent to $(v_{m+1}) - (v_1)$.
 
   I'm going to make either a chip-firing argument or a Laplacian
   matrix argument for why this is true, but it's pretty cumbersome so
   I'll leave it for later.
 
-  For any $m$, the divisor $(v_{m+1}) - (v_1)$ is $q$-reduced, and
-  hence $m\overline{D} = m[D]$ is nontrivial for $m < n$, as required.
+  $G$ is biconnected, so there is a path from $v_1$ to $v_{m+1}$ that
+  does not use any vertex $i$ for $1 < i < m$. Applying the burning
+  algorithm then shows that the divisor $(v_{m+1}) - (v_1)$ is
+  $v_1$-reduced, and hence $m\overline{D} = m[D]$ is nontrivial for $m <
+  \ell$, as required.
 \end{proof}
 
-$C_n$ is always a simple graph for $n > 2$, so we have the following:
+$C_n$ is a simple graph whenever $n > 2$, so we have the following:
 
 \begin{cor}
   Let $\Gamma$ be a finite abelian group that cannot be written as
@@ -133,9 +146,10 @@ connected. $G$ is the wedge sum of the connected components of $G'$
 direct product of Jacobians of subgraphs of $G$.
 
 \begin{defn}
-  Let $G$ be a graph, and let $\Gamma = \Jac(G)$. We will write $\mu$
-  for the maximum order of an element of $\Gamma$, and $\delta$ for
-  the maximum valency of a vertex in $G$.
+  Let $G$ be a graph, and let $\Gamma = \Jac(G)$. We will write $\mu(G)$
+  for the maximum order of an element of $\Gamma$, and $\delta(G)$ for
+  the maximum valency of a vertex in $G$. (When the graph $G$ is clear
+  from context, we will simply write $\delta$ or $\mu$). 
 \end{defn}
 
 \begin{lem}
@@ -149,11 +163,32 @@ direct product of Jacobians of subgraphs of $G$.
 
   We may apply Dhar's burning algorithm to check that $mD$ is
   $w$-reduced. Since $G$ is biconnected, there is a path from $w$ to
-  each of the neighbors of $v$ that does not contain $v$, and hence
-  each of the neighbors of $v$ is ``burned'' by the algorithm. $v$ has
-  more than $m$ distinct neighbors, so it is burned as well, and hence
-  $m\overline{D}$ is nontrivial, and $\overline{D}$ has order at
-  least $\delta$.
+  each of the neighbors of $v$ that does not contain $v$, and so each
+  of the neighbors of $v$ is ``burned'' by the algorithm. $v$ has more
+  than $m$ distinct neighbors, so it is burned as well. Therefore,
+  $m\overline{D}$ is nontrivial and $\overline{D}$ has order at least
+  $\delta$.
+\end{proof}
+
+\begin{cor}
+  \label{cor:genus_v_mu}
+  For any biconnected graph with genus $g$ and $|V(G)| = v$,
+  \begin{equation*}
+    v \ge \frac{2g - 2}{\mu - 1}
+  \end{equation*}
+\end{cor}
+\begin{proof}
+  Let $e = |E(G)|$. We have 
+  \begin{equation}
+    2e = \sum_{i=1}^n \val(v_i) \le \sum_{i=1}^n \delta = v \cdot \delta
+    \le v \cdot \mu
+  \end{equation}
+  Since $e = g + v - 1$, this gives
+  \begin{equation}
+    2g - 2 \le v \cdot (\mu - 1)
+  \end{equation}
+  as required.
+
 \end{proof}
 
 \begin{proof}[Proof of Theorem \ref{thm:2group}]
@@ -172,6 +207,98 @@ direct product of Jacobians of subgraphs of $G$.
   $G$. Without loss of generality, $G_2$ is not a tree, and
   hence $\Jac(G_1) \simeq (\Z/2\Z)^{k_1}$ for $k_1 < k$. By the
   induction hypothesis, $G_1$ is not simple, and so neither is $G$.
+\end{proof}
+
+The proof of Theorem \ref{thm:2group_product} will proceed in a
+similar manner. Throughout the following, we will suppose that $G$ is
+a biconnected graph with Jacobian $\Gamma \simeq (\Z/2\Z)^k \times H$
+for some finite abelian group $H$. We establish a bound on the
+genus of $G$:
+
+\begin{lem}
+  \label{lem:genus_cycle}
+  If $g$ is the genus of $G$, then $g \ge k$.
+\end{lem}
+\begin{proof}
+  For any graph $G_0$, let $h$ be the number of nontrivial invariant
+  factors of $\Jac(G_0)$. Let $G_0'$ be the graph obtained by adding a
+  single edge to $G_0$. We know $|h(G_0') - h(G_0)| \le 1$ (CITE
+  THIS). 
+
+  Since a graph $G$ with genus $g$ may be constructed by adding $g$ edges
+  to a spanning tree for $G$, $\Jac(G)$ has at most $g$ invariant
+  factors (and thus at most $g$ factors of $\Z/2\Z$). 
+\end{proof}
+
+Applying Corollary \ref{cor:genus_v_mu} to this result gives us a
+lower bound on $|V(G)|$ in terms of $k$ and $\mu$. We now establish an
+upper bound on $|V(G)|$ in terms of $\mu$ and $|H|$, to achieve an
+upper bound on $k$.
+
+\begin{prop}
+  \label{prop:v_bound}
+  For any finite abelian group $H$, there exists an integer $v_0$
+  (depending only on $H$) such that if $\Gamma = \Jac(G) \simeq (\Z/2\Z)^k
+  \times H$, then $|V(G)| < v_0$.
+\end{prop}
+
+\begin{proof}
+  Let $U = \{u \in V(G) : \val(u) > 2\}$, and enumerate the elements
+  of $U$ as $u_0, \ldots, u_{m-1}$. We will first establish a bound on
+  $m = |U|$, and then bound $|V(G)|$ in terms of $m$.
+  
+  Consider the set of divisors $\mathcal{U} = \{(u_i) - (u_0) : 0 \le
+  i < m\}$, and write $D_i$ for $(u_i) - (u_0)$. For any $D_i, D_j \in
+  \mathcal{U}$, we claim that $2D_j - 2D_i$ is $u_i$-reduced.
+
+  We have $2D_j - 2D_i = 2(u_j) - 2(u_i)$. Since $G$ is biconnected,
+  there is a path from $u_i$ to each of the neighbors of $u_j$ that
+  does not use $u_j$. An iteration of the burning algorithm must
+  therefore burn $u_j$, and in turn the entire graph. Furthermore,
+  since $2D_j - 2D_i$ is $u_i$-reduced, $2[D_j] \ne 2[D_i]$ for any $i
+  \ne j$.
+
+  Now let $\phi:\Gamma \to \Gamma$ be the map given by
+  \[
+  \phi(\overline{D}) = 2\overline{D}
+  \] 
+
+  We must have $|\im{\phi}| \le |H|$. In particular, if
+  $\overline{\mathcal{U}} \subseteq \Gamma$ is the set of equivalence
+  classes of the elements of $\mathcal{U}$, we must have
+  $|\phi(\overline{\mathcal{U}})| \le |H|$, and hence $m \le |H|$ as
+  well.
+
+  We now wish to bound $|V(G)|$ in terms of $m$. To do so, we will
+  consider a graph $G'$, given by the following transformation of $G$:
+
+  \begin{enumerate}
+    \item Choose some vertex of $G$ of valency $2$. Delete it, and
+      draw an edge between its neighbors.
+    \item Repeat until there are no 2-valent vertices remaining.
+  \end{enumerate}
+  
+  DRAW A PICTURE HERE!!!
+
+  Note that even if $G$ is simple, $G'$ need not be. It is clear,
+  however, that $G$ and $G'$ have the same number of vertices with
+  valency greater than $2$, and that $\delta(G) = \delta(G')$.
+
+  By Lemma \ref{lem:delta_le_mu}, we must have that $e' = |E(G')|$ is
+  at most $m \cdot \mu$ (since otherwise there would necessarily be a
+  vertex of $G$ with valency greater than $\delta$). Each 2-valent
+  vertex of $G$ is uniquely associated with some edge of $G'$. If
+  there are more than $e' \cdot \mu$ 2-valent vertices in $G$, then at
+  least $\mu$ of them are associated with a single edge of $G'$. 
+
+  $G$ then contains a path $P$ of length greater than $\mu$, where
+  each vertex of $P$ has valency $2$. This is a contradiction by Lemma
+  \ref{lem:2valent_path}, so we must have 
+  \[
+  |V(G)| - m < m\mu^2
+  \] 
+  Choosing $v_0 = |H| + |H| \cdot \mu^2$ then gives $|V(G)| < v_0$, as
+  required.
 \end{proof}
 
 
