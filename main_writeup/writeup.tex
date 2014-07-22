@@ -1,24 +1,38 @@
-\documentclass{article}
+\documentclass{amsart}
 
 \input{../common/BN_common}
+
+\newcommand{\bv}[1]{\widehat{\mathbf{#1}}}
 
 \begin{document}
 
 Unless stated otherwise, we will take a ``graph'' to mean a finite
 connected multigraph with no loops.
 
+
+\section{Jacobians of Finite Graphs}
 It is natural to ask which finite abelian groups appear as Jacobians
 of graphs. The problem can be considerably reduced by applying the
 following lemma:
 
 \begin{lem}
 \label{lem:wedge_product}
-  Let $G_1$ and $G_2$ be graphs. Then $\Jac(G_1 \vee G_2) = \Jac(G_1)
-  \times \Jac(G_2)$. 
+Let $G_1$ and $G_2$ be graphs. Then $\Jac(G_1 \vee G_2) \simeq
+\Jac(G_1) \times \Jac(G_2)$.
 \end{lem}
 \begin{proof}
   ...Proof goes here...
 \end{proof}
+
+Note that in the case that $G_1$ is a tree (and therefore has just one
+spanning tree), $\Jac(G_1 \vee G_2) \simeq \Jac(G_2)$. As a result, we
+have the following corollary:
+\begin{cor}
+  \label{cor:1_valent}
+  Let $G$ be a graph, and let $A = \{v \in V(G) : \val{v} > 1\}$. If
+  $G'$ is the subgraph of $G$ induced by $A$, then $\Jac(G) \simeq
+  \Jac(G')$.
+\end{cor}
 
 Lemma \ref{lem:wedge_product}, together with the classification
 theorem for finite abelian groups, tells us that if, for all $n$,
@@ -43,7 +57,7 @@ $\Jac(G) \simeq \Z/n\Z$.
   A spanning tree on $B_n$ consists of a single edge between its
   vertices $v_1$ and $v_2$, so $B_n$ has $n$ spanning trees and
   $|\Jac(B_n)| = n$. To show that $\Jac(B_n) \simeq \Z/n\Z$, it
-  suffices to find a single element of order $n$.
+  suffices to find a single element of order at least $n$.
 
   Let $D \in \Div^0(B_n)$ be the divisor $(v_2) - (v_1)$, and consider
   $\overline{D} = [D] \in \Jac(B_n)$. For any $1 \le m < n$, the
@@ -51,28 +65,118 @@ $\Jac(G) \simeq \Z/n\Z$.
   impossible to fire it without sending it into debt. If $m=n$, then
   firing $v_2$ yields the zero divisor. $m\overline{D}$ is therefore
   trivial iff $m$ is a multiple of $n$, and hence $\overline{D}$ has
-  order $n$ as required.\\
+  order $n$ as required.
 \end{proof}
 
-Banana graphs are only realizable as a multigraphs. So, we might also
-wish to find a construction for a simple graph $G$ with $\Jac(G)
-\simeq \Z/n\Z$, for given $n$. This is (almost) always possible, by
-the following proposition:
+This construction is sufficient to show that all finite abelian groups
+appear as the Jacobian of some graph. However, since banana graphs are
+only realizable as a multigraphs, we might also wish to find a
+construction for a simple graph $G$ with $\Jac(G) \simeq \Z/n\Z$ for
+given $n$. This is (almost) always possible, by the following
+proposition:
 
 \begin{prop}
-  Let $C_n$ be the cycle graph on $n$ vertices. Then $\Jac(C_n) \simeq \Z/n\Z$.
+  \label{prop:cycle_cyclic}
+  Let $C_n$ be the cycle graph on $n$ vertices. Then $\Jac(C_n) \simeq
+  \Z/n\Z$.
 \end{prop}
 
 \begin{proof}
-  Each spanning tree on $C_n$ corresponds to a choice of $n-1$ edges,
-  so $\Jac(C_n)$ has order $n$ and it again suffices to find an
-  element of order $n$. Enumerate the vertices of $C_n$ as $\{v_1,
-  \ldots, v_n\}$, with $v_i, v_{i+1}$ adjacent for all $1 \le i < n$,
-  and consider the divisor $v_2 - v_1$.   
+  Each spanning tree on $C_n$ corresponds to a choice of $n-1$ edges
+  to include in the tree, so $\Jac(C_n)$ has order $n$ and it again
+  suffices to find a single element of order at least $n$. Enumerate
+  the vertices of $C_n$ as $\{v_1, \ldots, v_n\}$, with $v_i, v_{i+1}$
+  adjacent for all $1 \le i < n$, and consider the divisor $D = (v_2)
+  - (v_1)$. We claim that for any $1 \le m < n$, $mD$ is equivalent to
+  $(v_{m+1}) - (v_1)$.
+
+  I'm going to make either a chip-firing argument or a Laplacian
+  matrix argument for why this is true, but it's pretty cumbersome so
+  I'll leave it for later.
+
+  For any $m$, the divisor $(v_{m+1}) - (v_1)$ is $q$-reduced, and
+  hence $m\overline{D} = m[D]$ is nontrivial for $m < n$, as required.
+\end{proof}
+
+$C_n$ is always a simple graph for $n > 2$, so we have the following:
+
+\begin{cor}
+  Let $\Gamma$ be a finite abelian group that cannot be written as
+  $\Z/2\Z \times H$ for any group $H$. Then there exists a simple
+  graph $G$ such that $\Gamma \simeq \Jac(G)$.
+\end{cor}
+
+The rest of this section will investigate which groups $\Gamma =
+\Z/2\Z \times H$ can possibly occur as the Jacobian of some simple
+graph. It is known that there is no simple graph $G$ with $\Jac(G)
+\simeq \Z/2\Z$. We extend this result as follows:
+
+\begin{thm}
+  \label{thm:2group}
+  For any $k \ge 1$, if $G$ is a graph such that $\Jac(G) \simeq
+  (\Z/2\Z)^k$, then $G$ is not simple.
+\end{thm}
+
+\begin{thm}
+  \label{thm:2group_product}
+  Let $H$ be a finite abelian group. There exists an integer $k_0$
+  (depending on $H$) such that for all $k > k_0$ there does not exist
+  a simple graph $G$ with $\Jac(G) \simeq (\Z/2\Z)^k \times H$.
+\end{thm}
+
+To prove Theorem \ref{thm:2group_product}, we will first prove it in a
+special case, where $G$ is required to be biconnected. If $G$ is a
+graph that is not biconnected, then there is a vertex $v_0$ such that
+the subgraph $G'$ induced by $V(G) \setminus \{v_0\}$ is not
+connected. $G$ is the wedge sum of the connected components of $G'$
+(together with the vertex $v_0$), and so $\Jac(G)$ breaks down as a
+direct product of Jacobians of subgraphs of $G$.
+
+\begin{defn}
+  Let $G$ be a graph, and let $\Gamma = \Jac(G)$. We will write $\mu$
+  for the maximum order of an element of $\Gamma$, and $\delta$ for
+  the maximum valency of a vertex in $G$.
+\end{defn}
+
+\begin{lem}
+  \label{lem:delta_le_mu}
+  If $G$ is biconnected, then $\delta \le \mu$.
+\end{lem}
+\begin{proof}
+  Let $v$ be a vertex in $V(G)$ with valency $\delta$, and let $w$ be
+  a vertex adjacent to $w$. Consider the divisor $D = (v) -
+  (w)$, and let $m < \delta$. 
+
+  We may apply Dhar's burning algorithm to check that $mD$ is
+  $w$-reduced. Since $G$ is biconnected, there is a path from $w$ to
+  each of the neighbors of $v$ that does not contain $v$, and hence
+  each of the neighbors of $v$ is ``burned'' by the algorithm. $v$ has
+  more than $m$ distinct neighbors, so it is burned as well, and hence
+  $m\overline{D}$ is nontrivial, and $\overline{D}$ has order at
+  least $\delta$.
+\end{proof}
+
+\begin{proof}[Proof of Theorem \ref{thm:2group}]
+  Let $G$ be a biconnected graph with $\Jac(G) = (\Z/2\Z)^k$. By
+  Corollary \ref{cor:1_valent}, we may assume without loss of
+  generality that each vertex of $G$ has valency at least $2$. By
+  Lemma \ref{lem:delta_le_mu}, each vertex of $G$ has valency exactly
+  $2$, and $G = C_n$ for some $n$. We must have $n=2$, which means $G$
+  cannot be simple.
+
+  Now let $G$ be a graph that is not biconnected, with $\Jac(G) \simeq
+  (\Z/2\Z)^k$. We proceed by induction on $k$.
+  
+  The base case $k=1$ is known. For $k > 1$, note that $\Jac(G) \simeq
+  \Jac(G_1) \times \Jac(G_2)$ for connected subgraphs $G_1, G_2$ of
+  $G$. Without loss of generality, $G_2$ is not a tree, and
+  hence $\Jac(G_1) \simeq (\Z/2\Z)^{k_1}$ for $k_1 < k$. By the
+  induction hypothesis, $G_1$ is not simple, and so neither is $G$.
 \end{proof}
 
 
 
+\section{Relationship to Jacobians of Metric Graphs}
 \begin{lem}
   \label{lem:jac_generators}
   Let $G$ be a graph. $\Jac(G)$ is generated by the set \[\{[(v) -
