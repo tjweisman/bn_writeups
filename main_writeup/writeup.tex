@@ -3,12 +3,17 @@
 \input{../common/BN_common}
 
 \newcommand{\bv}[1]{\widehat{\mathbf{#1}}}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\title{Jacobians of finite graphs and the monodromy pairing}
+\author{Louis Gaudet, Nicholas Wawrykow, Theodore Weisman}
 
 \begin{document}
 
+\maketitle
+
 Unless stated otherwise, we will take a ``graph'' to mean a finite
 connected multigraph with no loops.
-
 
 \section{Jacobians of Finite Graphs}
 
@@ -29,8 +34,8 @@ Let $G_1$ and $G_2$ be graphs. Then $\Jac(G_1 \vee G_2) \simeq
 [This might be a good place for a picture]
 
 Note that in the case that $G_1$ is a tree (and therefore has just one
-spanning tree), $\Jac(G_1 \vee G_2) \simeq \Jac(G_2)$. As a result, we
-have the following corollary:
+spanning tree), $\Jac(G_1 \vee G_2) \simeq \Jac(G_2)$. We then have
+the following corollary:
 \begin{cor}
   \label{cor:1_valent}
   Let $G$ be a graph, and let $A = \{v \in V(G) : \val(v) > 1\}$. If
@@ -74,7 +79,7 @@ For given $n$, we give two possible constructions of $G$ with $\Jac(G)
   order $n$ as required.
 \end{proof}
 
-\subsection{The multigraph case}
+\subsection{The simple graph case}
 The construction given above is sufficient to show that all finite
 abelian groups appear as the Jacobian of some graph. However, since
 banana graphs are only realizable as a multigraphs, we might also wish
@@ -108,16 +113,16 @@ $n$. We show that such an element exists on a wider family of graphs:
   I'll leave it for later.
 
   $G$ is biconnected, so there is a path from $v_1$ to $v_{m+1}$ that
-  does not use any vertex $i$ for $1 < i < m$. Applying the burning
-  algorithm then shows that the divisor $(v_{m+1}) - (v_1)$ is
-  $v_1$-reduced, and hence $m\overline{D} = m[D]$ is nontrivial for $m <
-  \ell$, as required.
+  does not contain any vertex $v_i$ for $1 < i < m$. Applying the
+  burning algorithm then shows that the divisor $(v_{m+1}) - (v_1)$ is
+  $v_1$-reduced, and hence $m\overline{D} = m[D]$ is nontrivial for $m
+  < \ell$, as required.
 \end{proof}
 
 $C_n$ is a simple graph whenever $n > 2$, so we have the following:
 
 \begin{cor}
-  Let $\Gamma$ be a finite abelian group that cannot be written as
+  Let $\Gamma$ be a finite abelian group that is not isomorphic to
   $\Z/2\Z \times H$ for any group $H$. Then there exists a simple
   graph $G$ such that $\Gamma \simeq \Jac(G)$.
 \end{cor}
@@ -125,7 +130,8 @@ $C_n$ is a simple graph whenever $n > 2$, so we have the following:
 The rest of this section will investigate which groups $\Gamma =
 \Z/2\Z \times H$ can possibly occur as the Jacobian of some simple
 graph. It is known that there is no simple graph $G$ with $\Jac(G)
-\simeq \Z/2\Z$. We extend this result as follows:
+\simeq \Z/2\Z$ (CITE OR GIVE SHORT PROOF). We extend this result as
+follows:
 
 \begin{thm}
   \label{thm:2group}
@@ -136,17 +142,17 @@ graph. It is known that there is no simple graph $G$ with $\Jac(G)
 \begin{thm}
   \label{thm:2group_product}
   Let $H$ be a finite abelian group. There exists an integer $k_0$
-  (depending on $H$) such that for all $k > k_0$ there does not exist
+  (depending on $H$) such that for all $k > k_0$, there does not exist
   a simple graph $G$ with $\Jac(G) \simeq (\Z/2\Z)^k \times H$.
 \end{thm}
 
 To prove Theorem \ref{thm:2group_product}, we will first prove it in a
 special case, where $G$ is required to be biconnected. If $G$ is a
-graph that is not biconnected, then there is a vertex $v_0$ such that
-the subgraph $G'$ induced by $V(G) \setminus \{v_0\}$ is not
-connected. $G$ is the wedge sum of the connected components of $G'$
-(together with the vertex $v_0$), and so $\Jac(G)$ breaks down as a
-direct product of Jacobians of subgraphs of $G$.
+graph that is not biconnected, then by definition, there is a vertex
+$v_0$ such that the subgraph $G'$ induced by $V(G) \setminus \{v_0\}$
+is not connected. $G$ is the wedge sum of the connected components of
+$G'$ (together with the vertex $v_0$), and so $\Jac(G)$ breaks down as
+a direct product of Jacobians of subgraphs of $G$.
 
 \begin{defn}
   Let $G$ be a graph, and let $\Gamma = \Jac(G)$. We will write $\mu(G)$
@@ -212,11 +218,22 @@ direct product of Jacobians of subgraphs of $G$.
   induction hypothesis, $G_1$ is not simple, and so neither is $G$.
 \end{proof}
 
-The proof of Theorem \ref{thm:2group_product} will proceed in a
-similar manner. Throughout the following, we will suppose that $G$ is
-a biconnected graph with Jacobian $\Gamma \simeq (\Z/2\Z)^k \times H$
-for some finite abelian group $H$. We establish a bound on the
-genus of $G$:
+\begin{remark}
+  The proof of Theorem \ref{thm:2group} also gives a complete
+  characterization of any graph $G$ with $\Jac(G) \simeq
+  (\Z/2\Z)^k$: in general, $G$ must be a tree with precisely $k$ of
+  the edges occuring two times. We will apply this fact later, in our
+  discussion of the monodromy pairing on $\Jac(G)$.
+\end{remark}
+
+PICTURE!?
+
+We will now prove Theorem \ref{thm:2group_product}, using a similar
+inductive argument on biconnected subgraphs. Throughout the following,
+we will suppose that $G$ is a biconnected graph with Jacobian $\Gamma
+\simeq (\Z/2\Z)^k \times H$ for some finite abelian group $H$, and
+that $\mu$ is the maximum order of an element of $H$. We first
+establish a bound on the genus of $G$:
 
 \begin{lem}
   \label{lem:genus_cycle}
@@ -256,17 +273,17 @@ upper bound on $k$.
 
   We have $2D_j - 2D_i = 2(u_j) - 2(u_i)$. Since $G$ is biconnected,
   there is a path from $u_i$ to each of the neighbors of $u_j$ that
-  does not use $u_j$. An iteration of the burning algorithm must
-  therefore burn $u_j$, and in turn the entire graph. Furthermore,
-  since $2D_j - 2D_i$ is $u_i$-reduced, $2[D_j] \ne 2[D_i]$ for any $i
-  \ne j$.
+  does not contain $u_j$. Since $u_j$ has valency at least $3$, an
+  iteration of the burning algorithm must burn $u_j$, and in turn the
+  entire graph. Furthermore, since $2D_j - 2D_i$ is $u_i$-reduced,
+  $2[D_j] \ne 2[D_i]$ for any $i \ne j$.
 
   Now let $\phi:\Gamma \to \Gamma$ be the map given by
   \[
   \phi(\overline{D}) = 2\overline{D}
   \] 
 
-  We must have $|\im{\phi}| \le |H|$. In particular, if
+  We must have $|\im(\phi)| \le |H|$. In particular, if
   $\overline{\mathcal{U}} \subseteq \Gamma$ is the set of equivalence
   classes of the elements of $\mathcal{U}$, we must have
   $|\phi(\overline{\mathcal{U}})| \le |H|$, and hence $m \le |H|$ as
@@ -308,12 +325,12 @@ Applying Corollary \ref{cor:genus_v_mu} and Lemma
 \ref{lem:genus_cycle}, we see that for sufficiently large $k$, we must
 have $|V(G)| > v_0$. This in turn implies that for sufficiently large
 $k$, $(\Z/2\Z)^k \times H$ is not the Jacobian of any biconnected
-graph.
+graph.\\
 
 We complete the proof of Theorem \ref{thm:2group_product} via
 induction on $|H|$\footnote{We could obtain a slightly better bound by
-  inducting on $\eta(H)$, the number of invariant factors of $H$. This
-  is slightly more cumbersome, and is left to the revisor as an
+  inducting on the number of invariant factors of $H$. This is
+  slightly more cumbersome, and is left to the revisor as an
   exercise}. When $|H| = 1$ or $2$, Theorem \ref{thm:2group} gives the
 bound $k_0 = 1$. For $|H| \ge 3$, there must exist (by Proposition
 \ref{prop:v_bound}) an integer $k'$ such that if $k > k'$, and
@@ -346,13 +363,57 @@ Without loss of generality, we may assume that neither $G_1$ nor $G_2$
 is a tree, and $\Jac(G_1)$ and $\Jac(G_2)$ are both proper subgroups
 of $\Jac(G)$. Furthermore, if either $H_1$ or $H_2$ were trivial, then
 $G_1$ (resp. $G_2$) would have Jacobian isomorphic to $(\Z/2\Z)^k$ for
-$k \ge 0$, implying that $G$ is not simple.
+$k > 0$, implying that at least one of $G_1$ or $G_2$ is not simple.
 
 Finally, since $k_1 + k_2 = k > k'' \ge k(H_1) + k(H_2)$, we must have
 that either $k_1 > k(H_1)$ or $k_2 > k(H_2)$. Then either $G_1$ or
 $G_2$ is not simple, so that $G$ is not simple, as required.
 
-\subsection{Further queries}
+\subsection{Further queries} 
+
+Analysis of the proof of Theorem \ref{thm:2group_product} suggests
+that, if $H$ is cyclic of prime power order, $k_0(H)$ is
+$O(|H|^4)$. In practice, it seems that much better bounds should
+hold. For instance, no simple graph $G$ has yet been found where
+$\Jac(G) \simeq (\Z/2\Z)^k \times H$ for any $k > |H|$.
+
+In some cases, it is possible to directly verify that certain groups
+do not arise as the Jacobian of any simple graph. We note that, for
+given $m$, while there are infinitely many isomorphism classes of
+simple graphs with fewer than $m$ spanning trees, at most finitely
+many of these classes represent 2-edge-connected graphs. (THIS MIGHT
+NEED A PROOF).
+
+Lemma \ref{lem:wedge_product} tells us that any graph $G$ may be
+uniquely associated to some 2-edge-connected graph with identical
+Jacobian. For a given group $H$, it is possible to compute the
+Jacobian of all 2-edge-connected simple graphs with at most $|H|$
+spanning trees, and verify that $H$ does or does not occur. 
+
+Computer computations of this nature have led to the following:
+
+\begin{prop}
+  The groups $\Z/2\Z \times \Z/4\Z$, $(\Z/2\Z)^2 \times \Z/4\Z$, and
+  $\Z/2\Z \times (\Z/4\Z)^2$ are not isomorphic to the Jacobian of any
+  simple graph.
+\end{prop}
+
+It is also of interest that the key fact in the proof of the
+nonoccurence of groups with many factors of $\Z/2\Z$ seems to be the
+requirement that $G$ is biconnected, rather than the fact that $G$ is
+simple. This, together with the discovery that the Jacobians of ``most''
+graphs are cyclic (CITE STUFF), suggests the following:
+
+\begin{conj}
+  Let $G$ be a biconnected graph. For any $n$, there exists $k_0$ such
+  that if $k > k_0$, $\Jac(G) \not\simeq (\Z/n\Z)^k$.
+\end{conj}
+
+Finally, we note that when $\Jac(G) \simeq (\Z/n\Z)^k \times H$ for
+some finite abelian group $H$, $k$ is necessarily bounded above by the
+genus of $G$. The next section will consider certain circumstances
+under which this bound can be achieved, and explore the relationship
+between the Jacobians of finite and metric graphs.
 
 \section{Relationship to Jacobians of Metric Graphs}
 \begin{lem}
