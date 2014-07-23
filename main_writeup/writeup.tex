@@ -339,11 +339,13 @@ $\Jac(G) \simeq (\Z/2\Z)^k \times H$, then $G$ is not biconnected.
 By the induction hypothesis, for any proper subgroup $H' \subset H$,
 there exists an integer $k(H')$ such that for all $k > k(H')$, no
 simple graph $G'$ has $\Jac(G') \simeq (\Z/2\Z)^k \times H'$. Now,
-since $H$ is finite, there are finitely many pairs of proper subgroups
-$H_1, H_2 \subset H$ such that $H_1 \times H_2 \simeq H$. Define
+since $H$ is finite, there are finitely many pairs of nontrivial
+proper subgroups $H_1, H_2 \subset H$ such that $H_1 \times H_2 \simeq
+H$. Define
 
 \begin{equation}
-  k'' = \max\{k \in \N : k = k(H_1) + k(H_2), H_1 \times H_2 = H\}
+  k'' = \max\{k(H_1) + k(H_2) : H_1, H_2 \textrm{ nontrivial}, H_1
+  \times H_2 \simeq H\}
 \end{equation}
 
 Now let $k_0 = \max(k', k'')$. We wish to show that for all $k > k_0$,
@@ -360,10 +362,10 @@ that
 \end{align}
 
 Without loss of generality, we may assume that neither $G_1$ nor $G_2$
-is a tree, and $\Jac(G_1)$ and $\Jac(G_2)$ are both proper subgroups
-of $\Jac(G)$. Furthermore, if either $H_1$ or $H_2$ were trivial, then
-$G_1$ (resp. $G_2$) would have Jacobian isomorphic to $(\Z/2\Z)^k$ for
-$k > 0$, implying that at least one of $G_1$ or $G_2$ is not simple.
+is a tree, so that $\Jac(G_1)$ and $\Jac(G_2)$ are both nontrivial. In
+that case, if either $H_1$ or $H_2$ were trivial, then $G_1$
+(resp. $G_2$) would have Jacobian isomorphic to $(\Z/2\Z)^k$ for $k >
+0$, implying that at least one of $G_1$ or $G_2$ is not simple.
 
 Finally, since $k_1 + k_2 = k > k'' \ge k(H_1) + k(H_2)$, we must have
 that either $k_1 > k(H_1)$ or $k_2 > k(H_2)$. Then either $G_1$ or
@@ -390,19 +392,19 @@ Jacobian. For a given group $H$, it is possible to compute the
 Jacobian of all 2-edge-connected simple graphs with at most $|H|$
 spanning trees, and verify that $H$ does or does not occur. 
 
-Computer computations of this nature have led to the following:
+Computer searches of this nature have led to the following:
 
-\begin{prop}
+\begin{thm}
   The groups $\Z/2\Z \times \Z/4\Z$, $(\Z/2\Z)^2 \times \Z/4\Z$, and
   $\Z/2\Z \times (\Z/4\Z)^2$ are not isomorphic to the Jacobian of any
   simple graph.
-\end{prop}
+\end{thm}
 
 It is also of interest that the key fact in the proof of the
 nonoccurence of groups with many factors of $\Z/2\Z$ seems to be the
-requirement that $G$ is biconnected, rather than the fact that $G$ is
-simple. This, together with the discovery that the Jacobians of ``most''
-graphs are cyclic (CITE STUFF), suggests the following:
+requirement that $G$ is biconnected, rather than that $G$ is
+simple. This, together with the discovery that the Jacobians of
+``most'' graphs are cyclic (CITE STUFF), suggests the following:
 
 \begin{conj}
   Let $G$ be a biconnected graph. For any $n$, there exists $k_0$ such
@@ -412,8 +414,8 @@ graphs are cyclic (CITE STUFF), suggests the following:
 Finally, we note that when $\Jac(G) \simeq (\Z/n\Z)^k \times H$ for
 some finite abelian group $H$, $k$ is necessarily bounded above by the
 genus of $G$. The next section will consider certain circumstances
-under which this bound can be achieved, and explore the relationship
-between the Jacobians of finite and metric graphs.
+under which this bound can be achieved, and also say some things about
+metric graphs.
 
 \section{Relationship to Jacobians of Metric Graphs}
 \begin{lem}
