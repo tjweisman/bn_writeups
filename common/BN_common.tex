@@ -7,22 +7,25 @@
 \usepackage{pifont}
 \usepackage{mathtools}
 
-\newtheorem{thm}{Theorem}
-\newtheorem{lem}{Lemma}
-\newtheorem{prop}{Proposition}
-\newtheorem*{prop*}{Proposition}
-\newtheorem{conj}{Conjecture}
-\newtheorem{cor}{Corollary}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{conj}[thm]{Conjecture}
+\newtheorem{cor}[thm]{Corollary}
+
+\newtheorem*{prop*}[thm]{Proposition}
 
 \theoremstyle{definition}
-\newtheorem{claim}{Claim}
+\newtheorem{claim}[thm]{Claim}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{quest}[thm]{Question}
+\newtheorem{remark}[thm]{Remark}
+\newtheorem{fact}[thm]{Fact}
+
 \newtheorem*{claim*}{Claim}
-\newtheorem{fact}{Fact}
-\newtheorem*{fact*}{Fact}
-\newtheorem{defn}{Definition}
-\newtheorem{remark}{Remark}
-\newtheorem{quest}{Question}
 \newtheorem*{quest*}{Question}
+\newtheorem*{remark}{Remark}
+\newtheorem*{fact*}{Fact}
 
 \newcommand{\N}{\ensuremath{\mathbb{N}}}
 \newcommand{\Z}{\ensuremath{\mathbb{Z}}}
