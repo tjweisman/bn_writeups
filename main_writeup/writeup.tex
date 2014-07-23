@@ -66,8 +66,8 @@ Let $G_1$ and $G_2$ be graphs. Then $\Jac(G_1 \vee G_2) \simeq
 
 [This might be a good place for a picture]
 
-Note that in the case that $G_1$ is a tree (and therefore has just one
-spanning tree), $\Jac(G_1 \vee G_2) \simeq \Jac(G_2)$. We then have
+Note that in the case that $G_1$ is a tree (and therefore $\Jac(G_1)$
+is trivial), $\Jac(G_1 \vee G_2) \simeq \Jac(G_2)$. We then have
 the following corollary:
 \begin{cor}
   \label{cor:1_valent}
@@ -86,7 +86,7 @@ For given $n$, we give two possible constructions of $G$ with $\Jac(G)
 
 \begin{defn}
   $B_n$, the \emph{banana graph on $n$ edges}, is the graph with
-  $V(B_n) = \{v_1, v_2\}$ and edge set consisting of $n$ copies of
+  $V(B_n) = \{v_1, v_2\}$ and edge multiset consisting of $n$ copies of
   $\{v_1, v_2\}$.
 \end{defn}
 
@@ -110,8 +110,7 @@ For given $n$, we give two possible constructions of $G$ with $\Jac(G)
 \end{prop}
 
 \begin{proof}
-  A spanning tree on $B_n$ consists of a single edge between its
-  vertices $v_1$ and $v_2$, so $B_n$ has $n$ spanning trees and
+  $B_n$ has $n$ spanning trees, so
   $|\Jac(B_n)| = n$. To show that $\Jac(B_n) \simeq \Z/n\Z$, it
   suffices to find a single element of order at least $n$.
 
@@ -134,14 +133,13 @@ following proposition:
 
 \begin{prop}
   \label{prop:cycle_cyclic}
-  Let $C_n$ be the cycle graph on $n$ vertices. Then $\Jac(C_n) \simeq
+  Let $C_n$ be the cycle graph on $n \ge 2$ vertices. Then $\Jac(C_n) \simeq
   \Z/n\Z$.
 \end{prop}
 
-Each spanning tree on $C_n$ corresponds to a choice of $n-1$ edges to
-include in the tree, so $\Jac(C_n)$ has order $n$ and, as before, it
+$C_n$ has $n$ spanning trees, so $|\Jac(C_n)|=n$ and, as before, it
 suffices to find a single element of $\Jac(C_n)$ of order at least
-$n$. We show that such an element exists on a wider family of graphs:
+$n$. With the following lemma, we show that such an element exists on a wider family of graphs:
 
 \begin{lem}
   \label{lem:2valent_path}
@@ -175,7 +173,7 @@ $C_n$ is a simple graph whenever $n > 2$, so we have the following:
 The rest of this section will investigate which groups $\Gamma =
 \Z/2\Z \times H$ can possibly occur as the Jacobian of some simple
 graph. It is known that there is no simple graph $G$ with $\Jac(G)
-\simeq \Z/2\Z$ (CITE OR GIVE SHORT PROOF). We extend this result as
+\simeq \Z/2\Z$, since there is no simple graph with two spanning trees. We extend this result as
 follows:
 
 \begin{thm}
@@ -187,15 +185,15 @@ follows:
 \begin{thm}
   \label{thm:2group_product}
   Let $H$ be a finite abelian group. There exists an integer $k_0$
-  (depending on $H$) such that for all $k > k_0$, there does not exist
+  (depending only on $H$) such that for all $k > k_0$, there does not exist
   a simple graph $G$ with $\Jac(G) \simeq (\Z/2\Z)^k \times H$.
 \end{thm}
 
-To prove Theorem \ref{thm:2group_product}, we will first prove it in a
-special case, where $G$ is required to be biconnected. If $G$ is a
+To prove Theorem \ref{thm:2group_product}, we will first prove it in the case
+where $G$ is biconnected. If $G$ is a
 graph that is not biconnected, then by definition, there is a vertex
 $v_0$ such that the subgraph $G'$ induced by $V(G) \setminus \{v_0\}$
-is not connected. $G$ is the wedge sum of the connected components of
+is not connected. $G$ is then the wedge sum of the connected components of
 $G'$ (together with the vertex $v_0$), and so $\Jac(G)$ breaks down as
 a direct product of Jacobians of subgraphs of $G$.
 
@@ -213,12 +211,12 @@ a direct product of Jacobians of subgraphs of $G$.
 \begin{proof}
   Let $v$ be a vertex in $V(G)$ with valency $\delta$, and let $w$ be
   a vertex adjacent to $w$. Consider the divisor $D = (v) -
-  (w)$, and let $m < \delta$. 
+  (w)$, and let $m < \delta$ be a positive integer. 
 
   We may apply Dhar's burning algorithm to check that $mD$ is
   $w$-reduced. Since $G$ is biconnected, there is a path from $w$ to
   each of the neighbors of $v$ that does not contain $v$, and so each
-  of the neighbors of $v$ is ``burned'' by the algorithm. $v$ has more
+  of the neighbors of $v$ is burned during the algorithm. $v$ has more
   than $m$ distinct neighbors, so it is burned as well. Therefore,
   $m\overline{D}$ is nontrivial and $\overline{D}$ has order at least
   $\delta$.
@@ -228,21 +226,16 @@ a direct product of Jacobians of subgraphs of $G$.
   \label{cor:genus_v_mu}
   For any biconnected graph with genus $g$ and $|V(G)| = v$,
   \begin{equation*}
-    v \ge \frac{2g - 2}{\mu - 1}
+    v \ge \frac{2g - 2}{\mu - 1}.
   \end{equation*}
 \end{cor}
 \begin{proof}
   Let $e = |E(G)|$. We have 
   \begin{equation*}
     2e = \sum_{i=1}^n \val(v_i) \le \sum_{i=1}^n \delta = v \cdot \delta
-    \le v \cdot \mu
+    \le v \cdot \mu.
   \end{equation*}
-  Since $e = g + v - 1$, this gives
-  \begin{equation*}
-    2g - 2 \le v \cdot (\mu - 1)
-  \end{equation*}
-  as required.
-
+  Since $e = g + v - 1$, this gives $2g - 2 \le v \cdot (\mu - 1)$, as required.
 \end{proof}
 
 \begin{proof}[Proof of Theorem \ref{thm:2group}]
@@ -250,7 +243,7 @@ a direct product of Jacobians of subgraphs of $G$.
   Corollary \ref{cor:1_valent}, we may assume without loss of
   generality that each vertex of $G$ has valency at least $2$. By
   Lemma \ref{lem:delta_le_mu}, each vertex of $G$ has valency exactly
-  $2$, and $G = C_n$ for some $n$. We must have $n=2$, which means $G$
+  $2$, hence $G = C_n$ for some $n$. We must have $n=2$, which means $G$
   cannot be simple.
 
   Now let $G$ be a graph that is not biconnected, with $\Jac(G) \simeq
@@ -323,7 +316,7 @@ establish a bound on the genus of $G$:
   If $g$ is the genus of $G$, then $g \ge k$.
 \end{lem}
 \begin{proof}
-  For any graph $G_0$, let $h$ be the number of nontrivial invariant
+  For any graph $G_0$, let $h(G_0)$ be the number of nontrivial invariant
   factors of $\Jac(G_0)$. Let $G_0'$ be the graph obtained by adding a
   single edge to $G_0$. We know $|h(G_0') - h(G_0)| \le 1$ (CITE
   THIS). 
@@ -331,13 +324,13 @@ establish a bound on the genus of $G$:
 
   Since a graph $G$ with genus $g$ may be constructed by adding $g$ edges
   to a spanning tree for $G$, $\Jac(G)$ has at most $g$ invariant
-  factors (and thus at most $g$ factors of $\Z/2\Z$). 
+  factors, and thus at most $g$ factors of $\Z/2\Z$. 
 \end{proof}
 
 Applying Corollary \ref{cor:genus_v_mu} to this result gives us a
 lower bound on $|V(G)|$ in terms of $k$ and $\mu$. We now establish an
 upper bound on $|V(G)|$ in terms of $\mu$ and $|H|$, to achieve an
-upper bound on $k$.
+upper bound on $g$, and hence $k$.
 
 \begin{prop}
   \label{prop:v_bound}
