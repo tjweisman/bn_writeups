@@ -334,18 +334,19 @@ upper bound on $g$, and hence $k$.
 
 \begin{prop}
   \label{prop:v_bound}
-  For any finite abelian group $H$, there exists an integer $v_0$
+  Suppose that $G$ is biconnected. Then for any finite abelian group $H$, there exists an integer $v_0$
   (depending only on $H$) such that if $\Gamma = \Jac(G) \simeq (\Z/2\Z)^k
   \times H$, then $|V(G)| < v_0$.
 \end{prop}
 
 \begin{proof}
   Let $U = \{u \in V(G) : \val(u) > 2\}$, and enumerate the elements
-  of $U$ as $u_0, \ldots, u_{m-1}$. We will first establish a bound on
+  of $U$ as $u_1, \ldots, u_m$. We will first establish a bound on
   $m = |U|$, and then bound $|V(G)|$ in terms of $m$.
   
-  Consider the set of divisors $\mathcal{U} = \{(u_i) - (u_0) : 0 \le
-  i < m\}$, and write $D_i$ for $(u_i) - (u_0)$. For any $D_i, D_j \in
+  Consider the set of divisors $\mathcal{U} = \{(u_i) - (u_1) : 1 \le
+  i \le m\}$, and let $\overline{\mathcal{U}} \subseteq \Gamma$ be the set of equivalence
+  classes of the elements of $\mathcal{U}$. Write $D_i$ for $(u_i) - (u_1)$. For any $D_i, D_j \in
   \mathcal{U}$, we claim that $2D_j - 2D_i$ is $u_i$-reduced.
 
   We have $2D_j - 2D_i = 2(u_j) - 2(u_i)$. Since $G$ is biconnected,
@@ -353,18 +354,16 @@ upper bound on $g$, and hence $k$.
   does not contain $u_j$. Since $u_j$ has valency at least $3$, an
   iteration of the burning algorithm must burn $u_j$, and in turn the
   entire graph. Furthermore, since $2D_j - 2D_i$ is $u_i$-reduced,
-  $2[D_j] \ne 2[D_i]$ for any $i \ne j$.
+  $2[D_j] \ne 2[D_i]$ for any $i \ne j$. Note that this also implies that
+  $[D_j] \ne [D_i]$ for any $i \ne j$, so we have $m=|\overline{\mathcal{U}}|$. 
 
   Now let $\phi:\Gamma \to \Gamma$ be the map given by
   \[
-  \phi(\overline{D}) = 2\overline{D}
+  \phi(\overline{D}) = 2\overline{D}.
   \] 
 
-  We must have $|\im(\phi)| \le |H|$. In particular, if
-  $\overline{\mathcal{U}} \subseteq \Gamma$ is the set of equivalence
-  classes of the elements of $\mathcal{U}$, we must have
-  $|\phi(\overline{\mathcal{U}})| \le |H|$, and hence $m \le |H|$ as
-  well.
+  By the above, we have $|\phi(\overline{\mathcal{U}})|=|\overline{\mathcal{U}}|=m$. Further $|\im(\phi)| \le |H|$, and so 
+  we get $m=|\phi(\overline{\mathcal{U}})| \le |H|$, as desired.
 
   We now wish to bound $|V(G)|$ in terms of $m$. To do so, we will
   consider a graph $G'$, given by the following transformation of $G$:
@@ -438,13 +437,13 @@ upper bound on $g$, and hence $k$.
   there are more than $e' \cdot \mu$ 2-valent vertices in $G$, then at
   least $\mu$ of them are associated with a single edge of $G'$. 
 
-  $G$ then contains a path $P$ of length greater than $\mu$, where
-  each vertex of $P$ has valency $2$. This is a contradiction by Lemma
-  \ref{lem:2valent_path}, so we must have 
+  In this case, $G$ would contain a path $P$ of length greater than $\mu$, where
+  each vertex of $P$ has valency $2$. This would contradict Lemma
+  \ref{lem:2valent_path}, so instead we have 
   \[
-  |V(G)| - m < m\mu^2
+  |V(G)| - m < m\mu^2.
   \] 
-  Choosing $v_0 = |H| + |H| \cdot \mu^2$ then gives $|V(G)| < v_0$, as
+  Choosing $v_0 = |H|(1 + \mu^2)$ then gives $|V(G)| < v_0$, as
   required.
 \end{proof}
 
@@ -452,13 +451,16 @@ Applying Corollary \ref{cor:genus_v_mu} and Lemma
 \ref{lem:genus_cycle}, we see that for sufficiently large $k$, we must
 have $|V(G)| > v_0$. This in turn implies that for sufficiently large
 $k$, $(\Z/2\Z)^k \times H$ is not the Jacobian of any biconnected
-graph.\\
+graph.
 
-We complete the proof of Theorem \ref{thm:2group_product} via
+We now complete the proof of Theorem \ref{thm:2group_product} via
 induction on $|H|$\footnote{We could obtain a slightly better bound by
   inducting on the number of invariant factors of $H$. This is
   slightly more cumbersome, and is left to the revisor as an
-  exercise}. When $|H| = 1$ or $2$, Theorem \ref{thm:2group} gives the
+  exercise}.
+  
+\begin{proof}[Proof of Theorem \ref{thm:2group_product}]
+When $|H| = 1$ or $2$, Theorem \ref{thm:2group} gives the
 bound $k_0 = 1$. For $|H| \ge 3$, there must exist (by Proposition
 \ref{prop:v_bound}) an integer $k'$ such that if $k > k'$, and
 $\Jac(G) \simeq (\Z/2\Z)^k \times H$, then $G$ is not biconnected.
@@ -497,6 +499,7 @@ that case, if either $H_1$ or $H_2$ were trivial, then $G_1$
 Finally, since $k_1 + k_2 = k > k'' \ge k(H_1) + k(H_2)$, we must have
 that either $k_1 > k(H_1)$ or $k_2 > k(H_2)$. Then either $G_1$ or
 $G_2$ is not simple, so that $G$ is not simple, as required.
+\end{proof}
 
 \subsection{Further queries} 
 
