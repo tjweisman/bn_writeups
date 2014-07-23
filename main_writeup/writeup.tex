@@ -626,27 +626,8 @@ on a multiset $S$:
 \end{defn}
 
 \begin{prop}
-  \label{prop:banana}
-  For any multiset of positive integers $S$, with $|S| = m$, we have
-  \begin{equation*}
-    |\Jac(B_S)| = |\Jac(C_S)| = R(S)
-  \end{equation*}
-  Furthermore, if $R(S) = p^r$ for some prime $p$ and integer $r$, we
-  have
-  \begin{equation*}
-    \Jac(B_S) \simeq \Jac(C_S) \simeq \Z/p^r\Z
-  \end{equation*}
-  where ``$\simeq$'' where denotes an isomorphism of groups,
-  \emph{not} groups with pairing.
-\end{prop}
-\begin{proof}
-  PROOF GOES HURR 
-\end{proof}
-
-\begin{prop}
   \label{prop:banana_pairing}
-  Let $S$ be a multiset of positive integers such that $R(S) = p^r$
-  for an odd prime $p$ and integer $r$. Then
+  Let $S$ be a multiset of positive integers such that $R(S) = p^r$ for an odd prime $p$ and integer $r$, such that some divisor is not $p^{r-1}$ torsion. Then 
   \begin{equation*}
     \Jac(B_S) \simeq (\Z/p^r\Z, \pair{\cdot}{\cdot})
   \end{equation*}
@@ -656,7 +637,11 @@ on a multiset $S$:
   \end{equation*}
 \end{prop}
 \begin{proof}
-  PROOF ALSO GOES HURR
+ First note that $B_{S}$ has $p^r$ trees. Of the $m$ edges before subdividing choose $1$ to form the tree. Let this be the $i$-th edge. Upon subdividing all of the $s_{i}$ subdivided edges in the original $i$-th edge must be present. We must eliminate $1$ edge formed from subdivision from the each of the remaining $m-1$ original edges we must choose to eliminate $1$ edge from each. There are $s_{j}$ choices of ways to eliminate an edge formed from by subdivision from the original $j$-th edge. Taking the product of these and summing over $i$s gives $\sum^{m}_{i=1}s_{1}\dots \hat{s_{i}} \dots s_{m}=R(S)$.
+ 
+ By the Matrix Tree Theorem group is of order $p^{r}$. Since each element is $p^{t}$ torsion for $0\le t\le r$ and there exists an element that is not $p^{r-1}$ torsion that element must be $p^{r}$ torsion. Since there exists an element that is $p^r$ torsion and the group is of order $p^r$ the group must be isomorphic to $\Z/p^{r}/Z$.
+ 
+ To see that the pairing on the group is isomorphic to $\frac{P(S)xy}{p^r}$ take the two vertices on the original banana. Taking a smooth piecewise linear function such that between two adjacent vertices on the $i$-th edge their difference is $s_{1}\dots \hat{s_{i}} \dots s_{m}$ and this increases linearly we see that the difference between the two original edges is $P(S)$. Furthermore we see that this is same no matter which of the $m$ original edges we choose as the difference will always be $s_{1}\dots \hat{s_{i}} \dots s_{m}\cdot s_{i}$, and that out of the negative of the two edges the slope is $R(S)$ and the slope into the positive edge is $R(S)$. Thus this function satisfies the conditions to be the monodromy pairing, implying that $\Jac(B_S) \simeq (\Z/p^r\Z, \pair{\cdot}{\cdot})$
 \end{proof}
 
 If $p$ is odd, there are only two such pairings. In this case, our
@@ -671,4 +656,12 @@ residue and nonresidue pairings on $\Z/p^r\Z$, respectively.
   $\Jac(B_{p^r}) \simeq (\Z/p^r\Z, \mathfrak{r})$.
 \end{prop}
 
+\begin{proof}
+
+It is easy to check that there is one nontrivial invariant factor in the Smith normal form of the laplacian matrix of $B_{p^r}$, which is equal to $\left(\begin{array}{cc}p^{r}&-p^r\\-p^r&p^r\end{array}\right)$.
+
+ To see that $B_{p^r}$ has the residue pairing, it is sufficient to take the pairing of $\left[\begin{array}{c}-1\\1\end{array}\right]$ with itself. As noted in %Shokrieh
+the monodromy pairing is given by $\pair{\overline{D_1}}{\overline{D_{2}}}=[D_1]^{T}\digamma[D_2]$, where $\digamma$ is a generalized inverse of the laplacian. One such generalized inverse is $\digamma=\frac{1}{p^{r}}\left(\begin{array}{cc}0&0\\0&1\end{array}\right)$. Thus pairing $\left[\begin{array}{c}-1\\1\end{array}\right]$ with itself gives $\frac{1}{p^{r}}$. Since $1$ is always a residual, $\Jac(B_{p^r}) \simeq (\Z/p^r\Z, \mathfrak{r})$.
+
+\end{proof}
 \end{document}
