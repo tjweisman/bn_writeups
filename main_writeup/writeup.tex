@@ -1,4 +1,5 @@
 \documentclass{amsart}
+\usepackage{tikz}
 
 \input{../common/BN_common}
 
@@ -28,7 +29,11 @@ Let $G_1$ and $G_2$ be graphs. Then $\Jac(G_1 \vee G_2) \simeq
 \Jac(G_1) \times \Jac(G_2)$.
 \end{lem}
 \begin{proof}
-  ...Proof goes here...
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \end{proof}
 
 [This might be a good place for a picture]
@@ -57,7 +62,20 @@ For given $n$, we give two possible constructions of $G$ with $\Jac(G)
   $\{v_1, v_2\}$.
 \end{defn}
 
-[THIS WOULD BE A GOOD PLACE FOR A PICTURE]
+\begin{center}
+\begin{tikzpicture}
+
+\draw (0,0) to [out=30, in=150] (6,0) ;
+\draw (0,0) to [out=-30, in=-150] (6,0) ;
+\draw (0,0) to [out=0, in=180] (6,0) ;
+
+\draw [fill] (0,0) circle [radius=.1cm] ;
+\draw [fill] (6,0) circle [radius=.1cm] ;
+
+\node at (3,-1.5) {$B_{3}$} ;
+
+\end{tikzpicture}
+\end{center}
 
 \begin{prop}
   \label{prop:banana_cyclic}
@@ -226,7 +244,45 @@ a direct product of Jacobians of subgraphs of $G$.
   discussion of the monodromy pairing on $\Jac(G)$.
 \end{remark}
 
-PICTURE!?
+\begin{center}
+\begin{tikzpicture}
+
+\draw (0,0) to [out=15, in=165] (2,0) ;
+\draw (0,0) to [out=-15, in=-165] (2,0) ;
+
+\draw (2,0) to [out=75, in=225] (3, 1.7) ;
+\draw (2,0) to [out=45, in=255] (3, 1.7) ;
+
+\draw (2,0) to [out=-60, in=-240] (3, -1.7) ;
+
+\draw (3,-1.7) to [out=15, in=165] (5, -1.7) ;
+\draw (3,-1.7) to [out=-15, in=-165] (5, -1.7) ;
+
+\draw (5, -1.7) [out=60, in=210] to (6.7, 0) ;
+\draw (5, -1.7) [out=30, in=240] to (6.7, 0) ;
+
+\draw (6.7, 0) [out=120, in=-30] to (5, 1.7) ;
+\draw (6.7, 0) [out=150, in=-60] to (5, 1.7) ;
+
+\draw (6.7, 0) to (8.4, 1.7) ;
+
+\draw (6.7, 0) to [out=-30, in=120] (8.4, -1.7) ;
+\draw (6.7, 0) to [out=-60, in=150] (8.4, -1.7) ;
+
+\draw [fill] (0,0) circle [radius=.1cm] ;
+\draw [fill] (2,0) circle [radius=.1cm] ;
+\draw [fill] (3,1.7) circle [radius=.1cm] ;
+\draw [fill] (3,-1.7) circle [radius=.1cm] ;
+\draw [fill] (5,-1.7) circle [radius=.1cm] ;
+\draw [fill] (6.7, 0) circle [radius=.1cm] ;
+\draw [fill] (5,1.7) circle [radius=.1cm] ;
+\draw [fill] (8.4,1.7) circle [radius=.1cm] ;
+\draw [fill] (8.4,-1.7) circle [radius=.1cm] ;
+
+\node at (4.2, -2.2) {$\Jac(G)\simeq(\Z/2\Z)^6$} ;
+
+\end{tikzpicture}
+\end{center}
 
 We will now prove Theorem \ref{thm:2group_product}, using a similar
 inductive argument on biconnected subgraphs. Throughout the following,
@@ -244,6 +300,7 @@ establish a bound on the genus of $G$:
   factors of $\Jac(G_0)$. Let $G_0'$ be the graph obtained by adding a
   single edge to $G_0$. We know $|h(G_0') - h(G_0)| \le 1$ (CITE
   THIS). 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
   Since a graph $G$ with genus $g$ may be constructed by adding $g$ edges
   to a spanning tree for $G$, $\Jac(G)$ has at most $g$ invariant
@@ -297,8 +354,55 @@ upper bound on $k$.
       draw an edge between its neighbors.
     \item Repeat until there are no 2-valent vertices remaining.
   \end{enumerate}
-  
-  DRAW A PICTURE HERE!!!
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{center}
+\begin{tikzpicture}
+
+\draw (0:0) to (60:2) ;
+\draw (0:0) to (0:2) ;
+\draw (60:2) to (0:2) ;
+\draw (0:0) to (30:1.155) ;
+\draw (0:2) to (30:1.155) ;
+\draw (60:2) to (30:1.155) ;
+
+\draw [fill] (0:0) circle [radius=.1cm] ;
+\draw [fill] (0:2) circle [radius=.1cm] ;
+\draw [fill] (60:2) circle [radius=.1cm] ;
+\draw [fill] (30:1.155) circle [radius=.1cm] ;
+\draw [fill] (30:.6) circle [radius=.1cm] ;
+\draw [fill] (30:1.73) circle [radius=.1cm] ;
+
+\draw [shift={(3,0)}] (0:0) to (60:2) ;
+\draw [shift={(3,0)}] (0:0) to (0:2) ;
+\draw [shift={(3,0)}] (60:2) to (0:2) ;
+\draw [shift={(3,0)}] (0:0) to (30:1.155) ;
+\draw [shift={(3,0)}] (0:2) to (30:1.155) ;
+\draw [shift={(3,0)}] (60:2) to (30:1.155) ;
+
+\draw [shift={(3,0)}][fill] (0:0) circle [radius=.1cm] ;
+\draw [shift={(3,0)}][fill] (0:2) circle [radius=.1cm] ;
+\draw [shift={(3,0)}][fill] (60:2) circle [radius=.1cm] ;
+\draw [shift={(3,0)}][fill] (30:1.155) circle [radius=.1cm] ;
+\draw [shift={(3,0)}][fill] (30:.6) circle [radius=.1cm] ;
+
+\draw [shift={(6,0)}] (0:0) to (60:2) ;
+\draw [shift={(6,0)}](0:0) to (0:2) ;
+\draw [shift={(6,0)}](60:2) to (0:2) ;
+\draw [shift={(6,0)}](0:0) to (30:1.155) ;
+\draw [shift={(6,0)}](0:2) to (30:1.155) ;
+\draw [shift={(6,0)}](60:2) to (30:1.155) ;
+
+\draw [shift={(6,0)}][fill] (0:0) circle [radius=.1cm] ;
+\draw [shift={(6,0)}][fill] (0:2) circle [radius=.1cm] ;
+\draw [shift={(6,0)}][fill] (60:2) circle [radius=.1cm] ;
+\draw [shift={(6,0)}][fill] (30:1.155) circle [radius=.1cm] ;
+
+\node at (2.5, .75) {$\rightarrow$} ;
+\node at (5.5, .75) {$\rightarrow$} ;
+
+\end{tikzpicture}
+\end{center}
 
   Note that even if $G$ is simple, $G'$ need not be. It is clear,
   however, that $G$ and $G'$ have the same number of vertices with
