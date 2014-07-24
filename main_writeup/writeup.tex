@@ -994,5 +994,56 @@ $\DP$ by  \ref{lemma:2-group iso}.
 \end{center}
 \end{proof}
 
+\begin{prop}
+\label{prop: E_2}
+\end{prop}
+
 %It's picture time motherfuckers
+%C_{4}
+\begin{center}
+\begin{tikzpicture}
+
+\draw (0,0) to (0,2) ;
+\draw (0,0) to (2,0) ;
+\draw (2,0) to (2,2) ;
+\draw (0,2) to (2,2) ;
+
+\draw [fill] (0,0) circle [radius=.1] ;
+\draw [fill] (2,2) circle [radius=.1] ;
+\draw [fill] (2,0) circle [radius=.1] ;
+\draw [fill] (0,2) circle [radius=.1] ;
+
+\end{tikzpicture}
+\end{center}
+
+%B_{4}
+\begin{center}
+\begin{tikzpicture}
+
+\draw (0,0) to [out=10, in=170] (2,0) ;
+\draw (0,0) to [out=-10, in=-170] (2,0) ;
+\draw (0,0) to [out=30, in=150] (2,0) ;
+\draw (0,0) to [out=-30, in=-150] (2,0) ;
+
+\draw [fill] (0,0) circle [radius=.1] ;
+\draw [fill] (2,0) circle [radius=.1] ;
+
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}
+
+\draw (0,0) to [out=30, in=150] (2,0) ;
+\draw (0,0) to [out=-30, in=-150] (2,0) ;
+\draw (2,0) to [out=30, in=150] (4,0) ;
+\draw (2,0) to [out=-30, in=-150] (4,0) ;
+
+\draw [fill] (0,0) circle [radius=.1] ;
+\draw [fill] (2,0) circle [radius=.1] ;
+\draw [fill] (4,0) circle [radius=.1] ;
+
+\end{tikzpicture}
+\end{center}
+
 \end{document}
