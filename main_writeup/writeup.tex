@@ -66,8 +66,8 @@ Let $G_1$ and $G_2$ be graphs. Then $\Jac(G_1 \vee G_2) \simeq
 
 [This might be a good place for a picture]
 
-Note that in the case that $G_1$ is a tree (and therefore has just one
-spanning tree), $\Jac(G_1 \vee G_2) \simeq \Jac(G_2)$. We then have
+Note that in the case that $G_1$ is a tree (and therefore $\Jac(G_1)$
+is trivial), $\Jac(G_1 \vee G_2) \simeq \Jac(G_2)$. We then have
 the following corollary:
 \begin{cor}
   \label{cor:1_valent}
@@ -86,7 +86,7 @@ For given $n$, we give two possible constructions of $G$ with $\Jac(G)
 
 \begin{defn}
   $B_n$, the \emph{banana graph on $n$ edges}, is the graph with
-  $V(B_n) = \{v_1, v_2\}$ and edge set consisting of $n$ copies of
+  $V(B_n) = \{v_1, v_2\}$ and edge multiset consisting of $n$ copies of
   $\{v_1, v_2\}$.
 \end{defn}
 
@@ -110,8 +110,7 @@ For given $n$, we give two possible constructions of $G$ with $\Jac(G)
 \end{prop}
 
 \begin{proof}
-  A spanning tree on $B_n$ consists of a single edge between its
-  vertices $v_1$ and $v_2$, so $B_n$ has $n$ spanning trees and
+  $B_n$ has $n$ spanning trees, so
   $|\Jac(B_n)| = n$. To show that $\Jac(B_n) \simeq \Z/n\Z$, it
   suffices to find a single element of order at least $n$.
 
@@ -134,14 +133,13 @@ following proposition:
 
 \begin{prop}
   \label{prop:cycle_cyclic}
-  Let $C_n$ be the cycle graph on $n$ vertices. Then $\Jac(C_n) \simeq
+  Let $C_n$ be the cycle graph on $n \ge 2$ vertices. Then $\Jac(C_n) \simeq
   \Z/n\Z$.
 \end{prop}
 
-Each spanning tree on $C_n$ corresponds to a choice of $n-1$ edges to
-include in the tree, so $\Jac(C_n)$ has order $n$ and, as before, it
+$C_n$ has $n$ spanning trees, so $|\Jac(C_n)|=n$ and, as before, it
 suffices to find a single element of $\Jac(C_n)$ of order at least
-$n$. We show that such an element exists on a wider family of graphs:
+$n$. With the following lemma, we show that such an element exists on a wider family of graphs:
 
 \begin{lem}
   \label{lem:2valent_path}
@@ -175,7 +173,7 @@ $C_n$ is a simple graph whenever $n > 2$, so we have the following:
 The rest of this section will investigate which groups $\Gamma =
 \Z/2\Z \times H$ can possibly occur as the Jacobian of some simple
 graph. It is known that there is no simple graph $G$ with $\Jac(G)
-\simeq \Z/2\Z$ (CITE OR GIVE SHORT PROOF). We extend this result as
+\simeq \Z/2\Z$, since there is no simple graph with two spanning trees. We extend this result as
 follows:
 
 \begin{thm}
@@ -187,15 +185,15 @@ follows:
 \begin{thm}
   \label{thm:2group_product}
   Let $H$ be a finite abelian group. There exists an integer $k_0$
-  (depending on $H$) such that for all $k > k_0$, there does not exist
+  (depending only on $H$) such that for all $k > k_0$, there does not exist
   a simple graph $G$ with $\Jac(G) \simeq (\Z/2\Z)^k \times H$.
 \end{thm}
 
-To prove Theorem \ref{thm:2group_product}, we will first prove it in a
-special case, where $G$ is required to be biconnected. If $G$ is a
+To prove Theorem \ref{thm:2group_product}, we will first prove it in the case
+where $G$ is biconnected. If $G$ is a
 graph that is not biconnected, then by definition, there is a vertex
 $v_0$ such that the subgraph $G'$ induced by $V(G) \setminus \{v_0\}$
-is not connected. $G$ is the wedge sum of the connected components of
+is not connected. $G$ is then the wedge sum of the connected components of
 $G'$ (together with the vertex $v_0$), and so $\Jac(G)$ breaks down as
 a direct product of Jacobians of subgraphs of $G$.
 
@@ -213,12 +211,12 @@ a direct product of Jacobians of subgraphs of $G$.
 \begin{proof}
   Let $v$ be a vertex in $V(G)$ with valency $\delta$, and let $w$ be
   a vertex adjacent to $w$. Consider the divisor $D = (v) -
-  (w)$, and let $m < \delta$. 
+  (w)$, and let $m < \delta$ be a positive integer. 
 
   We may apply Dhar's burning algorithm to check that $mD$ is
   $w$-reduced. Since $G$ is biconnected, there is a path from $w$ to
   each of the neighbors of $v$ that does not contain $v$, and so each
-  of the neighbors of $v$ is ``burned'' by the algorithm. $v$ has more
+  of the neighbors of $v$ is burned during the algorithm. $v$ has more
   than $m$ distinct neighbors, so it is burned as well. Therefore,
   $m\overline{D}$ is nontrivial and $\overline{D}$ has order at least
   $\delta$.
@@ -228,21 +226,16 @@ a direct product of Jacobians of subgraphs of $G$.
   \label{cor:genus_v_mu}
   For any biconnected graph with genus $g$ and $|V(G)| = v$,
   \begin{equation*}
-    v \ge \frac{2g - 2}{\mu - 1}
+    v \ge \frac{2g - 2}{\mu - 1}.
   \end{equation*}
 \end{cor}
 \begin{proof}
   Let $e = |E(G)|$. We have 
   \begin{equation*}
     2e = \sum_{i=1}^n \val(v_i) \le \sum_{i=1}^n \delta = v \cdot \delta
-    \le v \cdot \mu
+    \le v \cdot \mu.
   \end{equation*}
-  Since $e = g + v - 1$, this gives
-  \begin{equation*}
-    2g - 2 \le v \cdot (\mu - 1)
-  \end{equation*}
-  as required.
-
+  Since $e = g + v - 1$, this gives $2g - 2 \le v \cdot (\mu - 1)$, as required.
 \end{proof}
 
 \begin{proof}[Proof of Theorem \ref{thm:2group}]
@@ -250,7 +243,7 @@ a direct product of Jacobians of subgraphs of $G$.
   Corollary \ref{cor:1_valent}, we may assume without loss of
   generality that each vertex of $G$ has valency at least $2$. By
   Lemma \ref{lem:delta_le_mu}, each vertex of $G$ has valency exactly
-  $2$, and $G = C_n$ for some $n$. We must have $n=2$, which means $G$
+  $2$, hence $G = C_n$ for some $n$. We must have $n=2$, which means $G$
   cannot be simple.
 
   Now let $G$ be a graph that is not biconnected, with $\Jac(G) \simeq
@@ -323,7 +316,7 @@ establish a bound on the genus of $G$:
   If $g$ is the genus of $G$, then $g \ge k$.
 \end{lem}
 \begin{proof}
-  For any graph $G_0$, let $h$ be the number of nontrivial invariant
+  For any graph $G_0$, let $h(G_0)$ be the number of nontrivial invariant
   factors of $\Jac(G_0)$. Let $G_0'$ be the graph obtained by adding a
   single edge to $G_0$. We know $|h(G_0') - h(G_0)| \le 1$ (CITE
   THIS). 
@@ -331,28 +324,29 @@ establish a bound on the genus of $G$:
 
   Since a graph $G$ with genus $g$ may be constructed by adding $g$ edges
   to a spanning tree for $G$, $\Jac(G)$ has at most $g$ invariant
-  factors (and thus at most $g$ factors of $\Z/2\Z$). 
+  factors, and thus at most $g$ factors of $\Z/2\Z$. 
 \end{proof}
 
 Applying Corollary \ref{cor:genus_v_mu} to this result gives us a
 lower bound on $|V(G)|$ in terms of $k$ and $\mu$. We now establish an
 upper bound on $|V(G)|$ in terms of $\mu$ and $|H|$, to achieve an
-upper bound on $k$.
+upper bound on $g$, and hence $k$.
 
 \begin{prop}
   \label{prop:v_bound}
-  For any finite abelian group $H$, there exists an integer $v_0$
+  Suppose that $G$ is biconnected. Then for any finite abelian group $H$, there exists an integer $v_0$
   (depending only on $H$) such that if $\Gamma = \Jac(G) \simeq (\Z/2\Z)^k
   \times H$, then $|V(G)| < v_0$.
 \end{prop}
 
 \begin{proof}
   Let $U = \{u \in V(G) : \val(u) > 2\}$, and enumerate the elements
-  of $U$ as $u_0, \ldots, u_{m-1}$. We will first establish a bound on
+  of $U$ as $u_1, \ldots, u_m$. We will first establish a bound on
   $m = |U|$, and then bound $|V(G)|$ in terms of $m$.
   
-  Consider the set of divisors $\mathcal{U} = \{(u_i) - (u_0) : 0 \le
-  i < m\}$, and write $D_i$ for $(u_i) - (u_0)$. For any $D_i, D_j \in
+  Consider the set of divisors $\mathcal{U} = \{(u_i) - (u_1) : 1 \le
+  i \le m\}$, and let $\overline{\mathcal{U}} \subseteq \Gamma$ be the set of equivalence
+  classes of the elements of $\mathcal{U}$. Write $D_i$ for $(u_i) - (u_1)$. For any $D_i, D_j \in
   \mathcal{U}$, we claim that $2D_j - 2D_i$ is $u_i$-reduced.
 
   We have $2D_j - 2D_i = 2(u_j) - 2(u_i)$. Since $G$ is biconnected,
@@ -360,18 +354,16 @@ upper bound on $k$.
   does not contain $u_j$. Since $u_j$ has valency at least $3$, an
   iteration of the burning algorithm must burn $u_j$, and in turn the
   entire graph. Furthermore, since $2D_j - 2D_i$ is $u_i$-reduced,
-  $2[D_j] \ne 2[D_i]$ for any $i \ne j$.
+  $2[D_j] \ne 2[D_i]$ for any $i \ne j$. Note that this also implies that
+  $[D_j] \ne [D_i]$ for any $i \ne j$, so we have $m=|\overline{\mathcal{U}}|$. 
 
   Now let $\phi:\Gamma \to \Gamma$ be the map given by
   \[
-  \phi(\overline{D}) = 2\overline{D}
+  \phi(\overline{D}) = 2\overline{D}.
   \] 
 
-  We must have $|\im(\phi)| \le |H|$. In particular, if
-  $\overline{\mathcal{U}} \subseteq \Gamma$ is the set of equivalence
-  classes of the elements of $\mathcal{U}$, we must have
-  $|\phi(\overline{\mathcal{U}})| \le |H|$, and hence $m \le |H|$ as
-  well.
+  By the above, we have $|\phi(\overline{\mathcal{U}})|=|\overline{\mathcal{U}}|=m$. Further $|\im(\phi)| \le |H|$, and so 
+  we get $m=|\phi(\overline{\mathcal{U}})| \le |H|$, as desired.
 
   We now wish to bound $|V(G)|$ in terms of $m$. To do so, we will
   consider a graph $G'$, given by the following transformation of $G$:
@@ -445,13 +437,13 @@ upper bound on $k$.
   there are more than $e' \cdot \mu$ 2-valent vertices in $G$, then at
   least $\mu$ of them are associated with a single edge of $G'$. 
 
-  $G$ then contains a path $P$ of length greater than $\mu$, where
-  each vertex of $P$ has valency $2$. This is a contradiction by Lemma
-  \ref{lem:2valent_path}, so we must have 
+  In this case, $G$ would contain a path $P$ of length greater than $\mu$, where
+  each vertex of $P$ has valency $2$. This would contradict Lemma
+  \ref{lem:2valent_path}, so instead we have 
   \[
-  |V(G)| - m < m\mu^2
+  |V(G)| - m < m\mu^2.
   \] 
-  Choosing $v_0 = |H| + |H| \cdot \mu^2$ then gives $|V(G)| < v_0$, as
+  Choosing $v_0 = |H|(1 + \mu^2)$ then gives $|V(G)| < v_0$, as
   required.
 \end{proof}
 
@@ -459,13 +451,16 @@ Applying Corollary \ref{cor:genus_v_mu} and Lemma
 \ref{lem:genus_cycle}, we see that for sufficiently large $k$, we must
 have $|V(G)| > v_0$. This in turn implies that for sufficiently large
 $k$, $(\Z/2\Z)^k \times H$ is not the Jacobian of any biconnected
-graph.\\
+graph.
 
-We complete the proof of Theorem \ref{thm:2group_product} via
+We now complete the proof of Theorem \ref{thm:2group_product} via
 induction on $|H|$\footnote{We could obtain a slightly better bound by
   inducting on the number of invariant factors of $H$. This is
   slightly more cumbersome, and is left to the revisor as an
-  exercise}. When $|H| = 1$ or $2$, Theorem \ref{thm:2group} gives the
+  exercise}.
+  
+\begin{proof}[Proof of Theorem \ref{thm:2group_product}]
+When $|H| = 1$ or $2$, Theorem \ref{thm:2group} gives the
 bound $k_0 = 1$. For $|H| \ge 3$, there must exist (by Proposition
 \ref{prop:v_bound}) an integer $k'$ such that if $k > k'$, and
 $\Jac(G) \simeq (\Z/2\Z)^k \times H$, then $G$ is not biconnected.
@@ -504,6 +499,7 @@ that case, if either $H_1$ or $H_2$ were trivial, then $G_1$
 Finally, since $k_1 + k_2 = k > k'' \ge k(H_1) + k(H_2)$, we must have
 that either $k_1 > k(H_1)$ or $k_2 > k(H_2)$. Then either $G_1$ or
 $G_2$ is not simple, so that $G$ is not simple, as required.
+\end{proof}
 
 \subsection{Further queries} 
 
@@ -627,14 +623,14 @@ $\Z/p^r\Z$, we wish to find a graphs $G$ such that $\Jac(G) \simeq
 
 Section \ref{sec:jacobians} gave a construction for graphs with any
 desired Jacobian, but we require a way to construct graphs whose
-Jacobian is associated with a particular pairing. We provide two such
-constructions below:
+Jacobian is associated with a particular pairing. We provide two
+possible constructions below:
 
 \begin{defn}
   Let $S = \{s_1, \ldots, s_m\}$ be a multiset of positive
   integers. $B_S$, the \emph{subdivided banana graph of $S$}, is the
   graph obtained by subidividing the $i$th edge of $B_m$ by $s_i-1$
-  vertices. 
+  vertices.
 \end{defn}
 
 \begin{defn}
@@ -644,56 +640,104 @@ constructions below:
   $s_i$.
 \end{defn}
 
-We will use the following notation for particular integer quantities
-on a multiset $S$:
+When $|S| = m$, we will use the following notation for the $m-1$th
+elementary symmetric polynomial applied to the elements of $S$:
+
 \begin{defn}
   Let $S = \{s_1, \ldots, s_m\}$. Define
   \begin{align*}
-    P(S) &= \prod_{i=1}^ms_i\\
-    R(S) &= \sum_{i=1}^mP(S)s_i^{-1}
+    R(S) &= \sum_{i=1}^m\frac{\prod_{j=1}^ms_j}{s_i}
   \end{align*}
 \end{defn}
 
 \begin{prop}
   \label{prop:banana_pairing}
-  Let $S$ be a multiset of positive integers such that $R(S) = p^r$ for an odd prime $p$ and integer $r$, such that some divisor is not $p^{r-1}$ torsion. Then 
+  Let $S$ be a multiset of positive integers such that $R(S) = p^r$
+  for a prime $p$ and integer $r$, and $\gcd(s_i, p) = 1$ for all $s_i
+  \in S$. Then
   \begin{equation*}
     \Jac(B_S) \simeq (\Z/p^r\Z, \pair{\cdot}{\cdot})
   \end{equation*}
   where $\pair{\cdot}{\cdot}$ is the pairing on $\Z/p^r\Z$ given by
   \begin{equation*}
-    \pair{x}{y} = \frac{P(S)xy}{p^r}
+    \pair{x}{y} = \frac{\left(\prod_{i=1}^ms_i\right)xy}{p^r}
   \end{equation*}
 \end{prop}
 \begin{proof}
- First note that $B_{S}$ has $p^r$ trees. Of the $m$ edges before subdividing choose $1$ to form the tree. Let this be the $i$-th edge. Upon subdividing all of the $s_{i}$ subdivided edges in the original $i$-th edge must be present. We must eliminate $1$ edge formed from subdivision from the each of the remaining $m-1$ original edges we must choose to eliminate $1$ edge from each. There are $s_{j}$ choices of ways to eliminate an edge formed from by subdivision from the original $j$-th edge. Taking the product of these and summing over $i$s gives $\sum^{m}_{i=1}s_{1}\dots \hat{s_{i}} \dots s_{m}=R(S)$.
- 
- By the Matrix Tree Theorem group is of order $p^{r}$. Since each element is $p^{t}$ torsion for $0\le t\le r$ and there exists an element that is not $p^{r-1}$ torsion that element must be $p^{r}$ torsion. Since there exists an element that is $p^r$ torsion and the group is of order $p^r$ the group must be isomorphic to $\Z/p^{r}/Z$.
- 
- To see that the pairing on the group is isomorphic to $\frac{P(S)xy}{p^r}$ take the two vertices on the original banana. Taking a smooth piecewise linear function such that between two adjacent vertices on the $i$-th edge their difference is $s_{1}\dots \hat{s_{i}} \dots s_{m}$ and this increases linearly we see that the difference between the two original edges is $P(S)$. Furthermore we see that this is same no matter which of the $m$ original edges we choose as the difference will always be $s_{1}\dots \hat{s_{i}} \dots s_{m}\cdot s_{i}$, and that out of the negative of the two edges the slope is $R(S)$ and the slope into the positive edge is $R(S)$. Thus this function satisfies the conditions to be the monodromy pairing, implying that $\Jac(B_S) \simeq (\Z/p^r\Z, \pair{\cdot}{\cdot})$
+  We first show that $|\Jac(B_S)| = p^r$. Let $|S| = m$. We may
+  partition the edges of $B_S$ into sets $E_1, \ldots, E_m$, where
+  $E_i$ corresponds to the $i$th edge of the banana graph $B_m$. The
+  edge set of any spanning tree on $B_S$ must be
+
+  \begin{equation*}
+    E_i \cup \left(\bigcup_{j \ne i} (E_j \setminus \{e_{jk}\})\right)
+  \end{equation*}
+  where $e_{jk}$ is some edge in $E_j$. Each possible choice of $E_i$
+  and $e_{jk}$ corresponds to a distinct spanning tree of $B_S$, so we
+  have $R(S)$ spanning trees, as required.
+
+  We will enumerate the vertices of $B_S$ as follows: let $v_0, v_0'$
+  be the vertices corresponding to $v_1, v_2$ on $B_m$, and let
+  $v_{ij}$ be the $j$th vertex that subdivides the $i$th edge of
+  $B_m$.
+
+  Now consider the divisor $D = (v_0') - (v_0)$. We claim that
+  $m\overline{D} = m[D]$ is nontrivial for any $m < p^r$. Suppose
+  otherwise, so that $p^tD$ is principal for $t < r$, and let $\Delta$
+  be the Laplacian map of $G$. There must exist a function $f:V(G) \to
+  \Z$ such that $\Delta f = D$.
+
+  For each edge $e = \{u, v\} \in E(B_S)$, let $b(e) = f(u) - f(v)$
+  (orient each edge to point from $v_{ij}$ to $v_{ij+1}$). Since $D(v)
+  = 0$ for any $v \in V(G) \setminus \{v_0, v_0'\}$, we must have
+  $b(e_1) = b(e_2)$ for any $e_1, e_2 \in E_i$.  If $a_i = b(e)$ for
+  any $e \in E_i$, then the following conditions must both hold:
+  
+  \begin{equation}
+    \sum_{i=0}^m a_i = p^t
+  \end{equation}
+  \begin{equation}
+    a_is_i = f(v_2) \textrm{ for all } 1 \le i \le m
+  \end{equation}
+
+  Taking these conditions together with the fact that $R(S) = p^r$, we
+  see
+  \begin{equation*}
+    p^t = \sum_{i=1}^m \frac{f(v_2)}{s_i^{-1}} = 
+    \frac{f(v_2) p^r}{\prod_{i=1}^ms_i}
+  \end{equation*}
+  \begin{equation*}
+    \prod_{i=1}^ms_i = p^{r-t}f(v)
+  \end{equation*}
+  For $r > t$, this is impossible, and thus the group is cyclic,
+  generated by $\overline{D}$. 
+
+  The monodromy pairing on $\Jac(B_S)$ is then entirely determined by
+  the value of $\pair{\overline{D}}{\overline{D}}$. Consider the
+  following function $f:V(G) \to \Z$:
+
+  \begin{equation*}
+    f(v) = 
+    \begin{cases}
+      0, & v = v_0 \\
+      \prod_{i=1}^ms_i, & v = v_0' \\
+      j \cdot s_i^{-1}\prod_{k=1}^ms_k, & v = v_{ij}
+    \end{cases}
+  \end{equation*}
+
+  It is clear that $\Delta(f) = p^rD$, and hence that
+  $\pair{\overline{D}}{\overline{D}} = \frac{\prod_{i=1}^ms_i}{p^r}$.
 \end{proof}
 
+\subsection{Groups of odd order}
+\label{sec:odd_groups}
 If $p$ is odd, there are only two such pairings. In this case, our
 goal is to find graphs $G_1$, $G_2$ such that $\Jac(G_1) \simeq
 (\Z/p^r\Z, \mathfrak{r})$ and $\Jac(G_2) \simeq (\Z/p^r\Z,
 \mathfrak{n})$, where $\mathfrak{r}$ and $\mathfrak{n}$ represent the
-residue and nonresidue pairings on $\Z/p^r\Z$, respectively. 
+residue and nonresidue pairings on $\Z/p^r\Z$, respectively.
 
-\begin{prop}
-  \label{prop:banana_residue}
-  Let $B_{p^r}$ be the banana graph on $p^r$ edges. Then
-  $\Jac(B_{p^r}) \simeq (\Z/p^r\Z, \mathfrak{r})$.
-\end{prop}
-
-\begin{proof}
-
-It is easy to check that there is one nontrivial invariant factor in the Smith normal form of the laplacian matrix of $B_{p^r}$, which is equal to $\left(\begin{array}{cc}p^{r}&-p^r\\-p^r&p^r\end{array}\right)$.
-
- To see that $B_{p^r}$ has the residue pairing, it is sufficient to take the pairing of $\left[\begin{array}{c}-1\\1\end{array}\right]$ with itself. As noted in %Shokrieh
-the monodromy pairing is given by $\pair{\overline{D_1}}{\overline{D_{2}}}=[D_1]^{T}\digamma[D_2]$, where $\digamma$ is a generalized inverse of the laplacian. One such generalized inverse is $\digamma=\frac{1}{p^{r}}\left(\begin{array}{cc}0&0\\0&1\end{array}\right)$. Thus pairing $\left[\begin{array}{c}-1\\1\end{array}\right]$ with itself gives $\frac{1}{p^{r}}$. Since $1$ is always a residual, $\Jac(B_{p^r}) \simeq (\Z/p^r\Z, \mathfrak{r})$.
-
-(CITE STUFF BY SHOKRIEH)
-\end{proof}
+\subsection{2-groups}
 
 \begin{lem}
  \label{lemma:2-group iso}
@@ -704,8 +748,17 @@ the monodromy pairing is given by $\pair{\overline{D_1}}{\overline{D_{2}}}=[D_1]
   are isomorphic as pairings on $\Z/2^r\Z$ for $r\ge3$
 \end{lem}
 \begin{proof}
- Note that isomorphisms of pairing are derived from group isomorphisms. All isomorphisms $\phi$ on cyclic groups of order $2^{r}$ are of the form $\phi:x\to cx$ with $c$ odd. Let $\Phi$ be an isomorphism of pairings. Then $\Phi\pair{x}{y}=\pair{\phi(x)}{\phi(y)}$ for some $\phi$. Thus $\frac{axy}{2^{r}}$ is isomorphic to $\frac{bxy}{2^{r}}$ if  $ac^{2}\equiv b\pmod 2^{r}$ for some $c$. Since $a\equiv b\pmod 8$ and $c^{2}\equiv 1\pmod 8$ for all odd $c$. Since there are only $4$ isomorphism classes of pairings on $\Z/2^r\Z$ for $r\ge3$ %shokrieh
- $\frac{axy}{2^{r}}\simeq  \frac{bxy}{2^{r}}$ as there are only $4$ odd numbers modulo $8$.
+  Note that isomorphisms of pairing are derived from group
+  isomorphisms. All isomorphisms $\phi$ on cyclic groups of order
+  $2^{r}$ are of the form $\phi:x\to cx$ with $c$ odd. Let $\Phi$ be
+  an isomorphism of pairings. Then
+  $\Phi\pair{x}{y}=\pair{\phi(x)}{\phi(y)}$ for some $\phi$. Thus
+  $\frac{axy}{2^{r}}$ is isomorphic to $\frac{bxy}{2^{r}}$ if
+  $ac^{2}\equiv b\pmod 2^{r}$ for some $c$. Since $a\equiv b\pmod 8$
+  and $c^{2}\equiv 1\pmod 8$ for all odd $c$. Since there are only $4$
+  isomorphism classes of pairings on $\Z/2^r\Z$ for $r\ge3$ %shokrieh
+  $\frac{axy}{2^{r}}\simeq \frac{bxy}{2^{r}}$ as there are only $4$
+  odd numbers modulo $8$.
 \end{proof}
 
 \begin{defn}
