@@ -684,14 +684,14 @@ $\Z/p^r\Z$, we wish to find a graphs $G$ such that $\Jac(G) \simeq
 
 Section \ref{sec:jacobians} gave a construction for graphs with any
 desired Jacobian, but we require a way to construct graphs whose
-Jacobian is associated with a particular pairing. We provide two such
-constructions below:
+Jacobian is associated with a particular pairing. We provide two
+possible constructions below:
 
 \begin{defn}
   Let $S = \{s_1, \ldots, s_m\}$ be a multiset of positive
   integers. $B_S$, the \emph{subdivided banana graph of $S$}, is the
   graph obtained by subidividing the $i$th edge of $B_m$ by $s_i-1$
-  vertices. 
+  vertices.
 \end{defn}
 
 \begin{defn}
@@ -701,56 +701,104 @@ constructions below:
   $s_i$.
 \end{defn}
 
-We will use the following notation for particular integer quantities
-on a multiset $S$:
+When $|S| = m$, we will use the following notation for the $m-1$th
+elementary symmetric polynomial applied to the elements of $S$:
+
 \begin{defn}
   Let $S = \{s_1, \ldots, s_m\}$. Define
   \begin{align*}
-    P(S) &= \prod_{i=1}^ms_i\\
-    R(S) &= \sum_{i=1}^mP(S)s_i^{-1}
+    R(S) &= \sum_{i=1}^m\frac{\prod_{j=1}^ms_j}{s_i}
   \end{align*}
 \end{defn}
 
 \begin{prop}
   \label{prop:banana_pairing}
-  Let $S$ be a multiset of positive integers such that $R(S) = p^r$ for an odd prime $p$ and integer $r$, such that some divisor is not $p^{r-1}$ torsion. Then 
+  Let $S$ be a multiset of positive integers such that $R(S) = p^r$
+  for a prime $p$ and integer $r$, and $\gcd(s_i, p) = 1$ for all $s_i
+  \in S$. Then
   \begin{equation*}
     \Jac(B_S) \simeq (\Z/p^r\Z, \pair{\cdot}{\cdot})
   \end{equation*}
   where $\pair{\cdot}{\cdot}$ is the pairing on $\Z/p^r\Z$ given by
   \begin{equation*}
-    \pair{x}{y} = \frac{P(S)xy}{p^r}
+    \pair{x}{y} = \frac{\left(\prod_{i=1}^ms_i\right)xy}{p^r}
   \end{equation*}
 \end{prop}
 \begin{proof}
- First note that $B_{S}$ has $p^r$ trees. Of the $m$ edges before subdividing choose $1$ to form the tree. Let this be the $i$-th edge. Upon subdividing all of the $s_{i}$ subdivided edges in the original $i$-th edge must be present. We must eliminate $1$ edge formed from subdivision from the each of the remaining $m-1$ original edges we must choose to eliminate $1$ edge from each. There are $s_{j}$ choices of ways to eliminate an edge formed from by subdivision from the original $j$-th edge. Taking the product of these and summing over $i$s gives $\sum^{m}_{i=1}s_{1}\dots \hat{s_{i}} \dots s_{m}=R(S)$.
- 
- By the Matrix Tree Theorem group is of order $p^{r}$. Since each element is $p^{t}$ torsion for $0\le t\le r$ and there exists an element that is not $p^{r-1}$ torsion that element must be $p^{r}$ torsion. Since there exists an element that is $p^r$ torsion and the group is of order $p^r$ the group must be isomorphic to $\Z/p^{r}/Z$.
- 
- To see that the pairing on the group is isomorphic to $\frac{P(S)xy}{p^r}$ take the two vertices on the original banana. Taking a smooth piecewise linear function such that between two adjacent vertices on the $i$-th edge their difference is $s_{1}\dots \hat{s_{i}} \dots s_{m}$ and this increases linearly we see that the difference between the two original edges is $P(S)$. Furthermore we see that this is same no matter which of the $m$ original edges we choose as the difference will always be $s_{1}\dots \hat{s_{i}} \dots s_{m}\cdot s_{i}$, and that out of the negative of the two edges the slope is $R(S)$ and the slope into the positive edge is $R(S)$. Thus this function satisfies the conditions to be the monodromy pairing, implying that $\Jac(B_S) \simeq (\Z/p^r\Z, \pair{\cdot}{\cdot})$
+  We first show that $|\Jac(B_S)| = p^r$. Let $|S| = m$. We may
+  partition the edges of $B_S$ into sets $E_1, \ldots, E_m$, where
+  $E_i$ corresponds to the $i$th edge of the banana graph $B_m$. The
+  edge set of any spanning tree on $B_S$ must be
+
+  \begin{equation*}
+    E_i \cup \left(\bigcup_{j \ne i} (E_j \setminus \{e_{jk}\})\right)
+  \end{equation*}
+  where $e_{jk}$ is some edge in $E_j$. Each possible choice of $E_i$
+  and $e_{jk}$ corresponds to a distinct spanning tree of $B_S$, so we
+  have $R(S)$ spanning trees, as required.
+
+  We will enumerate the vertices of $B_S$ as follows: let $v_0, v_0'$
+  be the vertices corresponding to $v_1, v_2$ on $B_m$, and let
+  $v_{ij}$ be the $j$th vertex that subdivides the $i$th edge of
+  $B_m$.
+
+  Now consider the divisor $D = (v_0') - (v_0)$. We claim that
+  $m\overline{D} = m[D]$ is nontrivial for any $m < p^r$. Suppose
+  otherwise, so that $p^tD$ is principal for $t < r$, and let $\Delta$
+  be the Laplacian map of $G$. There must exist a function $f:V(G) \to
+  \Z$ such that $\Delta f = D$.
+
+  For each edge $e = \{u, v\} \in E(B_S)$, let $b(e) = f(u) - f(v)$
+  (orient each edge to point from $v_{ij}$ to $v_{ij+1}$). Since $D(v)
+  = 0$ for any $v \in V(G) \setminus \{v_0, v_0'\}$, we must have
+  $b(e_1) = b(e_2)$ for any $e_1, e_2 \in E_i$.  If $a_i = b(e)$ for
+  any $e \in E_i$, then the following conditions must both hold:
+  
+  \begin{equation}
+    \sum_{i=0}^m a_i = p^t
+  \end{equation}
+  \begin{equation}
+    a_is_i = f(v_2) \textrm{ for all } 1 \le i \le m
+  \end{equation}
+
+  Taking these conditions together with the fact that $R(S) = p^r$, we
+  see
+  \begin{equation*}
+    p^t = \sum_{i=1}^m \frac{f(v_2)}{s_i^{-1}} = 
+    \frac{f(v_2) p^r}{\prod_{i=1}^ms_i}
+  \end{equation*}
+  \begin{equation*}
+    \prod_{i=1}^ms_i = p^{r-t}f(v)
+  \end{equation*}
+  For $r > t$, this is impossible, and thus the group is cyclic,
+  generated by $\overline{D}$. 
+
+  The monodromy pairing on $\Jac(B_S)$ is then entirely determined by
+  the value of $\pair{\overline{D}}{\overline{D}}$. Consider the
+  following function $f:V(G) \to \Z$:
+
+  \begin{equation*}
+    f(v) = 
+    \begin{cases}
+      0, & v = v_0 \\
+      \prod_{i=1}^ms_i, & v = v_0' \\
+      j \cdot s_i^{-1}\prod_{k=1}^ms_k, & v = v_{ij}
+    \end{cases}
+  \end{equation*}
+
+  It is clear that $\Delta(f) = p^rD$, and hence that
+  $\pair{\overline{D}}{\overline{D}} = \frac{\prod_{i=1}^ms_i}{p^r}$.
 \end{proof}
 
+\subsection{Groups of odd order}
+\label{sec:odd_groups}
 If $p$ is odd, there are only two such pairings. In this case, our
 goal is to find graphs $G_1$, $G_2$ such that $\Jac(G_1) \simeq
 (\Z/p^r\Z, \mathfrak{r})$ and $\Jac(G_2) \simeq (\Z/p^r\Z,
 \mathfrak{n})$, where $\mathfrak{r}$ and $\mathfrak{n}$ represent the
-residue and nonresidue pairings on $\Z/p^r\Z$, respectively. 
+residue and nonresidue pairings on $\Z/p^r\Z$, respectively.
 
-\begin{prop}
-  \label{prop:banana_residue}
-  Let $B_{p^r}$ be the banana graph on $p^r$ edges. Then
-  $\Jac(B_{p^r}) \simeq (\Z/p^r\Z, \mathfrak{r})$.
-\end{prop}
-
-\begin{proof}
-
-It is easy to check that there is one nontrivial invariant factor in the Smith normal form of the laplacian matrix of $B_{p^r}$, which is equal to $\left(\begin{array}{cc}p^{r}&-p^r\\-p^r&p^r\end{array}\right)$.
-
- To see that $B_{p^r}$ has the residue pairing, it is sufficient to take the pairing of $\left[\begin{array}{c}-1\\1\end{array}\right]$ with itself. As noted in %Shokrieh
-the monodromy pairing is given by $\pair{\overline{D_1}}{\overline{D_{2}}}=[D_1]^{T}\digamma[D_2]$, where $\digamma$ is a generalized inverse of the laplacian. One such generalized inverse is $\digamma=\frac{1}{p^{r}}\left(\begin{array}{cc}0&0\\0&1\end{array}\right)$. Thus pairing $\left[\begin{array}{c}-1\\1\end{array}\right]$ with itself gives $\frac{1}{p^{r}}$. Since $1$ is always a residual, $\Jac(B_{p^r}) \simeq (\Z/p^r\Z, \mathfrak{r})$.
-
-(CITE STUFF BY SHOKRIEH)
-\end{proof}
+\subsection{2-groups}
 
 \begin{lem}
  \label{lemma:2-group iso}
@@ -761,8 +809,17 @@ the monodromy pairing is given by $\pair{\overline{D_1}}{\overline{D_{2}}}=[D_1]
   are isomorphic as pairings on $\Z/2^r\Z$ for $r\ge3$
 \end{lem}
 \begin{proof}
- Note that isomorphisms of pairing are derived from group isomorphisms. All isomorphisms $\phi$ on cyclic groups of order $2^{r}$ are of the form $\phi:x\to cx$ with $c$ odd. Let $\Phi$ be an isomorphism of pairings. Then $\Phi\pair{x}{y}=\pair{\phi(x)}{\phi(y)}$ for some $\phi$. Thus $\frac{axy}{2^{r}}$ is isomorphic to $\frac{bxy}{2^{r}}$ if  $ac^{2}\equiv b\pmod 2^{r}$ for some $c$. Since $a\equiv b\pmod 8$ and $c^{2}\equiv 1\pmod 8$ for all odd $c$. Since there are only $4$ isomorphism classes of pairings on $\Z/2^r\Z$ for $r\ge3$ %shokrieh
- $\frac{axy}{2^{r}}\simeq  \frac{bxy}{2^{r}}$ as there are only $4$ odd numbers modulo $8$.
+  Note that isomorphisms of pairing are derived from group
+  isomorphisms. All isomorphisms $\phi$ on cyclic groups of order
+  $2^{r}$ are of the form $\phi:x\to cx$ with $c$ odd. Let $\Phi$ be
+  an isomorphism of pairings. Then
+  $\Phi\pair{x}{y}=\pair{\phi(x)}{\phi(y)}$ for some $\phi$. Thus
+  $\frac{axy}{2^{r}}$ is isomorphic to $\frac{bxy}{2^{r}}$ if
+  $ac^{2}\equiv b\pmod 2^{r}$ for some $c$. Since $a\equiv b\pmod 8$
+  and $c^{2}\equiv 1\pmod 8$ for all odd $c$. Since there are only $4$
+  isomorphism classes of pairings on $\Z/2^r\Z$ for $r\ge3$ %shokrieh
+  $\frac{axy}{2^{r}}\simeq \frac{bxy}{2^{r}}$ as there are only $4$
+  odd numbers modulo $8$.
 \end{proof}
 
 \begin{prop}
