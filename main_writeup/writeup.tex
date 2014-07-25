@@ -30,98 +30,41 @@ proposition:
 Let $G_1$ and $G_2$ be graphs. Then $\Jac(G_1 \vee G_2) \simeq
 \Jac(G_1) \times \Jac(G_2)$.
 \end{prop}
-
-We prove Proposition \ref{prop:wedge_product} by observing that the
-Jacobian of a graph can be directly computed from the Smith normal
-form of its Laplacian matrix. Throughout the following, for any
-integer matrix $M$, let $M_{i,i}$ represent the submatrix of $M$ obtained
-by deleting the $i$th row and column.
-
-\begin{lem}
-\label{lem:SNF_submatrix}
-Let $G$ be a graph, and let $Q$ be the Laplacian matrix of $G$. If the
-Smith normal form of $Q$ is $S$, then for any $i$, the Smith normal
-form of $Q_{i,i}$ is $S_{n,n}$.
-\end{lem}
 \begin{proof}
-  WE NEED A PROOF OF THIS, but I feel like someone has to have proved
-  it already so I'm not typing it.
+
+  Let $G = G_1 \vee G_2$, with $v_0$ being the vertex of intersection,
+  and let $\Jac(G) = \Gamma$. For any subgraph $G'$ of $G$, define the
+  subgroup $\Div_{G'}^0(G)$ by:
+  \[
+  \Div_{G'}^0(G) = \{D \in \Div^0(G) : \forall v \in
+  V(G) \setminus V(G'), D(v) = 0 \}
+  \]
+  
+  Since $V(G_1) \cup V(G_2) = V(G)$, it is clear that
+  $\Div_{G_1}^0(G)$ and $\Div_{G_2}^0(G)$ generate
+  $\Div^0(G)$. Furthermore, since $V(G_1) \cap V(G_2) = \{v_0\}$, for
+  any $D \in \Div_{G_1}^0(G) \cap \Div_{G_2}^0(G)$, we must have $D(v)
+  = 0$ for all $v \in V(G) \setminus \{v_0\}$ and hence $D(v_0) = 0$
+  as well. Thus, the intersection of $\Div_{G_1}^0(G)$ and
+  $\Div_{G_2}^0(G)$ is trivial, and we have 
+
+  \[\Div_{G_1}^0(G) \times
+  \Div_{G_2}^0(G) \simeq \Div^0(G)\]
+
+  Let $\Gamma_1$ and $\Gamma_2$ be the sets of equivalence classes of
+  the elements of $\Div_{G_1}^0(G)$ and $\Div_{G_2}^0(G)$,
+  respectively. It is clear that $\Gamma_1$ and $\Gamma_2$ generate
+  $\Jac(G)$. We claim that:
+
+  \begin{enumerate}
+  \item $\Gamma_1 \cap \Gamma_2$ is trivial
+  \item $\Gamma_1$ (resp. $\Gamma_2$) is a group isomorphic to
+    $\Jac(G_1)$ (resp. $\Jac(G_2)$). 
+  \end{enumerate}
+  
 \end{proof}
 
-\begin{proof}[Proof of Proposition \ref{prop:wedge_product}]
-  Let $Q_1$ and $Q_2$ be the Laplacian matrices of $G_1$ and $G_2$,
-  respectively, and let the vertex of intersection of $G_1$ and $G_2$
-  be $v_0$. Enumerate the vertices of $G$ so that the Laplacian of $G$
-  can be written as
-\begin{equation*}
-  Q = 
-  \left[\begin{array}{ccc}
-      Q_1 & \vdots & \\
-      \ldots & \val{v_0}  & \ldots \\
-      & \vdots & Q_2
-  \end{array}\right]
-\end{equation*}
-If we delete the row and column corresponding to $v_0$, the resulting
-matrix $Q'$ will be in block diagonal form, and has cokernel
-isomorphic to that of the matrix obtained by taking the Smith normal
-form of the blocks. Applying Lemma \ref{lem:SNF_submatrix}, we then
-see that the following matrix $M$ has cokernel isomorphic to the
-cokernel of $Q$:
-
-\begin{equation*}
-  \left[\begin{array}{cc|c}
-      S_1 & \\
-      & S_2 \\ \hline
-      & & 0
-    \end{array}\right]
-\end{equation*}
-
-where $S_1$, $S_2$ are diagonal matrices whose entries are the
-invariant factors of $\Jac(G_1), \Jac(G_2)$, respectively.
-\end{proof}
-
-\begin{figure}[h]
-  \begin{tikzpicture}
-
-    
-    \draw {(0:1) -- (120:1) -- (240:1)} -- cycle (270:1.2) node[below]
-    {$G_1$};
-    \foreach \theta in {0, 120, 240} {
-      \fill (\theta:1) circle (2pt) ;
-    } ;
-
-    \node at (0:1.5) {\LARGE $\vee$};
-
-    \begin{scope}[xshift=3cm]
-      \draw {(0:1) -- (90:1) -- (180:1) -- (270:1)} -- cycle (270:1.2)
-      node[below] {$G_2$};
-
-      \foreach \theta in {0, 90, ...,  270} {
-        \fill (\theta:1) circle (2pt) ;
-      } ;
-    \end{scope}
-
-    \node at (0:4.7) {\LARGE $=$} ;
-
-    \begin{scope}[xshift=6cm]
-      \draw {(0:1) -- (120:1) -- (240:1)} -- cycle ;
-      \foreach \theta in {0, 120, 240} {
-        \fill (\theta:1) circle (2pt) ;
-      } ;
-      \begin{scope}[xshift=2cm]
-        \draw {(0:1) -- (90:1) -- (180:1) -- (270:1)} -- cycle ;
-        
-        \foreach \theta in {0, 90, ...,  270} {
-          \fill (\theta:1) circle (2pt) ;
-        } ;
-      \end{scope}
-      \node[below] at (1,-1.2) {$G_1 \vee G_2$} ;
-    \end{scope}
-  \end{tikzpicture}
-  \caption{The wedge sum operation on graphs. In this case, $\Jac(G_1)
-  \simeq \Z/3\Z$, $\Jac(G_2) \simeq \Z/4\Z$, and $\Jac(G_1 \vee G_2)
-  \simeq \Z/12\Z$.}
-\end{figure}
+[This might be a good place for a picture]
 
 Note that in the case that $G_1$ is a tree (and therefore $\Jac(G_1)$
 is trivial), $\Jac(G_1 \vee G_2) \simeq \Jac(G_2)$. We then have
@@ -971,15 +914,52 @@ This completes the proof of Theorem \ref{thm:graph_pairing}.
   odd numbers modulo $8$.
 \end{proof}
 
-\begin{prop}
+\begin{defn}
+ Let $\mathcal{P}_{2}$ denote be the semigroup of
+isomorphism classes of non degenerate symmetric bilinear pairings on
+finite abelian 2-groups, under orthogonal direct sum.
+%rewrite so as not to copy from Miranda
 
-\end{prop}
+\end{defn}
 
-\begin{thm}
+ \begin{prop} $\mathcal{P}_{2}$ is generated by the following
+pairings:
+  
+   \[ \AP \text{ on } \Z/2^{n}\Z, r\ge 1; \langle 1,
+1\rangle=\frac{1}{2^{n}}
+   \]
+   \[ \BP \text{ on } \Z/2^{n}\Z, r\ge 2; \langle 1,
+1\rangle=\frac{-1}{2^{n}}
+   \]
+   \[ \CP \text{ on } \Z/2^{n}\Z, r\ge 3; \langle 1,
+1\rangle=\frac{5}{2^{n}}
+   \]
+   \[ \DP \text{ on } \Z/2^{n}\Z, r\ge 3; \langle 1,
+1\rangle=\frac{-5}{2^{n}}
+   \]
+   \[ \EP \text{ on } \Z/2^{n}\Z\times\Z/2^{n}\Z, r\ge 1; \langle
+e_{i}, e_{j}\rangle=\begin{cases}0&\mbox{if } i=j\\
+\frac{1}{2^{n}}&\mbox{if } i\neq j\end{cases}
+   \]
+   \[ \FP \text{ on } \Z/2^{n}\Z\times\Z/2^{n}\Z, r\ge 2; \langle
+e_{i}, e_{j}\rangle=\begin{cases}\frac{1}{2^{n-1}}&\mbox{if } i=j\\
+\frac{1}{2^{n}}&\mbox{if } i\neq j\end{cases}
+   \]
+   
+where $\{e_{1}, e_{2}\}$ generate $\Z/2^{n}\Z\times\Z/2^{n}\Z$ in the
+last two cases.
+ \end{prop}
+ \begin{proof} See [Mir]
+ \end{proof}
 
-\end{thm}
+ \begin{thm} For each of $\AP$, $\BP$, $\CP$, $\DP$ there exists a
+graph $G$ such that the monodromy pairing on $G$ is the desired
+pairing.
+ \end{thm}
 
-%It's picture time motherfuckers
+\begin{proof}
+ Case 1: $\AP$. $B_{2^{n}}$ is cyclic of order $2^{n}$ has pairing
+$\AP$. This follows from \ref{prop:banana_residue}.
 
 %A pairing 
 \begin{center}
@@ -1004,6 +984,11 @@ This completes the proof of Theorem \ref{thm:graph_pairing}.
 
 \end{tikzpicture}
 \end{center}
+
+  
+   Case 2: $\BP$. The cycle graph on $2^{n}$ vertices has pairing
+$\BP$.
+%%%%we should prove that the pairing on the cycle is always n-1/n%%%%%%%%%
 
 %B pairing check the labeling
 \begin{center}
@@ -1031,7 +1016,29 @@ This completes the proof of Theorem \ref{thm:graph_pairing}.
 
 \end{tikzpicture}
 \end{center}
+  
+   Case 3a: For $n$ odd take $\left\{1, 2,\frac{2^{n}-2}{3}\right\}_{b}$. One can check that the divisor $D=v-w$ where $w$ is a trivalent vertex and $v$ is the adjacent vertex
+on edge that was subdivided $\frac{2^{n}-2}{3}$ times, has order, by using the slope
+definition of the monodromy pairing by defining the function such that all slopes are increasing in the direction of $v$ and decreasing from $w$. This results in the linear equations
+  \begin{equation*}
+a+b+c=2^{t}
+  \end{equation*}
+  \begin{equation*}
+a=2b
+  \end{equation*}
+  \begin{equation*}
+a+\left(\frac{2^{n}-2}{3}-1\right)(a+b)=c
+  \end{equation*}
+where $a$ is the slope on the undivided edge, $b$ is the
+slope the edges formed from the edge that was subdivided once, and $c$ is the slope
+on the edge between $v$ and $w$. Solving the equation gives
+\begin{equation*}
+2^{n}a=2^{t}
+\end{equation*}
+Since $t$ is at most $n$ and $t=n$ is the only solution such that $a$ has nonnegative integer value the order of this element must be $2^{n}$. Furthermore, $c=2^{n}-3$, implying that the pairing of $D$ with itself is $\frac{2^{n}-3}{2^{n}}$ which by \ref{lemma:2-group iso} is isomorphic to the $\CP$ pairing.
 
+$c=2^{n}-3$. Thus the pairing is $\frac{2^{n}-3}{2^{n}}$, which is
+isomorphic to $\CP$ by \ref{lemma:2-group iso}.
 
 %C pairing n odd
 \begin{center}
@@ -1056,6 +1063,30 @@ This completes the proof of Theorem \ref{thm:graph_pairing}.
 
 \end{tikzpicture}
 \end{center}
+    
+    Case 3b: For $n$ even take $\left\{1,1,1,
+\frac{2^{n}-1}{3}\right\}_{b}$. To check that the divisor
+$D=v-w$ where $w$ is a trivalent vertex and $v$ is the adjacent vertex
+on edge subdivided $\frac{2^{n}-1}{3}$ times  has order $2^{n}$, by using the slope
+definition of the monodromy pairing by defining the function such that all slopes are increasing in the direction of $v$ and decreasing from $w$.  This gives the linear equations 
+\begin{equation*}
+a+b+c+d=2^{t}
+\end{equation*}
+\begin{equation*}
+a=b=c
+\end{equation*}
+\begin{equation*}
+a+\left(\frac{2^{n}-1}{3}-1 \right)(a+b+c)=d
+\end{equation*}
+where $a$ is the slope on one of the undivided edges
+$b$ is the slope on another of the undivided edges,  $c$ is the
+slope on the third undivided edge and $d$ is the slope on
+the edge between $v$ and $w$.
+This results in the equation 
+\begin{equation*}
+2^na=2^t
+\end{equation*}
+Since $t$ is at most $n$ and $t=n$ is the only solution such that $a$ has nonnegative  integer value the order of this element must be $2^{n}$. Furthermore $d=2^{n}-3$ implying that the pairing of $D$ with itself is $\frac{2^{n}-3}{2^{n}}$, which isisomorphic to $\CP$ by  \ref{lemma:2-group iso}.
 
 %C pairing n even
 \begin{center}
@@ -1081,6 +1112,22 @@ This completes the proof of Theorem \ref{thm:graph_pairing}.
 
 \end{tikzpicture}
 \end{center}
+    
+    Case 4a: For odd $n$ take $\left\{1, 2,
+\frac{2^{n}-2}{3}\right\}_{c}$. To check that the divisor
+$D=v-w$ where $w$ is the vertex with degree has $\frac{2^{n}+4}{3}$ and
+$v$ is the vertex with degree has $\frac{2^{n}+1}{3}$ has order
+$2^{n}$ one can use the slope definition of the monodromy pairing. Taking the piecewise linear function such that the slopes go away from $w$ and towards $v$ one
+obtains the following linear equations,
+\begin{equation*}
+\frac{2^{n}-2}{3}a+2b=2^{t}
+\end{equation*}
+\begin{equation*}
+a=3b
+\end{equation*}
+where $a$ is slope on set of $\frac{2^{n}-2}{3}$ edges, and
+$b$ is slope on the doubled edges. Since $t$ is at most $n$ and $t=n$ is the only solution such that $b$ has nonnegative integer value the order of this element must be $2^{n}$. This also implies that the pairing of $D$ with itself is $\frac{3}{2^{n}}$, as the equations have solution $a=3$. This pairing is isomorphic to
+$\DP$ by  \ref{lemma:2-group iso}.
 
 %D pairing n odd
 \begin{center}
@@ -1108,8 +1155,23 @@ This completes the proof of Theorem \ref{thm:graph_pairing}.
 
 \end{tikzpicture}
 \end{center}
+    
+    Case 4b: For even $n$ take $\left\{1, 1, 1,
+\frac{2^{n}-1}{3}\right\}$. To check that the divisor $D=v-w$,
+where $w$ is one of the vertices with degree $\frac{2^{n}+2}{3}$
+and $v$ is the other vertex with degree $\frac{2^{n}+2}{3}$, has
+order $2^{n}$, use the slope definition of the monodromy pairing. Taking the piecewise linear function such that the slopes are increasing towards $w$ and away from $v$, one arrives at the linear equations
+\begin{equation*}
+b+ \frac{2^{n}-1}{3}a=2^{t}
+\end{equation*}
+\begin{equation*}
+3b=a
+\end{equation*}
+where $a$ is the slope on edge copied $\frac{2^{n}-1}{3}$ times, and $b$
+is slope on the edges that aren't copied. Since $t$ is at most $n$ and $t=n$ is the only solution such that $b$ has nonnegative integer value the order of this element must be $2^{n}$. This also implies that the pairing of $D$ with itself is $\frac{3}{2^{n}}$, as the equations have solution $a=3$. This pairing is isomorphic to
+$\DP$ by  \ref{lemma:2-group iso}.
 
-%D pairing n odd
+%D pairing n even
 \begin{center}
 \begin{tikzpicture}
 
@@ -1136,4 +1198,58 @@ This completes the proof of Theorem \ref{thm:graph_pairing}.
 
 \end{tikzpicture}
 \end{center}
+\end{proof}
+
+\begin{prop}
+\label{prop: E_2}
+\end{prop}
+
+%It's picture time motherfuckers
+%C_{4}
+\begin{center}
+\begin{tikzpicture}
+
+\draw (0,0) to (0,2) ;
+\draw (0,0) to (2,0) ;
+\draw (2,0) to (2,2) ;
+\draw (0,2) to (2,2) ;
+
+\draw [fill] (0,0) circle [radius=.1] ;
+\draw [fill] (2,2) circle [radius=.1] ;
+\draw [fill] (2,0) circle [radius=.1] ;
+\draw [fill] (0,2) circle [radius=.1] ;
+
+\end{tikzpicture}
+\end{center}
+
+%B_{4}
+\begin{center}
+\begin{tikzpicture}
+
+\draw (0,0) to [out=10, in=170] (2,0) ;
+\draw (0,0) to [out=-10, in=-170] (2,0) ;
+\draw (0,0) to [out=30, in=150] (2,0) ;
+\draw (0,0) to [out=-30, in=-150] (2,0) ;
+
+\draw [fill] (0,0) circle [radius=.1] ;
+\draw [fill] (2,0) circle [radius=.1] ;
+
+\end{tikzpicture}
+\end{center}
+
+\begin{center}
+\begin{tikzpicture}
+
+\draw (0,0) to [out=30, in=150] (2,0) ;
+\draw (0,0) to [out=-30, in=-150] (2,0) ;
+\draw (2,0) to [out=30, in=150] (4,0) ;
+\draw (2,0) to [out=-30, in=-150] (4,0) ;
+
+\draw [fill] (0,0) circle [radius=.1] ;
+\draw [fill] (2,0) circle [radius=.1] ;
+\draw [fill] (4,0) circle [radius=.1] ;
+
+\end{tikzpicture}
+\end{center}
+
 \end{document}
