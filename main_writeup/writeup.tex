@@ -511,10 +511,7 @@ $k$, $(\Z/2\Z)^k \times H$ is not the Jacobian of any biconnected
 graph.
 
 We now complete the proof of Theorem \ref{thm:2group_product} via
-induction on $|H|$\footnote{We could obtain a slightly better bound by
-  inducting on the number of invariant factors of $H$. This is
-  slightly more cumbersome, and is left to the revisor as an
-  exercise}.
+induction on $|H|$.
   
 \begin{proof}[Proof of Theorem \ref{thm:2group_product}]
 When $|H| = 1$ or $2$, Theorem \ref{thm:2group} gives the
@@ -622,6 +619,7 @@ metric graphs.
 
 \section{The monodromy pairing on the Jacobian}
 
+
 The Jacobian of a finite graph is endowed with a natural monodromy
 pairing. Since it is possible to classify all finite abelian groups
 with pairing, it is worth considering which groups \emph{with pairing}
@@ -640,6 +638,7 @@ this question.
 Our main result will be the following:
 
 \begin{thm}
+  \label{thm:graph_pairing}
   Let $\Gamma$ be a finite abelian group of odd order, not isomorphic
   to $(\Z/p\Z) \times H$ for any prime $p \equiv 1 \pmod {24}$ and
   group $H$. Then there exists a graph $G$ such that
@@ -648,16 +647,7 @@ Our main result will be the following:
   \]
 \end{thm}
 
-Under the assumption of the Generalized Riemann Hypothesis, this
-result can be strengthened:
-\begin{thm}
-  Let $\Gamma$ be a finite abelian group of odd order. If the
-  Generalized Riemann Hypothesis holds, then there exists a graph $G$
-  such that 
-  \[
-  \Jac(G) \simeq \Gamma
-  \]
-\end{thm}
+\subsection{Basic constructions}
 
 As in the case of groups without pairing, we will take advantage of
 the fact that the wedge sum of two graphs corresponds to a product
@@ -697,7 +687,7 @@ possible constructions below:
   $s_i$.
 \end{defn}
 
-When $|S| = m$, we will use the following notation for the $m-1$th
+When $|S| = m$, we will use the following notation for the $(m-1)$th
 elementary symmetric polynomial applied to the elements of $S$:
 
 \begin{defn}
@@ -750,12 +740,16 @@ elementary symmetric polynomial applied to the elements of $S$:
   $b(e_1) = b(e_2)$ for any $e_1, e_2 \in E_i$.  If $a_i = b(e)$ for
   any $e \in E_i$, then the following conditions must both hold:
   
-  \begin{equation}
-    \sum_{i=0}^m a_i = p^t
-  \end{equation}
-  \begin{equation}
-    a_is_i = f(v_2) \textrm{ for all } 1 \le i \le m
-  \end{equation}
+  \begin{enumerate}
+    \item 
+      \[
+      \sum_{i=0}^m a_i = p^t
+      \]
+    \item
+      \[
+      a_is_i = f(v_2) \textrm{ for all } 1 \le i \le m
+      \]
+  \end{enumerate}
 
   Taking these conditions together with the fact that $R(S) = p^r$, we
   see
@@ -786,13 +780,172 @@ elementary symmetric polynomial applied to the elements of $S$:
   $\pair{\overline{D}}{\overline{D}} = \frac{\prod_{i=1}^ms_i}{p^r}$.
 \end{proof}
 
+The cycle graph $C_n$ and the banana graph $B_n$ are both special
+cases of the subdivided banana. As a result, we have:
+
+\begin{cor}
+  For any prime $p$ and integer $r$, 
+  \begin{equation*}
+    \Jac(B_{p^r}) \simeq (\Z/p^r\Z, \pair{\cdot}{\cdot}_1)
+  \end{equation*}
+  \begin{equation*}
+    \Jac(C_{p^r}) \simeq (\Z/p^r\Z, \pair{\cdot}{\cdot}_2)
+  \end{equation*}
+  where $\pair{\cdot}{\cdot}_1$ and $\pair{\cdot}{\cdot}_2$ are the
+  pairings on $\Z/p^r\Z$ given by
+  \begin{equation*}
+    \pair{x}{y}_1 = \frac{xy}{p^r} \qquad \pair{x}{y}_2 = \frac{(-1)xy}{p^r}
+  \end{equation*}
+\end{cor}
+
 \subsection{Groups of odd order}
 \label{sec:odd_groups}
-If $p$ is odd, there are only two such pairings. In this case, our
-goal is to find graphs $G_1$, $G_2$ such that $\Jac(G_1) \simeq
-(\Z/p^r\Z, \mathfrak{r})$ and $\Jac(G_2) \simeq (\Z/p^r\Z,
-\mathfrak{n})$, where $\mathfrak{r}$ and $\mathfrak{n}$ represent the
-residue and nonresidue pairings on $\Z/p^r\Z$, respectively.
+
+Our goal is to use the construction above to build graphs whose
+Jacobian is isomorphic to $(\Z/p^r\Z, \pair{\cdot}{\cdot})$ for any
+pairing $\pair{\cdot}{\cdot}$. We will first address the simpler
+situation, where $p$ is odd. In this case, up to isomorphism, there
+are only two pairings on $\Z/p^r\Z$; we will denote these by
+$\mathfrak{r}$ and $\mathfrak{n}$, the \emph{residue} and
+\emph{nonresidue} pairings, respectively. We will also assume that $r
+> 1$, and discuss the $r=1$ case separately. 
+
+We can see immediately that the banana graph $B_{p^r}$ always gives
+rise to the residue pairing on $\Z/p^r\Z$. To achieve the nonresidue
+pairing, it suffices to prove the following:
+
+\begin{claim}
+  \label{claim:exist_decomp}
+  For any odd prime $p$ and integer $r > 1$, there exists a
+  multiset of positive integers $S = \{s_1, \ldots s_m\}$ such that
+  $R(S) = p^r$, $\gcd(p, s_i) = 1$ for all $i$, and $\prod_{i=1}^ms_i$
+  is a nonresidue modulo $p$.
+\end{claim}
+
+We will need the following proposition, which follows from (CITATION):
+\begin{prop}
+  \label{prop:q_bound}
+  For any prime $p$ and integer $r > 1$, there exists a prime
+  quadratic nonresidue $q$ such that $q^2/4<p^r$, with $q\equiv 3\pmod
+  4$ if $r$ is odd and $q\equiv 1\pmod 4$ if $r$ is even.
+\end{prop}
+
+\begin{lem}
+  \label{lem:decompose_q_non}
+  Let $q$ be a prime with $q \equiv 3 \pmod 4$. Then for any $k$
+  with $\left( \frac{k}{q} \right) = -1$, there exists $0 < a < q$
+  such that $a(q-a) \equiv k \pmod q$. 
+\end{lem}
+\begin{proof}
+  Let the set of nonresidues modulo $q$ be $R_q$. Consider the map
+  $\phi:\F_q \to \F_q$ given by $\phi(x) = -x^2$. The image of
+  $\phi$ is a subset of $R_q$, since (by quadratic reciprocity)
+  $-1$ is a nonresidue modulo $q$. Furthermore, since the polynomial
+  $-x^2 - a$ has at most two roots in $\F_q$ (for any $a$), and
+  $|R_q| = (q - 1)/2$, $\phi_k$ is onto $R_q$. 
+
+  Since $k \in R_q$, choose $a$ such that $\phi(a) = k$, and note
+  that $k \equiv -a^2 \equiv a(q-a) \pmod q$, as required.
+\end{proof}
+\begin{lem}
+  \label{lem:decompose_q_res}
+  Let $q$ be a prime with $q \equiv 1 \pmod 4$. Then for any $k$
+  with $\left( \frac{k}{q} \right) = 1$, there exists $0 < a < q$
+  such that $a(q-a) \equiv k \pmod q$.
+\end{lem}
+\begin{proof}
+  Define $\phi$ as in Lemma \ref{lem:decompose_q_non}, and note that in
+  this case quadratic reciprocity implies that $\phi$ is onto the set
+  of residues modulo $q$ (since $-1$ is a residue mod $q$). $k$ is
+  again in the image of $\phi$, so its decomposition can be
+  constructed as before.
+\end{proof}
+
+\begin{lem}
+  \label{lem:exist_q}
+  Let $p$ be a prime with $p \equiv 1 \pmod 4$, and let $r$ be an
+  integer with $r > 1$. Then there exists a prime $q$, with $\left(
+    \frac{q}{p^r} \right) = -1$, and an integer $0 < a < q$ such that
+  the quantity
+  \[\frac{p^r - a(q-a)}{q}\] 
+  is a positive integer.
+\end{lem}
+\begin{proof}
+  First suppose $r$ is odd. By Proposition \ref{prop:q_bound}, there
+  exists a prime $q \equiv 3 \pmod 4$ such that $\left( \frac{q}{p}
+  \right) = -1$ and $\frac{q^2}{4} < p^r$.
+
+  Since $r$ is odd, and $p \equiv 1 \pmod 4$, $p^r$ is a nonresidue
+  modulo $q$. Apply Lemma \ref{lem:decompose_q_non} to find $a$ such
+  that $p^r \equiv a(q-a) \pmod q$. Since $q < p$ and $r > 1$,
+  $a(q-a) < p^r$. Therefore $p^r - a(q-a)$ is positive and divisible
+  by $q$, as required.
+
+  Now suppose $r$ is even. By Proposition \ref{prop:q_bound}, there
+  exists a prime $q$ with $q \equiv 1 \pmod 4$ such that $\left(
+    \frac{q}{p} \right) = -1$ and $\frac{q^2}{4} < p^r$. Since $r$ is
+  even, and $p \equiv 1 \pmod 4$, $p^r$ is a residue modulo $q$. Apply
+  Lemma \ref{lem:decompose_q_res} to find an $a < q$ such that $p^r -
+  a(q-a)$ is divisible by $q$, and as in the odd case, we must have
+  $p^r - a(q-a) > 0$.
+\end{proof}
+
+\begin{proof}[Proof of Claim \ref{claim:exist_decomp}]
+  First consider the case that $p \equiv 3 \pmod 4$. Choose $S = \{1,
+  p^r-1\}$. Clearly $R(S) = p^r$, and by quadratic reciprocity,
+  $s_1s_2 \equiv -1 \pmod {p^r}$ is a nonresidue modulo $p^r$.
+
+  In the case that $p \equiv 1 \pmod 4$, choose $q,a$ as in
+  Lemma \ref{lem:exist_q}. Choose
+
+  \[s_1 = a, \quad s_2 =  q-a, \quad s_3 = \frac{p^r - a(q-a)}{q}\]
+
+  It is easy to check that $R(S) = p^r$. $a$ and $q-a$ are both less
+  than $p$, so they must be prime to $p$, and if $s_3$ were divisible
+  by $p$, then the product $a(q-a)$ would be as well.
+
+  Finally, the quantity $s_1s_2s_3$ is a nonresidue mod $p^r$ iff
+  $\dfrac{(-1)(a(q-a))^2}{q}$ is a nonresidue mod $p$. Since $p \equiv
+  1 \pmod 4$, $-1$ is a residue modulo $p^r$, and hence the numerator
+  of this expression is also a residue. Therefore $\left(
+    \frac{s_1s_2s_3}{p^r} \right) = \left( \frac{q}{p^r} \right) =
+  -1$, as required.
+\end{proof}
+
+For a prime $p$ and integer $r > 1$, given a set $S$ described by
+Claim \ref{claim:exist_decomp}, we see that $B_S \simeq (\Z/p^r\Z,
+\mathfrak{n})$, as required.
+
+We now consider the case that $r=1$. We begin by noting that in
+certain cases, it is still possible to construct a set $S$
+satisfying the required conditions:
+\begin{prop}
+  Let $p$ be an odd prime, not equivalent to $1 \pmod {24}$. Then
+  there exists a multiset of positive integers $S$ such that $R(S) =
+  p$ and $\prod_{s_i \in S}s_i$ is a nonresidue modulo $p$.
+\end{prop}
+\begin{proof}
+  I don't know how directly this follows from the citations...
+\end{proof}
+
+This completes the proof of Theorem \ref{thm:graph_pairing}.
+
+\begin{remark} We could extend Theorem \ref{thm:graph_pairing} to
+  cover \emph{all} groups with pairing of odd order if we could prove
+  Claim \ref{claim:exist_decomp} in the case that $r=1$.
+  
+  The critical difference between the two cases is Proposition
+  \ref{prop:q_bound}, which, in the $r=1$ case, implies a lower bound
+  better than $2\sqrt{p}$ on the smallest nonresidue modulo $p$ that
+  is equivalent to $3 \pmod 4$.
+
+  While this bound is not currently known to hold for all primes $p$,
+  computer search has verified that it does for all $p < 10^9$. The
+  best known theoretical bound on $q$ is $O(p^{1/2 + \epsilon})$ for
+  any $\epsilon > 0$, but bounds that are sufficient to prove the
+  proposition for the case $r=1$ hold under the assumption of the
+  Generalized Riemann Hypothesis (CITATION NEEDED).
+\end{remark}
 
 \subsection{2-groups}
 
