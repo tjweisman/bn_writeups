@@ -1,0 +1,377 @@
+\documentclass{beamer}
+
+\usepackage{tikz}
+
+\newtheorem{prop}{Proposition}
+
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+
+\DeclareMathOperator{\Jac}{Jac}
+\DeclareMathOperator{\Div}{Div}
+\DeclareMathOperator{\Prin}{Prin}        
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\val}{val}
+
+\title{Jacobians of finite graphs}
+\author{Louis Gaudet, Nicholas Wawrykow, Theodore Weisman\\
+  Mentors: Daniel Corey, David Jensen, Dhruv Ranganathan}
+
+\institute{Yale University, SUMRY 2014}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\section{Background}
+\begin{frame}
+  \frametitle{Definitions}
+
+  $G = \{V(G), E(G)\}$ is a finite, connected multigraph with no loops
+
+  \begin{definition}
+    A \emph{divisor} on $G$ is an assignment of an integer to each vertex.
+  \end{definition}
+  
+  \pause
+  Divisors form a group, under pointwise addition:
+
+\begin{center}
+\begin{tikzpicture}
+
+%first divisor
+\draw (60:1) -- (0,0) -- (0:1) -- (60:1) ;
+
+\draw [fill] (0,0) circle [radius=0.05cm] ;
+\draw [fill] (60:1) circle [radius=0.05cm] ;
+\draw [fill] (0:1) circle [radius=0.05cm] ;
+
+%first divisor labels
+\node [right] at (60:1.15) {$\;0$} ;
+\node [left] at (-.1,0) {$-2\;$} ;
+\node [right] at (0:1.2) {$2$} ;
+
+%second divisor
+\draw [shift={(2.8cm,0cm)}] (60:1) -- (0,0) -- (0:1) -- (60:1) ;
+
+\draw [fill,shift={(2.8cm,0cm)}] (0,0) circle [radius=0.05cm] ;
+\draw [fill,shift={(2.8cm,0cm)}] (60:1) circle [radius=0.05cm] ;
+\draw [fill,shift={(2.8cm,0cm)}] (0:1) circle [radius=0.05cm] ;
+
+%second divisor labels
+\node [right,shift={(2.8cm,0cm)}] at (60:1.15) {$\;5$} ;
+\node [left,shift={(2.8cm,0cm)}] at (-.1,0) {$-2\;$} ;
+\node [right,shift={(2.8cm,0cm)}] at (0:1.2) {$-1$} ;
+
+%resulting divisor
+\draw [shift={(5.8cm,0cm)}] (60:1) -- (0,0) -- (0:1) -- (60:1) ;
+
+\draw [fill,shift={(5.8cm,0cm)}] (0,0) circle [radius=0.05cm] ;
+\draw [fill,shift={(5.8cm,0cm)}] (60:1) circle [radius=0.05cm] ;
+\draw [fill,shift={(5.8cm,0cm)}] (0:1) circle [radius=0.05cm] ;
+
+%resulting divisor labels
+\node [right,shift={(5.8cm,0cm)}] at (60:1.15) {$\;5$} ;
+\node [left,shift={(5.8cm,0cm)}] at (-.1,0) {$-4\;$} ;
+\node [right,shift={(5.8cm,0cm)}] at (0:1.2) {$1$} ;
+
+%plus and equals signs
+\node [shift={(1.9cm,-.5cm)}] at (0,1) {$+$} ;
+\node [shift={(4.9cm,-.5cm)}] at (0,1) {$=$} ;
+
+\end{tikzpicture}
+\end{center}
+
+\pause
+
+Think of a divisor as a configuration of chips stacked on the vertices.
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Chip firing} For a fixed graph $G$, we can play a
+  ``chip-firing game'' with divisors on $G$:
+
+\begin{center}
+\begin{tikzpicture}
+
+%first divisor
+\draw (60:1) -- (0,0) -- (0:1) -- (60:1) ;
+
+\draw [fill] (0,0) circle [radius=0.05cm] ;
+\draw [fill] (60:1) circle [radius=0.05cm] ;
+\draw [fill=red] (0:1) circle [radius=0.05cm] ;
+
+%first divisor labels
+\node [right] at (60:1.15) {$\;0$} ;
+\node [left] at (-.1,0) {$-2\;$} ;
+\node [right] at (0:1.2) {$2$} ;
+
+%fire arrow
+\node [shift={(2.6cm,-.5cm)}] at (0,1) {$\xrightarrow{\hspace{1.5cm}}$} ;
+\node [above,shift={(2.6cm,-.5cm)}] at (0,1.15) {fire\;\;\;\;} ;
+\draw [fill=red,shift={(2.9cm,1cm)}] (0,-.25) circle [radius=0.05cm] ;
+
+%second divisor
+\draw [shift={(4cm,0cm)}] (60:1) -- (0,0) -- (0:1) -- (60:1) ;
+
+\draw [fill,shift={(4cm,0cm)}] (0,0) circle [radius=0.05cm] ;
+\draw [fill,shift={(4cm,0cm)}] (60:1) circle [radius=0.05cm] ;
+\draw [fill,shift={(4cm,0cm)}] (0:1) circle [radius=0.05cm] ;
+
+%second divisor labels
+\node [right,shift={(4cm,0cm)}] at (60:1.15) {$\;1$} ;
+\node [left,shift={(4cm,0cm)}] at (-.1,0) {$-1\;$} ;
+\node [right,shift={(4cm,0cm)}] at (0:1.2) {$0$} ;
+
+\end{tikzpicture}
+\end{center}
+
+
+\begin{itemize}
+
+\pause
+\item
+If you can get between two divisors $D$ and $D'$ via a sequence of
+chip-firing moves, then $D,D'$ are \textbf{equivalent}, $D\sim D'$.
+
+\pause 
+\item Every divisor in an equivalence class has the same
+  \emph{degree} (total number of chips on the graph).
+
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{The Jacobian group}
+  \begin{itemize}
+  \item Consider $\Div^0(G)$, the subgroup of divisors of degree $0$
+    on $G$
+    \pause
+  \item What is the structure of non-equivalent elements of $\Div^0(G)$?
+  \end{itemize}
+  \pause
+  \begin{definition}
+    The Jacobian group of $G$ is
+    \begin{equation*}
+      \Jac(G) = \Div^0(G)/\sim
+    \end{equation*}
+    where $\sim$ is the equivalence relation given by chip-firing.
+  \end{definition}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example:}
+  [INSERT EXAMPLE HERE]
+\end{frame}
+
+\begin{frame}
+  \begin{itemize}
+    \item $\Jac(G)$ is always a finite abelian group
+      \pause
+    \item For any graph $G$, $|\Jac(G)|$ is the number of spanning
+      trees on $G$
+      \pause
+    \item The Jacobian of a cycle graph on $n$ vertices is $\Z/n\Z$. 
+  \end{itemize}
+  PICTURE HERE
+\end{frame}
+
+\begin{frame}
+  \frametitle{\textbf{Our question:}} 
+
+  Which finite abelian groups are the Jacobian of some graph?
+\end{frame}
+
+\begin{frame}
+  \frametitle{The wedge sum}
+  \begin{prop}
+    Let $G_1$, $G_2$ be graphs. Then $\Jac(G_1 \vee G_2) \simeq
+    \Jac(G_1) \times \Jac(G_2)$
+  \end{prop}
+  
+  \pause 
+    \begin{tikzpicture}
+
+    
+    \draw {(0:1) -- (120:1) -- (240:1)} -- cycle (270:1.2) node[below]
+    {$G_1$};
+    \foreach \theta in {0, 120, 240} {
+      \fill (\theta:1) circle (2pt) ;
+    } ;
+
+    \node at (0:1.5) {\LARGE $\vee$};
+
+    \begin{scope}[xshift=3cm]
+      \draw {(0:1) -- (90:1) -- (180:1) -- (270:1)} -- cycle (270:1.2)
+      node[below] {$G_2$};
+
+      \foreach \theta in {0, 90, ...,  270} {
+        \fill (\theta:1) circle (2pt) ;
+      } ;
+    \end{scope}
+
+    \node at (0:4.7) {\LARGE $=$} ;
+
+    \begin{scope}[xshift=6cm]
+      \draw {(0:1) -- (120:1) -- (240:1)} -- cycle ;
+      \foreach \theta in {0, 120, 240} {
+        \fill (\theta:1) circle (2pt) ;
+      } ;
+      \begin{scope}[xshift=2cm]
+        \draw {(0:1) -- (90:1) -- (180:1) -- (270:1)} -- cycle ;
+        
+        \foreach \theta in {0, 90, ...,  270} {
+          \fill (\theta:1) circle (2pt) ;
+        } ;
+      \end{scope}
+      \node[below] at (1,-1.2) {$G_1 \vee G_2$} ;
+    \end{scope}
+  \end{tikzpicture}
+
+  $\Jac(G_1) \simeq \Z/3\Z$, $\Jac(G_2) \simeq \Z/4\Z$, $\Jac(G_1 \vee
+  G_2) \simeq \Z/12\Z$.
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{\textbf{Our question:}} 
+
+  \begin{itemize}
+  \item
+    Which finite abelian groups are the Jacobian of some graph?  
+
+  \pause
+
+  \begin{itemize}
+  \item All of them!
+  \end{itemize}
+
+  \pause
+\item
+  Which finite abelian groups are the Jacobian of some \emph{simple}
+  graph?
+\end{itemize}
+
+PICTURE OF C2
+  
+\end{frame}
+
+\begin{frame}
+  \begin{prop}
+    There is no simple graph $G$ with $\Jac(G) \simeq \Z/2\Z$. 
+  \end{prop}
+  
+  Reason: no simple graph with exactly two spanning trees.
+
+  \pause 
+
+  \vspace{2cm}
+
+  Are there other groups we do \emph{not} get?
+\end{frame}
+
+\begin{frame}
+  \frametitle{Our results}
+  \begin{theorem}
+  For any $k \ge 1$, there does not exist a simple graph $G$ with
+  $\Jac(G) \simeq (\Z/2\Z)^k$.
+  \end{theorem}
+  \pause
+  We can also give a complete characterization of all multigraphs with
+  such Jacobian.
+
+  \pause
+    \begin{center}
+    \begin{tikzpicture}
+
+      \draw (0,0) to [out=15, in=165] (2,0) ;
+      \draw (0,0) to [out=-15, in=-165] (2,0) ;
+
+      \draw (2,0) to [out=75, in=225] (3, 1.7) ;
+      \draw (2,0) to [out=45, in=255] (3, 1.7) ;
+
+      \draw (2,0) to [out=-60, in=-240] (3, -1.7) ;
+
+      \draw (3,-1.7) to [out=15, in=165] (5, -1.7) ;
+      \draw (3,-1.7) to [out=-15, in=-165] (5, -1.7) ;
+
+      \draw (5, -1.7) [out=60, in=210] to (6.7, 0) ;
+      \draw (5, -1.7) [out=30, in=240] to (6.7, 0) ;
+
+      \draw (6.7, 0) [out=120, in=-30] to (5, 1.7) ;
+      \draw (6.7, 0) [out=150, in=-60] to (5, 1.7) ;
+
+      \draw (6.7, 0) to (8.4, 1.7) ;
+
+      \draw (6.7, 0) to [out=-30, in=120] (8.4, -1.7) ;
+      \draw (6.7, 0) to [out=-60, in=150] (8.4, -1.7) ;
+
+      \draw [fill] (0,0) circle [radius=.1cm] ;
+      \draw [fill] (2,0) circle [radius=.1cm] ;
+      \draw [fill] (3,1.7) circle [radius=.1cm] ;
+      \draw [fill] (3,-1.7) circle [radius=.1cm] ;
+      \draw [fill] (5,-1.7) circle [radius=.1cm] ;
+      \draw [fill] (6.7, 0) circle [radius=.1cm] ;
+      \draw [fill] (5,1.7) circle [radius=.1cm] ;
+      \draw [fill] (8.4,1.7) circle [radius=.1cm] ;
+      \draw [fill] (8.4,-1.7) circle [radius=.1cm] ;
+    \end{tikzpicture}
+    \end{center}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Our results}
+  \begin{theorem}
+    Let $H$ be any finite abelian group.  $(\Z/2\Z)^k \times H$ is not
+    the Jacobian of any simple graph for all sufficiently large $k$.
+  \end{theorem}
+
+  \pause 
+
+  Proof idea: 
+  \begin{enumerate}
+  \item bound $k$ when the graph is biconnected
+    (i.e. \emph{wedge-free})
+    \pause
+  \item if $k$ is too large, the Jacobian factors as a product of
+    Jacobians on wedge components
+    \pause
+  \item as $k$ continues to grow, eventually a component looks like
+    $(\Z/2\Z)^\ell$ for $\ell \ge 1$
+  \end{enumerate}
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Future questions}
+  \begin{itemize}
+    \item Can we get a better bound on $k$?
+      \pause
+    \item Can we give a complete description of \emph{exactly} which
+      groups are Jacobians of some simple graph?
+      \pause
+    \item Can we describe which groups are Jacobians of biconnected
+      graphs?
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Acknowledgements}
+
+  Thanks to our mentors, as well as Sam Payne and the rest of the
+  SUMRY.
+  
+\end{frame}
+
+\begin{frame}
+  \frametitle{References}
+\end{frame}
+
+\end{document}
