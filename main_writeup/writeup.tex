@@ -30,41 +30,98 @@ proposition:
 Let $G_1$ and $G_2$ be graphs. Then $\Jac(G_1 \vee G_2) \simeq
 \Jac(G_1) \times \Jac(G_2)$.
 \end{prop}
+
+We prove Proposition \ref{prop:wedge_product} by observing that the
+Jacobian of a graph can be directly computed from the Smith normal
+form of its Laplacian matrix. Throughout the following, for any
+integer matrix $M$, let $M_{i,i}$ represent the submatrix of $M$ obtained
+by deleting the $i$th row and column.
+
+\begin{lem}
+\label{lem:SNF_submatrix}
+Let $G$ be a graph, and let $Q$ be the Laplacian matrix of $G$. If the
+Smith normal form of $Q$ is $S$, then for any $i$, the Smith normal
+form of $Q_{i,i}$ is $S_{n,n}$.
+\end{lem}
 \begin{proof}
-
-  Let $G = G_1 \vee G_2$, with $v_0$ being the vertex of intersection,
-  and let $\Jac(G) = \Gamma$. For any subgraph $G'$ of $G$, define the
-  subgroup $\Div_{G'}^0(G)$ by:
-  \[
-  \Div_{G'}^0(G) = \{D \in \Div^0(G) : \forall v \in
-  V(G) \setminus V(G'), D(v) = 0 \}
-  \]
-  
-  Since $V(G_1) \cup V(G_2) = V(G)$, it is clear that
-  $\Div_{G_1}^0(G)$ and $\Div_{G_2}^0(G)$ generate
-  $\Div^0(G)$. Furthermore, since $V(G_1) \cap V(G_2) = \{v_0\}$, for
-  any $D \in \Div_{G_1}^0(G) \cap \Div_{G_2}^0(G)$, we must have $D(v)
-  = 0$ for all $v \in V(G) \setminus \{v_0\}$ and hence $D(v_0) = 0$
-  as well. Thus, the intersection of $\Div_{G_1}^0(G)$ and
-  $\Div_{G_2}^0(G)$ is trivial, and we have 
-
-  \[\Div_{G_1}^0(G) \times
-  \Div_{G_2}^0(G) \simeq \Div^0(G)\]
-
-  Let $\Gamma_1$ and $\Gamma_2$ be the sets of equivalence classes of
-  the elements of $\Div_{G_1}^0(G)$ and $\Div_{G_2}^0(G)$,
-  respectively. It is clear that $\Gamma_1$ and $\Gamma_2$ generate
-  $\Jac(G)$. We claim that:
-
-  \begin{enumerate}
-  \item $\Gamma_1 \cap \Gamma_2$ is trivial
-  \item $\Gamma_1$ (resp. $\Gamma_2$) is a group isomorphic to
-    $\Jac(G_1)$ (resp. $\Jac(G_2)$). 
-  \end{enumerate}
-  
+  WE NEED A PROOF OF THIS, but I feel like someone has to have proved
+  it already so I'm not typing it.
 \end{proof}
 
-[This might be a good place for a picture]
+\begin{proof}[Proof of Proposition \ref{prop:wedge_product}]
+  Let $Q_1$ and $Q_2$ be the Laplacian matrices of $G_1$ and $G_2$,
+  respectively, and let the vertex of intersection of $G_1$ and $G_2$
+  be $v_0$. Enumerate the vertices of $G$ so that the Laplacian of $G$
+  can be written as
+\begin{equation*}
+  Q = 
+  \left[\begin{array}{ccc}
+      Q_1 & \vdots & \\
+      \ldots & \val{v_0}  & \ldots \\
+      & \vdots & Q_2
+  \end{array}\right]
+\end{equation*}
+If we delete the row and column corresponding to $v_0$, the resulting
+matrix $Q'$ will be in block diagonal form, and has cokernel
+isomorphic to that of the matrix obtained by taking the Smith normal
+form of the blocks. Applying Lemma \ref{lem:SNF_submatrix}, we then
+see that the following matrix $M$ has cokernel isomorphic to the
+cokernel of $Q$:
+
+\begin{equation*}
+  \left[\begin{array}{cc|c}
+      S_1 & \\
+      & S_2 \\ \hline
+      & & 0
+    \end{array}\right]
+\end{equation*}
+
+where $S_1$, $S_2$ are diagonal matrices whose entries are the
+invariant factors of $\Jac(G_1), \Jac(G_2)$, respectively.
+\end{proof}
+
+\begin{figure}[h]
+  \begin{tikzpicture}
+
+    
+    \draw {(0:1) -- (120:1) -- (240:1)} -- cycle (270:1.2) node[below]
+    {$G_1$};
+    \foreach \theta in {0, 120, 240} {
+      \fill (\theta:1) circle (2pt) ;
+    } ;
+
+    \node at (0:1.5) {\LARGE $\vee$};
+
+    \begin{scope}[xshift=3cm]
+      \draw {(0:1) -- (90:1) -- (180:1) -- (270:1)} -- cycle (270:1.2)
+      node[below] {$G_2$};
+
+      \foreach \theta in {0, 90, ...,  270} {
+        \fill (\theta:1) circle (2pt) ;
+      } ;
+    \end{scope}
+
+    \node at (0:4.7) {\LARGE $=$} ;
+
+    \begin{scope}[xshift=6cm]
+      \draw {(0:1) -- (120:1) -- (240:1)} -- cycle ;
+      \foreach \theta in {0, 120, 240} {
+        \fill (\theta:1) circle (2pt) ;
+      } ;
+      \begin{scope}[xshift=2cm]
+        \draw {(0:1) -- (90:1) -- (180:1) -- (270:1)} -- cycle ;
+        
+        \foreach \theta in {0, 90, ...,  270} {
+          \fill (\theta:1) circle (2pt) ;
+        } ;
+      \end{scope}
+      \node[below] at (1,-1.2) {$G_1 \vee G_2$} ;
+    \end{scope}
+  \end{tikzpicture}
+  \caption{The wedge sum operation on graphs. In this case, $\Jac(G_1)
+  \simeq \Z/3\Z$, $\Jac(G_2) \simeq \Z/4\Z$, and $\Jac(G_1 \vee G_2)
+  \simeq \Z/12\Z$.}
+\end{figure}
 
 Note that in the case that $G_1$ is a tree (and therefore $\Jac(G_1)$
 is trivial), $\Jac(G_1 \vee G_2) \simeq \Jac(G_2)$. We then have
@@ -878,7 +935,7 @@ This completes the proof of Theorem \ref{thm:graph_pairing}.
   Claim \ref{claim:exist_decomp} in the case that $r=1$.
   
   The critical difference between the two cases is Proposition
-  \ref{prop:q_bound}, which, in the $r=1$ case, implies a lower bound
+  \ref{prop:q_bound}, which, in the $r=1$ case, implies an upper bound
   better than $2\sqrt{p}$ on the smallest nonresidue modulo $p$ that
   is equivalent to $3 \pmod 4$.
 
@@ -959,7 +1016,7 @@ pairing.
 
 \begin{proof}
  Case 1: $\AP$. $B_{2^{n}}$ is cyclic of order $2^{n}$ has pairing
-$\AP$. This follows from \ref{prop:banana_residue}.
+$\AP$.
 
 %A pairing 
 \begin{center}
