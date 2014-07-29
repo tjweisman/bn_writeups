@@ -1,13 +1,56 @@
-\begin{lem}
-Suppose $G = G_1 \vee G_2$. Let $Q_G$, $Q_{G_1}$, and $Q_{G_2}$ be the Laplacian matrices of $G$, $G_1$, and $G_2$, respectively.
-\end{lem}
-\begin{proof}
-
-\end{proof}
-
 \begin{prop}
 If $G = G_1 \vee G_2$, then $\Jac(G)=\Jac(G_1) \oplus \Jac(G_2)$.
 \end{prop}
 \begin{proof}
+Fix two graph isomorphisms $\psi_1, \psi_2$ that map $G_1, G_2$ into their corresponding subgraphs of $G$ (respectively). Define the map $\iota_1: \Div^0(G_1) \hookrightarrow \Div^0(G)$ by
+\[
+\iota_1 \left(\sum_{v \in V(G_1)}a_v v \right)= \sum_{v \in V(G_1)}a_{v} \psi(v),
+\]
+and define $\iota_2 : \Div^0(G_2) \hookrightarrow \Div^0(G)$ analogously. 
 
+Now let $D, E \in \Div^0(G)$ be given; we can uniquely write
+\[
+D = D_1 + D_2 \quad \text{and} \quad E = E_1 + E_2,
+\]
+where $D_1, E_1 \in \im(\iota_1)$ and $D_2, E_2 \in \im(\iota_2)$. It suffices to show that
+\[
+\pair{D}{E}_G = \pair{\iota_1^{-1}(D_1)}{\iota_1^{-1}(E_1)}_{G_1} + \pair{\iota_2^{-1}(D_2)}{\iota_2^{-1}(E_2)}_{G_2}.
+\]
+Let $m = |\Jac(G)|$, so $m \cdot \iota_1^{-1}(E_1) \in \im(\Delta_1)$ and $m \cdot \iota_2^{-1}(E_2) \in \im(\Delta_2)$. Now choose $f_1 \in \Delta_1^{-1} (m \cdot \iota_1^{-1}(E_1))$ and $f_2 \in \Delta_2^{-1} (m \cdot \iota_2^{-1}(E_2))$ such that $f_1(\psi_1^{-1}(v_0)) = f_2(\psi_2^{-1}(v_0)) = 0$. We lift these to functions $\widehat{f_1}, \widehat{f_2} \in \mathcal{M}(G)$ be defining
+\[
+\widehat{f_1}(v) =
+\begin{cases}
+f_1(\psi_1^{-1}(v)) & \text{if $v \in V(\im(\psi_1))$} \\
+0 & \text{if $v \notin V(\im(\psi_1))$},
+\end{cases}
+\]
+and analogously for $\widehat{f_2}$.
+
+Now we claim that $\widehat{f_1} \in \Delta^{-1}(mE_1)$ and $\widehat{f_2} \in \Delta^{-1}(mE_2)$. We prove this just for $\widehat{f_1}$, since the proof for $\widehat{f_2}$ is analogous. First, note that $\Delta(\widehat{f_1})(v)=0=mE_1(v)$ for all $v \notin V(\im(\psi_1))$. Then note that $\Delta_1(f_1)(u) = m \cdot \iota_1^{-1}(E_1)(u)$ for all $u \in V(G_1)$, so by taking $\psi_1(u)=v$, we get
+\[
+\Delta_1(f_1)(u) = \Delta_1(f_1)(\psi_1^{-1}(v)) = m \cdot \iota_1^{-1}(E_1)(\psi_1^{-1}(v)) = mE_1(v)
+\]
+for all $u \in V(G_1)$. Now we have
+\begin{align*}
+\Delta_1(f_1)(u) &= \ord_{u}(f_1) = \sum_{\{u,w\} \in E(G_1)} f_1(u) - f_1(w) \\
+&= \sum_{\{\psi_1(u),\psi_1(w)\} \in E(G)} \widehat{f_1}(\psi_1(u)) - \widehat{f_1}(\psi_1(w)) = \ord_{\psi_1(u)}(\widehat{f_1}) = \Delta(\widehat{f_1})(v),
+\end{align*}
+so we deduce that $\Delta(\widehat{f_1})(v)=mE_1(v)$ for all $v\in V(\im(\psi_1))$ as well, and hence $\widehat{f_1}\in\Delta^{-1}(mE_1)$, as desired.
+
+Now by the definition of the monodromy pairing in [CITE SHOKRIEH],
+\begin{align*}
+\pair{D_1}{E_1}_G &= \frac{1}{m} \sum_{v \in V(G)} D_1(v) \widehat{f_1}(v) = \frac{1}{m} \sum_{v \in V(\psi_1(G_1))} D_1(v) \widehat{f_1}(v) \\ 
+&= \frac{1}{m} \sum_{u \in V(G_1)} D_1(\psi_1(u)) \widehat{f_1}(\psi_1(u)) = \frac{1}{m} \sum_{u\in V(G_1)} \iota_1^{-1}(D_1)(u)f_1(u) \\
+&= \pair{\iota_1^{-1}(D_1)}{\iota_1^{-1}(E_1)}_{G_1}.
+\end{align*}
+An analogous argument shows that $\pair{D_2}{E_2}_G = \pair{\iota_1^{-1}(D_2)}{\iota_1^{-1}(E_2)}_{G_2}$. Further,
+\[
+\pair{D_1}{E_2}_G = \frac{1}{m} \sum_{v \in V(G)} D_1(v) \widehat{f_2}(v) = 0,
+\]
+since $\widehat{f_2}(v)=0$ when $v\in V(\im(\psi_1))$ and $D_1(v)=0$ when $v\notin V(\im(\psi_1))$. An identical argument shows that $\pair{D_2}{E_1}_G = 0$. Therefore, by bilinearity,
+\begin{align*}
+\pair{D}{E}_G &= \pair{D_1}{E_1} + \pair{D_1}{E_2} + \pair{D_2}{E_1} + \pair{D_2}{E_2} \\
+&= \pair{\iota_1^{-1}(D_1)}{\iota_1^{-1}(E_1)}_{G_1} + \pair{\iota_2^{-1}(D_2)}{\iota_2^{-1}(E_2)}_{G_2},
+\end{align*}
+as desired.
 \end{proof}
