@@ -81,9 +81,7 @@ invariant factors of $\Jac(G_1), \Jac(G_2)$, respectively.
 \end{proof}
 
 \begin{figure}[h]
-  \begin{tikzpicture}
-
-    
+  \begin{tikzpicture}    
     \draw {(0:1) -- (120:1) -- (240:1)} -- cycle (270:1.2) node[below]
     {$G_1$};
     \foreach \theta in {0, 120, 240} {
@@ -196,30 +194,64 @@ following proposition:
 
 $C_n$ has $n$ spanning trees, so $|\Jac(C_n)|=n$ and, as before, it
 suffices to find a single element of $\Jac(C_n)$ of order at least
-$n$. With the following lemma, we show that such an element exists on a wider family of graphs:
+$n$. Using the following lemma, we show that such an element exists on
+a wider family of graphs:
 
 \begin{lem}
   \label{lem:2valent_path}
-  Let $G$ be a biconnected graph, and suppose that for some path $P =
-  \{v_1, \ldots, v_\ell\}$ on $G$, $\val(v_i) = 2$ for all $1 < i <
-  \ell$. Then $\Jac(G)$ contains an element of order at least $\ell$.
+  Let $G$ be a graph, and suppose that for some path $P$ with vertices
+  $\{v_1, \ldots, v_\ell\}$ on $G$, $\val(v_i) = 2$ for all $1 < i <
+  \ell$. If $D$ is the divisor $(v_2) - (v_1)$, then, for any $1 < m <
+  \ell$,
+  \begin{equation*}
+    mD \sim (v_{m+1}) - (v_1)
+  \end{equation*}
 \end{lem}
 \begin{proof}
-  Consider the divisor $D = (v_2) - (v_1)$. We claim that for any $1
-  \le m < \ell$, $mD$ is equivalent to $(v_{m+1}) - (v_1)$.
+  Under an appropriate enumeration of the vertices of $G$, the
+  Laplacian matrix $Q$ of $G$ has the form
 
-  I'm going to make either a chip-firing argument or a Laplacian
-  matrix argument for why this is true, but it's pretty cumbersome so
-  I'll leave it for later.
+  $$Q = \begin{bmatrix}
+    k_1 & -1 \\
+    -1 &  2 & -1 \\
+    & -1 &  2 & -1 \\
+    &    &    &  \ddots  \\
+    &    &    &  -1 & k_\ell \\ 
+    &    &    &     &    & \ddots
+  \end{bmatrix}$$
 
-  $G$ is biconnected, so there is a path from $v_1$ to $v_{m+1}$ that
-  does not contain any vertex $v_i$ for $1 < i < m$. Applying the
-  burning algorithm then shows that the divisor $(v_{m+1}) - (v_1)$ is
+  where $k_1$ and $k_\ell$ are the degrees of $v_1$ and $v_\ell$,
+  respectively. Since the equivalence relation on divisors is defined
+  by the image of the Laplacian map $\Delta$, the claim is equivalent
+  to the statement that there exists $\mathbf{v} \in \Z^n$ such that
+
+  \begin{equation*}
+    \bv{v}_{m+1} - \bv{v}_1  = m(\bv{v}_2 - \bv{v}_1) + Q\mathbf{v}
+  \end{equation*}
+
+  where $\bv{v}_i$ represents the $i$th standard basis element for
+  $\Z^n$, corresponding to the divisor with formal sum $(v_i)$. If we
+  choose $\mathbf{v} = \sum_{i=1}^{m - 1}(m - i)\bv{v}_i$, it is
+  easy to check that the equality above holds.
+\end{proof}
+
+\begin{cor}
+  \label{cor:2valent_path}
+  Let $G$ be any biconnected graph that contains a path $P$ as
+  above. Then $\Jac(G)$ contains an element of order at least $\ell$.
+\end{cor}
+\begin{proof}
+  Let $m < \ell$, and consider $D = (v_2) - (v_1)$. $G$ is
+  biconnected, so there is a path from $v_1$ to $v_{m+1}$ that does
+  not contain any vertex $v_i$ for $1 < i < m$. Applying the burning
+  algorithm then shows that the divisor $(v_{m+1}) - (v_1)$ is
   $v_1$-reduced, and hence $m\overline{D} = m[D]$ is nontrivial for $m
   < \ell$, as required.
 \end{proof}
 
-$C_n$ is a simple graph whenever $n > 2$, so we have the following:
+$C_n$ clearly satisfies the conditions required by Corollary
+\ref{cor:2valent_path} above. Furthermore, $C_n$ is a simple graph
+whenever $n > 2$, so we have the following:
 
 \begin{cor}
   Let $\Gamma$ be a finite abelian group that is not isomorphic to
@@ -230,8 +262,8 @@ $C_n$ is a simple graph whenever $n > 2$, so we have the following:
 The rest of this section will investigate which groups $\Gamma =
 \Z/2\Z \times H$ can possibly occur as the Jacobian of some simple
 graph. It is known that there is no simple graph $G$ with $\Jac(G)
-\simeq \Z/2\Z$, since there is no simple graph with two spanning trees. We extend this result as
-follows:
+\simeq \Z/2\Z$, since there is no simple graph with two spanning
+trees. We extend this result as follows:
 
 \begin{thm}
   \label{thm:2group}
@@ -246,11 +278,11 @@ follows:
   a simple graph $G$ with $\Jac(G) \simeq (\Z/2\Z)^k \times H$.
 \end{thm}
 
-To prove Theorem \ref{thm:2group_product}, we will first prove it in the case
-where $G$ is biconnected. If $G$ is a
-graph that is not biconnected, then by definition, there is a vertex
-$v_0$ such that the subgraph $G'$ induced by $V(G) \setminus \{v_0\}$
-is not connected. $G$ is then the wedge sum of the connected components of
+To prove Theorem \ref{thm:2group_product}, we will first prove it in
+the case where $G$ is biconnected. If $G$ is a graph that is not
+biconnected, then by definition, there is a vertex $v_0$ such that the
+subgraph $G'$ induced by $V(G) \setminus \{v_0\}$ is not
+connected. $G$ is then the wedge sum of the connected components of
 $G'$ (together with the vertex $v_0$), and so $\Jac(G)$ breaks down as
 a direct product of Jacobians of subgraphs of $G$.
 
@@ -263,36 +295,46 @@ a direct product of Jacobians of subgraphs of $G$.
 
 \begin{lem}
   \label{lem:delta_le_mu}
-  If $G$ is biconnected, then $\delta \le \mu$.
+  If $G$ is biconnected, then $\delta(G) \le \mu(G)$. Furthermore, if
+  $\delta(G) = \mu(G)$, then $G$ must be the banana graph $B_\mu$.
 \end{lem}
 \begin{proof}
   Let $v$ be a vertex in $V(G)$ with valency $\delta$, and let $w$ be
-  a vertex adjacent to $w$. Consider the divisor $D = (v) -
+  a vertex adjacent to $v$. Consider the divisor $D = (v) -
   (w)$, and let $m < \delta$ be a positive integer. 
 
-  We may apply Dhar's burning algorithm to check that $mD$ is
+  We apply Dhar's burning algorithm to check that $mD$ is
   $w$-reduced. Since $G$ is biconnected, there is a path from $w$ to
   each of the neighbors of $v$ that does not contain $v$, and so each
   of the neighbors of $v$ is burned during the algorithm. $v$ has more
   than $m$ distinct neighbors, so it is burned as well. Therefore,
-  $m\overline{D}$ is nontrivial and $\overline{D}$ has order at least
+  $m\overline{D}$ is nonzero and $\overline{D}$ has order at least
   $\delta$.
+
+  In the case that $\delta = \mu$, we must have $\delta\overline{D} =
+  0$. Starting from $\delta D$, chip-fire $v$ once, and let the divisor
+  we obtain be $E$. Applying the burning algorithm and the
+  biconnectivity condition once more, we see that $v$, as well as each
+  of its neighbors, must be burned, and therefore that $E$ is
+  zero. This is only possible if the multiplicity of the edge
+  $\{v,w\}$ is $\delta$, i.e. $G$ is a banana graph.
 \end{proof}
 
 \begin{cor}
   \label{cor:genus_v_mu}
-  For any biconnected graph with genus $g$ and $|V(G)| = v$,
+  For any biconnected graph with genus $g$ and $|V(G)| = n$,
   \begin{equation*}
-    v \ge \frac{2g - 2}{\mu - 1}.
+    n \ge \frac{2g - 2}{\mu - 1}.
   \end{equation*}
 \end{cor}
 \begin{proof}
   Let $e = |E(G)|$. We have 
   \begin{equation*}
-    2e = \sum_{i=1}^n \val(v_i) \le \sum_{i=1}^n \delta = v \cdot \delta
-    \le v \cdot \mu.
+    2e = \sum_{i=1}^n \val(v_i) \le \sum_{i=1}^n \delta = n \cdot \delta
+    \le n \cdot \mu.
   \end{equation*}
-  Since $e = g + v - 1$, this gives $2g - 2 \le v \cdot (\mu - 1)$, as required.
+  Since $e = g + n - 1$, this gives $2g - 2 \le n \cdot (\mu - 1)$, as
+  required.
 \end{proof}
 
 \begin{proof}[Proof of Theorem \ref{thm:2group}]
@@ -308,17 +350,19 @@ a direct product of Jacobians of subgraphs of $G$.
   
   The base case $k=1$ is known. For $k > 1$, note that $\Jac(G) \simeq
   \Jac(G_1) \times \Jac(G_2)$ for connected subgraphs $G_1, G_2$ of
-  $G$. Without loss of generality, $G_2$ is not a tree, and
-  hence $\Jac(G_1) \simeq (\Z/2\Z)^{k_1}$ for $k_1 < k$. By the
-  induction hypothesis, $G_1$ is not simple, and so neither is $G$.
+  $G$. Without loss of generality, $G_2$ is not a tree, and hence
+  $\Jac(G_1) \simeq (\Z/2\Z)^{k_1}$ for $k_1 < k$. By the inductive
+  hypothesis, $G_1$ is not simple, and so neither is $G$.
 \end{proof}
 
 \begin{remark}
   The proof of Theorem \ref{thm:2group} also gives a complete
   characterization of any graph $G$ with $\Jac(G) \simeq
-  (\Z/2\Z)^k$: in general, $G$ must be a tree with precisely $k$ of
-  the edges occuring two times. We will apply this fact later, in our
-  discussion of the monodromy pairing on $\Jac(G)$.
+  (\Z/2\Z)^k$. In general, we can always obtain $G$ from the following
+  construction: starting with some tree $T$, choose $k$ edges of $T$,
+  and give those edges multiplicity $2$. We will apply this
+  characterization later, in our discussion of the monodromy pairing
+  on $\Jac(G)$.
 \end{remark}
 
 \begin{figure}[H]
@@ -357,7 +401,8 @@ a direct product of Jacobians of subgraphs of $G$.
       \draw [fill] (8.4,1.7) circle [radius=.1cm] ;
       \draw [fill] (8.4,-1.7) circle [radius=.1cm] ;
     \end{tikzpicture}
-    \caption{$\Jac(G) \simeq (\Z/2\Z)^6$}
+    \caption{An example of a graph $G$ with $\Jac(G) \simeq
+      (\Z/2\Z)^6$}
   \end{center}
 \end{figure}
 
@@ -391,9 +436,10 @@ upper bound on $g$, and hence $k$.
 
 \begin{prop}
   \label{prop:v_bound}
-  Suppose that $G$ is biconnected. Then for any finite abelian group $H$, there exists an integer $v_0$
-  (depending only on $H$) such that if $\Gamma = \Jac(G) \simeq (\Z/2\Z)^k
-  \times H$, then $|V(G)| < v_0$.
+  Suppose that $G$ is biconnected. Then for any finite abelian group
+  $H$, there exists an integer $v_0$ (depending only on $H$) such that
+  if $\Gamma = \Jac(G) \simeq (\Z/2\Z)^k \times H$, then $|V(G)| <
+  v_0$.
 \end{prop}
 
 \begin{proof}
@@ -402,25 +448,29 @@ upper bound on $g$, and hence $k$.
   $m = |U|$, and then bound $|V(G)|$ in terms of $m$.
   
   Consider the set of divisors $\mathcal{U} = \{(u_i) - (u_1) : 1 \le
-  i \le m\}$, and let $\overline{\mathcal{U}} \subseteq \Gamma$ be the set of equivalence
-  classes of the elements of $\mathcal{U}$. Write $D_i$ for $(u_i) - (u_1)$. For any $D_i, D_j \in
-  \mathcal{U}$, we claim that $2D_j - 2D_i$ is $u_i$-reduced.
+  i \le m\}$, and let $\overline{\mathcal{U}} \subseteq \Gamma$ be the
+  set of equivalence classes of the elements of $\mathcal{U}$. Write
+  $D_i$ for $(u_i) - (u_1)$. For any $D_i, D_j \in \mathcal{U}$, we
+  claim that $2D_j - 2D_i$ is $u_i$-reduced.
 
   We have $2D_j - 2D_i = 2(u_j) - 2(u_i)$. Since $G$ is biconnected,
   there is a path from $u_i$ to each of the neighbors of $u_j$ that
   does not contain $u_j$. Since $u_j$ has valency at least $3$, an
   iteration of the burning algorithm must burn $u_j$, and in turn the
   entire graph. Furthermore, since $2D_j - 2D_i$ is $u_i$-reduced,
-  $2[D_j] \ne 2[D_i]$ for any $i \ne j$. Note that this also implies that
-  $[D_j] \ne [D_i]$ for any $i \ne j$, so we have $m=|\overline{\mathcal{U}}|$. 
+  $2[D_j] \ne 2[D_i]$ for any $i \ne j$. Note that this also implies
+  that $[D_j] \ne [D_i]$ for any $i \ne j$, so we have
+  $m=|\overline{\mathcal{U}}|$.
 
   Now let $\phi:\Gamma \to \Gamma$ be the map given by
   \[
   \phi(\overline{D}) = 2\overline{D}.
   \] 
 
-  By the above, we have $|\phi(\overline{\mathcal{U}})|=|\overline{\mathcal{U}}|=m$. Further $|\im(\phi)| \le |H|$, and so 
-  we get $m=|\phi(\overline{\mathcal{U}})| \le |H|$, as desired.
+  By the above, we have
+  $|\phi(\overline{\mathcal{U}})|=|\overline{\mathcal{U}}|=m$. Furthermore,
+  $|\im(\phi)| \le |H|$, and so we find
+  $m=|\phi(\overline{\mathcal{U}})| \le |H|$ as desired.
 
   We now wish to bound $|V(G)|$ in terms of $m$. To do so, we will
   consider a graph $G'$, given by the following transformation of $G$:
@@ -492,11 +542,11 @@ upper bound on $g$, and hence $k$.
   vertex of $G$ with valency greater than $\delta$). Each 2-valent
   vertex of $G$ is uniquely associated with some edge of $G'$. If
   there are more than $e' \cdot \mu$ 2-valent vertices in $G$, then at
-  least $\mu$ of them are associated with a single edge of $G'$. 
+  least $\mu$ of them are associated with a single edge of $G'$.
 
-  In this case, $G$ would contain a path $P$ of length greater than $\mu$, where
-  each vertex of $P$ has valency $2$. This would contradict Lemma
-  \ref{lem:2valent_path}, so instead we have 
+  In this case, $G$ would contain a path $P$ of length greater than
+  $\mu$, where each vertex of $P$ has valency $2$. This would
+  contradict Corollary \ref{cor:2valent_path}, so instead we have
   \[
   |V(G)| - m < m\mu^2.
   \] 
@@ -560,7 +610,7 @@ $G_2$ is not simple, so that $G$ is not simple, as required.
 Analysis of the proof of Theorem \ref{thm:2group_product} suggests
 that, if $H$ is cyclic of prime power order, $k_0(H)$ is
 $O(|H|^4)$. In practice, it seems that much better bounds should
-hold. For instance, no simple graph $G$ has yet been found where
+hold. For instance, we were unable to find any simple graph $G$ where
 $\Jac(G) \simeq (\Z/2\Z)^k \times H$ for any $k > |H|$.
 
 In some cases, it is possible to directly verify that certain groups
@@ -587,34 +637,161 @@ Computer searches of this nature have led to the following:
 It is also of interest that the key fact in the proof of the
 nonoccurence of groups with many factors of $\Z/2\Z$ seems to be the
 requirement that $G$ is biconnected, rather than that $G$ is
-simple. This, together with the discovery that the Jacobians of
-``most'' graphs are cyclic (CITE STUFF), suggests the following:
+simple. This, together with the fact that the Jacobians of ``most''
+graphs are cyclic (CITE STUFF), suggests the following:
 
 \begin{conj}
   Let $G$ be a biconnected graph. For any $n$, there exists $k_0$ such
   that if $k > k_0$, $\Jac(G) \not\simeq (\Z/n\Z)^k$.
 \end{conj}
 
-Finally, we note that when $\Jac(G) \simeq (\Z/n\Z)^k \times H$ for
-some finite abelian group $H$, $k$ is necessarily bounded above by the
-genus of $G$. The next section will consider certain circumstances
-under which this bound can be achieved, and also say some things about
-metric graphs.
+We already know that this conjecture holds with $k_0 = 1$ in the case
+$n=3$: Lemma \ref{lem:delta_le_mu} shows that the the only biconnected
+graphs with Jacobian $(\Z/3\Z)^k$ are the $3$-cycle and the
+$3$-banana.
 
-\section{Relationship to Jacobians of Metric Graphs}
-\begin{lem}
-  \label{lem:jac_generators}
-  Let $G$ be a graph. $\Jac(G)$ is generated by the set \[\{[(v) -
-  (w)]: \{v, w\} \in E(G)\}\]
-\end{lem}
+In addition, we note that when $\Jac(G) \simeq (\Z/n\Z)^k \times H$
+for some finite abelian group $H$, $k$ is necessarily bounded above by
+the genus of $G$. We will now consider certain circumstances under
+which this bound can be achieved, and examine a construction for a
+graph that provides it.
 
+\subsection{The Jacobian of a subdivided graph}
+
+For any graph $G$ with genus $g$, let $G'$ be the metric graph
+corresponding to $G$. It is known that $\Jac(G)$ is a discrete
+subgroup of $\Jac(G')$, corresponding to a lattice on $(\R/\Z)^g$.
+
+Let $G_m$ be the graph obtained by ``subdividing'' the edges of $G$
+$m$ times; that is, we add $m-1$ two-valent vertices to $V(G)$ for
+each edge of $G$, and replace each edge of $G$ with $m$ edges between
+those vertices. [someone] provides the following result:
+
+\begin{prop}
+  \label{prop:quotient_subdivide}
+  $\Jac(G)$ is a subgroup of $\Jac(G')$, with 
+\begin{equation*}
+  \Jac(G')/\Jac(G) \simeq (\Z/m\Z)^g
+\end{equation*}
+\end{prop}
+
+The theorem below gives an explicit description of the structure of
+$\Jac(G')$:
+
+\begin{thm}
+  \label{thm:subdivide}
+  Let $G$ be a graph with genus $g$, and suppose
+  \begin{equation*}
+    \Jac(G) \simeq \Z/a_1\Z \times \Z/a_2\Z \times \ldots \times \Z/a_k\Z
+  \end{equation*}
+
+  such that $a_i > 1$ and $a_{i-1} | a_i$ for all $1 < i \le k$. Let
+  $G_m$ be as above. Then
+
+  \begin{equation*}
+    \Jac(G_m) \simeq (\Z/m\Z)^{g-k} 
+    \times \Z/ma_1\Z \times \ldots \times \Z/ma_k\Z
+  \end{equation*}
+\end{thm}
+
+Note that it suffices to prove Theorem \ref{thm:subdivide} for $m=p$
+for prime $p$, since we may achieve a subdivision into $b_1 \cdot b_2$
+edges by successively subdividing into $b_1$ and $b_2$ edges.
+
+Since $\Jac(G)$ is isomorphic to a subgroup of $\Jac(G_p)$, if two
+divisors are equivalent in $\Div^0(G)$, they are also equivalent in
+$\Div^0(G_p)$.
+
+\begin{prop}
+  \label{prop:p_surjective}
+  For each $D \in \Div^0(G)$, $\exists D' \in \Div^0(G_p)$ such that $p
+  \cdot D' \sim D$.
+\end{prop}
 \begin{proof}
-  In general, $\Div^0(G)$ is generated by divisors of the form $(v_a)
-  - (v_b)$ for $v_a, v_b \in V(G)$. Since $G$ is connected, any such
-  divisor may be represented as a sum of divisors of the form $(v) -
-  (w)$ for adjacent $v$ and $w$ (formal proof can be given if
-  necessary). Therefore the Jacobian is generated by the equivalence
-  classes of these divisors.  
+  Let $A \subseteq \Div^0(G)$ be the set of divisors of the form $v -
+  w$ for $\{v, w\} \in E(G)$. It is clear that the elements of $A$
+  generate $\Div^0(G)$, so it suffices to prove the proposition for
+  all $a \in A$.
+  
+  $a = v_0 - v_p$ for some pair of vertices $v_0, v_p \in V(G)$
+  connected by an edge. In $G_p$, $v_0$ and $v_p$ are connected by a
+  path of length $p$, where each vertex in the path has degree $2$.
+  
+  Let the vertices in this path be $\{v_0, v_1, \ldots, v_p\}$. Lemma
+  \ref{lem:2valent_path} shows that $(v_p) - (v_0)$ is in fact
+  equivalent to $p \cdot (v_1) - p \cdot (v_0)$.
+\end{proof}
+
+Let $D \in \Div^0(G_p)$ be written $\sum_{i=1}^na_iv_i$, for $a_i \in
+\Z$. The proof of Proposition \ref{prop:p_surjective} also
+demonstrates that if $a_1 = p$ and $a_j = 0$ for all $j \ne 0, p$,
+then $D \sim D'$ for some $D' \in \Jac(G)$. This also holds more
+generally:
+
+\begin{prop}
+  \label{prop:p_to_jac}
+  Let $D \in \Div^0(G_p)$ be written $\sum_{i=1}^na_iv_i$, and
+  suppose that for each $v_i \in V(G_p) \setminus V(G)$, $p |
+  a_i$. Then $D \sim D'$ for some $D' \in \Div^0(G)$. 
+\end{prop}
+\begin{proof}
+  As in Proposition \ref{prop:p_surjective}, enumerate the first $p+1$
+  vertices on $G$ by letting $v_0, v_p$ be adjacent vertices in $G$,
+  and $v_1$ to $v_{p-1}$ be the vertices on the path between them in
+  $G_p$. It suffices to prove the proposition for $a_i = p$ for $1 \le
+  i < p$ and $a_j = 0$ for all $v_j \in V(G_p) \setminus V(G), j \ne
+  i$.
+
+  We proceed by induction on $i$. The case $i=1$ follows directly from
+  the proof of Proposition \ref{prop:p_surjective} (the divisor $p
+  \cdot v_0 - p \cdot v_1$ is equivalent to $v_0 - v_p \in
+  \Div^0(G)$).
+
+  For $i > 1$, it is clear from the form of the matrix $Q$ that the
+  divisor $p \cdot v_{i-2} - 2p \cdot v_{i-1} + p \cdot v_i$ is in
+  the image of the Laplacian map $\Delta$. By the induction
+  hypothesis, there are divisors $D_1, D_2 \in \Div(G)$ such that
+  $D_1 + p \cdot v_{i-2} \sim D_1'$ and $D_2 + p \cdot v_{i-1} \sim
+  D_2'$ for $D_1', D_2' \in \Div^0(G)$. 
+
+  We then have $-D_1' + 2D_2' \sim -D_1 + 2D_2 + p \cdot v_i$, so
+  $D + p \cdot v_i \sim D'$ for $D \in \Div(G)$, $D' \in \Div^0(G)$,
+  as required.
+\end{proof}
+
+\begin{proof}[Proof of Theorem \ref{thm:subdivide}]
+  It follows from Proposition \ref{prop:p_to_jac} that there is a set
+  $B \subset \Jac(G_p)$, $B = \{b_1, \ldots, b_k\}$ such that $p \cdot
+  b_i$ is a generator for the invariant factor $\Z/a_i\Z$ in
+  $\Jac(G)$.
+
+  For each $b_i$, we must have either $|b_i| = pa_i$ or $|b_i| =
+  a_i$. If $|b_i| = a_i$, then $\langle b_i \rangle$ is the same
+  invariant factor $\Z/a_i\Z$ of $\Jac(G)$ generated by $p \cdot b_i$,
+  and therefore $\gcd(p, a_i) = 1$. If $|b_i| = pa_i$, then $\langle
+  b_i \rangle \simeq \Z/pa_i\Z$.
+
+  So, if $j$ is the smallest integer such that $\gcd(p, a_i) = 1$ for
+  all $i \le j$, then the set $B$ generates the group
+
+  $$H \simeq \Z/a_1\Z \times \ldots \times \Z/a_j\Z 
+  \times \Z/pa_{j+1}\Z \times \ldots \times \Z/pa_k\Z$$
+
+  Since $\Jac(G)$ is a subgroup of $H$, if $g \in \Jac(G_p)$ is not
+  generated by $B$, Proposition \ref{prop:quotient_subdivide} implies
+  that $g$ has order $p$. So we have $\Jac(G_p) \simeq H \times
+  (\Z/p\Z)^{g-k+j}$, since there are $p^{g-k+j}$ elements in
+  $\Jac(G_p)$ not in $H$.
+
+  However, since $a_1, \ldots, a_j$ are each coprime to $p$, we can
+  simplify the product of cyclic groups and write
+
+\begin{equation*}
+  \Jac(G_p) \simeq \Z/pa_1\Z \times 
+  \ldots \times \Z/pa_k\Z \times (\Z/p\Z)^{g-k}
+\end{equation*}
+
+as required.
 \end{proof}
 
 \section{The monodromy pairing on the Jacobian}
@@ -949,6 +1126,49 @@ This completes the proof of Theorem \ref{thm:graph_pairing}.
 
 \subsection{2-groups}
 
+We now turn to the task of constructing graphs $G$ for which $\Jac(G)
+\simeq (\Z/2^r\Z, \pair{\cdot}{\cdot})$, given some integer $r$ and
+pairing $\pair{\cdot}{\cdot}$ on $\Z/2^r\Z$. The classification of
+such pairings is somewhat more complicated than that of the odd prime
+pairings; however, there are still only finitely many cases to
+consider.
+
+\begin{defn}
+ Let $\mathcal{P}_{2}$ denote be the semigroup of
+isomorphism classes of nondegenerate symmetric bilinear pairings on
+finite abelian 2-groups, under orthogonal direct sum.
+%rewrite so as not to copy from Miranda
+\end{defn}
+
+\begin{prop} $\mathcal{P}_{2}$ is generated by the following pairings:
+  
+   \[ \AP \text{ on } \Z/2^{r}\Z, r\ge 1; \langle 1,
+1\rangle=\frac{1}{2^{n}}
+   \]
+   \[ \BP \text{ on } \Z/2^{r}\Z, r\ge 2; \langle 1,
+1\rangle=\frac{-1}{2^{n}}
+   \]
+   \[ \CP \text{ on } \Z/2^{r}\Z, r\ge 3; \langle 1,
+1\rangle=\frac{5}{2^{n}}
+   \]
+   \[ \DP \text{ on } \Z/2^{r}\Z, r\ge 3; \langle 1,
+1\rangle=\frac{-5}{2^{n}}
+   \]
+   \[ \EP \text{ on } \Z/2^{r}\Z\times\Z/2^{n}\Z, r\ge 1; \langle
+e_{i}, e_{j}\rangle=\begin{cases}0&\mbox{if } i=j\\
+\frac{1}{2^{n}}&\mbox{if } i\neq j\end{cases}
+   \]
+   \[ \FP \text{ on } \Z/2^{n}\Z\times\Z/2^{n}\Z, r\ge 2; \langle
+e_{i}, e_{j}\rangle=\begin{cases}\frac{1}{2^{n-1}}&\mbox{if } i=j\\
+\frac{1}{2^{n}}&\mbox{if } i\neq j\end{cases}
+   \]
+   
+where $\{e_{1}, e_{2}\}$ generate $\Z/2^{n}\Z\times\Z/2^{n}\Z$ in the
+last two cases.
+ \end{prop}
+ \begin{proof} See [Mir]
+ \end{proof}
+
 \begin{lem}
  \label{lemma:2-group iso}
  If $a\equiv b\pmod 8$ for $a,b$ odd then
@@ -971,43 +1191,6 @@ This completes the proof of Theorem \ref{thm:graph_pairing}.
   odd numbers modulo $8$.
 \end{proof}
 
-\begin{defn}
- Let $\mathcal{P}_{2}$ denote be the semigroup of
-isomorphism classes of non degenerate symmetric bilinear pairings on
-finite abelian 2-groups, under orthogonal direct sum.
-%rewrite so as not to copy from Miranda
-
-\end{defn}
-
- \begin{prop} $\mathcal{P}_{2}$ is generated by the following
-pairings:
-  
-   \[ \AP \text{ on } \Z/2^{n}\Z, r\ge 1; \langle 1,
-1\rangle=\frac{1}{2^{n}}
-   \]
-   \[ \BP \text{ on } \Z/2^{n}\Z, r\ge 2; \langle 1,
-1\rangle=\frac{-1}{2^{n}}
-   \]
-   \[ \CP \text{ on } \Z/2^{n}\Z, r\ge 3; \langle 1,
-1\rangle=\frac{5}{2^{n}}
-   \]
-   \[ \DP \text{ on } \Z/2^{n}\Z, r\ge 3; \langle 1,
-1\rangle=\frac{-5}{2^{n}}
-   \]
-   \[ \EP \text{ on } \Z/2^{n}\Z\times\Z/2^{n}\Z, r\ge 1; \langle
-e_{i}, e_{j}\rangle=\begin{cases}0&\mbox{if } i=j\\
-\frac{1}{2^{n}}&\mbox{if } i\neq j\end{cases}
-   \]
-   \[ \FP \text{ on } \Z/2^{n}\Z\times\Z/2^{n}\Z, r\ge 2; \langle
-e_{i}, e_{j}\rangle=\begin{cases}\frac{1}{2^{n-1}}&\mbox{if } i=j\\
-\frac{1}{2^{n}}&\mbox{if } i\neq j\end{cases}
-   \]
-   
-where $\{e_{1}, e_{2}\}$ generate $\Z/2^{n}\Z\times\Z/2^{n}\Z$ in the
-last two cases.
- \end{prop}
- \begin{proof} See [Mir]
- \end{proof}
 
  \begin{thm} For each of $\AP$, $\BP$, $\CP$, $\DP$ there exists a
 graph $G$ such that the monodromy pairing on $G$ is the desired
