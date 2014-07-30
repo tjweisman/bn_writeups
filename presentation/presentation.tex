@@ -1,6 +1,13 @@
 \documentclass[mathserif, serif, xcolor=dvipsnames]{beamer}
 
 \usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{framed}
+
+\setbeamertemplate{navigation symbols}{}
+
+\usetheme{default}
+\usecolortheme{crane}
 
 \newtheorem{prop}{Proposition}
 
@@ -16,8 +23,8 @@
 \DeclareMathOperator{\val}{val}
 
 \title{Jacobians of finite graphs}
-\author{Louis Gaudet, Nicholas Wawrykow, Theodore Weisman\\
-  Mentors: Daniel Corey, David Jensen, Dhruv Ranganathan}
+\author[L. Gaudet, N. Wawrykow, T. Weisman]{Louis Gaudet, Nicholas Wawrykow, Theodore Weisman\\
+  {\tiny Mentors: Daniel Corey, David Jensen, Dhruv Ranganathan}}
 
 \institute{Yale University, SUMRY 2014}
 
@@ -27,18 +34,22 @@
   \titlepage
 \end{frame}
 
-\section{Background}
+%\section{Background}
 \begin{frame}
   \frametitle{Definitions}
 
-  $G = \{V(G), E(G)\}$ is a finite, connected multigraph with no loops
+  $G = (V(G), E(G))$ is a finite, connected multigraph (no loops)
+
+  \pause
 
   \begin{definition}
-    A \emph{divisor} on $G$ is an assignment of an integer to each vertex.
+    A \textbf{divisor} on $G$ is an assignment of an integer to each vertex.
   \end{definition}
   
   \pause
-  Divisors form a group, under pointwise addition:
+  Divisors form a group, under vertex-wise addition:
+  
+  \pause
 
 \begin{center}
 \begin{tikzpicture}
@@ -46,55 +57,61 @@
 %first divisor
 \draw (60:1) -- (0,0) -- (0:1) -- (60:1) ;
 
-\draw [fill] (0,0) circle [radius=0.05cm] ;
-\draw [fill] (60:1) circle [radius=0.05cm] ;
-\draw [fill] (0:1) circle [radius=0.05cm] ;
+\draw [fill] (0,0) circle [radius=0.06cm] ;
+\draw [fill] (60:1) circle [radius=0.06cm] ;
+\draw [fill] (0:1) circle [radius=0.06cm] ;
 
 %first divisor labels
-\node [right] at (60:1.15) {$\;0$} ;
-\node [left] at (-.1,0) {$-2\;$} ;
-\node [right] at (0:1.2) {$2$} ;
+\node [right] at (60:1) {$0$} ;
+\node [left] at (0,0) {$-2$} ;
+\node [right] at (0:1) {$2$} ;
+
+\pause
 
 %second divisor
 \draw [shift={(2.8cm,0cm)}] (60:1) -- (0,0) -- (0:1) -- (60:1) ;
 
-\draw [fill,shift={(2.8cm,0cm)}] (0,0) circle [radius=0.05cm] ;
-\draw [fill,shift={(2.8cm,0cm)}] (60:1) circle [radius=0.05cm] ;
-\draw [fill,shift={(2.8cm,0cm)}] (0:1) circle [radius=0.05cm] ;
+\draw [fill,shift={(2.8cm,0cm)}] (0,0) circle [radius=0.06cm] ;
+\draw [fill,shift={(2.8cm,0cm)}] (60:1) circle [radius=0.06cm] ;
+\draw [fill,shift={(2.8cm,0cm)}] (0:1) circle [radius=0.06cm] ;
 
 %second divisor labels
-\node [right,shift={(2.8cm,0cm)}] at (60:1.15) {$\;5$} ;
-\node [left,shift={(2.8cm,0cm)}] at (-.1,0) {$-2\;$} ;
-\node [right,shift={(2.8cm,0cm)}] at (0:1.2) {$-1$} ;
+\node [right,shift={(2.8cm,0cm)}] at (60:1) {$5$} ;
+\node [left,shift={(2.8cm,0cm)}] at (0,0) {$-2$} ;
+\node [right,shift={(2.8cm,0cm)}] at (0:1) {$-1$} ;
 
-%resulting divisor
-\draw [shift={(5.8cm,0cm)}] (60:1) -- (0,0) -- (0:1) -- (60:1) ;
-
-\draw [fill,shift={(5.8cm,0cm)}] (0,0) circle [radius=0.05cm] ;
-\draw [fill,shift={(5.8cm,0cm)}] (60:1) circle [radius=0.05cm] ;
-\draw [fill,shift={(5.8cm,0cm)}] (0:1) circle [radius=0.05cm] ;
-
-%resulting divisor labels
-\node [right,shift={(5.8cm,0cm)}] at (60:1.15) {$\;5$} ;
-\node [left,shift={(5.8cm,0cm)}] at (-.1,0) {$-4\;$} ;
-\node [right,shift={(5.8cm,0cm)}] at (0:1.2) {$1$} ;
+\pause
 
 %plus and equals signs
 \node [shift={(1.9cm,-.5cm)}] at (0,1) {$+$} ;
 \node [shift={(4.9cm,-.5cm)}] at (0,1) {$=$} ;
+
+%resulting divisor
+\draw [shift={(5.8cm,0cm)}] (60:1) -- (0,0) -- (0:1) -- (60:1) ;
+
+\draw [fill,shift={(5.8cm,0cm)}] (0,0) circle [radius=0.06cm] ;
+\draw [fill,shift={(5.8cm,0cm)}] (60:1) circle [radius=0.06cm] ;
+\draw [fill,shift={(5.8cm,0cm)}] (0:1) circle [radius=0.06cm] ;
+
+%resulting divisor labels
+\node [right,shift={(5.8cm,0cm)}] at (60:1) {$5$} ;
+\node [left,shift={(5.8cm,0cm)}] at (0,0) {$-4$} ;
+\node [right,shift={(5.8cm,0cm)}] at (0:1) {$1$} ;
 
 \end{tikzpicture}
 \end{center}
 
 \pause
 
-Think of a divisor as a configuration of chips stacked on the vertices.
+Think of a divisor as a ``configuration of chips'' stacked on the vertices.
 
 \end{frame}
 
 \begin{frame}
-  \frametitle{Chip firing} For a fixed graph $G$, we can play a
-  ``chip-firing game'' with divisors on $G$:
+  \frametitle{Chip-firing} For a fixed graph $G$, we can play a
+  \textbf{chip-firing game} with divisors on $G$:
+
+\pause
 
 \begin{center}
 \begin{tikzpicture}
@@ -102,35 +119,63 @@ Think of a divisor as a configuration of chips stacked on the vertices.
 %first divisor
 \draw (60:1) -- (0,0) -- (0:1) -- (60:1) ;
 
-\draw [fill] (0,0) circle [radius=0.05cm] ;
-\draw [fill] (60:1) circle [radius=0.05cm] ;
-\draw [fill=red] (0:1) circle [radius=0.05cm] ;
+\draw [fill] (0,0) circle [radius=0.06cm] ;
+\draw [fill] (60:1) circle [radius=0.06cm] ;
+\draw [fill] (0:1) circle [radius=0.06cm] ;
 
 %first divisor labels
-\node [right] at (60:1.15) {$\;0$} ;
-\node [left] at (-.1,0) {$-2\;$} ;
-\node [right] at (0:1.2) {$2$} ;
+\node [right] at (60:1) {$0$} ;
+\node [left] at (0,0) {$-2$} ;
+\node [right] at (0:1) {$2$} ;
 
+\pause
+
+%changes fire vertex to red
+\draw [fill=red] (0:1) circle [radius=0.06cm] ;
 %fire arrow
 \node [shift={(2.6cm,-.5cm)}] at (0,1) {$\xrightarrow{\hspace{1.5cm}}$} ;
-\node [above,shift={(2.6cm,-.5cm)}] at (0,1.15) {fire\;\;\;\;} ;
-\draw [fill=red,shift={(2.9cm,1cm)}] (0,-.25) circle [radius=0.05cm] ;
+\node [above,shift={(2.6cm,-.5cm)}] at (0,1) {fire\;\;\;\;} ;
+\draw [fill=red,shift={(2.9cm,1cm)}] (0,-.25) circle [radius=0.06cm] ;
+
+\pause
 
 %second divisor
 \draw [shift={(4cm,0cm)}] (60:1) -- (0,0) -- (0:1) -- (60:1) ;
 
-\draw [fill,shift={(4cm,0cm)}] (0,0) circle [radius=0.05cm] ;
-\draw [fill,shift={(4cm,0cm)}] (60:1) circle [radius=0.05cm] ;
-\draw [fill,shift={(4cm,0cm)}] (0:1) circle [radius=0.05cm] ;
+\draw [fill,shift={(4cm,0cm)}] (0,0) circle [radius=0.06cm] ;
+\draw [fill,shift={(4cm,0cm)}] (60:1) circle [radius=0.06cm] ;
+\draw [fill,shift={(4cm,0cm)}] (0:1) circle [radius=0.06cm] ;
 
 %second divisor labels
-\node [right,shift={(4cm,0cm)}] at (60:1.15) {$\;1$} ;
-\node [left,shift={(4cm,0cm)}] at (-.1,0) {$-1\;$} ;
-\node [right,shift={(4cm,0cm)}] at (0:1.2) {$0$} ;
+\node [right,shift={(4cm,0cm)}] at (60:1) {$1$} ;
+\node [left,shift={(4cm,0cm)}] at (0,0) {$-1$} ;
+\node [right,shift={(4cm,0cm)}] at (0:1) {$0$} ;
+
+\pause
+
+%changes fire vertex to red
+\draw [fill=red,shift={(4cm,0cm)}] (0:0) circle [radius=0.06cm] ;
+%fire arrow
+\node [shift={(6.6cm,-.5cm)}] at (0,1) {$\xrightarrow{\hspace{1.5cm}}$} ;
+\node [above,shift={(6.6cm,-.5cm)}] at (0,1) {fire\;\;\;\;} ;
+\draw [fill=red,shift={(6.9cm,1cm)}] (0,-.25) circle [radius=0.06cm] ;
+
+\pause
+
+%third divisor
+\draw [shift={(8cm,0cm)}] (60:1) -- (0,0) -- (0:1) -- (60:1) ;
+
+\draw [fill,shift={(8cm,0cm)}] (0,0) circle [radius=0.06cm] ;
+\draw [fill,shift={(8cm,0cm)}] (60:1) circle [radius=0.06cm] ;
+\draw [fill,shift={(8cm,0cm)}] (0:1) circle [radius=0.06cm] ;
+
+%third divisor labels
+\node [right,shift={(8cm,0cm)}] at (60:1) {$2$} ;
+\node [left,shift={(8cm,0cm)}] at (0,0) {$-3$} ;
+\node [right,shift={(8cm,0cm)}] at (0:1) {$1$} ;
 
 \end{tikzpicture}
 \end{center}
-
 
 \begin{itemize}
 
@@ -139,9 +184,9 @@ Think of a divisor as a configuration of chips stacked on the vertices.
 If you can get between two divisors $D$ and $D'$ via a sequence of
 chip-firing moves, then $D,D'$ are \textbf{equivalent}, $D\sim D'$.
 
-\pause 
+\pause
 \item Every divisor in an equivalence class has the same
-  \emph{degree} (total number of chips on the graph).
+  \textbf{degree} (total number of chips on the graph).
 
 \end{itemize}
 
@@ -150,14 +195,14 @@ chip-firing moves, then $D,D'$ are \textbf{equivalent}, $D\sim D'$.
 \begin{frame}
   \frametitle{The Jacobian group}
   \begin{itemize}
-  \item Consider $\Div^0(G)$, the subgroup of divisors of degree $0$
+  \item $\Div^0(G)$ $=$ subgroup of divisors of degree $0$
     on $G$
     \pause
   \item What is the structure of non-equivalent elements of $\Div^0(G)$?
   \end{itemize}
   \pause
   \begin{definition}
-    The Jacobian group of $G$ is
+    The \textbf{Jacobian} group of $G$ is
     \begin{equation*}
       \Jac(G) = \Div^0(G)/\sim
     \end{equation*}
@@ -167,23 +212,170 @@ chip-firing moves, then $D,D'$ are \textbf{equivalent}, $D\sim D'$.
 
 \begin{frame}
   \frametitle{Example:}
-  [INSERT EXAMPLE HERE]
+  
+  Consider $C_3$, the cycle graph on three vertices.
+  
+  \pause
+
+\begin{center}
+\begin{tikzpicture}
+
+%text
+\node [left,shift={(-1cm,0cm)}] at (0,0.4) {$\Jac(C_3) =$} ;
+\node [left,shift={(-.5cm,0cm)}] at (0,0.4) {$\Bigg\{$} ;
+\node [right,shift={(7.5cm,0cm)}] at (0,0.4) {$\Bigg\}$} ;
+\node [right,shift={(1.7cm,0cm)}] at (0,0) {\Huge ,} ;
+\node [right,shift={(4.7cm,0cm)}] at (0,0) {\Huge ,} ;
+
+%first divisor
+\draw (60:1) -- (0,0) -- (0:1) -- (60:1) ;
+
+\draw [fill] (0,0) circle [radius=0.06cm] ;
+\draw [fill] (60:1) circle [radius=0.06cm] ;
+\draw [fill] (0:1) circle [radius=0.06cm] ;
+
+%first divisor labels
+\node [right] at (60:1) {$0$} ;
+\node [left] at (0,0) {$0$} ;
+\node [right] at (0:1) {$0$} ;
+
+%second divisor
+\draw [shift={(3cm,0cm)}] (60:1) -- (0,0) -- (0:1) -- (60:1) ;
+
+\draw [fill,shift={(3cm,0cm)}] (0,0) circle [radius=0.06cm] ;
+\draw [fill,shift={(3cm,0cm)}] (60:1) circle [radius=0.06cm] ;
+\draw [fill,shift={(3cm,0cm)}] (0:1) circle [radius=0.06cm] ;
+
+%second divisor labels
+\node [right,shift={(3cm,0cm)}] at (60:1) {$0$} ;
+\node [left,shift={(3cm,0cm)}] at (0,0) {$-1$} ;
+\node [right,shift={(3cm,0cm)}] at (0:1) {$1$} ;
+
+%third divisor
+\draw [shift={(6cm,0cm)}] (60:1) -- (0,0) -- (0:1) -- (60:1) ;
+
+\draw [fill,shift={(6cm,0cm)}] (0,0) circle [radius=0.06cm] ;
+\draw [fill,shift={(6cm,0cm)}] (60:1) circle [radius=0.06cm] ;
+\draw [fill,shift={(6cm,0cm)}] (0:1) circle [radius=0.06cm] ;
+
+%third divisor labels
+\node [right,shift={(6cm,0cm)}] at (60:1) {$0$} ;
+\node [left,shift={(6cm,0cm)}] at (0,0) {$-2$} ;
+\node [right,shift={(6cm,0cm)}] at (0:1) {$2$} ;
+
+\end{tikzpicture}
+\end{center}
+
+\pause
+
+$\implies \quad \Jac(C_3)\simeq \Z/3\Z$
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%showing that the divisor is equivalent to 0
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\pause
+
+\begin{center}
+\begin{tikzpicture}
+
+%first divisor
+\draw (60:1) -- (0,0) -- (0:1) -- (60:1) ;
+
+\draw [fill] (0,0) circle [radius=0.06cm] ;
+\draw [fill] (60:1) circle [radius=0.06cm] ;
+\draw [fill] (0:1) circle [radius=0.06cm] ;
+
+%first divisor labels
+\node [right] at (60:1) {$0$} ;
+\node [left] at (0,0) {$-3$} ;
+\node [right] at (0:1) {$3$} ;
+
+%changes fire vertex to red
+\draw [fill=red] (0:1) circle [radius=0.06cm] ;
+%fire arrow
+\node [shift={(2.6cm,-.5cm)}] at (0,1) {$\xrightarrow{\hspace{1.5cm}}$} ;
+\node [above,shift={(2.6cm,-.5cm)}] at (0,1) {fire\quad $2\times$} ;
+\draw [fill=red,shift={(2.9cm,1cm)}] (-.3,-.25) circle [radius=0.06cm] ;
+
+%second divisor
+\draw [shift={(4cm,0cm)}] (60:1) -- (0,0) -- (0:1) -- (60:1) ;
+
+\draw [fill,shift={(4cm,0cm)}] (0,0) circle [radius=0.06cm] ;
+\draw [fill,shift={(4cm,0cm)}] (60:1) circle [radius=0.06cm] ;
+\draw [fill,shift={(4cm,0cm)}] (0:1) circle [radius=0.06cm] ;
+
+%second divisor labels
+\node [right,shift={(4cm,0cm)}] at (60:1) {$2$} ;
+\node [left,shift={(4cm,0cm)}] at (0,0) {$-1$} ;
+\node [right,shift={(4cm,0cm)}] at (0:1) {$-1$} ;
+
+%changes fire vertex to red
+\draw [fill=red,shift={(4cm,0cm)}] (60:1) circle [radius=0.06cm] ;
+%fire arrow
+\node [shift={(6.6cm,-.5cm)}] at (0,1) {$\xrightarrow{\hspace{1.5cm}}$} ;
+\node [above,shift={(6.6cm,-.5cm)}] at (0,1) {fire\;\;\;\;} ;
+\draw [fill=red,shift={(6.9cm,1cm)}] (0,-.25) circle [radius=0.06cm] ;
+
+%third divisor
+\draw [shift={(8cm,0cm)}] (60:1) -- (0,0) -- (0:1) -- (60:1) ;
+
+\draw [fill,shift={(8cm,0cm)}] (0,0) circle [radius=0.06cm] ;
+\draw [fill,shift={(8cm,0cm)}] (60:1) circle [radius=0.06cm] ;
+\draw [fill,shift={(8cm,0cm)}] (0:1) circle [radius=0.06cm] ;
+
+%third divisor labels
+\node [right,shift={(8cm,0cm)}] at (60:1) {$0$} ;
+\node [left,shift={(8cm,0cm)}] at (0,0) {$0$} ;
+\node [right,shift={(8cm,0cm)}] at (0:1) {$0$} ;
+
+\end{tikzpicture}
+\end{center}
+
 \end{frame}
 
 \begin{frame}
+\frametitle{Facts about $\Jac(G)$}
   \begin{itemize}
-    \item $\Jac(G)$ is always a finite abelian group
+    \item $\Jac(G)$ is always a finite abelian group.
       \pause
-    \item For any graph $G$, $|\Jac(G)|$ is the number of spanning
-      trees on $G$
+    \item $|\Jac(G)| =$ the number of \emph{spanning
+      trees} on $G$.
       \pause
-    \item The Jacobian of a cycle graph on $n$ vertices is $\Z/n\Z$. 
+    \item For the $n$-cycle $C_n$, we have $\Jac(C_n)\simeq \Z/n\Z$. 
   \end{itemize}
-  PICTURE HERE
+
+\pause
+
+\begin{center}
+\begin{tikzpicture}
+
+\draw (0,0) to [out=30,in=150] (0:2) ;
+\draw (0,0) to [out=-30,in=-150] (0:2) ;
+\draw [fill] (0,0) circle [radius=0.06cm] ;
+\draw [fill] (0:2) circle [radius=0.06cm] ;
+
+\begin{scope}[xshift=6cm]
+      \draw {(0:1) -- (72:1) -- (144:1) -- (216:1) -- (288:1)} -- cycle (288:1.2) ;
+
+      \foreach \theta in {0, 72, ...,  288} {
+        \fill (\theta:1) circle (2pt) ;
+      } ;
+    \end{scope}
+    
+%labels
+\node [below] at (1,-0.8) {$\Jac(C_2)\simeq \Z/2\Z$} ;
+\node [below] at (6,-1.2) {$\Jac(C_5)\simeq \Z/5\Z$} ;
+
+\end{tikzpicture}
+\end{center}
+
 \end{frame}
 
+%\section{Questions and results}
+
 \begin{frame}
-  \frametitle{\textbf{Our question:}} 
+  \frametitle{Our question:} 
 
   Which finite abelian groups are the Jacobian of some graph?
 \end{frame}
@@ -195,8 +387,11 @@ chip-firing moves, then $D,D'$ are \textbf{equivalent}, $D\sim D'$.
     \Jac(G_1) \times \Jac(G_2)$
   \end{prop}
   
-  \pause 
-    \begin{tikzpicture}
+  \vspace{0.3cm}
+  
+  \pause
+  \begin{center}
+    \begin{tikzpicture}[scale=0.9]
 
     
     \draw {(0:1) -- (120:1) -- (240:1)} -- cycle (270:1.2) node[below]
@@ -232,15 +427,27 @@ chip-firing moves, then $D,D'$ are \textbf{equivalent}, $D\sim D'$.
       \end{scope}
       \node[below] at (1,-1.2) {$G_1 \vee G_2$} ;
     \end{scope}
+    
+    %%% wedge vertices
+    \draw [fill=yellow] (0:1) circle [radius=0.08cm] ;
+    \draw [fill=yellow,xshift=3cm] (180:1) circle [radius=0.08cm] ;
+    \draw [fill=yellow,xshift=6cm] (0:1) circle [radius=0.08cm] ;
+    
   \end{tikzpicture}
+  \end{center}
+ 
+ \pause
 
-  $\Jac(G_1) \simeq \Z/3\Z$, $\Jac(G_2) \simeq \Z/4\Z$, $\Jac(G_1 \vee
-  G_2) \simeq \Z/12\Z$.
+  $\Jac(G_1) \simeq \Z/3\Z$, \quad $\Jac(G_2) \simeq \Z/4\Z$
+  
+  \pause
+  \bigskip
+  $\Jac(G_1 \vee G_2) \simeq \Z/12\Z$
 
 \end{frame}
 
 \begin{frame}
-  \frametitle{\textbf{Our question:}} 
+  \frametitle{Our question} 
 
   \begin{itemize}
   \item
@@ -256,24 +463,32 @@ chip-firing moves, then $D,D'$ are \textbf{equivalent}, $D\sim D'$.
 \item
   Which finite abelian groups are the Jacobian of some \emph{simple}
   graph?
+  
+  \begin{itemize}
+  \item can use $C_n$ only for $n\ge3$
+  \item only interested in $\Z/2\Z\times H$ for $H$ finite abelian
+  \end{itemize}
+  
 \end{itemize}
-
-PICTURE OF C2
   
 \end{frame}
 
 \begin{frame}
+ \frametitle{A known result} 
   \begin{prop}
-    There is no simple graph $G$ with $\Jac(G) \simeq \Z/2\Z$. 
+    There does not exist a simple graph $G$ with $\Jac(G) \simeq \Z/2\Z$. 
   \end{prop}
+ \vspace{0.3cm}
+ 
+ \pause
   
-  Reason: no simple graph with exactly two spanning trees.
+ \textbf{Proof.} There is no simple graph with 2 spanning trees. $\square$
 
   \pause 
 
-  \vspace{2cm}
+  \vspace{1.8cm}
 
-  Are there other groups we do \emph{not} get?
+  \textbf{Question:} Are there other groups we \emph{cannot} get?
 \end{frame}
 
 \begin{frame}
@@ -282,13 +497,16 @@ PICTURE OF C2
   For any $k \ge 1$, there does not exist a simple graph $G$ with
   $\Jac(G) \simeq (\Z/2\Z)^k$.
   \end{theorem}
+  
+  \vspace{0.3cm}
+  
   \pause
   We can also give a complete characterization of all multigraphs with
   such Jacobian.
 
   \pause
     \begin{center}
-    \begin{tikzpicture}
+    \begin{tikzpicture}[scale=0.7]
 
       \draw (0,0) to [out=15, in=165] (2,0) ;
       \draw (0,0) to [out=-15, in=-165] (2,0) ;
@@ -321,6 +539,8 @@ PICTURE OF C2
       \draw [fill] (5,1.7) circle [radius=.1cm] ;
       \draw [fill] (8.4,1.7) circle [radius=.1cm] ;
       \draw [fill] (8.4,-1.7) circle [radius=.1cm] ;
+      
+      \node at (4.2,-3) {$\Jac(G)\simeq (\Z/2\Z)^6$} ;
     \end{tikzpicture}
     \end{center}
 
@@ -330,15 +550,16 @@ PICTURE OF C2
   \frametitle{Our results}
   \begin{theorem}
     Let $H$ be any finite abelian group.  $(\Z/2\Z)^k \times H$ is not
-    the Jacobian of any simple graph for all sufficiently large $k$.
+    the Jacobian of any simple graph for all $k$ sufficiently large.
   \end{theorem}
+  \vspace{0.6cm}
 
   \pause 
 
   Proof idea: 
   \begin{enumerate}
-  \item bound $k$ when the graph is biconnected
-    (i.e. \emph{wedge-free})
+  \item bound $k$ when the graph is \emph{biconnected}
+    (i.e., wedge-free)
     \pause
   \item if $k$ is too large, the Jacobian factors as a product of
     Jacobians on wedge components
@@ -352,7 +573,7 @@ PICTURE OF C2
 \begin{frame}
   \frametitle{Future questions}
   \begin{itemize}
-    \item Can we get a better bound on $k$?
+    \item Can we get a better bound on $k$? (maybe $k\le|H|$?)
       \pause
     \item Can we give a complete description of \emph{exactly} which
       groups are Jacobians of some simple graph?
