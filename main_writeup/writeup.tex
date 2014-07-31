@@ -170,32 +170,21 @@ For given $n$, we give two possible constructions of $G$ with $\Jac(G)
   suffices to find a single element of order at least $n$.
 
   Let $D \in \Div^0(B_n)$ be the divisor $(v_2) - (v_1)$, and consider
-  $\overline{D} = [D] \in \Jac(B_n)$. For any $1 \le m < n$, the
-  divisor $mD$ is $v_1$-reduced---since $v_2$ has degree $n$, it is
-  impossible to fire it without sending it into debt. If $m=n$, then
-  firing $v_2$ yields the zero divisor. $m\overline{D}$ is therefore
-  trivial iff $m$ is a multiple of $n$, and hence $\overline{D}$ has
-  order $n$ as required.
+  $\overline{D} = \in \Jac(B_n)$. For any $1 \le m < n$, the divisor
+  $mD$ is $v_1$-reduced---since $v_2$ has degree $n$, it is impossible
+  to fire it without sending it into debt. If $m=n$, then firing $v_2$
+  yields the zero divisor. $m\overline{D}$ is therefore trivial iff
+  $m$ is a multiple of $n$, and hence $\overline{D}$ has order $n$ as
+  required.
 \end{proof}
 
 \subsection{The simple graph case}
 The construction given above is sufficient to show that all finite
 abelian groups appear as the Jacobian of some graph. However, since
-banana graphs are only realizable as a multigraphs, we might also wish
-to find a construction for a simple graph $G$ with $\Jac(G) \simeq
-\Z/n\Z$ for given $n$. This is (almost) always possible, by the
-following proposition:
-
-\begin{prop}
-  \label{prop:cycle_cyclic}
-  Let $C_n$ be the cycle graph on $n \ge 2$ vertices. Then $\Jac(C_n) \simeq
-  \Z/n\Z$.
-\end{prop}
-
-$C_n$ has $n$ spanning trees, so $|\Jac(C_n)|=n$ and, as before, it
-suffices to find a single element of $\Jac(C_n)$ of order at least
-$n$. Using the following lemma, we show that such an element exists on
-a wider family of graphs:
+banana graphs are only realizable as a multigraphs, it is natural to
+ask whether there also exists a family of simple graphs $G$ such that
+$\Jac(G) \simeq \Z/n\Z$ for given $n$. Below, we provide such a
+construction for all $n > 2$. 
 
 \begin{lem}
   \label{lem:2valent_path}
@@ -245,13 +234,23 @@ a wider family of graphs:
   biconnected, so there is a path from $v_1$ to $v_{m+1}$ that does
   not contain any vertex $v_i$ for $1 < i < m$. Applying the burning
   algorithm then shows that the divisor $(v_{m+1}) - (v_1)$ is
-  $v_1$-reduced, and hence $m\overline{D} = m[D]$ is nontrivial for $m
-  < \ell$, as required.
+  $v_1$-reduced, and hence $m\overline{D}$ is nonzero for $m < \ell$,
+  as required.
 \end{proof}
 
-$C_n$ clearly satisfies the conditions required by Corollary
-\ref{cor:2valent_path} above. Furthermore, $C_n$ is a simple graph
-whenever $n > 2$, so we have the following:
+\begin{cor}
+  \label{prop:cycle_cyclic}
+  Let $C_n$ be the cycle graph on $n \ge 2$ vertices. Then $\Jac(C_n) \simeq
+  \Z/n\Z$.
+\end{cor}
+\begin{proof}
+$C_n$ has $n$ spanning trees, so $|\Jac(C_n)|=n$ and, as before, it
+suffices to find a single element of $\Jac(C_n)$ of order at least
+$n$. Corollary \ref{cor:2valent_path} guarantees that such an element
+exists.
+\end{proof}
+
+$C_n$ is a simple graph whenever $n > 2$, so we have the following
 
 \begin{cor}
   Let $\Gamma$ be a finite abelian group that is not isomorphic to
@@ -263,28 +262,16 @@ The rest of this section will investigate which groups $\Gamma =
 \Z/2\Z \times H$ can possibly occur as the Jacobian of some simple
 graph. It is known that there is no simple graph $G$ with $\Jac(G)
 \simeq \Z/2\Z$, since there is no simple graph with two spanning
-trees. We extend this result as follows:
+trees. 
 
-\begin{thm}
-  \label{thm:2group}
-  For any $k \ge 1$, if $G$ is a graph such that $\Jac(G) \simeq
-  (\Z/2\Z)^k$, then $G$ is not simple.
-\end{thm}
-
-\begin{thm}
-  \label{thm:2group_product}
-  Let $H$ be a finite abelian group. There exists an integer $k_0$
-  (depending only on $H$) such that for all $k > k_0$, there does not exist
-  a simple graph $G$ with $\Jac(G) \simeq (\Z/2\Z)^k \times H$.
-\end{thm}
-
-To prove Theorem \ref{thm:2group_product}, we will first prove it in
-the case where $G$ is biconnected. If $G$ is a graph that is not
-biconnected, then by definition, there is a vertex $v_0$ such that the
-subgraph $G'$ induced by $V(G) \setminus \{v_0\}$ is not
-connected. $G$ is then the wedge sum of the connected components of
-$G'$ (together with the vertex $v_0$), and so $\Jac(G)$ breaks down as
-a direct product of Jacobians of subgraphs of $G$.
+We will generalize this result, first examining the case that the
+graph $G$ is biconnected. We motivate this restriction by noting that
+there is a sense in which biconnected graphs generate all other
+graphs: when $G$ is not biconnected, then by definition, there is a
+vertex $v_0$ such that the subgraph $G'$ induced by $V(G) \setminus
+\{v_0\}$ is not connected. $G$ is then the wedge sum of the connected
+components of $G'$ (together with the vertex $v_0$), and so $\Jac(G)$
+splits as a direct product of Jacobians of subgraphs of $G$.
 
 \begin{defn}
   Let $G$ be a graph, and let $\Gamma = \Jac(G)$. We will write $\mu(G)$
@@ -336,6 +323,14 @@ a direct product of Jacobians of subgraphs of $G$.
   Since $e = g + n - 1$, this gives $2g - 2 \le n \cdot (\mu - 1)$, as
   required.
 \end{proof}
+
+We now prove the first of our main results:
+
+\begin{thm}
+  \label{thm:2group}
+  For any $k \ge 1$, if $G$ is a graph such that $\Jac(G) \simeq
+  (\Z/2\Z)^k$, then $G$ is not simple.
+\end{thm}
 
 \begin{proof}[Proof of Theorem \ref{thm:2group}]
   Let $G$ be a biconnected graph with $\Jac(G) = (\Z/2\Z)^k$. By
@@ -406,33 +401,25 @@ a direct product of Jacobians of subgraphs of $G$.
   \end{center}
 \end{figure}
 
-We will now prove Theorem \ref{thm:2group_product}, using a similar
-inductive argument on biconnected subgraphs. Throughout the following,
-we will suppose that $G$ is a biconnected graph with Jacobian $\Gamma
-\simeq (\Z/2\Z)^k \times H$ for some finite abelian group $H$, and
-that $\mu$ is the maximum order of an element of $H$. We first
-establish a bound on the genus of $G$:
+We will now generalize this result to graphs whose Jacobian is of the
+form $(\Z/2\Z)^k \times H$, using a similar inductive argument on
+biconnected subgraphs. Throughout the following, we will suppose that
+$G$ is a biconnected graph with Jacobian $\Jac(G) = \Gamma \simeq
+(\Z/2\Z)^k \times H$ for some finite abelian group $H$, and that $\mu$
+is the maximum order of an element of $H$. We will require the
+following bound on the genus of $G$:
 
-\begin{lem}
+\begin{thm}[CITE LORENZINI]
   \label{lem:genus_cycle}
   If $g$ is the genus of $G$, then $g \ge k$.
-\end{lem}
-\begin{proof}
-  For any graph $G_0$, let $h(G_0)$ be the number of nontrivial invariant
-  factors of $\Jac(G_0)$. Let $G_0'$ be the graph obtained by adding a
-  single edge to $G_0$. We know $|h(G_0') - h(G_0)| \le 1$ (CITE
-  THIS). 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{thm}
 
-  Since a graph $G$ with genus $g$ may be constructed by adding $g$ edges
-  to a spanning tree for $G$, $\Jac(G)$ has at most $g$ invariant
-  factors, and thus at most $g$ factors of $\Z/2\Z$. 
-\end{proof}
-
-Applying Corollary \ref{cor:genus_v_mu} to this result gives us a
-lower bound on $|V(G)|$ in terms of $k$ and $\mu$. We now establish an
-upper bound on $|V(G)|$ in terms of $\mu$ and $|H|$, to achieve an
-upper bound on $g$, and hence $k$.
+Applying Corollary \ref{cor:genus_v_mu} to this result shows that 
+\begin{equation*}
+  |V(G)| \ge \frac{2k-2}{\mu - 1}
+\end{equation*}
+We now establish an upper bound on $|V(G)|$ in terms of $\mu$ and
+$|H|$, to achieve an upper bound on $k$.
 
 \begin{prop}
   \label{prop:v_bound}
@@ -458,29 +445,29 @@ upper bound on $g$, and hence $k$.
   does not contain $u_j$. Since $u_j$ has valency at least $3$, an
   iteration of the burning algorithm must burn $u_j$, and in turn the
   entire graph. Furthermore, since $2D_j - 2D_i$ is $u_i$-reduced,
-  $2[D_j] \ne 2[D_i]$ for any $i \ne j$. Note that this also implies
-  that $[D_j] \ne [D_i]$ for any $i \ne j$, so we have
-  $m=|\overline{\mathcal{U}}|$.
+  $2\overline{D_j} \ne 2\overline{D_i}$ for any $i \ne j$. Note that
+  this also implies that $\overline{D_j} \ne \overline{D_i}$ for any
+  $i \ne j$, so we have $m=|\overline{\mathcal{U}}|$.
 
-  Now let $\phi:\Gamma \to \Gamma$ be the map given by
-  \[
-  \phi(\overline{D}) = 2\overline{D}.
-  \] 
+  We now define a map
+  \begin{align*}
+    \phi: \Gamma \to \Gamma \\
+    \overline{D} \mapsto 2\overline{D}
+  \end{align*}
 
   By the above, we have
   $|\phi(\overline{\mathcal{U}})|=|\overline{\mathcal{U}}|=m$. Furthermore,
   $|\im(\phi)| \le |H|$, and so we find
   $m=|\phi(\overline{\mathcal{U}})| \le |H|$ as desired.
 
-  We now wish to bound $|V(G)|$ in terms of $m$. To do so, we will
-  consider a graph $G'$, given by the following transformation of $G$:
+  We now wish to bound $|V(G)|$ in terms of $m$. To do so, consider a
+  graph $G'$, given by the following transformation of $G$:
 
   \begin{enumerate}
-  \item Choose some vertex of $G$ of valency $2$. Delete it, and
-    draw an edge between its neighbors.
+  \item Choose any vertex of $G$ of valency $2$. Delete it, and draw
+    an edge between its neighbors.
   \item Repeat until there are no 2-valent vertices remaining.
   \end{enumerate}
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
 
   \begin{figure}[H]
     \begin{center}
@@ -562,6 +549,13 @@ graph.
 
 We now complete the proof of Theorem \ref{thm:2group_product} via
 induction on $|H|$.
+
+\begin{thm}
+  \label{thm:2group_product}
+  Let $H$ be a finite abelian group. There exists an integer $k_0$
+  (depending only on $H$) such that for all $k > k_0$, there does not exist
+  a simple graph $G$ with $\Jac(G) \simeq (\Z/2\Z)^k \times H$.
+\end{thm}
   
 \begin{proof}[Proof of Theorem \ref{thm:2group_product}]
 When $|H| = 1$ or $2$, Theorem \ref{thm:2group} gives the
@@ -617,8 +611,11 @@ In some cases, it is possible to directly verify that certain groups
 do not arise as the Jacobian of any simple graph. We note that, for
 given $m$, while there are infinitely many isomorphism classes of
 simple graphs with fewer than $m$ spanning trees, at most finitely
-many of these classes represent 2-edge-connected graphs. (THIS MIGHT
-NEED A PROOF).
+many of these classes represent 2-edge-connected graphs. This results
+from the fact that, for any vertex $v_0$ on a 2-edge-connected graph,
+any divisor of the form $(v) - (v_0)$ is $v_0$-reduced, and hence
+there are at least as many spanning trees on the graph as there are
+vertices.  
 
 Lemma \ref{prop:wedge_product} tells us that any graph $G$ may be
 uniquely associated to some 2-edge-connected graph with identical
@@ -797,15 +794,14 @@ as required.
 \section{The monodromy pairing on the Jacobian}
 
 
-The Jacobian of a finite graph is endowed with a natural monodromy
-pairing. Since it is possible to classify all finite abelian groups
-with pairing, it is worth considering which groups \emph{with pairing}
-occur as the Jacobian of some graph. This section will investigate
-this question.
+The Jacobian of a finite graph is endowed with a natural pairing,
+called the monodromy pairing. Since it is possible to classify all
+finite abelian groups with pairing, we will now consider which groups
+\emph{with pairing} occur as the Jacobian of some graph.
 
 \begin{note}
-  Throughout the following, unless otherwise noted, we will always use
-  the word ``group'' to mean ``group \emph{with pairing},''
+  Throughout the rest of this section, unless otherwise noted, we will
+  always use the word ``group'' to mean ``group \emph{with pairing},''
   ``isomorphism'' and ``$\simeq$'' to mean an isomorphism of groups
   with pairing, and $\oplus$ to denote the orthogonal sum on groups
   with pairing. For a graph $G$, we will take $\Jac(G)$ to mean the
@@ -829,7 +825,7 @@ Our main result will be the following:
 As in the case of groups without pairing, we will take advantage of
 the fact that the wedge sum of two graphs corresponds to a product
 operation on the Jacobians of those graphs. In this case, the
-``product'' will be the orthogonal sum:
+``product'' will be the orthogonal sum, as seen below:
 
 \begin{prop}
   \label{prop:wedge_sum}
@@ -983,10 +979,10 @@ elementary symmetric polynomial applied to the elements of $S$:
   $B_m$.
 
   Now consider the divisor $D = (v_0') - (v_0)$. We claim that
-  $m\overline{D} = m[D]$ is nontrivial for any $m < p^r$. Suppose
-  otherwise, so that $p^tD$ is principal for $t < r$, and let $\Delta$
-  be the Laplacian map of $G$. There must exist a function $f:V(G) \to
-  \Z$ such that $\Delta f = D$.
+  $m\overline{D}$ is nonzero for any $m < p^r$. Suppose otherwise, so
+  that $p^tD$ is principal for $t < r$, and let $\Delta$ be the
+  Laplacian map of $G$. There must exist a function $f:V(G) \to \Z$
+  such that $\Delta f = D$.
 
   For each edge $e = \{u, v\} \in E(B_S)$, let $b(e) = f(u) - f(v)$
   (orient each edge to point from $v_{ij}$ to $v_{ij+1}$). Since $D(v)
@@ -1210,133 +1206,98 @@ such pairings is somewhat more complicated than that of the odd prime
 pairings; however, there are still only finitely many cases to
 consider.
 
-\begin{defn}
- Let $\mathcal{P}_{2}$ denote be the semigroup of
-isomorphism classes of nondegenerate symmetric bilinear pairings on
-finite abelian 2-groups, under orthogonal direct sum.
-%rewrite so as not to copy from Miranda
-\end{defn}
+\begin{prop}[CITE MIRANDA]
+  Let $\mathcal{P}_{2}$ be the semigroup of isomorphism classes of
+  2-groups with pairing, under orthogonal direct
+  sum. $\mathcal{P}_{2}$ is generated by the following groups with pairing:
 
-\begin{prop} $\mathcal{P}_{2}$ is generated by the following pairings:
-  
-   \[ \AP \text{ on } \Z/2^{r}\Z, r\ge 1; \langle 1,
-1\rangle=\frac{1}{2^{n}}
+  \[ \AP \simeq (\Z/2^r\Z, \pair{\cdot}{\cdot}), r \ge 1; \quad
+  \pair{x}{y} = \frac{xy}{2^r}\]
+  \[ \BP \simeq (\Z/2^r\Z, \pair{\cdot}{\cdot}), r \ge 2; \quad
+  \pair{x}{y} = \frac{-xy}{2^r}\]
+  \[ \CP \simeq (\Z/2^r\Z, \pair{\cdot}{\cdot}), r \ge 3; \quad
+  \pair{x}{y} = \frac{5xy}{2^r}\]
+  \[ \DP \simeq (\Z/2^r\Z, \pair{\cdot}{\cdot}), r \ge 3; \quad
+  \pair{x}{y} = \frac{-5xy}{2^r}\]
+  \[ \EP \simeq ((\Z/2^r\Z)^2, \pair{\cdot}{\cdot}), r \ge 1; \quad
+  \pair{e_i}{e_j} = 
+  \begin{cases}
+    0, & i = j\\
+    \frac{1}{2^{n}}, & \textrm{otherwise }
+  \end{cases}
    \]
-   \[ \BP \text{ on } \Z/2^{r}\Z, r\ge 2; \langle 1,
-1\rangle=\frac{-1}{2^{n}}
-   \]
-   \[ \CP \text{ on } \Z/2^{r}\Z, r\ge 3; \langle 1,
-1\rangle=\frac{5}{2^{n}}
-   \]
-   \[ \DP \text{ on } \Z/2^{r}\Z, r\ge 3; \langle 1,
-1\rangle=\frac{-5}{2^{n}}
-   \]
-   \[ \EP \text{ on } \Z/2^{r}\Z\times\Z/2^{n}\Z, r\ge 1; \langle
-e_{i}, e_{j}\rangle=\begin{cases}0&\mbox{if } i=j\\
-\frac{1}{2^{n}}&\mbox{if } i\neq j\end{cases}
-   \]
-   \[ \FP \text{ on } \Z/2^{n}\Z\times\Z/2^{n}\Z, r\ge 2; \langle
-e_{i}, e_{j}\rangle=\begin{cases}\frac{1}{2^{n-1}}&\mbox{if } i=j\\
-\frac{1}{2^{n}}&\mbox{if } i\neq j\end{cases}
-   \]
-   
-where $\{e_{1}, e_{2}\}$ generate $\Z/2^{n}\Z\times\Z/2^{n}\Z$ in the
-last two cases.
+   \[ \FP \simeq ((\Z/2^r\Z)^2, \pair{\cdot}{\cdot}), r \ge 2; \quad
+   \pair{e_i}{e_j} = 
+   \begin{cases}
+     \frac{1}{2^{n-1}}, & i = j\\
+     \frac{1}{2^{n}}, & \textrm{otherwise }
+   \end{cases}
+   \]   
  \end{prop}
- \begin{proof} See [Mir]
- \end{proof}
+
+ Our goal is to find families of graphs with Jacobian isomorphic to
+ each of the families of groups with pairing given above. We provide
+ constructions for some, but not all, of these families. 
+
+ We will be aided by the following lemma:
 
 \begin{lem}
- \label{lemma:2-group iso}
- If $a\equiv b\pmod 8$ for $a,b$ odd then
- \begin{equation}
-  \frac{axy}{2^{r}}\simeq  \frac{bxy}{2^{r}}
- \end{equation}
-  are isomorphic as pairings on $\Z/2^r\Z$ for $r\ge3$
+ \label{lem:2group_pairing_iso}
+ Let $r \ge 3$, and let $a,b$ be odd integers with $a \equiv b \pmod
+ 8$. Let $\Gamma_a \simeq (\Z/2^r\Z, \pair{\cdot}{\cdot}_a)$,
+ $\Gamma_b \simeq (\Z/2^r\Z, \pair{\cdot}{\cdot}_b)$, where 
+ \begin{equation*}
+  \pair{x}{y}_a = \frac{axy}{2^r} \qquad \pair{x}{y}_b = \frac{bxy}{2^r}
+ \end{equation*}
+ Then $\Gamma_1 \simeq \Gamma_2$.
 \end{lem}
 \begin{proof}
-  Note that isomorphisms of pairing are derived from group
-  isomorphisms. All isomorphisms $\phi$ on cyclic groups of order
-  $2^{r}$ are of the form $\phi:x\to cx$ with $c$ odd. Let $\Phi$ be
-  an isomorphism of pairings. Then
-  $\Phi\pair{x}{y}=\pair{\phi(x)}{\phi(y)}$ for some $\phi$. Thus
-  $\frac{axy}{2^{r}}$ is isomorphic to $\frac{bxy}{2^{r}}$ if
-  $ac^{2}\equiv b\pmod 2^{r}$ for some $c$. Since $a\equiv b\pmod 8$
-  and $c^{2}\equiv 1\pmod 8$ for all odd $c$. Since there are only $4$
-  isomorphism classes of pairings on $\Z/2^r\Z$ for $r\ge3$ %shokrieh
-  $\frac{axy}{2^{r}}\simeq \frac{bxy}{2^{r}}$ as there are only $4$
-  odd numbers modulo $8$.
+  Note that the four pairing isomorphism classes of cyclic groups of
+  order $2^r$ correspond precisely to odd residue classes modulo
+  $8$. There must therefore exist an isomorphism of groups
+  $\phi_1:\Gamma_1 \to \Z/2^r\Z$ such that $\phi_1(axy) =
+  c\phi_1(x)\phi_1(y)$, where $c$ is the unique positive integer less
+  than $8$ congruent to $a$ mod $8$. A similar isomorphism exists for
+  $\Gamma_2$ and $b$, which completes the proof.
 \end{proof}
 
-
- \begin{thm} For each of $\AP$, $\BP$, $\CP$, $\DP$ there exists a
-graph $G$ such that the monodromy pairing on $G$ is the desired
-pairing.
- \end{thm}
+\begin{thm} Let $\Gamma \simeq (\Z/2^r\Z,
+  \pair{\cdot}{\cdot})$. There exists a graph $G$ such that $\Jac(G)
+  \simeq \Gamma$. 
+\end{thm}
 
 \begin{proof}
- Case 1: $\AP$. $B_{2^{n}}$ is cyclic of order $2^{n}$ has pairing
-$\AP$.
+  Observe that $\Jac(B_{2^r}) \simeq \AP$ and $\Jac(C_{2^r}) \simeq
+  \BP$, where $B_{2^r}$ and $C_{2^r}$ are respectively the cycle and
+  banana graphs on $2^r$ edges.
 
-%A pairing 
-\begin{center}
-\begin{tikzpicture}
-
-\draw (0,0) to [out=330,in=210] (4,0) ;
-\draw (0,0) to [out=345,in=195] (4,0) ;
-\draw (0,0) to [out=15,in=165] (4,0) ;
-\draw (0,0) to [out=30,in=150] (4,0) ;
-
-\draw [fill] (2,.1) circle [radius=0.01cm] ;
-\draw [fill] (2,0) circle [radius=0.01cm] ;
-\draw [fill] (2,-.1) circle [radius=0.01cm] ;
-
-\draw (.25,.25) to [out=90,in=-90] (2,1) ;
-\draw (3.75,.25) to [out=90,in=-90] (2,1) ;
-
-\draw [fill] (4,0) circle [radius=0.1cm] ;
-\draw [fill] (0,0) circle [radius=0.1cm] ;
-
-\node at (2, 1.2) {$2^{n}$} ;
-
-\end{tikzpicture}
-\end{center}
-
-  
-   Case 2: $\BP$. The cycle graph on $2^{n}$ vertices has pairing
-$\BP$.
-%%%%we should prove that the pairing on the cycle is always n-1/n%%%%%%%%%
-
-%B pairing check the labeling
-\begin{center}
-\begin{tikzpicture}
-
-\draw (0,0) to (0,-2) ;
-\draw (0,-2) to (1.4,-3.4) ;
-\draw (1.4,-3.4) to (3.4,-3.4) ;
-\draw (3.4,-3.4) to (4.8,-2) ;
-\draw (4.8,-2) to (4.8, 0) ;
-\draw [dashed] (0,0) to [out=45, in=135] (4.8,0) ;
-
-\draw [fill] (4.8,0) circle [radius=0.1cm] ;
-\draw [fill] (0,0) circle [radius=0.1cm] ;
-\draw [fill] (0,-2) circle [radius=0.1cm] ;
-\draw [fill] (1.4,-3.4) circle [radius=0.1cm] ;
-\draw [fill] (3.4,-3.4) circle [radius=0.1cm] ;
-\draw [fill] (4.8,-2) circle [radius=0.1cm] ;
-
-\draw (.25,.5) to [out=90,in=-90] (2.4,1.6) ;
-\draw (4.55,.5) to [out=90,in=-90] (2.4,1.6) ;
-
-\node at (2.4, 1.8) {$2^n-5$} ;
+  It remains to find constructions for graphs providing the groups
+  $\CP$ and $\DP$. We consider the cases for even and odd $r$
+  seperately.
 
 
-\end{tikzpicture}
-\end{center}
-  
-   Case 3a: For $n$ odd take $\left\{1, 2,\frac{2^{n}-2}{3}\right\}_{b}$. One can check that the divisor $D=v-w$ where $w$ is a trivalent vertex and $v$ is the adjacent vertex
-on edge that was subdivided $\frac{2^{n}-2}{3}$ times, has order, by using the slope
-definition of the monodromy pairing by defining the function such that all slopes are increasing in the direction of $v$ and decreasing from $w$. This results in the linear equations
+  For even $r$, let $S = \{1, 1, 1, \frac{2^r - 1}{3}\}$, and consider
+  the subdivided banana $B_S$ and the generalized cycle graph
+  $C_S$. We claim that $\Jac(B_S) \simeq \CP$ and $\Jac(C_S) \simeq
+  \DP$. 
+
+  By Proposition \ref{prop:banana_pairing}, we see that $\Jac(B_S)$ is
+  cyclic of order $2^r$, with pairing
+  \begin{equation*}
+    \pair{x}{y} = \dfrac{\frac{2^r-1}{3}xy}{2^r}
+  \end{equation*}
+  For any $r \ge 3$, $\frac{2^r - 1}{3} \equiv 5 \pmod 8$, as required.
+
+  For odd $r$, 
+
+  Case 3a: For $n$ odd take $\left\{1,
+    2,\frac{2^{n}-2}{3}\right\}_{b}$. One can check that the divisor
+  $D=v-w$ where $w$ is a trivalent vertex and $v$ is the adjacent
+  vertex on edge that was subdivided $\frac{2^{n}-2}{3}$ times, has
+  order, by using the slope definition of the monodromy pairing by
+  defining the function such that all slopes are increasing in the
+  direction of $v$ and decreasing from $w$. This results in the linear
+  equations
   \begin{equation*}
 a+b+c=2^{t}
   \end{equation*}
@@ -1352,7 +1313,11 @@ on the edge between $v$ and $w$. Solving the equation gives
 \begin{equation*}
 2^{n}a=2^{t}
 \end{equation*}
-Since $t$ is at most $n$ and $t=n$ is the only solution such that $a$ has nonnegative integer value the order of this element must be $2^{n}$. Furthermore, $c=2^{n}-3$, implying that the pairing of $D$ with itself is $\frac{2^{n}-3}{2^{n}}$ which by \ref{lemma:2-group iso} is isomorphic to the $\CP$ pairing.
+Since $t$ is at most $n$ and $t=n$ is the only solution such that $a$
+has nonnegative integer value the order of this element must be
+$2^{n}$. Furthermore, $c=2^{n}-3$, implying that the pairing of $D$
+with itself is $\frac{2^{n}-3}{2^{n}}$ which by \ref{lemma:2-group
+  iso} is isomorphic to the $\CP$ pairing.
 
 $c=2^{n}-3$. Thus the pairing is $\frac{2^{n}-3}{2^{n}}$, which is
 isomorphic to $\CP$ by \ref{lemma:2-group iso}.
@@ -1381,11 +1346,13 @@ isomorphic to $\CP$ by \ref{lemma:2-group iso}.
 \end{tikzpicture}
 \end{center}
     
-    Case 3b: For $n$ even take $\left\{1,1,1,
-\frac{2^{n}-1}{3}\right\}_{b}$. To check that the divisor
-$D=v-w$ where $w$ is a trivalent vertex and $v$ is the adjacent vertex
-on edge subdivided $\frac{2^{n}-1}{3}$ times  has order $2^{n}$, by using the slope
-definition of the monodromy pairing by defining the function such that all slopes are increasing in the direction of $v$ and decreasing from $w$.  This gives the linear equations 
+Case 3b: For $n$ even take $\left\{1,1,1,
+  \frac{2^{n}-1}{3}\right\}_{b}$. To check that the divisor $D=v-w$
+where $w$ is a trivalent vertex and $v$ is the adjacent vertex on edge
+subdivided $\frac{2^{n}-1}{3}$ times has order $2^{n}$, by using the
+slope definition of the monodromy pairing by defining the function
+such that all slopes are increasing in the direction of $v$ and
+decreasing from $w$.  This gives the linear equations
 \begin{equation*}
 a+b+c+d=2^{t}
 \end{equation*}
@@ -1517,11 +1484,6 @@ $\DP$ by  \ref{lemma:2-group iso}.
 \end{center}
 \end{proof}
 
-\begin{prop}
-\label{prop: E_2}
-\end{prop}
-
-%It's picture time motherfuckers
 %C_{4}
 \begin{center}
 \begin{tikzpicture}
@@ -1568,5 +1530,65 @@ $\DP$ by  \ref{lemma:2-group iso}.
 
 \end{tikzpicture}
 \end{center}
+
+Each of the above constructions gives a graph with cyclic Jacobian,
+giving four of the six generators for 2-groups with pairing. We have
+few concrete results relating to the remaining two
+generators. However, we may still make the following observation:
+
+\begin{thm}
+  For any $k \ge 1$, there is no graph $G$ such that $\Jac(G) \simeq
+  (\mathcal{E}_2)^k$. 
+\end{thm}
+\begin{proof}
+  This is a result of the characterization of graphs $G$ with $\Jac(G)
+  \simeq (\Z/2\Z)^k$, given in Section 1. We see that any such graph
+  has Jacobian isomorphic to $(\AP)^k$.
+\end{proof}
+
+This result, combined with our inability to construct \emph{any} graph
+$G$ that yields the group $\EP$, leads us to make the following:
+
+\begin{conj}
+  There is no graph $G$ such that $\Jac(G) \simeq \EP$.
+\end{conj}
+
+We note, however, that there do exist examples of graphs $G$ such that
+for some subgroup $H \subset \Jac(G)$, if $\pair{\cdot}{\cdot}\big|_H$ is
+the monodromy pairing on $\Jac(G)$ restricted to $H$, then $(H,
+\pair{\cdot}{\cdot}\big|_H) \simeq \EP$. In particular, take $G$ to be
+the following graph:
+
+[PICTURE GOES HERE, ONCE WE ACTUALLY FIGURE OUT WHAT THIS GRAPH SHOULD
+BE]
+
+We have even fewer results regarding $\FP$. We note that the complete
+graph $K_4$ is an example of a graph with Jacobian isomorphic to
+$\mathcal{F}_4$, but we were unable to find other examples of graphs
+that provide this pairing.
+
+\subsection{Simple graphs}
+As in Section 1, some of the constructions given above are only
+possible if we allow multiple edges on our graphs. We do not have a
+broad result concerning groups with pairing that \emph{can} arise as
+Jacobians of multigraphs that \emph{cannot} arise as Jacobians of
+simple graphs. However, we observe that such groups do in fact exist:
+
+\begin{thm}
+  Let $\Gamma_\mathfrak{r} \simeq (\Z/3\Z, \mathfrak{r})$, and
+  $\Gamma_\mathfrak{n} \simeq (\Z/3\Z, \mathfrak{n})$. For any odd
+  integer $k$, there is no simple graph $G$ such that
+  \begin{align*}
+      \Jac(G) \simeq (\Gamma_\mathfrak{r})^k, \text{ or } \\
+      \Jac(G) \simeq (\Gamma_\mathfrak{r})^k \times \Gamma_\mathfrak{n}
+  \end{align*}
+\end{thm}
+\begin{proof}
+Lemma \ref{lem:delta_le_mu} shows that the only biconnected simple
+graph with Jacobian of the form $(\Z/3\Z)^k$ is the $3$-cycle
+$C_3$. The monodromy pairing on $\Jac(C_3)$ is the nonresidue pairing
+$\mathfrak{n}$, and the groups with pairing given above do not arise
+as powers of $\Z/3\Z$ with this pairing. 
+\end{proof}
 
 \end{document}
