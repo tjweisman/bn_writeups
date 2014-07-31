@@ -122,8 +122,8 @@ invariant factors of $\Jac(G_1), \Jac(G_2)$, respectively.
 \end{figure}
 
 Note that in the case that $G_1$ is a tree (and therefore $\Jac(G_1)$
-is trivial), $\Jac(G_1 \vee G_2) \simeq \Jac(G_2)$. We then have
-the following corollary:
+is trivial), $\Jac(G_1 \vee G_2) \simeq \Jac(G_2)$. We have the
+following corollary:
 \begin{cor}
   \label{cor:1_valent}
   Let $G$ be a graph, and let $A = \{v \in V(G) : \val(v) > 1\}$. If
@@ -131,13 +131,20 @@ the following corollary:
   \Jac(G')$.
 \end{cor}
 
-Proposition \ref{prop:wedge_product}, together with the classification
-theorem for finite abelian groups, tells us that if, for all $n$,
-there exists a graph $G$ such that $\Jac(G)$ is cyclic of order $n$,
-then \emph{all} finite abelian groups are the Jacobian of some graph.
+\begin{proof}
+  Any vertex of valency $1$ can be viewed as a tree of two vertices
+  that has been added to the graph via the wedge sum operation. Such
+  trees, as noted above, have no effect on the Jacobian of $G$.
+\end{proof}
 
-For given $n$, we give two possible constructions of $G$ with $\Jac(G)
-\simeq \Z/n\Z$.
+Proposition \ref{prop:wedge_product}, together with the classification
+theorem for finite abelian groups, tells us that if, for all $n \in
+\N$, there exists a graph $G$ such that $\Jac(G)$ is cyclic of order
+$n$, then \emph{all} finite abelian groups are the Jacobian of some
+graph.
+
+We will now fix $n$, and provide two constructions of $G$ with
+$\Jac(G) \simeq \Z/n\Z$.
 
 \begin{defn}
   $B_n$, the \emph{banana graph on $n$ edges}, is the graph with
@@ -161,7 +168,7 @@ For given $n$, we give two possible constructions of $G$ with $\Jac(G)
 
 \begin{prop}
   \label{prop:banana_cyclic}
-  Let $B_n$ be the banana graph on $n$ edges. Then $\Jac(B_n) \simeq \Z/n\Z$.
+  The Jacobian of $B_n$ is isomorphic to $\Z/n\Z$.
 \end{prop}
 
 \begin{proof}
@@ -178,13 +185,21 @@ For given $n$, we give two possible constructions of $G$ with $\Jac(G)
   required.
 \end{proof}
 
+We now have a procedure for constructing graphs whose Jacobian is any
+desired product of cyclic groups: we simply take the wedge sum of the
+banana graphs of the appropriate size. This provides the following:
+
+\begin{cor}
+  For any finite abelian group $\Gamma$, there exists a graph $G$ such
+  that $\Jac(G) \simeq \Gamma$. 
+\end{cor}
+
 \subsection{The simple graph case}
-The construction given above is sufficient to show that all finite
-abelian groups appear as the Jacobian of some graph. However, since
-banana graphs are only realizable as a multigraphs, it is natural to
-ask whether there also exists a family of simple graphs $G$ such that
-$\Jac(G) \simeq \Z/n\Z$ for given $n$. Below, we provide such a
-construction for all $n > 2$. 
+We have shown that all finite abelian groups appear as the Jacobian of
+some graph. However, since banana graphs are only realizable as a
+multigraphs, it is natural to ask whether there also exists a family
+of simple graphs $G$ such that $\Jac(G) \simeq \Z/n\Z$. Below, we
+provide such a construction for all $n > 2$.
 
 \begin{lem}
   \label{lem:2valent_path}
@@ -265,19 +280,24 @@ graph. It is known that there is no simple graph $G$ with $\Jac(G)
 trees. 
 
 We will generalize this result, first examining the case that the
-graph $G$ is biconnected. We motivate this restriction by noting that
-there is a sense in which biconnected graphs generate all other
-graphs: when $G$ is not biconnected, then by definition, there is a
-vertex $v_0$ such that the subgraph $G'$ induced by $V(G) \setminus
-\{v_0\}$ is not connected. $G$ is then the wedge sum of the connected
-components of $G'$ (together with the vertex $v_0$), and so $\Jac(G)$
-splits as a direct product of Jacobians of subgraphs of $G$.
+graph $G$ is biconnected. 
+
+\begin{remark}
+  \label{remark:biconnected_wedge}
+  We motivate this restriction by noting that there is a sense in
+  which biconnected graphs generate all other graphs: when $G$ is not
+  biconnected, then by definition, there is a vertex $v_0$ such that
+  the subgraph $G'$ induced by $V(G) \setminus \{v_0\}$ is not
+  connected. $G$ is then the wedge sum of the connected components of
+  $G'$ (together with the vertex $v_0$), and so $\Jac(G)$ splits as a
+  direct product of Jacobians of subgraphs of $G$.
+\end{remark}
 
 \begin{defn}
-  Let $G$ be a graph, and let $\Gamma = \Jac(G)$. We will write $\mu(G)$
-  for the maximum order of an element of $\Gamma$, and $\delta(G)$ for
-  the maximum valency of a vertex in $G$. (When the graph $G$ is clear
-  from context, we will simply write $\delta$ or $\mu$). 
+  Let $G$ be a graph. We will write $\mu(G)$ for the maximum order of
+  an element of $\Jac(G)$, and $\delta(G)$ for the maximum valency of
+  a vertex in $G$. (When the graph $G$ is clear from context, we will
+  simply write $\delta$ or $\mu$).
 \end{defn}
 
 \begin{lem}
@@ -299,8 +319,8 @@ splits as a direct product of Jacobians of subgraphs of $G$.
   $\delta$.
 
   In the case that $\delta = \mu$, we must have $\delta\overline{D} =
-  0$. Starting from $\delta D$, chip-fire $v$ once, and let the divisor
-  we obtain be $E$. Applying the burning algorithm and the
+  0$. Starting from $\delta D$, chip-fire $v$ once, and let the
+  divisor we obtain be $E$. Applying the burning algorithm and the
   biconnectivity condition once more, we see that $v$, as well as each
   of its neighbors, must be burned, and therefore that $E$ is
   zero. This is only possible if the multiplicity of the edge
@@ -328,26 +348,27 @@ We now prove the first of our main results:
 
 \begin{thm}
   \label{thm:2group}
-  For any $k \ge 1$, if $G$ is a graph such that $\Jac(G) \simeq
-  (\Z/2\Z)^k$, then $G$ is not simple.
+  For any $k \ge 1$, there is no simple graph $G$ such that $\Jac(G)
+  \simeq (\Z/2\Z)^k$.
 \end{thm}
 
-\begin{proof}[Proof of Theorem \ref{thm:2group}]
+\begin{proof}
   Let $G$ be a biconnected graph with $\Jac(G) = (\Z/2\Z)^k$. By
   Corollary \ref{cor:1_valent}, we may assume without loss of
   generality that each vertex of $G$ has valency at least $2$. By
   Lemma \ref{lem:delta_le_mu}, each vertex of $G$ has valency exactly
-  $2$, hence $G = C_n$ for some $n$. We must have $n=2$, which means $G$
-  cannot be simple.
+  $2$, hence $G = C_n$ for some $n$. We must have $n=2$, which means
+  $G$ cannot be simple.
 
-  Now let $G$ be a graph that is not biconnected, with $\Jac(G) \simeq
-  (\Z/2\Z)^k$. We proceed by induction on $k$.
+  Now let $G$ be a graph that is \emph{not} biconnected, with $\Jac(G)
+  \simeq (\Z/2\Z)^k$. We proceed by induction on $k$.
   
   The base case $k=1$ is known. For $k > 1$, note that $\Jac(G) \simeq
   \Jac(G_1) \times \Jac(G_2)$ for connected subgraphs $G_1, G_2$ of
-  $G$. Without loss of generality, $G_2$ is not a tree, and hence
-  $\Jac(G_1) \simeq (\Z/2\Z)^{k_1}$ for $k_1 < k$. By the inductive
-  hypothesis, $G_1$ is not simple, and so neither is $G$.
+  $G$ (see Remark \ref{remark:biconnected_wedge}). Without loss of
+  generality, $G_2$ is not a tree, and hence $\Jac(G_1) \simeq
+  (\Z/2\Z)^{k_1}$ for $k_1 < k$. By the inductive hypothesis, $G_1$ is
+  not simple, and so neither is $G$.
 \end{proof}
 
 \begin{remark}
@@ -424,9 +445,8 @@ $|H|$, to achieve an upper bound on $k$.
 \begin{prop}
   \label{prop:v_bound}
   Suppose that $G$ is biconnected. Then for any finite abelian group
-  $H$, there exists an integer $v_0$ (depending only on $H$) such that
-  if $\Gamma = \Jac(G) \simeq (\Z/2\Z)^k \times H$, then $|V(G)| <
-  v_0$.
+  $H$, there exists an integer $n_H$ such that if $\Gamma = \Jac(G)
+  \simeq (\Z/2\Z)^k \times H$, then $|V(G)| < n_H$.
 \end{prop}
 
 \begin{proof}
@@ -442,12 +462,13 @@ $|H|$, to achieve an upper bound on $k$.
 
   We have $2D_j - 2D_i = 2(u_j) - 2(u_i)$. Since $G$ is biconnected,
   there is a path from $u_i$ to each of the neighbors of $u_j$ that
-  does not contain $u_j$. Since $u_j$ has valency at least $3$, an
-  iteration of the burning algorithm must burn $u_j$, and in turn the
-  entire graph. Furthermore, since $2D_j - 2D_i$ is $u_i$-reduced,
-  $2\overline{D_j} \ne 2\overline{D_i}$ for any $i \ne j$. Note that
-  this also implies that $\overline{D_j} \ne \overline{D_i}$ for any
-  $i \ne j$, so we have $m=|\overline{\mathcal{U}}|$.
+  does not contain $u_j$. Since $u_j$ has valency at least $3$, in the
+  first iteration of the burning algorithm, $u_j$ (and in turn the
+  entire graph) will be burned. Therefore $2D_j - 2D_i$ is
+  $u_i$-reduced, and $2\overline{D_j} \ne 2\overline{D_i}$ for any $i
+  \ne j$. Note that this also implies that $\overline{D_j} \ne
+  \overline{D_i}$ for any $i \ne j$, so we have
+  $m=|\overline{\mathcal{U}}|$.
 
   We now define a map
   \begin{align*}
@@ -547,28 +568,29 @@ have $|V(G)| > v_0$. This in turn implies that for sufficiently large
 $k$, $(\Z/2\Z)^k \times H$ is not the Jacobian of any biconnected
 graph.
 
-We now complete the proof of Theorem \ref{thm:2group_product} via
-induction on $|H|$.
+Using this fact, we will induct on $|H|$ to show that for sufficiently
+large $k$, $(\Z/2\Z)^k \times H$ is not the Jacobian of \emph{any}
+graph.
 
 \begin{thm}
   \label{thm:2group_product}
-  Let $H$ be a finite abelian group. There exists an integer $k_0$
-  (depending only on $H$) such that for all $k > k_0$, there does not exist
-  a simple graph $G$ with $\Jac(G) \simeq (\Z/2\Z)^k \times H$.
+  Let $H$ be a finite abelian group. There exists an integer $k_H$
+  such that for all $k > k_H$, there does not exist a simple graph $G$
+  with $\Jac(G) \simeq (\Z/2\Z)^k \times H$.
 \end{thm}
   
-\begin{proof}[Proof of Theorem \ref{thm:2group_product}]
-When $|H| = 1$ or $2$, Theorem \ref{thm:2group} gives the
-bound $k_0 = 1$. For $|H| \ge 3$, there must exist (by Proposition
-\ref{prop:v_bound}) an integer $k'$ such that if $k > k'$, and
-$\Jac(G) \simeq (\Z/2\Z)^k \times H$, then $G$ is not biconnected.
+\begin{proof}
+  When $|H| = 1$ or $2$, Theorem \ref{thm:2group} gives the bound $k_0
+  = 1$. For $|H| \ge 3$, there must exist (by Proposition
+  \ref{prop:v_bound}) an integer $k'$ such that if $k > k'$, and
+  $\Jac(G) \simeq (\Z/2\Z)^k \times H$, then $G$ is not biconnected.
 
-By the induction hypothesis, for any proper subgroup $H' \subset H$,
-there exists an integer $k(H')$ such that for all $k > k(H')$, no
-simple graph $G'$ has $\Jac(G') \simeq (\Z/2\Z)^k \times H'$. Now,
-since $H$ is finite, there are finitely many pairs of nontrivial
-proper subgroups $H_1, H_2 \subset H$ such that $H_1 \times H_2 \simeq
-H$. Define
+  By the inductive hypothesis, for any proper subgroup $H' \subset H$,
+  there exists an integer $k(H')$ such that for all $k > k(H')$, no
+  simple graph $G'$ has $\Jac(G') \simeq (\Z/2\Z)^k \times H'$. Now,
+  since $H$ is finite, there are finitely many pairs of nontrivial
+  proper subgroups $H_1, H_2 \subset H$ such that $H_1 \times H_2
+  \simeq H$. Define
 
 \begin{equation*}
   k'' = \max\{k(H_1) + k(H_2) : H_1, H_2 \textrm{ nontrivial}, H_1
@@ -913,10 +935,13 @@ operation on the Jacobians of those graphs. In this case, the
   as desired.
 \end{proof}
 
-The problem is now reduced to the following: given a prime $p$, a
-positive integer $r$, and a pairing $\pair{\cdot}{\cdot}$ on
-$\Z/p^r\Z$, we wish to find a graphs $G$ such that $\Jac(G) \simeq
-(\Z/p^r\Z, \pair{\cdot}{\cdot})$.
+
+The problem is now reduced to the following: given a prime $p$,
+positive integer $r$ and $k$, and a pairing $\pair{\cdot}{\cdot}$ on
+$(\Z/p^r\Z)^k$, we wish to find a graphs $G$ such that $\Jac(G) \simeq
+((\Z/p^r\Z)^l, \pair{\cdot}{\cdot})$. In most cases (in particular
+when $p$ is odd), we can take $k=1$ and restrict our search to graphs
+with cyclic Jacobian.
 
 Section \ref{sec:jacobians} gave a construction for graphs with any
 desired Jacobian, but we require a way to construct graphs whose
@@ -1039,12 +1064,12 @@ cases of the subdivided banana. As a result, we have:
     \Jac(B_{p^r}) \simeq (\Z/p^r\Z, \pair{\cdot}{\cdot}_1)
   \end{equation*}
   \begin{equation*}
-    \Jac(C_{p^r}) \simeq (\Z/p^r\Z, \pair{\cdot}{\cdot}_2)
+    \Jac(C_{p^r}) \simeq (\Z/p^r\Z, \pair{\cdot}{\cdot}_{-1})
   \end{equation*}
-  where $\pair{\cdot}{\cdot}_1$ and $\pair{\cdot}{\cdot}_2$ are the
+  where $\pair{\cdot}{\cdot}_1$ and $\pair{\cdot}{\cdot}_{-1}$ are the
   pairings on $\Z/p^r\Z$ given by
   \begin{equation*}
-    \pair{x}{y}_1 = \frac{xy}{p^r} \qquad \pair{x}{y}_2 = \frac{(-1)xy}{p^r}
+    \pair{x}{y}_1 = \frac{xy}{p^r} \qquad \pair{x}{y}_{-1} = \frac{(-1)xy}{p^r}
   \end{equation*}
 \end{cor}
 
@@ -1058,27 +1083,37 @@ situation, where $p$ is odd. In this case, up to isomorphism, there
 are only two pairings on $\Z/p^r\Z$; we will denote these by
 $\mathfrak{r}$ and $\mathfrak{n}$, the \emph{residue} and
 \emph{nonresidue} pairings, respectively. We will also assume that $r
-> 1$, and discuss the $r=1$ case separately. 
+> 1$, and discuss the $r=1$ case separately.
 
-We can see immediately that the banana graph $B_{p^r}$ always gives
-rise to the residue pairing on $\Z/p^r\Z$. To achieve the nonresidue
-pairing, it suffices to prove the following:
+Observe that the banana graph $B_{p^r}$ always gives rise to the
+residue pairing on $\Z/p^r\Z$. To achieve the nonresidue pairing, it
+suffices to prove the following:
 
-\begin{claim}
-  \label{claim:exist_decomp}
+\begin{prop}
+  \label{prop:exist_decomp}
   For any odd prime $p$ and integer $r > 1$, there exists a
   multiset of positive integers $S = \{s_1, \ldots s_m\}$ such that
   $R(S) = p^r$, $\gcd(p, s_i) = 1$ for all $i$, and $\prod_{i=1}^ms_i$
   is a nonresidue modulo $p$.
-\end{claim}
+\end{prop}
 
-We will need the following proposition, which follows from (CITATION):
+Our proof will rely heavily on quadratic reciprocity, and it will be
+necessary to consider the cases $p \equiv 1 \pmod 4$ and $p \equiv 3
+\pmod 4$ seperately.
+
+For the $p \equiv 1 \pmod 4$ case, we will need the following
+proposition, which follows from (CITATION):
 \begin{prop}
   \label{prop:q_bound}
-  For any prime $p$ and integer $r > 1$, there exists a prime
-  quadratic nonresidue $q$ such that $q^2/4<p^r$, with $q\equiv 3\pmod
-  4$ if $r$ is odd and $q\equiv 1\pmod 4$ if $r$ is even.
+  For any prime $p$ and integer $r > 1$, there exist prime quadratic
+  nonresidues $q_1 \equiv 1 \pmod 4, q_2 \equiv 3 \pmod 4$, such that
+  $q_1$ and $q_2$ are both less than $2\sqrt{p}$.
 \end{prop}
+
+When $p \equiv 1 \pmod 4$, we also will need to consider $r$ even and
+$r$ odd seperately. We will choose our decomposing set $S$ slightly
+differently in each case, to ensure that $\pi_{i=1}^ms_i$ is in fact a
+nonresidue.
 
 \begin{lem}
   \label{lem:decompose_q_non}
@@ -1087,16 +1122,21 @@ We will need the following proposition, which follows from (CITATION):
   such that $a(q-a) \equiv k \pmod q$. 
 \end{lem}
 \begin{proof}
-  Let the set of nonresidues modulo $q$ be $R_q$. Consider the map
-  $\phi:\F_q \to \F_q$ given by $\phi(x) = -x^2$. The image of
-  $\phi$ is a subset of $R_q$, since (by quadratic reciprocity)
-  $-1$ is a nonresidue modulo $q$. Furthermore, since the polynomial
-  $-x^2 - a$ has at most two roots in $\F_q$ (for any $a$), and
-  $|R_q| = (q - 1)/2$, $\phi_k$ is onto $R_q$. 
+  Let $R_q$ denote the set of nonresidues modulo $q$. Consider the map
+  $\phi:\F_q \to \F_q$ given by $\phi(x) = -x^2$. The image of $\phi$
+  is a subset of $R_q$, since (by quadratic reciprocity) $-1$ is a
+  nonresidue modulo $q$. Furthermore, since the polynomial $-x^2 - a$
+  has at most two roots in $\F_q$ (for any $a$), and $|R_q| = (q -
+  1)/2$, $\phi$ is onto $R_q$.
 
   Since $k \in R_q$, choose $a$ such that $\phi(a) = k$, and note
   that $k \equiv -a^2 \equiv a(q-a) \pmod q$, as required.
 \end{proof}
+
+The following lemma is a result nearly identical to the previous one;
+note that we now require the product of $a$ and $q-a$ to be a residue
+rather than a nonresidue.
+
 \begin{lem}
   \label{lem:decompose_q_res}
   Let $q$ be a prime with $q \equiv 1 \pmod 4$. Then for any $k$
@@ -1140,7 +1180,11 @@ We will need the following proposition, which follows from (CITATION):
   $p^r - a(q-a) > 0$.
 \end{proof}
 
-\begin{proof}[Proof of Claim \ref{claim:exist_decomp}]
+We are now ready to prove Proposition \ref{prop:exist_decomp}. Given a
+prime $q$ of the form described by Lemma \ref{lem:exist_q}, we will
+construct our decomposing set $S$ in terms of $q$. 
+
+\begin{proof}[Proof of Proposition \ref{prop:exist_decomp}]
   First consider the case that $p \equiv 3 \pmod 4$. Choose $S = \{1,
   p^r-1\}$. Clearly $R(S) = p^r$, and by quadratic reciprocity,
   $s_1s_2 \equiv -1 \pmod {p^r}$ is a nonresidue modulo $p^r$.
@@ -1163,7 +1207,7 @@ We will need the following proposition, which follows from (CITATION):
 \end{proof}
 
 For a prime $p$ and integer $r > 1$, given a set $S$ described by
-Claim \ref{claim:exist_decomp}, we see that $B_S \simeq (\Z/p^r\Z,
+Proposition \ref{prop:exist_decomp}, we see that $B_S \simeq (\Z/p^r\Z,
 \mathfrak{n})$, as required.
 
 We now consider the case that $r=1$. We begin by noting that in
@@ -1182,7 +1226,7 @@ This completes the proof of Theorem \ref{thm:graph_pairing}.
 
 \begin{remark} We could extend Theorem \ref{thm:graph_pairing} to
   cover \emph{all} groups with pairing of odd order if we could prove
-  Claim \ref{claim:exist_decomp} in the case that $r=1$.
+  Proposition \ref{prop:exist_decomp} in the case that $r=1$.
   
   The critical difference between the two cases is Proposition
   \ref{prop:q_bound}, which, in the $r=1$ case, implies an upper bound
