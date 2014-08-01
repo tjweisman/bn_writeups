@@ -40,6 +40,11 @@
   \frametitle{Definitions}
 
   $G = (V(G), E(G))$ is a finite, connected multigraph (no loops).
+  
+  \pause
+  \begin{itemize}
+  \item For later: a \textbf{simple} graph is one with no multi-edges.
+  \end{itemize}
 
   \pause
 
@@ -110,6 +115,10 @@
   \frametitle{Definitions}
 
   $G = (V(G), E(G))$ is a finite, connected multigraph (no loops).
+ 
+  \begin{itemize}
+  \item For later: a \textbf{simple} graph is one with no multi-edges.
+  \end{itemize}
 
   \begin{definition}
     A \textbf{divisor} on $G$ is an assignment of an integer to each vertex.
@@ -518,7 +527,7 @@ Every divisor in an equivalence class has the same
 
 \begin{frame}
   \frametitle{The wedge sum}
-  \begin{prop}
+  \begin{prop}[GWW]
     Let $G_1$, $G_2$ be graphs. Then $\Jac(G_1 \vee G_2) \simeq
     \Jac(G_1) \times \Jac(G_2)$.
   \end{prop}
@@ -589,6 +598,7 @@ Every divisor in an equivalence class has the same
   \item
     Which finite abelian groups are the Jacobian of some graph?  
 
+\medskip
   \pause
 
   \begin{itemize}
@@ -600,9 +610,11 @@ Every divisor in an equivalence class has the same
 \item
   Which finite abelian groups are the Jacobian of some \textbf{simple}
   graph?
+  \medskip
   \pause
   \begin{itemize}
   \item We can use $C_n$ only for $n\ge3$.
+   \medskip
   \item We're only interested in $\Z/2\Z\times H$ for some finite abelian group $H$. 
   \end{itemize}
   
@@ -630,7 +642,7 @@ Every divisor in an equivalence class has the same
 
 \begin{frame}
   \frametitle{Our results}
-  \begin{theorem}
+  \begin{theorem}[GWW]
   For any $k \ge 1$, there does not exist a simple graph $G$ with
   $\Jac(G) \simeq (\Z/2\Z)^k$.
   \end{theorem}
@@ -685,7 +697,7 @@ Every divisor in an equivalence class has the same
 
 \begin{frame}
   \frametitle{Our results}
-  \begin{theorem}
+  \begin{theorem}[GWW]
     Let $H$ be any finite abelian group. Then there exists $k_H$ such that for all $k>k_H$, $(\Z/2\Z)^k \times H$ is not the Jacobian of any simple graph. 
   \end{theorem}
   \vspace{0.6cm}
@@ -707,13 +719,75 @@ Every divisor in an equivalence class has the same
 \end{frame}
 
 \begin{frame}
+  \frametitle{Our results}
+  \begin{theorem}[GWW]
+    Let $G$ be a simple, biconnected graph with $\Jac(G)\simeq(\Z/3\Z)^k$ with $k\ge1$. Then in fact $G=C_3$ and $k=1$. 
+  \end{theorem}
+
+ \vspace{0.3cm}
+  
+  \pause
+  We can also give a complete characterization of all simple graphs with
+  this Jacobian.
+
+  \pause
+    \begin{center}
+    \begin{tikzpicture}[scale=1.1]
+
+	%triangle 1
+      \draw (0,0) -- (30:1) -- (-30:1) -- (0,0) ;
+
+      \draw [fill] (0,0) circle [radius=.06cm] ;
+      \draw [fill] (30:1) circle [radius=.06cm] ;
+      \draw [fill] (-30:1) circle [radius=.06cm] ;
+      
+      %bridge
+      \draw (30:1) -- (1.3,1.2) -- (1.9,0.8) ;
+      \draw [fill] (1.3,1.2) circle [radius=.06cm] ;
+      \draw [fill] (1.9,0.8) circle [radius=.06cm] ;
+      
+      %triangle 2
+      \draw [shift={(1.9,0.8)},rotate=320] (0,0) -- (30:1) -- (-30:1) -- (0,0) ;
+
+      \draw [fill,shift={(1.9,0.8)},rotate=320] (0,0) circle [radius=.06cm] ;
+      \draw [fill,shift={(1.9,0.8)},rotate=320] (30:1) circle [radius=.06cm] ;
+      \draw [fill,shift={(1.9,0.8)},rotate=320] (-30:1) circle [radius=.06cm] ;
+      
+      %leaf
+      \draw [shift={(1.9,0.8)},rotate=320] (-30:1) -- (-80:0.8) ;
+      \draw [fill,shift={(1.9,0.8)},rotate=320] (-80:0.8) circle [radius=0.06cm] ;
+      
+      %bridge 2
+      \draw [fill,shift={(1.9,0.8)},rotate=320] (30:1) -- (1.5,0) ;
+      
+      %triangle 3
+      \draw [rotate=340,shift={(2.915,0.89)}] (0,0) -- (30:1) -- (-30:1) -- (0,0) ;
+
+      \draw [fill,rotate=340,shift={(2.915,0.89)}] (0,0) circle [radius=.06cm] ;
+      \draw [fill,rotate=340,shift={(2.915,0.89)}] (30:1) circle [radius=.06cm] ;
+      \draw [fill,rotate=340,shift={(2.915,0.89)}] (-30:1) circle [radius=.06cm] ;
+      
+      %triangle 4
+      \draw [shift={(4.03,0.011)},rotate=90] (0,0) -- (30:1) -- (-30:1) -- (0,0) ;
+
+      \draw [fill,shift={(4.03,0.011)},rotate=90] (0,0) circle [radius=.06cm] ;
+      \draw [fill,shift={(4.03,0.011)},rotate=90] (30:1) circle [radius=.06cm] ;
+      \draw [fill,shift={(4.03,0.011)},rotate=90] (-30:1) circle [radius=.06cm] ;
+      
+      \node at (2.3,-1.6) {$\Jac(G)\simeq (\Z/3\Z)^4$} ;
+    \end{tikzpicture}
+    \end{center}
+
+\end{frame}
+
+\begin{frame}
   \frametitle{Future questions}
   \begin{itemize}
-    \item Can we get a better bound on $k$?
+    \item Can we get a more precise bound on $k$ such that $(\Z/2\Z)^k\times H$ is not the Jacobian of a simple graph?
     \medskip
       \pause
       \begin{itemize}
-      \item Evidence suggests that perhaps $k_H=|H|$. 
+      \item Evidence suggests that perhaps $k\ge|H|$. 
       \end{itemize}
       \medskip
       \pause
@@ -723,6 +797,11 @@ Every divisor in an equivalence class has the same
       \pause
     \item Can we describe which groups are Jacobians of biconnected (wedge-free)
       graphs?
+      \medskip
+      \pause
+      \begin{itemize}
+      \item \textbf{Conjecture:} $(\Z/n\Z)^k$ is not the Jacobian of a biconnected graph for all sufficiently large $k$. (maybe for $k\ge n$?)
+      \end{itemize}
   \end{itemize}
 \end{frame}
 
