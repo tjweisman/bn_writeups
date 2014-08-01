@@ -13,7 +13,6 @@
 \begin{document}
 
 \maketitle
-
 Unless stated otherwise, we will take a ``graph'' to mean a finite
 connected multigraph with no loops.
 
@@ -21,9 +20,8 @@ connected multigraph with no loops.
 \label{sec:jacobians}
 
 \subsection{The general graph case}
-It is natural to ask which finite abelian groups appear as Jacobians
-of graphs. The problem can be considerably reduced by the following
-proposition:
+We begin with a result on the structure of the Jacobian of the wedge
+sum of two graphs. 
 
 \begin{prop}
 \label{prop:wedge_product}
@@ -33,9 +31,8 @@ Let $G_1$ and $G_2$ be graphs. Then $\Jac(G_1 \vee G_2) \simeq
 
 We prove Proposition \ref{prop:wedge_product} by observing that the
 Jacobian of a graph can be directly computed from the Smith normal
-form of its Laplacian matrix. Throughout the following, for any
-integer matrix $M$, let $M_{i,i}$ represent the submatrix of $M$ obtained
-by deleting the $i$th row and column.
+form of its Laplacian matrix. We will denote by $M_{i,i}$ the
+submatrix of $M$ obtained by deleting the $i$th row and column.
 
 \begin{lem}
 \label{lem:SNF_submatrix}
@@ -57,30 +54,30 @@ form of $Q_{i,i}$ is $S_{n,n}$.
   Q = 
   \left[\begin{array}{ccc}
       Q_1 & \vdots & \\
-      \ldots & \val{v_0}  & \ldots \\
+      \ldots & \val(v_0)  & \ldots \\
       & \vdots & Q_2
-  \end{array}\right]
+  \end{array}\right].
 \end{equation*}
 If we delete the row and column corresponding to $v_0$, the resulting
-matrix $Q'$ will be in block diagonal form, and has cokernel
-isomorphic to that of the matrix obtained by taking the Smith normal
-form of the blocks. Applying Lemma \ref{lem:SNF_submatrix}, we then
-see that the following matrix $M$ has cokernel isomorphic to the
-cokernel of $Q$:
+matrix $Q'$ will be in block diagonal form. $Q'$ has the same Smith
+Normal form as a block diagonal matrix whose blocks are the Smith
+Normal forms of the blocks of $Q'$. Applying Lemma
+\ref{lem:SNF_submatrix}, we then see that the following matrix $M$ has
+cokernel isomorphic to the cokernel of $Q$:
 
 \begin{equation*}
   \left[\begin{array}{cc|c}
       S_1 & \\
       & S_2 \\ \hline
       & & 0
-    \end{array}\right]
+    \end{array}\right].
 \end{equation*}
 
 where $S_1$, $S_2$ are diagonal matrices whose entries are the
 invariant factors of $\Jac(G_1), \Jac(G_2)$, respectively.
 \end{proof}
 
-\begin{figure}[h]
+\begin{figure}[H]
   \begin{tikzpicture}    
     \draw {(0:1) -- (120:1) -- (240:1)} -- cycle (270:1.2) node[below]
     {$G_1$};
@@ -143,8 +140,8 @@ theorem for finite abelian groups, tells us that if, for all $n \in
 $n$, then \emph{all} finite abelian groups are the Jacobian of some
 graph.
 
-We will now fix $n$, and provide two constructions of $G$ with
-$\Jac(G) \simeq \Z/n\Z$.
+We will now fix $n$, and provide a construction of $G$ with $\Jac(G)
+\simeq \Z/n\Z$.
 
 \begin{defn}
   $B_n$, the \emph{banana graph on $n$ edges}, is the graph with
@@ -197,9 +194,9 @@ banana graphs of the appropriate size. This provides the following:
 \subsection{The simple graph case}
 We have shown that all finite abelian groups appear as the Jacobian of
 some graph. However, since banana graphs are only realizable as a
-multigraphs, it is natural to ask whether there also exists a family
-of simple graphs $G$ such that $\Jac(G) \simeq \Z/n\Z$. Below, we
-provide such a construction for all $n > 2$.
+multigraphs, it is natural to ask whether, for fixed $n \in \N$, there
+also exists a simple graph $G$ such that $\Jac(G) \simeq
+\Z/n\Z$. Below, we provide such a construction for all $n > 2$.
 
 \begin{lem}
   \label{lem:2valent_path}
@@ -230,12 +227,12 @@ provide such a construction for all $n > 2$.
   to the statement that there exists $\mathbf{v} \in \Z^n$ such that
 
   \begin{equation*}
-    \bv{v}_{m+1} - \bv{v}_1  = m(\bv{v}_2 - \bv{v}_1) + Q\mathbf{v}
+    \bv{v}_{m+1} - \bv{v}_1  = m(\bv{v}_2 - \bv{v}_1) - Q\mathbf{v}
   \end{equation*}
 
   where $\bv{v}_i$ represents the $i$th standard basis element for
   $\Z^n$, corresponding to the divisor with formal sum $(v_i)$. If we
-  choose $\mathbf{v} = \sum_{i=1}^{m - 1}(m - i)\bv{v}_i$, it is
+  choose $\mathbf{v} = \sum_{i=1}^{m - 1}(m - i)\bv{v}_{i+1}$, it is
   easy to check that the equality above holds.
 \end{proof}
 
@@ -279,8 +276,8 @@ graph. It is known that there is no simple graph $G$ with $\Jac(G)
 \simeq \Z/2\Z$, since there is no simple graph with two spanning
 trees. 
 
-We will generalize this result, first examining the case that the
-graph $G$ is biconnected. 
+We will generalize this result, first restricting ourselves to the
+case that the graph $G$ is biconnected.
 
 \begin{remark}
   \label{remark:biconnected_wedge}
@@ -372,6 +369,7 @@ We now prove the first of our main results:
 \end{proof}
 
 \begin{remark}
+  \label{remark:2group_characterize}
   The proof of Theorem \ref{thm:2group} also gives a complete
   characterization of any graph $G$ with $\Jac(G) \simeq
   (\Z/2\Z)^k$. In general, we can always obtain $G$ from the following
@@ -428,9 +426,10 @@ biconnected subgraphs. Throughout the following, we will suppose that
 $G$ is a biconnected graph with Jacobian $\Jac(G) = \Gamma \simeq
 (\Z/2\Z)^k \times H$ for some finite abelian group $H$, and that $\mu$
 is the maximum order of an element of $H$. We will require the
-following bound on the genus of $G$:
+following bound on the genus of $G$, which Proposition 5.2 in
+\cite{Lorenzini1989}:
 
-\begin{thm}[CITE LORENZINI]
+\begin{thm}[Lorenzini, 1989]
   \label{lem:genus_cycle}
   If $g$ is the genus of $G$, then $g \ge k$.
 \end{thm}
@@ -558,19 +557,19 @@ $|H|$, to achieve an upper bound on $k$.
   \[
   |V(G)| - m < m\mu^2.
   \] 
-  Choosing $v_0 = |H|(1 + \mu^2)$ then gives $|V(G)| < v_0$, as
+  Choosing $n_H = |H|(1 + \mu^2)$ then gives $|V(G)| < n_H$, as
   required.
 \end{proof}
 
 Applying Corollary \ref{cor:genus_v_mu} and Lemma
 \ref{lem:genus_cycle}, we see that for sufficiently large $k$, we must
-have $|V(G)| > v_0$. This in turn implies that for sufficiently large
+have $|V(G)| > n_H$. This in turn implies that for sufficiently large
 $k$, $(\Z/2\Z)^k \times H$ is not the Jacobian of any biconnected
 graph.
 
 Using this fact, we will induct on $|H|$ to show that for sufficiently
 large $k$, $(\Z/2\Z)^k \times H$ is not the Jacobian of \emph{any}
-graph.
+simple graph.
 
 \begin{thm}
   \label{thm:2group_product}
@@ -597,18 +596,18 @@ graph.
   \times H_2 \simeq H\}
 \end{equation*}
 
-Now let $k_0 = \max(k', k'')$. We wish to show that for all $k > k_0$,
+Now let $k_H = \max(k', k'')$. We wish to show that for all $k > k_H$,
 if $\Jac(G) \simeq (\Z/2\Z)^k \times H$, then $G$ is not simple. Let
-$G$ be a graph with this Jacobian, and let $k > k_0$.  Since $k > k'$,
+$G$ be a graph with this Jacobian, and let $k > k_H$.  Since $k > k'$,
 $G$ is not biconnected, so it must be the wedge sum of two graphs
-$G_1$ and $G_2$. There must then exist integers $k_1, k_2$ with $k_1 +
-k_2 = k$ and groups $H_1, H_2$ with $H_1 \times H_2 \simeq H$ such
-that
+$G_1$ and $G_2$ (see Remark \ref{remark:biconnected_wedge}). There
+must then exist integers $k_1, k_2$ with $k_1 + k_2 = k$ and groups
+$H_1, H_2$ with $H_1 \times H_2 \simeq H$ such that
 
-\begin{align}
+\begin{align*}
   \Jac(G_1) &\simeq (\Z/2\Z)^{k_1} \times H_1 \\
   \Jac(G_2) &\simeq (\Z/2\Z)^{k_2} \times H_2
-\end{align}
+\end{align*}
 
 Without loss of generality, we may assume that neither $G_1$ nor $G_2$
 is a tree, so that $\Jac(G_1)$ and $\Jac(G_2)$ are both nontrivial. In
@@ -656,16 +655,19 @@ Computer searches of this nature have led to the following:
 It is also of interest that the key fact in the proof of the
 nonoccurence of groups with many factors of $\Z/2\Z$ seems to be the
 requirement that $G$ is biconnected, rather than that $G$ is
-simple. This, together with the fact that the Jacobians of ``most''
-graphs are cyclic (CITE STUFF), suggests the following:
+simple. It has been shown that, asymptotically, the probability that
+the Jacobian of a random graph is cyclic is relatively high (CITE A
+THING). We might then expect that the Jacobians of most graphs have a
+small number of invariant factors. Since random graphs almost always
+biconnected, we make the following conjecture:
 
 \begin{conj}
-  Let $G$ be a biconnected graph. For any $n$, there exists $k_0$ such
-  that if $k > k_0$, $\Jac(G) \not\simeq (\Z/n\Z)^k$.
+  For any $n \in \N$, there exists $k_n$ such that if $k > k_n$, there
+  is no biconnected graph $G$ with $\Jac(G) \simeq (\Z/n\Z)^k$.
 \end{conj}
 
-We already know that this conjecture holds with $k_0 = 1$ in the case
-$n=3$: Lemma \ref{lem:delta_le_mu} shows that the the only biconnected
+We already know that this conjecture holds for $n=3$, with $k_3 =
+1$. Lemma \ref{lem:delta_le_mu} shows that the the only biconnected
 graphs with Jacobian $(\Z/3\Z)^k$ are the $3$-cycle and the
 $3$-banana.
 
@@ -684,7 +686,11 @@ subgroup of $\Jac(G')$, corresponding to a lattice on $(\R/\Z)^g$.
 Let $G_m$ be the graph obtained by ``subdividing'' the edges of $G$
 $m$ times; that is, we add $m-1$ two-valent vertices to $V(G)$ for
 each edge of $G$, and replace each edge of $G$ with $m$ edges between
-those vertices. [someone] provides the following result:
+those vertices. 
+
+PUT A PICTURE HERE! 
+
+[CITATION] provides the following result:
 
 \begin{prop}
   \label{prop:quotient_subdivide}
@@ -709,13 +715,13 @@ $\Jac(G')$:
 
   \begin{equation*}
     \Jac(G_m) \simeq (\Z/m\Z)^{g-k} 
-    \times \Z/ma_1\Z \times \ldots \times \Z/ma_k\Z
+    \times \Z/ma_1\Z \times \ldots \times \Z/ma_k\Z.
   \end{equation*}
 \end{thm}
 
 Note that it suffices to prove Theorem \ref{thm:subdivide} for $m=p$
-for prime $p$, since we may achieve a subdivision into $b_1 \cdot b_2$
-edges by successively subdividing into $b_1$ and $b_2$ edges.
+for prime $p$, since we may achieve a subdivision into $b_1b_2$ edges
+by successively subdividing into $b_1$ and $b_2$ edges.
 
 Since $\Jac(G)$ is isomorphic to a subgroup of $\Jac(G_p)$, if two
 divisors are equivalent in $\Div^0(G)$, they are also equivalent in
@@ -794,7 +800,7 @@ generally:
   all $i \le j$, then the set $B$ generates the group
 
   $$H \simeq \Z/a_1\Z \times \ldots \times \Z/a_j\Z 
-  \times \Z/pa_{j+1}\Z \times \ldots \times \Z/pa_k\Z$$
+  \times \Z/pa_{j+1}\Z \times \ldots \times \Z/pa_k\Z.$$
 
   Since $\Jac(G)$ is a subgroup of $H$, if $g \in \Jac(G_p)$ is not
   generated by $B$, Proposition \ref{prop:quotient_subdivide} implies
@@ -838,8 +844,20 @@ Our main result will be the following:
   to $(\Z/p\Z) \times H$ for any prime $p \equiv 1 \pmod {24}$ and
   group $H$. Then there exists a graph $G$ such that
   \[
-  \Jac(G) \simeq \Gamma
+  \Jac(G) \simeq \Gamma.
   \]
+\end{thm}
+
+Under the assumption of the Generalized Riemann Hypothesis, we will be
+able to strengthen this result:
+
+\begin{thm}[Conditional on GRH]
+  \label{thm:graph_pairing_grh}
+  Let $\Gamma$ be a finite abelian group of odd order. Then there
+  exists a graph $G$ such that
+  \begin{equation*}
+    \Jac(G) \simeq \Gamma.
+  \end{equation*}
 \end{thm}
 
 \subsection{Basic constructions}
@@ -913,7 +931,7 @@ operation on the Jacobians of those graphs. In this case, the
   V(\im(\psi_1))$ as well, and hence
   $\widehat{f_1}\in\Delta^{-1}(mE_1)$, as desired.
 
-  Now by the definition of the monodromy pairing in [CITE SHOKRIEH],
+  Now by the definition of the monodromy pairing in \cite{Shokrieh2010},
   \begin{align*}
     \pair{D_1}{E_1}_G &= \frac{1}{m} \sum_{v \in V(G)} D_1(v) \widehat{f_1}(v) = \frac{1}{m} \sum_{v \in V(\psi_1(G_1))} D_1(v) \widehat{f_1}(v) \\
     &= \frac{1}{m} \sum_{u \in V(G_1)} D_1(\psi_1(u)) \widehat{f_1}(\psi_1(u)) = \frac{1}{m} \sum_{u\in V(G_1)} \iota_1^{-1}(D_1)(u)f_1(u) \\
@@ -955,6 +973,29 @@ possible constructions below:
   vertices.
 \end{defn}
 
+\begin{figure}[H]
+  \begin{center}
+  \begin{tikzpicture}
+    
+    \draw (0,0) to [out=30, in=150] 
+       coordinate[pos=0.2] (A) 
+       coordinate[pos=0.4] (B) 
+       coordinate[pos=0.6] (C)
+       coordinate[pos=0.8] (D) (6,0);
+    \draw [fill] (A) circle (2pt);
+    \draw [fill] (B) circle (2pt);
+    \draw [fill] (C) circle (2pt);
+    \draw [fill] (D) circle (2pt);
+    \draw [fill] (0,0) circle (2pt);
+    \draw [fill] (6,0) circle (2pt);
+    \draw [fill] (3,0) circle (2pt);
+    \draw (0,0) to (6,0);
+    \draw (0,0) to [out=-30, in=-150] (6,0);
+  \end{tikzpicture}
+  \end{center}
+  \caption{The subdivided banana graph $B_S$, for $S = \{5, 2, 1\}$.}
+\end{figure}
+
 \begin{defn}
   Let $S = \{s_1, \ldots, s_m\}$ be a multiset of positive
   integers. $C_S$, the \emph{stupidly named cycle graph of $S$}, is
@@ -978,11 +1019,11 @@ elementary symmetric polynomial applied to the elements of $S$:
   for a prime $p$ and integer $r$, and $\gcd(s_i, p) = 1$ for all $s_i
   \in S$. Then
   \begin{equation*}
-    \Jac(B_S) \simeq (\Z/p^r\Z, \pair{\cdot}{\cdot})
+    \Jac(B_S) \simeq (\Z/p^r\Z, \pair{\cdot}{\cdot}),
   \end{equation*}
   where $\pair{\cdot}{\cdot}$ is the pairing on $\Z/p^r\Z$ given by
   \begin{equation*}
-    \pair{x}{y} = \frac{\left(\prod_{i=1}^ms_i\right)xy}{p^r}
+    \pair{x}{y} = \frac{\left(\prod_{i=1}^ms_i\right)xy}{p^r}.
   \end{equation*}
 \end{prop}
 \begin{proof}
@@ -992,7 +1033,7 @@ elementary symmetric polynomial applied to the elements of $S$:
   edge set of any spanning tree on $B_S$ must be
 
   \begin{equation*}
-    E_i \cup \left(\bigcup_{j \ne i} (E_j \setminus \{e_{jk}\})\right)
+    E_i \cup \left(\bigcup_{j \ne i} (E_j \setminus \{e_{jk}\})\right),
   \end{equation*}
   where $e_{jk}$ is some edge in $E_j$. Each possible choice of $E_i$
   and $e_{jk}$ corresponds to a distinct spanning tree of $B_S$, so we
@@ -1082,38 +1123,47 @@ pairing $\pair{\cdot}{\cdot}$. We will first address the simpler
 situation, where $p$ is odd. In this case, up to isomorphism, there
 are only two pairings on $\Z/p^r\Z$; we will denote these by
 $\mathfrak{r}$ and $\mathfrak{n}$, the \emph{residue} and
-\emph{nonresidue} pairings, respectively. We will also assume that $r
-> 1$, and discuss the $r=1$ case separately.
+\emph{nonresidue} pairings, respectively.
 
 Observe that the banana graph $B_{p^r}$ always gives rise to the
-residue pairing on $\Z/p^r\Z$. To achieve the nonresidue pairing, it
-suffices to prove the following:
+residue pairing on $\Z/p^r\Z$. To achieve the nonresidue pairing, we
+will use the subdivided banana graph $B_S$ with an appropriately
+chosen multiset $S$.
 
-\begin{prop}
-  \label{prop:exist_decomp}
-  For any odd prime $p$ and integer $r > 1$, there exists a
-  multiset of positive integers $S = \{s_1, \ldots s_m\}$ such that
-  $R(S) = p^r$, $\gcd(p, s_i) = 1$ for all $i$, and $\prod_{i=1}^ms_i$
-  is a nonresidue modulo $p$.
-\end{prop}
-
-Our proof will rely heavily on quadratic reciprocity, and it will be
+Our approach will rely on quadratic reciprocity, and it will be
 necessary to consider the cases $p \equiv 1 \pmod 4$ and $p \equiv 3
-\pmod 4$ seperately.
+\pmod 4$ seperately. We will need to further differentiate between the
+cases where $r > 1$ and $r = 1$; it is in the latter case that our
+results require the assumption of the Generalized Riemann Hypothesis.
 
 For the $p \equiv 1 \pmod 4$ case, we will need the following
-proposition, which follows from (CITATION):
+proposition:
 \begin{prop}
   \label{prop:q_bound}
   For any prime $p$ and integer $r > 1$, there exist prime quadratic
   nonresidues $q_1 \equiv 1 \pmod 4, q_2 \equiv 3 \pmod 4$, such that
   $q_1$ and $q_2$ are both less than $2\sqrt{p}$.
 \end{prop}
+\begin{proof}
+  Apply Theorem 1.7 in Pollack, using some Dirichlet character
+  arguments I don't understand. 
+\end{proof}
 
-When $p \equiv 1 \pmod 4$, we also will need to consider $r$ even and
-$r$ odd seperately. We will choose our decomposing set $S$ slightly
-differently in each case, to ensure that $\pi_{i=1}^ms_i$ is in fact a
-nonresidue.
+GRH gives us an analagous statement for $r=1$:
+\begin{prop}[Conditional on GRH]
+  \label{prop:q_bound_grh}
+  For any prime $p$, there exists a prime quadratic nonresidue $q
+  \equiv 3 \pmod 4$ such that $q < 2\sqrt{p}$.
+\end{prop}
+\begin{proof}
+  Somehow this follows from a result of Oesterle. Again, I don't
+  understand it.
+\end{proof}
+
+In general, we will also need to distinguish between the cases where
+$r$ is even and $r$ is odd; our description of the set $S$ will be
+slightly different in each case, and will require two slightly
+different lemmata.
 
 \begin{lem}
   \label{lem:decompose_q_non}
@@ -1133,10 +1183,6 @@ nonresidue.
   that $k \equiv -a^2 \equiv a(q-a) \pmod q$, as required.
 \end{proof}
 
-The following lemma is a result nearly identical to the previous one;
-note that we now require the product of $a$ and $q-a$ to be a residue
-rather than a nonresidue.
-
 \begin{lem}
   \label{lem:decompose_q_res}
   Let $q$ be a prime with $q \equiv 1 \pmod 4$. Then for any $k$
@@ -1151,13 +1197,16 @@ rather than a nonresidue.
   constructed as before.
 \end{proof}
 
+Note that, in the second lemma above, we require the product of $a$
+and $q-a$ to be a residue rather than a nonresidue.
+
 \begin{lem}
   \label{lem:exist_q}
   Let $p$ be a prime with $p \equiv 1 \pmod 4$, and let $r$ be an
   integer with $r > 1$. Then there exists a prime $q$, with $\left(
     \frac{q}{p^r} \right) = -1$, and an integer $0 < a < q$ such that
   the quantity
-  \[\frac{p^r - a(q-a)}{q}\] 
+  \[\frac{p^r - a(q-a)}{q}\]
   is a positive integer.
 \end{lem}
 \begin{proof}
@@ -1180,11 +1229,23 @@ rather than a nonresidue.
   $p^r - a(q-a) > 0$.
 \end{proof}
 
-We are now ready to prove Proposition \ref{prop:exist_decomp}. Given a
-prime $q$ of the form described by Lemma \ref{lem:exist_q}, we will
-construct our decomposing set $S$ in terms of $q$. 
+Note that in the the proof above, assuming GRH, we may relax the
+assumption that $r=1$ by applying Proposition \ref{prop:q_bound_grh}
+instead of Proposition \ref{prop:q_bound}.
 
-\begin{proof}[Proof of Proposition \ref{prop:exist_decomp}]
+We now apply Lemma \ref{lem:exist_q} to show the existence of a set
+$S$ corresponding to a subdivided banana graph that gives rise to the
+nonresidue pairing.
+
+\begin{prop}
+  \label{prop:exist_decomp}
+  For any odd prime $p$ and integer $r > 1$, there exists a
+  multiset of positive integers $S = \{s_1, \ldots s_m\}$ such that
+  $R(S) = p^r$, $\gcd(p, s_i) = 1$ for all $i$, and $\prod_{i=1}^ms_i$
+  is a nonresidue modulo $p$.
+\end{prop}
+
+\begin{proof}
   First consider the case that $p \equiv 3 \pmod 4$. Choose $S = \{1,
   p^r-1\}$. Clearly $R(S) = p^r$, and by quadratic reciprocity,
   $s_1s_2 \equiv -1 \pmod {p^r}$ is a nonresidue modulo $p^r$.
@@ -1210,35 +1271,48 @@ For a prime $p$ and integer $r > 1$, given a set $S$ described by
 Proposition \ref{prop:exist_decomp}, we see that $B_S \simeq (\Z/p^r\Z,
 \mathfrak{n})$, as required.
 
-We now consider the case that $r=1$. We begin by noting that in
-certain cases, it is still possible to construct a set $S$
-satisfying the required conditions:
+Note that, as in Lemma \ref{lem:exist_q}, GRH allows us to relax the
+assumption that $r=1$; this completes the proof of Theorem
+\ref{thm:graph_pairing_grh}.
+
+
+We conclude the proof of Theorem \ref{thm:graph_pairing} by noting
+that in certain cases, it is still possible to construct a set $S$
+satisfying the conditions required to achieve the nonresidue pairing:
+
 \begin{prop}
+  \label{prop:p_1mod24}
   Let $p$ be an odd prime, not equivalent to $1 \pmod {24}$. Then
   there exists a multiset of positive integers $S$ such that $R(S) =
   p$ and $\prod_{s_i \in S}s_i$ is a nonresidue modulo $p$.
 \end{prop}
 \begin{proof}
-  I don't know how directly this follows from the citations...
+  We consider the following cases:
+  \begin{itemize}
+  \item For $p \equiv 3 \pmod 4$, as before, we may use $S = \{1,
+    p-1\}$.
+  \item For $p \equiv 5 \pmod 8$, use $S = \{1, 1,
+    \frac{p-1}{2}\}$. Since $p \equiv 1 \pmod 4$, the product
+    $s_1s_2s_3$ is a nonresidue modulo $p$ iff $2$ is a nonresidue
+    modulo $p$---which is the case when $p \equiv 5 \pmod 8$.
+  \item For $p \equiv 2 \pmod 3$, if $p \equiv 3 \pmod 4$, we are in
+    the first case above. Otherwise, we have $p \equiv 1 \pmod 4$, and
+    $2$ is a nonresidue modulo $p$. Provided $p > 2$, Proposition
+    \ref{prop:q_bound} holds in this case, and the proof follows as
+    when $r > 1$.
+  \end{itemize}
+  
+  The only remaining possibility after eliminating these three cases
+  is $p \equiv 1 \pmod {24}$.
 \end{proof}
 
-This completes the proof of Theorem \ref{thm:graph_pairing}.
-
-\begin{remark} We could extend Theorem \ref{thm:graph_pairing} to
-  cover \emph{all} groups with pairing of odd order if we could prove
-  Proposition \ref{prop:exist_decomp} in the case that $r=1$.
-  
-  The critical difference between the two cases is Proposition
-  \ref{prop:q_bound}, which, in the $r=1$ case, implies an upper bound
-  better than $2\sqrt{p}$ on the smallest nonresidue modulo $p$ that
-  is equivalent to $3 \pmod 4$.
-
-  While this bound is not currently known to hold for all primes $p$,
-  computer search has verified that it does for all $p < 10^9$. The
-  best known theoretical bound on $q$ is $O(p^{1/2 + \epsilon})$ for
-  any $\epsilon > 0$, but bounds that are sufficient to prove the
-  proposition for the case $r=1$ hold under the assumption of the
-  Generalized Riemann Hypothesis (CITATION NEEDED).
+\begin{remark}
+  Proposition \ref{prop:p_1mod24} shows that we could provide an
+  unconditional proof of Theorem \ref{thm:graph_pairing_grh} if we
+  could prove Proposition \ref{prop:q_bound_grh} in the case that
+  $r=1$ for all primes $p \equiv 1 \pmod {24}$. In fact, computer
+  search has verified that the proposition holds for all such primes
+  smaller than $10^9$.
 \end{remark}
 
 \subsection{2-groups}
@@ -1250,7 +1324,7 @@ such pairings is somewhat more complicated than that of the odd prime
 pairings; however, there are still only finitely many cases to
 consider.
 
-\begin{prop}[CITE MIRANDA]
+\begin{prop}[Miranda, 1984]
   Let $\mathcal{P}_{2}$ be the semigroup of isomorphism classes of
   2-groups with pairing, under orthogonal direct
   sum. $\mathcal{P}_{2}$ is generated by the following groups with pairing:
@@ -1277,6 +1351,8 @@ consider.
      \frac{1}{2^{n}}, & \textrm{otherwise }
    \end{cases}
    \]   
+   where, in the last two cases, $e_i$ and $e_j$ are generators for
+   $\Z/2^r\Z \times \Z/2^r\Z$. 
  \end{prop}
 
  Our goal is to find families of graphs with Jacobian isomorphic to
@@ -1312,8 +1388,8 @@ consider.
 
 \begin{proof}
   Observe that $\Jac(B_{2^r}) \simeq \AP$ and $\Jac(C_{2^r}) \simeq
-  \BP$, where $B_{2^r}$ and $C_{2^r}$ are respectively the cycle and
-  banana graphs on $2^r$ edges.
+  \BP$, where $B_{2^r}$ and $C_{2^r}$ are respectively the banana and
+  cycle graphs on $2^r$ edges.
 
   It remains to find constructions for graphs providing the groups
   $\CP$ and $\DP$. We consider the cases for even and odd $r$
@@ -1360,11 +1436,11 @@ on the edge between $v$ and $w$. Solving the equation gives
 Since $t$ is at most $n$ and $t=n$ is the only solution such that $a$
 has nonnegative integer value the order of this element must be
 $2^{n}$. Furthermore, $c=2^{n}-3$, implying that the pairing of $D$
-with itself is $\frac{2^{n}-3}{2^{n}}$ which by \ref{lemma:2-group
-  iso} is isomorphic to the $\CP$ pairing.
+with itself is $\frac{2^{n}-3}{2^{n}}$ which by
+\ref{lem:2group_pairing_iso} is isomorphic to the $\CP$ pairing.
 
 $c=2^{n}-3$. Thus the pairing is $\frac{2^{n}-3}{2^{n}}$, which is
-isomorphic to $\CP$ by \ref{lemma:2-group iso}.
+isomorphic to $\CP$ by \ref{lem:2group_pairing_iso}.
 
 %C pairing n odd
 \begin{center}
@@ -1414,7 +1490,7 @@ This results in the equation
 \begin{equation*}
 2^na=2^t
 \end{equation*}
-Since $t$ is at most $n$ and $t=n$ is the only solution such that $a$ has nonnegative  integer value the order of this element must be $2^{n}$. Furthermore $d=2^{n}-3$ implying that the pairing of $D$ with itself is $\frac{2^{n}-3}{2^{n}}$, which isisomorphic to $\CP$ by  \ref{lemma:2-group iso}.
+Since $t$ is at most $n$ and $t=n$ is the only solution such that $a$ has nonnegative  integer value the order of this element must be $2^{n}$. Furthermore $d=2^{n}-3$ implying that the pairing of $D$ with itself is $\frac{2^{n}-3}{2^{n}}$, which isisomorphic to $\CP$ by  \ref{lem:2group_pairing_iso}.
 
 %C pairing n even
 \begin{center}
@@ -1455,7 +1531,7 @@ a=3b
 \end{equation*}
 where $a$ is slope on set of $\frac{2^{n}-2}{3}$ edges, and
 $b$ is slope on the doubled edges. Since $t$ is at most $n$ and $t=n$ is the only solution such that $b$ has nonnegative integer value the order of this element must be $2^{n}$. This also implies that the pairing of $D$ with itself is $\frac{3}{2^{n}}$, as the equations have solution $a=3$. This pairing is isomorphic to
-$\DP$ by  \ref{lemma:2-group iso}.
+$\DP$ by  \ref{lem:2group_pairing_iso}.
 
 %D pairing n odd
 \begin{center}
@@ -1497,7 +1573,7 @@ b+ \frac{2^{n}-1}{3}a=2^{t}
 \end{equation*}
 where $a$ is the slope on edge copied $\frac{2^{n}-1}{3}$ times, and $b$
 is slope on the edges that aren't copied. Since $t$ is at most $n$ and $t=n$ is the only solution such that $b$ has nonnegative integer value the order of this element must be $2^{n}$. This also implies that the pairing of $D$ with itself is $\frac{3}{2^{n}}$, as the equations have solution $a=3$. This pairing is isomorphic to
-$\DP$ by  \ref{lemma:2-group iso}.
+$\DP$ by  \ref{lem:2group_pairing_iso}.
 
 %D pairing n even
 \begin{center}
@@ -1586,12 +1662,13 @@ generators. However, we may still make the following observation:
 \end{thm}
 \begin{proof}
   This is a result of the characterization of graphs $G$ with $\Jac(G)
-  \simeq (\Z/2\Z)^k$, given in Section 1. We see that any such graph
-  has Jacobian isomorphic to $(\AP)^k$.
+  \simeq (\Z/2\Z)^k$, given in Remark
+  \ref{remark:2group_characterize}. We see that any such graph has
+  Jacobian isomorphic to $(\AP)^k$.
 \end{proof}
 
-This result, combined with our inability to construct \emph{any} graph
-$G$ that yields the group $\EP$, leads us to make the following:
+This result, combined with our failure to find \emph{any} graph $G$
+that yields the group $\EP$, leads us to make the following:
 
 \begin{conj}
   There is no graph $G$ such that $\Jac(G) \simeq \EP$.
@@ -1600,11 +1677,11 @@ $G$ that yields the group $\EP$, leads us to make the following:
 We note, however, that there do exist examples of graphs $G$ such that
 for some subgroup $H \subset \Jac(G)$, if $\pair{\cdot}{\cdot}\big|_H$ is
 the monodromy pairing on $\Jac(G)$ restricted to $H$, then $(H,
-\pair{\cdot}{\cdot}\big|_H) \simeq \EP$. In particular, take $G$ to be
-the following graph:
+\pair{\cdot}{\cdot}\big|_H) \simeq \EP$. In particular, take $G =
+B_S$, for $S = \{2, 2, 2\}$. 
 
-[PICTURE GOES HERE, ONCE WE ACTUALLY FIGURE OUT WHAT THIS GRAPH SHOULD
-BE]
+[PICTURE GOES HERE, POSSIBLY WITH A GOOD CAPTION EXPLAINING WHY THIS
+HAS THE RIGHT PAIRING]
 
 We have even fewer results regarding $\FP$. We note that the complete
 graph $K_4$ is an example of a graph with Jacobian isomorphic to
@@ -1632,7 +1709,11 @@ Lemma \ref{lem:delta_le_mu} shows that the only biconnected simple
 graph with Jacobian of the form $(\Z/3\Z)^k$ is the $3$-cycle
 $C_3$. The monodromy pairing on $\Jac(C_3)$ is the nonresidue pairing
 $\mathfrak{n}$, and the groups with pairing given above do not arise
-as powers of $\Z/3\Z$ with this pairing. 
+as powers of $\Z/3\Z$ with this pairing.
 \end{proof}
+
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{references}
 
 \end{document}
