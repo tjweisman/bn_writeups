@@ -1,5 +1,6 @@
 \documentclass{amsart}
 \usepackage{tikz}
+\usetikzlibrary{calc}
 \usepackage{float}
 
 \input{../common/BN_common}
@@ -21,61 +22,13 @@ connected multigraph with no loops.
 
 \subsection{The general graph case}
 We begin with a result on the structure of the Jacobian of the wedge
-sum of two graphs. 
+sum of two graphs.
 
-\begin{prop}
+\begin{prop}\cite[Proposition 1.2]{CR2000}
 \label{prop:wedge_product}
 Let $G_1$ and $G_2$ be graphs. Then $\Jac(G_1 \vee G_2) \simeq
 \Jac(G_1) \times \Jac(G_2)$.
 \end{prop}
-
-We prove Proposition \ref{prop:wedge_product} by observing that the
-Jacobian of a graph can be directly computed from the Smith normal
-form of its Laplacian matrix. We will denote by $M_{i,i}$ the
-submatrix of $M$ obtained by deleting the $i$th row and column.
-
-\begin{lem}
-\label{lem:SNF_submatrix}
-Let $G$ be a graph, and let $Q$ be the Laplacian matrix of $G$. If the
-Smith normal form of $Q$ is $S$, then for any $i$, the Smith normal
-form of $Q_{i,i}$ is $S_{n,n}$.
-\end{lem}
-\begin{proof}
-  WE NEED A PROOF OF THIS, but I feel like someone has to have proved
-  it already so I'm not typing it.
-\end{proof}
-
-\begin{proof}[Proof of Proposition \ref{prop:wedge_product}]
-  Let $Q_1$ and $Q_2$ be the Laplacian matrices of $G_1$ and $G_2$,
-  respectively, and let the vertex of intersection of $G_1$ and $G_2$
-  be $v_0$. Enumerate the vertices of $G$ so that the Laplacian of $G$
-  can be written as
-\begin{equation*}
-  Q = 
-  \left[\begin{array}{ccc}
-      Q_1 & \vdots & \\
-      \ldots & \val(v_0)  & \ldots \\
-      & \vdots & Q_2
-  \end{array}\right].
-\end{equation*}
-If we delete the row and column corresponding to $v_0$, the resulting
-matrix $Q'$ will be in block diagonal form. $Q'$ has the same Smith
-Normal form as a block diagonal matrix whose blocks are the Smith
-Normal forms of the blocks of $Q'$. Applying Lemma
-\ref{lem:SNF_submatrix}, we then see that the following matrix $M$ has
-cokernel isomorphic to the cokernel of $Q$:
-
-\begin{equation*}
-  \left[\begin{array}{cc|c}
-      S_1 & \\
-      & S_2 \\ \hline
-      & & 0
-    \end{array}\right].
-\end{equation*}
-
-where $S_1$, $S_2$ are diagonal matrices whose entries are the
-invariant factors of $\Jac(G_1), \Jac(G_2)$, respectively.
-\end{proof}
 
 \begin{figure}[H]
   \begin{tikzpicture}    
@@ -119,7 +72,7 @@ invariant factors of $\Jac(G_1), \Jac(G_2)$, respectively.
 \end{figure}
 
 Note that in the case that $G_1$ is a tree (and therefore $\Jac(G_1)$
-is trivial), $\Jac(G_1 \vee G_2) \simeq \Jac(G_2)$. We have the
+is trivial), $\Jac(G_1 \vee G_2) \simeq \Jac(G_2)$. We prove the
 following corollary:
 \begin{cor}
   \label{cor:1_valent}
@@ -134,69 +87,13 @@ following corollary:
   trees, as noted above, have no effect on the Jacobian of $G$.
 \end{proof}
 
-Proposition \ref{prop:wedge_product}, together with the classification
-theorem for finite abelian groups, tells us that if, for all $n \in
-\N$, there exists a graph $G$ such that $\Jac(G)$ is cyclic of order
-$n$, then \emph{all} finite abelian groups are the Jacobian of some
-graph.
-
-We will now fix $n$, and provide a construction of $G$ with $\Jac(G)
-\simeq \Z/n\Z$.
-
-\begin{defn}
-  $B_n$, the \emph{banana graph on $n$ edges}, is the graph with
-  $V(B_n) = \{v_1, v_2\}$ and edge multiset consisting of $n$ copies of
-  $\{v_1, v_2\}$.
-\end{defn}
-
-\begin{figure}[h]
-  \begin{center}
-    \begin{tikzpicture}
-      \draw (0,0) to [out=30, in=150] (6,0) ;
-      \draw (0,0) to [out=-30, in=-150] (6,0) ;
-      \draw (0,0) to [out=0, in=180] (6,0) ;
-
-      \draw [fill] (0,0) circle [radius=.1cm] ;
-      \draw [fill] (6,0) circle [radius=.1cm] ;      
-    \end{tikzpicture}
-    \caption{The $3$-banana $B_3$}
-  \end{center}
-\end{figure}
-
-\begin{prop}
-  \label{prop:banana_cyclic}
-  The Jacobian of $B_n$ is isomorphic to $\Z/n\Z$.
-\end{prop}
-
-\begin{proof}
-  $B_n$ has $n$ spanning trees, so
-  $|\Jac(B_n)| = n$. To show that $\Jac(B_n) \simeq \Z/n\Z$, it
-  suffices to find a single element of order at least $n$.
-
-  Let $D \in \Div^0(B_n)$ be the divisor $(v_2) - (v_1)$, and consider
-  $\overline{D} = \in \Jac(B_n)$. For any $1 \le m < n$, the divisor
-  $mD$ is $v_1$-reduced---since $v_2$ has degree $n$, it is impossible
-  to fire it without sending it into debt. If $m=n$, then firing $v_2$
-  yields the zero divisor. $m\overline{D}$ is therefore trivial iff
-  $m$ is a multiple of $n$, and hence $\overline{D}$ has order $n$ as
-  required.
-\end{proof}
-
-We now have a procedure for constructing graphs whose Jacobian is any
-desired product of cyclic groups: we simply take the wedge sum of the
-banana graphs of the appropriate size. This provides the following:
-
-\begin{cor}
-  For any finite abelian group $\Gamma$, there exists a graph $G$ such
-  that $\Jac(G) \simeq \Gamma$. 
-\end{cor}
-
-\subsection{The simple graph case}
-We have shown that all finite abelian groups appear as the Jacobian of
-some graph. However, since banana graphs are only realizable as a
-multigraphs, it is natural to ask whether, for fixed $n \in \N$, there
-also exists a simple graph $G$ such that $\Jac(G) \simeq
-\Z/n\Z$. Below, we provide such a construction for all $n > 2$.
+Cori and Rossin noted that Proposition \ref{prop:wedge_product},
+together with the classification theorem for finite abelian groups,
+tells us that if (for given $n \in \N$) there exists a graph $G$ such
+that $\Jac(G)$ is cyclic of order $n$, then \emph{all} finite abelian
+groups are the Jacobian of some graph. Cori and Rossin used cycle
+graphs to realize these Jacobians; below, we explicitly show that this
+construction is valid.
 
 \begin{lem}
   \label{lem:2valent_path}
@@ -209,31 +106,10 @@ also exists a simple graph $G$ such that $\Jac(G) \simeq
   \end{equation*}
 \end{lem}
 \begin{proof}
-  Under an appropriate enumeration of the vertices of $G$, the
-  Laplacian matrix $Q$ of $G$ has the form
-
-  $$Q = \begin{bmatrix}
-    k_1 & -1 \\
-    -1 &  2 & -1 \\
-    & -1 &  2 & -1 \\
-    &    &    &  \ddots  \\
-    &    &    &  -1 & k_\ell \\ 
-    &    &    &     &    & \ddots
-  \end{bmatrix}$$
-
-  where $k_1$ and $k_\ell$ are the degrees of $v_1$ and $v_\ell$,
-  respectively. Since the equivalence relation on divisors is defined
-  by the image of the Laplacian map $\Delta$, the claim is equivalent
-  to the statement that there exists $\mathbf{v} \in \Z^n$ such that
-
-  \begin{equation*}
-    \bv{v}_{m+1} - \bv{v}_1  = m(\bv{v}_2 - \bv{v}_1) - Q\mathbf{v}
-  \end{equation*}
-
-  where $\bv{v}_i$ represents the $i$th standard basis element for
-  $\Z^n$, corresponding to the divisor with formal sum $(v_i)$. If we
-  choose $\mathbf{v} = \sum_{i=1}^{m - 1}(m - i)\bv{v}_{i+1}$, it is
-  easy to check that the equality above holds.
+  We can give an explicit sequence of chip-firing moves that shows
+  that this equivalence holds: for each $1 < i \le m$, fire the vertex
+  $v_i$ $m + 1 - i$ times. We may check that $mD(v_i) = 0$ for all $1
+  < i < m+1$ and $mD(v_1) = -1$, $mD(v_{m+1}) = 1$, as required.
 \end{proof}
 
 \begin{cor}
@@ -262,13 +138,64 @@ $n$. Corollary \ref{cor:2valent_path} guarantees that such an element
 exists.
 \end{proof}
 
-$C_n$ is a simple graph whenever $n > 2$, so we have the following
-
-\begin{cor}
-  Let $\Gamma$ be a finite abelian group that is not isomorphic to
-  $\Z/2\Z \times H$ for any group $H$. Then there exists a simple
-  graph $G$ such that $\Gamma \simeq \Jac(G)$.
+\begin{cor}\cite[Corollary 1.3]{CR2000}
+  For any finite abelian group $\Gamma$, there exists a graph $G$ such
+  that $\Jac(G) \simeq \Gamma$. 
 \end{cor}
+
+We will also introduce a family of graphs related to cycle graphs,
+which we may also use to realize cyclic Jacobians for any given $n$.
+
+\begin{defn}
+  $B_n$, the \emph{banana graph on $n$ edges}, is the graph with
+  $V(B_n) = \{v_1, v_2\}$ and edge multiset consisting of $n$ copies of
+  $\{v_1, v_2\}$.
+\end{defn}
+
+\begin{figure}[h]
+  \begin{center}
+    \begin{tikzpicture}
+      \draw (0,0) to [out=30, in=150] (6,0) ;
+      \draw (0,0) to [out=-30, in=-150] (6,0) ;
+      \draw (0,0) to [out=0, in=180] (6,0) ;
+
+      \draw [fill] (0,0) circle [radius=.1cm] ;
+      \draw [fill] (6,0) circle [radius=.1cm] ;      
+    \end{tikzpicture}
+    \caption{The $3$-banana $B_3$}
+  \end{center}
+\end{figure}
+
+To find the Jacobian of the banana graph $B_n$, we apply the following
+result:
+
+\begin{thm}\cite[Theorem 2]{CR2000}
+  \label{thm:graph_dual_iso}
+  Let $G$ be a planar graph. For any planar dual $G^\star$ of $G$,
+  $\Jac(G) \simeq \Jac(G^\star)$.
+\end{thm}
+
+\begin{prop}
+  \label{prop:banana_cyclic}
+  The Jacobian of $B_n$ is isomorphic to $\Z/n\Z$.
+\end{prop}
+
+\begin{proof}
+  Note that $B_n$ is planar and dual to the cycle graph $C_n$, which
+  gives the required result.
+\end{proof}
+
+\subsection{The simple graph case}
+We have shown that all finite abelian groups appear as the Jacobian of
+some graph, which can be constructed using either cycle graphs or
+banana graphs. In fact, in many cases, the graphs we construct can be
+simple, as $C_n$ is simple whenever $n > 2$:
+
+\begin{prop}
+  Let $\Gamma$ be a finite abelian group that is not isomorphic to
+  $\Z/2\Z \times H$ for any group $H$ of even order. Then there exists
+  a simple graph $G$ such that $\Gamma \simeq \Jac(G)$.
+\end{prop}
 
 The rest of this section will investigate which groups $\Gamma =
 \Z/2\Z \times H$ can possibly occur as the Jacobian of some simple
@@ -286,8 +213,8 @@ case that the graph $G$ is biconnected.
   biconnected, then by definition, there is a vertex $v_0$ such that
   the subgraph $G'$ induced by $V(G) \setminus \{v_0\}$ is not
   connected. $G$ is then the wedge sum of the connected components of
-  $G'$ (together with the vertex $v_0$), and so $\Jac(G)$ splits as a
-  direct product of Jacobians of subgraphs of $G$.
+  $G'$ (each taken together with the vertex $v_0$), and so $\Jac(G)$
+  splits as a direct product of Jacobians of subgraphs of $G$.
 \end{remark}
 
 \begin{defn}
@@ -316,19 +243,19 @@ case that the graph $G$ is biconnected.
   $\delta$.
 
   In the case that $\delta = \mu$, we must have $\delta\overline{D} =
-  0$. Starting from $\delta D$, chip-fire $v$ once, and let the
-  divisor we obtain be $E$. Applying the burning algorithm and the
-  biconnectivity condition once more, we see that $v$, as well as each
-  of its neighbors, must be burned, and therefore that $E$ is
-  zero. This is only possible if the multiplicity of the edge
-  $\{v,w\}$ is $\delta$, i.e. $G$ is a banana graph.
+  0$. Starting from $\delta D$, chip-fire $v$ once to obtain some
+  divisor $E$. Applying the burning algorithm and the biconnectivity
+  condition once more, we see that $v$, as well as each of its
+  neighbors, must be burned, so that $E$ is $w$-reduced. $E$ must be
+  the zero divisor, which is only possible if the multiplicity of the
+  edge $\{v,w\}$ is $\delta$, i.e. $G$ is a banana graph.
 \end{proof}
 
 \begin{cor}
   \label{cor:genus_v_mu}
   For any biconnected graph with genus $g$ and $|V(G)| = n$,
   \begin{equation*}
-    n \ge \frac{2g - 2}{\mu - 1}.
+    n \ge \frac{2g - 2}{\mu - 2}.
   \end{equation*}
 \end{cor}
 \begin{proof}
@@ -337,7 +264,7 @@ case that the graph $G$ is biconnected.
     2e = \sum_{i=1}^n \val(v_i) \le \sum_{i=1}^n \delta = n \cdot \delta
     \le n \cdot \mu.
   \end{equation*}
-  Since $e = g + n - 1$, this gives $2g - 2 \le n \cdot (\mu - 1)$, as
+  Since $e = g + n - 1$, this gives $2g - 2 \le n \cdot (\mu - 2)$, as
   required.
 \end{proof}
 
@@ -372,9 +299,9 @@ We now prove the first of our main results:
   \label{remark:2group_characterize}
   The proof of Theorem \ref{thm:2group} also gives a complete
   characterization of any graph $G$ with $\Jac(G) \simeq
-  (\Z/2\Z)^k$. In general, we can always obtain $G$ from the following
-  construction: starting with some tree $T$, choose $k$ edges of $T$,
-  and give those edges multiplicity $2$. We will apply this
+  (\Z/2\Z)^k$. In general, we can always obtain $G$ by the following
+  procedure: starting with some tree $T$, choose $k$ edges of $T$, and
+  give those edges multiplicity $2$. We will apply this
   characterization later, in our discussion of the monodromy pairing
   on $\Jac(G)$.
 \end{remark}
@@ -420,23 +347,23 @@ We now prove the first of our main results:
   \end{center}
 \end{figure}
 
-We will now generalize this result to graphs whose Jacobian is of the
-form $(\Z/2\Z)^k \times H$, using a similar inductive argument on
-biconnected subgraphs. Throughout the following, we will suppose that
-$G$ is a biconnected graph with Jacobian $\Jac(G) = \Gamma \simeq
-(\Z/2\Z)^k \times H$ for some finite abelian group $H$, and that $\mu$
-is the maximum order of an element of $H$. We will require the
-following bound on the genus of $G$, which Proposition 5.2 in
-\cite{Lorenzini1989}:
+We will now generalize Theorem \ref{thm:2group} to graphs whose
+Jacobian is of the form $(\Z/2\Z)^k \times H$, using a similar
+inductive argument on biconnected subgraphs. Throughout the following,
+we will suppose that $G$ is a biconnected graph with Jacobian $\Jac(G)
+= \Gamma \simeq (\Z/2\Z)^k \times H$ for some finite abelian group
+$H$, and that $\mu$ is the maximum order of an element of $H$. We will
+require the following bound on the genus of $G$, which is stated as
+Proposition 5.2 in \cite{Lorenzini1989}. 
 
-\begin{thm}[Lorenzini, 1989]
-  \label{lem:genus_cycle}
+\begin{prop}[Lorenzini, 1989]
+  \label{prop:genus_cycle}
   If $g$ is the genus of $G$, then $g \ge k$.
-\end{thm}
+\end{prop}
 
 Applying Corollary \ref{cor:genus_v_mu} to this result shows that 
 \begin{equation*}
-  |V(G)| \ge \frac{2k-2}{\mu - 1}
+  |V(G)| \ge \frac{2k-2}{\mu - 2}
 \end{equation*}
 We now establish an upper bound on $|V(G)|$ in terms of $\mu$ and
 $|H|$, to achieve an upper bound on $k$.
@@ -561,15 +488,12 @@ $|H|$, to achieve an upper bound on $k$.
   required.
 \end{proof}
 
-Applying Corollary \ref{cor:genus_v_mu} and Lemma
-\ref{lem:genus_cycle}, we see that for sufficiently large $k$, we must
-have $|V(G)| > n_H$. This in turn implies that for sufficiently large
-$k$, $(\Z/2\Z)^k \times H$ is not the Jacobian of any biconnected
-graph.
-
-Using this fact, we will induct on $|H|$ to show that for sufficiently
-large $k$, $(\Z/2\Z)^k \times H$ is not the Jacobian of \emph{any}
-simple graph.
+Applying Corollary \ref{cor:genus_v_mu} and Proposition
+\ref{prop:genus_cycle}, we see that for sufficiently large $k$, we
+must have $|V(G)| > n_H$. This in turn implies that for sufficiently
+large $k$, $(\Z/2\Z)^k \times H$ is not the Jacobian of any
+biconnected graph. We will use this fact to show that this result
+holds generally, for all simple graphs.
 
 \begin{thm}
   \label{thm:2group_product}
@@ -579,17 +503,17 @@ simple graph.
 \end{thm}
   
 \begin{proof}
-  When $|H| = 1$ or $2$, Theorem \ref{thm:2group} gives the bound $k_0
+  When $|H| = 1$ or $2$, Theorem \ref{thm:2group} gives the bound $k_H
   = 1$. For $|H| \ge 3$, there must exist (by Proposition
   \ref{prop:v_bound}) an integer $k'$ such that if $k > k'$, and
   $\Jac(G) \simeq (\Z/2\Z)^k \times H$, then $G$ is not biconnected.
 
-  By the inductive hypothesis, for any proper subgroup $H' \subset H$,
-  there exists an integer $k(H')$ such that for all $k > k(H')$, no
-  simple graph $G'$ has $\Jac(G') \simeq (\Z/2\Z)^k \times H'$. Now,
-  since $H$ is finite, there are finitely many pairs of nontrivial
-  proper subgroups $H_1, H_2 \subset H$ such that $H_1 \times H_2
-  \simeq H$. Define
+  We proceed by induction on $|H|$. By the inductive hypothesis, for
+  any proper subgroup $H' \subset H$, there exists an integer $k(H')$
+  such that for all $k > k(H')$, no simple graph $G'$ has $\Jac(G')
+  \simeq (\Z/2\Z)^k \times H'$. Now, since $H$ is finite, there are
+  finitely many pairs of nontrivial proper subgroups $H_1, H_2 \subset
+  H$ such that $H_1 \times H_2 \simeq H$. Define
 
 \begin{equation*}
   k'' = \max\{k(H_1) + k(H_2) : H_1, H_2 \textrm{ nontrivial}, H_1
@@ -623,10 +547,10 @@ $G_2$ is not simple, so that $G$ is not simple, as required.
 \subsection{Further queries} 
 
 Analysis of the proof of Theorem \ref{thm:2group_product} suggests
-that, if $H$ is cyclic of prime power order, $k_0(H)$ is
-$O(|H|^4)$. In practice, it seems that much better bounds should
-hold. For instance, we were unable to find any simple graph $G$ where
-$\Jac(G) \simeq (\Z/2\Z)^k \times H$ for any $k > |H|$.
+that, if $H \simeq \Z/p^r\Z$ for prime $p$, $k_H = O(|H|p^3)$. In
+practice, it seems that much better bounds should hold. For instance,
+we were unable to find any simple graph $G$ where $\Jac(G) \simeq
+(\Z/2\Z)^k \times H$ for any $k > |H|$.
 
 In some cases, it is possible to directly verify that certain groups
 do not arise as the Jacobian of any simple graph. We note that, for
@@ -640,9 +564,10 @@ vertices.
 
 Lemma \ref{prop:wedge_product} tells us that any graph $G$ may be
 uniquely associated to some 2-edge-connected graph with identical
-Jacobian. For a given group $H$, it is possible to compute the
-Jacobian of all 2-edge-connected simple graphs with at most $|H|$
-spanning trees, and verify that $H$ does or does not occur. 
+Jacobian, since we may always contract bridges and leaves. For a given
+group $H$, it is possible to compute the Jacobian of all
+2-edge-connected simple graphs with at most $|H|$ spanning trees, and
+verify that $H$ does or does not occur.
 
 Computer searches of this nature have led to the following:
 
@@ -658,18 +583,18 @@ requirement that $G$ is biconnected, rather than that $G$ is
 simple. It has been shown that, asymptotically, the probability that
 the Jacobian of a random graph is cyclic is relatively high (CITE A
 THING). We might then expect that the Jacobians of most graphs have a
-small number of invariant factors. Since random graphs almost always
-biconnected, we make the following conjecture:
+small number of invariant factors. Since random graphs are almost
+always biconnected, we make the following conjecture:
 
 \begin{conj}
   For any $n \in \N$, there exists $k_n$ such that if $k > k_n$, there
   is no biconnected graph $G$ with $\Jac(G) \simeq (\Z/n\Z)^k$.
 \end{conj}
 
-We already know that this conjecture holds for $n=3$, with $k_3 =
-1$. Lemma \ref{lem:delta_le_mu} shows that the the only biconnected
-graphs with Jacobian $(\Z/3\Z)^k$ are the $3$-cycle and the
-$3$-banana.
+We already know that this conjecture holds for $n=3$, as Lemma
+\ref{lem:delta_le_mu} shows that the the only biconnected graphs with
+Jacobian $(\Z/3\Z)^k$ are the $3$-cycle and the $3$-banana. In this
+case, we have $k_3 = 1$.
 
 In addition, we note that when $\Jac(G) \simeq (\Z/n\Z)^k \times H$
 for some finite abelian group $H$, $k$ is necessarily bounded above by
@@ -680,28 +605,129 @@ graph that provides it.
 \subsection{The Jacobian of a subdivided graph}
 
 For any graph $G$ with genus $g$, let $G'$ be the metric graph
-corresponding to $G$. It is known that $\Jac(G)$ is a discrete
-subgroup of $\Jac(G')$, corresponding to a lattice on $(\R/\Z)^g$.
+obtained by giving each edge of $G$ length $1$. It is known that
+$\Jac(G)$ is a finite subgroup of $\Jac(G')$, corresponding to a
+sublattice of $(\R/\Z)^g$ (CITE PLEASE).
 
 Let $G_m$ be the graph obtained by ``subdividing'' the edges of $G$
 $m$ times; that is, we add $m-1$ two-valent vertices to $V(G)$ for
 each edge of $G$, and replace each edge of $G$ with $m$ edges between
 those vertices. 
 
-PUT A PICTURE HERE! 
+\begin{figure}[H]
+  \begin{center}
+  \begin{tikzpicture}
+    \draw (0,0) -- (0,2) -- (2,2) -- (2,0) -- cycle;
+    \draw (0,0) -- (2,2);
+
+    \fill (0,0) circle (2pt);
+    \fill (2,2) circle (2pt);
+    \fill (2,0) circle (2pt);
+    \fill (0,2) circle (2pt);
+
+    \node at (3,1) {\LARGE{$\to$}};
+
+    \begin{scope}[xshift=4cm]
+      \draw (0,0) -- (0,2) -- (2,2) -- (2,0) -- cycle;
+      \draw (0,0) -- (2,2);
+
+      \foreach \x in {0, 0.5, ..., 2} \fill (\x, 0) circle (2pt);
+      \foreach \x in {0, 0.5, ..., 2} \fill (\x, 2) circle (2pt);
+      \foreach \x in {0, 0.5, ..., 2} \fill (0, \x) circle (2pt);
+      \foreach \x in {0, 0.5, ..., 2} \fill (2, \x) circle (2pt);
+      \foreach \x in {0, 0.5, ..., 2} \fill (\x, 0) circle (2pt);
+      \foreach \x in {0, 0.5, ..., 2} \fill (45:{\x * sqrt(2)} )
+      circle (2pt);
+    \end{scope}
+
+    
+  \end{tikzpicture}
+  \end{center}
+  \caption{A graph $G$ and its $4$-subdivision $G_4$.}
+\end{figure}
 
 [CITATION] provides the following result:
 
 \begin{prop}
   \label{prop:quotient_subdivide}
-  $\Jac(G)$ is a subgroup of $\Jac(G')$, with 
+  $\Jac(G)$ is a subgroup of $\Jac(G_m)$, with 
 \begin{equation*}
-  \Jac(G')/\Jac(G) \simeq (\Z/m\Z)^g
+  \Jac(G_m)/\Jac(G) \simeq (\Z/m\Z)^g
 \end{equation*}
 \end{prop}
 
-The theorem below gives an explicit description of the structure of
-$\Jac(G')$:
+Below, we will give an explicit description of the structure of
+$\Jac(G')$. We will begin by considering the image of a map
+\begin{align*}
+  &\phi_m:\Jac(G_m) \to \Jac(G_m)\\
+  &D \mapsto mD
+\end{align*}
+
+We first show that $\phi_m$ is surjective onto $\Jac(G)$.
+
+\begin{lem}
+  \label{lem:m_surjective}
+  For each $D \in \Div^0(G)$, $\exists D' \in \Div^0(G_m)$ such that $m
+  \cdot D' \sim D$.
+\end{lem}
+\begin{proof}
+  Let $A \subseteq \Div^0(G)$ be the set of divisors of the form $(v)
+  - (w)$ for $\{v, w\} \in E(G)$. It is clear that the elements of $A$
+  generate $\Div^0(G)$, so it suffices to prove the proposition for
+  all $D = \in A$.
+  
+  Let $D \in A$, and write $D = (v_0) - (v_m)$. In $G_m$, $v_0$ and
+  $v_m$ are connected by a path of length $m$, where each vertex in
+  the path has degree $2$.
+  
+  Let the vertices in this path be $\{v_0, v_1, \ldots, v_m\}$. Lemma
+  \ref{lem:2valent_path} shows that $(v_m) - (v_0)$ is in fact
+  equivalent to $m \cdot (v_1) - m \cdot (v_0)$.
+\end{proof}
+
+Let $D \in \Div^0(G_m)$ be written $\sum_{i=1}^na_iv_i$, for $a_i \in
+\Z$. The proof of Proposition \ref{lem:m_surjective} also
+demonstrates that if $a_1 = m$ and $a_j = 0$ for all $j \ne 0, m$,
+then $D \sim D'$ for some $D' \in \Jac(G)$. More generally, we can see
+that the image of the map $\phi_m$ is contained in $\Jac(G)$, by the
+following proposition.
+
+\begin{lem}
+  \label{lem:m_to_jac}
+  Let $D \in \Div^0(G_m)$ be written $\sum_{i=1}^na_iv_i$, and suppose
+  that for each $v_i \in V(G_m) \setminus V(G)$, $m | a_i$. Then $D
+  \sim D'$ for some $D' \in \Div^0(G)$.
+\end{lem}
+\begin{proof}
+  As in Proposition \ref{lem:m_surjective}, enumerate the first $m+1$
+  vertices in $G_m$ by letting $v_0, v_m$ be adjacent vertices in $G$,
+  and $v_1$ to $v_{m-1}$ be the vertices on the path between them in
+  $G_m$. It suffices to prove the proposition for divisors that are
+  supported on $V(G) \cup \{v_i\}$ for $1 \le i < m$, with $a_i = m$.
+
+  We proceed by induction on $i$. The case $i=1$ follows directly from
+  the proof of Proposition \ref{lem:m_surjective} (the divisor $m
+  \cdot v_0 - m \cdot v_1$ is equivalent to $v_0 - v_m \in
+  \Div^0(G)$).
+
+  For $i > 1$, it is clear that the divisor $m \cdot v_{i-2} - 2m
+  \cdot v_{i-1} + m \cdot v_i$ is equivalent to $0$ (it can be
+  obtained by chip-firing $v_{i-1}$ once). By the inductive
+  hypothesis, the are divisors $D_1, D_2 \in \Div(G)$ such that $D_1
+  + p \cdot v_{i-2} \sim D_1'$ and $D_2 + p \cdot v_{i-1} \sim D_2'$
+  for $D_1', D_2' \in \Div^0(G)$.
+
+  We then have $-D_1' + 2D_2' \sim -D_1 + 2D_2 + p \cdot v_i$, so
+  $D + p \cdot v_i \sim D'$ for $D \in \Div(G)$, $D' \in \Div^0(G)$,
+  as required.
+\end{proof}
+
+Together, Lemma \ref{lem:m_surjective} and Lemma \ref{lem:m_to_jac}
+show the following:
+\begin{cor}
+  \label{cor:phi_jac}
+  The image of the map $\phi_m$ is precisely the group $\Jac(G)$. 
+\end{cor}
 
 \begin{thm}
   \label{thm:subdivide}
@@ -719,92 +745,32 @@ $\Jac(G')$:
   \end{equation*}
 \end{thm}
 
-Note that it suffices to prove Theorem \ref{thm:subdivide} for $m=p$
-for prime $p$, since we may achieve a subdivision into $b_1b_2$ edges
-by successively subdividing into $b_1$ and $b_2$ edges.
-
-Since $\Jac(G)$ is isomorphic to a subgroup of $\Jac(G_p)$, if two
-divisors are equivalent in $\Div^0(G)$, they are also equivalent in
-$\Div^0(G_p)$.
-
-\begin{prop}
-  \label{prop:p_surjective}
-  For each $D \in \Div^0(G)$, $\exists D' \in \Div^0(G_p)$ such that $p
-  \cdot D' \sim D$.
-\end{prop}
 \begin{proof}
-  Let $A \subseteq \Div^0(G)$ be the set of divisors of the form $v -
-  w$ for $\{v, w\} \in E(G)$. It is clear that the elements of $A$
-  generate $\Div^0(G)$, so it suffices to prove the proposition for
-  all $a \in A$.
+  It suffices to prove the theorem for $m=p$ for prime $p$, since we
+  may achieve a subdivision into $b_1b_2$ edges by successively
+  subdividing into $b_1$ and $b_2$ edges.
   
-  $a = v_0 - v_p$ for some pair of vertices $v_0, v_p \in V(G)$
-  connected by an edge. In $G_p$, $v_0$ and $v_p$ are connected by a
-  path of length $p$, where each vertex in the path has degree $2$.
-  
-  Let the vertices in this path be $\{v_0, v_1, \ldots, v_p\}$. Lemma
-  \ref{lem:2valent_path} shows that $(v_p) - (v_0)$ is in fact
-  equivalent to $p \cdot (v_1) - p \cdot (v_0)$.
-\end{proof}
+  Let $B = \{D_1, \ldots, D_k\}$ be a minimal set of generators for
+  $\Jac(G)$, so that $|D_i| = a_i$ for $1 \le i \le k$. It follows
+  from Corollary \ref{cor:phi_jac} that there is a set $B' \subset
+  \Jac(G_p)$, $B' = \{D_1', \ldots D_k'\}$ such that $\phi(D_i') =
+  D_i$.
 
-Let $D \in \Div^0(G_p)$ be written $\sum_{i=1}^na_iv_i$, for $a_i \in
-\Z$. The proof of Proposition \ref{prop:p_surjective} also
-demonstrates that if $a_1 = p$ and $a_j = 0$ for all $j \ne 0, p$,
-then $D \sim D'$ for some $D' \in \Jac(G)$. This also holds more
-generally:
-
-\begin{prop}
-  \label{prop:p_to_jac}
-  Let $D \in \Div^0(G_p)$ be written $\sum_{i=1}^na_iv_i$, and
-  suppose that for each $v_i \in V(G_p) \setminus V(G)$, $p |
-  a_i$. Then $D \sim D'$ for some $D' \in \Div^0(G)$. 
-\end{prop}
-\begin{proof}
-  As in Proposition \ref{prop:p_surjective}, enumerate the first $p+1$
-  vertices on $G$ by letting $v_0, v_p$ be adjacent vertices in $G$,
-  and $v_1$ to $v_{p-1}$ be the vertices on the path between them in
-  $G_p$. It suffices to prove the proposition for $a_i = p$ for $1 \le
-  i < p$ and $a_j = 0$ for all $v_j \in V(G_p) \setminus V(G), j \ne
-  i$.
-
-  We proceed by induction on $i$. The case $i=1$ follows directly from
-  the proof of Proposition \ref{prop:p_surjective} (the divisor $p
-  \cdot v_0 - p \cdot v_1$ is equivalent to $v_0 - v_p \in
-  \Div^0(G)$).
-
-  For $i > 1$, it is clear from the form of the matrix $Q$ that the
-  divisor $p \cdot v_{i-2} - 2p \cdot v_{i-1} + p \cdot v_i$ is in
-  the image of the Laplacian map $\Delta$. By the induction
-  hypothesis, there are divisors $D_1, D_2 \in \Div(G)$ such that
-  $D_1 + p \cdot v_{i-2} \sim D_1'$ and $D_2 + p \cdot v_{i-1} \sim
-  D_2'$ for $D_1', D_2' \in \Div^0(G)$. 
-
-  We then have $-D_1' + 2D_2' \sim -D_1 + 2D_2 + p \cdot v_i$, so
-  $D + p \cdot v_i \sim D'$ for $D \in \Div(G)$, $D' \in \Div^0(G)$,
-  as required.
-\end{proof}
-
-\begin{proof}[Proof of Theorem \ref{thm:subdivide}]
-  It follows from Proposition \ref{prop:p_to_jac} that there is a set
-  $B \subset \Jac(G_p)$, $B = \{b_1, \ldots, b_k\}$ such that $p \cdot
-  b_i$ is a generator for the invariant factor $\Z/a_i\Z$ in
-  $\Jac(G)$.
-
-  For each $b_i$, we must have either $|b_i| = pa_i$ or $|b_i| =
-  a_i$. If $|b_i| = a_i$, then $\langle b_i \rangle$ is the same
-  invariant factor $\Z/a_i\Z$ of $\Jac(G)$ generated by $p \cdot b_i$,
-  and therefore $\gcd(p, a_i) = 1$. If $|b_i| = pa_i$, then $\langle
-  b_i \rangle \simeq \Z/pa_i\Z$.
+  For each $D_i'$, we must have either $|D_i'| = pa_i$ or $|D_i'| =
+  a_i$. If $|D_i'| = a_i$, then $\langle D_i \rangle$ is the same
+  invariant factor $\Z/a_i\Z$ of $\Jac(G)$ generated by $p \cdot D_i$,
+  and therefore $\gcd(p, a_i) = 1$. If $|D_i'| = pa_i$, then $\langle
+  D_i' \rangle \simeq \Z/pa_i\Z$.
 
   So, if $j$ is the smallest integer such that $\gcd(p, a_i) = 1$ for
-  all $i \le j$, then the set $B$ generates the group
+  all $i \le j$, then the set $B'$ generates the group
 
   $$H \simeq \Z/a_1\Z \times \ldots \times \Z/a_j\Z 
   \times \Z/pa_{j+1}\Z \times \ldots \times \Z/pa_k\Z.$$
 
-  Since $\Jac(G)$ is a subgroup of $H$, if $g \in \Jac(G_p)$ is not
+  Since $\Jac(G)$ is a subgroup of $H$, if $D \in \Jac(G_p)$ is not
   generated by $B$, Proposition \ref{prop:quotient_subdivide} implies
-  that $g$ has order $p$. So we have $\Jac(G_p) \simeq H \times
+  that $D$ has order $p$. So we have $\Jac(G_p) \simeq H \times
   (\Z/p\Z)^{g-k+j}$, since there are $p^{g-k+j}$ elements in
   $\Jac(G_p)$ not in $H$.
 
@@ -818,6 +784,10 @@ generally:
 
 as required.
 \end{proof}
+
+When $|H|$ is odd, the theorem above shows that, if there exists a
+graph $G$ with genus $g$ such that $\Jac(G) \simeq H$, then there also
+exists a graph $G'$ such that $\Jac(G') \simeq (\Z/2\Z)^g \times H$.
 
 \section{The monodromy pairing on the Jacobian}
 
@@ -865,7 +835,8 @@ able to strengthen this result:
 As in the case of groups without pairing, we will take advantage of
 the fact that the wedge sum of two graphs corresponds to a product
 operation on the Jacobians of those graphs. In this case, the
-``product'' will be the orthogonal sum, as seen below:
+``product'' will be the orthogonal sum on groups with pairing, as seen
+below:
 
 \begin{prop}
   \label{prop:wedge_sum}
@@ -955,9 +926,9 @@ operation on the Jacobians of those graphs. In this case, the
 
 
 The problem is now reduced to the following: given a prime $p$,
-positive integer $r$ and $k$, and a pairing $\pair{\cdot}{\cdot}$ on
-$(\Z/p^r\Z)^k$, we wish to find a graphs $G$ such that $\Jac(G) \simeq
-((\Z/p^r\Z)^l, \pair{\cdot}{\cdot})$. In most cases (in particular
+positive integers $r$ and $k$, and a pairing $\pair{\cdot}{\cdot}$ on
+$(\Z/p^r\Z)^k$, we wish to find graphs $G$ such that $\Jac(G) \simeq
+((\Z/p^r\Z)^k, \pair{\cdot}{\cdot})$. In most cases (in particular
 when $p$ is odd), we can take $k=1$ and restrict our search to graphs
 with cyclic Jacobian.
 
@@ -998,10 +969,30 @@ possible constructions below:
 
 \begin{defn}
   Let $S = \{s_1, \ldots, s_m\}$ be a multiset of positive
-  integers. $C_S$, the \emph{stupidly named cycle graph of $S$}, is
-  the graph obtained giving the $i$th edge of $C_m$ multiplicity
-  $s_i$.
+  integers. $C_S$, the \emph{multicycle graph of $S$}, is the graph
+  obtained giving the $i$th edge of $C_m$ multiplicity $s_i$.
 \end{defn}
+
+Note that the graphs $B_S$ and $C_S$ are planar duals of each other,
+leading to the following (by Theorem \ref{thm:graph_dual_iso}):
+
+\begin{prop}
+  \label{prop:banana_cycle_iso}
+  For any multiset $S$ of positive integers, $\Jac(B_S) \simeq
+  \Jac(C_S)$. 
+\end{prop}
+
+\begin{note}
+  Throughout this section, we will use the following enumerations on
+  the vertices of $B_S$ and $C_S$:
+
+  On $B_S$, let $v_0, v_0'$ be the vertices corresponding to $v_1,
+  v_2$ on $B_m$, and let $v_{ij}$ be the $j$th vertex that subdivides
+  the $i$th edge of $B_m$.
+
+  On $C_S$, we enumerate the vertices as $v_0, \ldots, v_m$, such
+  that that the multiplicity of the edge $\{v_i, v_{i+1}\}$ is $s_i$.
+\end{note}
 
 When $|S| = m$, we will use the following notation for the $(m-1)$th
 elementary symmetric polynomial applied to the elements of $S$:
@@ -1009,8 +1000,10 @@ elementary symmetric polynomial applied to the elements of $S$:
 \begin{defn}
   Let $S = \{s_1, \ldots, s_m\}$. Define
   \begin{align*}
-    R(S) &= \sum_{i=1}^m\frac{\prod_{j=1}^ms_j}{s_i}
+    R(S) &= \sum_{i=1}^ms_1\ldots\hat{s_i}\ldots s_m 
   \end{align*}
+  where $\hat{s_i}$ indicates that $s_i$ is not included in the
+  product.
 \end{defn}
 
 \begin{prop}
@@ -1038,11 +1031,6 @@ elementary symmetric polynomial applied to the elements of $S$:
   where $e_{jk}$ is some edge in $E_j$. Each possible choice of $E_i$
   and $e_{jk}$ corresponds to a distinct spanning tree of $B_S$, so we
   have $R(S)$ spanning trees, as required.
-
-  We will enumerate the vertices of $B_S$ as follows: let $v_0, v_0'$
-  be the vertices corresponding to $v_1, v_2$ on $B_m$, and let
-  $v_{ij}$ be the $j$th vertex that subdivides the $i$th edge of
-  $B_m$.
 
   Now consider the divisor $D = (v_0') - (v_0)$. We claim that
   $m\overline{D}$ is nonzero for any $m < p^r$. Suppose otherwise, so
@@ -1133,8 +1121,8 @@ chosen multiset $S$.
 Our approach will rely on quadratic reciprocity, and it will be
 necessary to consider the cases $p \equiv 1 \pmod 4$ and $p \equiv 3
 \pmod 4$ seperately. We will need to further differentiate between the
-cases where $r > 1$ and $r = 1$; it is in the latter case that our
-results require the assumption of the Generalized Riemann Hypothesis.
+cases $r > 1$ and $r = 1$; it is in the latter case that our results
+rely on the assumption of the Generalized Riemann Hypothesis.
 
 For the $p \equiv 1 \pmod 4$ case, we will need the following
 proposition:
@@ -1160,45 +1148,34 @@ GRH gives us an analagous statement for $r=1$:
   understand it.
 \end{proof}
 
-In general, we will also need to distinguish between the cases where
-$r$ is even and $r$ is odd; our description of the set $S$ will be
-slightly different in each case, and will require two slightly
-different lemmata.
+Given a prime $q$ that satisfies the bounds above, we will need to
+find a particular way to write it as a sum of two positive integers,
+to ensure that our set $S$ has the desired properties. Below, we check
+that such a decomposition exists, and that this decomposition provides
+the properties we require.
 
 \begin{lem}
-  \label{lem:decompose_q_non}
-  Let $q$ be a prime with $q \equiv 3 \pmod 4$. Then for any $k$
-  with $\left( \frac{k}{q} \right) = -1$, there exists $0 < a < q$
-  such that $a(q-a) \equiv k \pmod q$. 
+  \label{lem:decompose_q}
+  Let $q$ be an odd prime, and let $k$ be an integer such that
+  $\left(\frac{k}{q}\right) = \left(\frac{-1}{q}\right)$. Then there
+  exists $0 < a < q$ such that $a(q-a) \equiv k \pmod q$. 
 \end{lem}
+
 \begin{proof}
-  Let $R_q$ denote the set of nonresidues modulo $q$. Consider the map
-  $\phi:\F_q \to \F_q$ given by $\phi(x) = -x^2$. The image of $\phi$
-  is a subset of $R_q$, since (by quadratic reciprocity) $-1$ is a
-  nonresidue modulo $q$. Furthermore, since the polynomial $-x^2 - a$
-  has at most two roots in $\F_q$ (for any $a$), and $|R_q| = (q -
-  1)/2$, $\phi$ is onto $R_q$.
+  Define a set $R_q$ by 
+  \begin{equation*}
+    R_q = \left\{\ell \in \F_q : \left(\frac{\ell}{q}\right) = 
+    \left(\frac{-1}{q}\right)\right\}
+  \end{equation*}
+  
+  Consider the map $\phi:\F_q \to \F_q$ given by $\phi(x) = -x^2$. The
+  image of $\phi$ must be a subset of $R_q$. Furthermore, since the
+  polynomial $-x^2 - a$ has at most two roots in $\F_q$ (for any $a$),
+  and $|R_q| = (q - 1)/2$, $\phi$ is onto $R_q$.
 
   Since $k \in R_q$, choose $a$ such that $\phi(a) = k$, and note
   that $k \equiv -a^2 \equiv a(q-a) \pmod q$, as required.
 \end{proof}
-
-\begin{lem}
-  \label{lem:decompose_q_res}
-  Let $q$ be a prime with $q \equiv 1 \pmod 4$. Then for any $k$
-  with $\left( \frac{k}{q} \right) = 1$, there exists $0 < a < q$
-  such that $a(q-a) \equiv k \pmod q$.
-\end{lem}
-\begin{proof}
-  Define $\phi$ as in Lemma \ref{lem:decompose_q_non}, and note that in
-  this case quadratic reciprocity implies that $\phi$ is onto the set
-  of residues modulo $q$ (since $-1$ is a residue mod $q$). $k$ is
-  again in the image of $\phi$, so its decomposition can be
-  constructed as before.
-\end{proof}
-
-Note that, in the second lemma above, we require the product of $a$
-and $q-a$ to be a residue rather than a nonresidue.
 
 \begin{lem}
   \label{lem:exist_q}
@@ -1208,30 +1185,17 @@ and $q-a$ to be a residue rather than a nonresidue.
   the quantity
   \[\frac{p^r - a(q-a)}{q}\]
   is a positive integer.
+
+  Moreover, assuming GRH, the above result holds for $r=1$ as well.
 \end{lem}
 \begin{proof}
-  First suppose $r$ is odd. By Proposition \ref{prop:q_bound}, there
-  exists a prime $q \equiv 3 \pmod 4$ such that $\left( \frac{q}{p}
-  \right) = -1$ and $\frac{q^2}{4} < p^r$.
-
-  Since $r$ is odd, and $p \equiv 1 \pmod 4$, $p^r$ is a nonresidue
-  modulo $q$. Apply Lemma \ref{lem:decompose_q_non} to find $a$ such
-  that $p^r \equiv a(q-a) \pmod q$. Since $q < p$ and $r > 1$,
-  $a(q-a) < p^r$. Therefore $p^r - a(q-a)$ is positive and divisible
-  by $q$, as required.
-
-  Now suppose $r$ is even. By Proposition \ref{prop:q_bound}, there
-  exists a prime $q$ with $q \equiv 1 \pmod 4$ such that $\left(
-    \frac{q}{p} \right) = -1$ and $\frac{q^2}{4} < p^r$. Since $r$ is
-  even, and $p \equiv 1 \pmod 4$, $p^r$ is a residue modulo $q$. Apply
-  Lemma \ref{lem:decompose_q_res} to find an $a < q$ such that $p^r -
-  a(q-a)$ is divisible by $q$, and as in the odd case, we must have
-  $p^r - a(q-a) > 0$.
+  Apply Proposition \ref{prop:q_bound} (or, for $r=1$, Proposition
+  \ref{prop:q_bound_grh}) to find a nonresidue $q$ with
+  $\left(\frac{-1}{q}\right) = \left(\frac{p^r}{q}\right)$, and
+  $\frac{q^2}{4} < p^r$. By Lemma \ref{lem:decompose_q}, there exists
+  $a$ such that $p^r \equiv a(q-a) \pmod q$. Therefore $p^r - a(q-a)$
+  is positive and divisible by $q$, as required.
 \end{proof}
-
-Note that in the the proof above, assuming GRH, we may relax the
-assumption that $r=1$ by applying Proposition \ref{prop:q_bound_grh}
-instead of Proposition \ref{prop:q_bound}.
 
 We now apply Lemma \ref{lem:exist_q} to show the existence of a set
 $S$ corresponding to a subdivided banana graph that gives rise to the
@@ -1243,6 +1207,8 @@ nonresidue pairing.
   multiset of positive integers $S = \{s_1, \ldots s_m\}$ such that
   $R(S) = p^r$, $\gcd(p, s_i) = 1$ for all $i$, and $\prod_{i=1}^ms_i$
   is a nonresidue modulo $p$.
+  
+  Furthermore, assuming GRH, the result also holds for $r=1$.
 \end{prop}
 
 \begin{proof}
@@ -1267,18 +1233,21 @@ nonresidue pairing.
   -1$, as required.
 \end{proof}
 
-For a prime $p$ and integer $r > 1$, given a set $S$ described by
-Proposition \ref{prop:exist_decomp}, we see that $B_S \simeq (\Z/p^r\Z,
-\mathfrak{n})$, as required.
+For a prime $p$ and integer $r$, given a set $S$ described by
+Proposition \ref{prop:exist_decomp}, we see that $B_S \simeq
+(\Z/p^r\Z, \mathfrak{n})$.
 
-Note that, as in Lemma \ref{lem:exist_q}, GRH allows us to relax the
-assumption that $r=1$; this completes the proof of Theorem
-\ref{thm:graph_pairing_grh}.
+\begin{proof}[Proof of Theorem \ref{thm:graph_pairing_grh}]
+  If we assume GRH, we can find a set $S$ as in Proposition
+  \ref{prop:exist_decomp} for \emph{all} powers of odd primes. Taking
+  wedge sums of the subdivided bananas these sets represent, we obtain
+  all groups of odd order.
+\end{proof}
 
-
-We conclude the proof of Theorem \ref{thm:graph_pairing} by noting
-that in certain cases, it is still possible to construct a set $S$
-satisfying the conditions required to achieve the nonresidue pairing:
+Finally, we conclude the proof of Theorem \ref{thm:graph_pairing} by
+noting that in certain cases, it is still possible to construct a set
+$S$ satisfying the conditions required to achieve the nonresidue
+pairing:
 
 \begin{prop}
   \label{prop:p_1mod24}
@@ -1297,9 +1266,8 @@ satisfying the conditions required to achieve the nonresidue pairing:
     modulo $p$---which is the case when $p \equiv 5 \pmod 8$.
   \item For $p \equiv 2 \pmod 3$, if $p \equiv 3 \pmod 4$, we are in
     the first case above. Otherwise, we have $p \equiv 1 \pmod 4$, and
-    $2$ is a nonresidue modulo $p$. Provided $p > 2$, Proposition
-    \ref{prop:q_bound} holds in this case, and the proof follows as
-    when $r > 1$.
+    $2$ is a nonresidue modulo $p$. Choose $S = \{1, 1,
+    \frac{p-1}{2}\}$ as before.
   \end{itemize}
   
   The only remaining possibility after eliminating these three cases
@@ -1309,25 +1277,25 @@ satisfying the conditions required to achieve the nonresidue pairing:
 \begin{remark}
   Proposition \ref{prop:p_1mod24} shows that we could provide an
   unconditional proof of Theorem \ref{thm:graph_pairing_grh} if we
-  could prove Proposition \ref{prop:q_bound_grh} in the case that
-  $r=1$ for all primes $p \equiv 1 \pmod {24}$. In fact, computer
-  search has verified that the proposition holds for all such primes
-  smaller than $10^9$.
+  could show that Proposition \ref{prop:q_bound_grh} holds for all
+  primes $p \equiv 1 \pmod {24}$. In fact, computer search has
+  verified that the proposition holds for all such primes smaller than
+  $10^9$.
 \end{remark}
 
 \subsection{2-groups}
 
 We now turn to the task of constructing graphs $G$ for which $\Jac(G)
-\simeq (\Z/2^r\Z, \pair{\cdot}{\cdot})$, given some integer $r$ and
-pairing $\pair{\cdot}{\cdot}$ on $\Z/2^r\Z$. The classification of
-such pairings is somewhat more complicated than that of the odd prime
-pairings; however, there are still only finitely many cases to
-consider.
+\simeq ((\Z/2^r\Z)^k, \pair{\cdot}{\cdot})$, given positive integers
+$r$,$k$ and pairing $\pair{\cdot}{\cdot}$ on $(\Z/2^r\Z)^k$. The
+classification of such pairings is somewhat more complicated than that
+of the odd prime pairings; however, there are still only finitely many
+cases to consider:
 
-\begin{prop}[Miranda, 1984]
+\begin{prop}\cite{Miranda1984}
   Let $\mathcal{P}_{2}$ be the semigroup of isomorphism classes of
-  2-groups with pairing, under orthogonal direct
-  sum. $\mathcal{P}_{2}$ is generated by the following groups with pairing:
+  2-groups with pairing, under orthogonal sum. $\mathcal{P}_{2}$ is
+  generated by the following groups with pairing:
 
   \[ \AP \simeq (\Z/2^r\Z, \pair{\cdot}{\cdot}), r \ge 1; \quad
   \pair{x}{y} = \frac{xy}{2^r}\]
@@ -1362,24 +1330,43 @@ consider.
  We will be aided by the following lemma:
 
 \begin{lem}
- \label{lem:2group_pairing_iso}
- Let $r \ge 3$, and let $a,b$ be odd integers with $a \equiv b \pmod
- 8$. Let $\Gamma_a \simeq (\Z/2^r\Z, \pair{\cdot}{\cdot}_a)$,
- $\Gamma_b \simeq (\Z/2^r\Z, \pair{\cdot}{\cdot}_b)$, where 
- \begin{equation*}
-  \pair{x}{y}_a = \frac{axy}{2^r} \qquad \pair{x}{y}_b = \frac{bxy}{2^r}
- \end{equation*}
- Then $\Gamma_1 \simeq \Gamma_2$.
+  \label{lem:2group_pairing_mod8}
+  Let $\Gamma$ be a finite abelian group of order $2^r$, with pairing
+  $\pair{\cdot}{\cdot}$. If $\pair{x}{x} = \frac{a}{2^r}$ for some $x
+  \in \Gamma$ and odd positive integer $a$, then $\Gamma$ is cyclic
+  generated by $x$.
+
+  Furthermore, for some $c \in \{\pm 1, \pm 3\}$, with $c \equiv a
+  \pmod 8$, there is an isomorphism of groups $\phi:\Gamma \to
+  \Z/2^r\Z$ such that
+  \begin{equation*}
+    \pair{x}{y} = \frac{c\phi(x)\phi(y)}{2^r}.
+  \end{equation*}
 \end{lem}
 \begin{proof}
+  For any $\ell < r$, we have $2^\ell\pair{x}{x} = \pair{2^\ell x}{x}
+  = \frac{a}{2^{r - \ell}} \ne 1$, and hence $|x| > 2^\ell$ and
+  $\Gamma \simeq \Z/2^r\Z$.
+
   Note that the four pairing isomorphism classes of cyclic groups of
-  order $2^r$ correspond precisely to odd residue classes modulo
-  $8$. There must therefore exist an isomorphism of groups
-  $\phi_1:\Gamma_1 \to \Z/2^r\Z$ such that $\phi_1(axy) =
-  c\phi_1(x)\phi_1(y)$, where $c$ is the unique positive integer less
-  than $8$ congruent to $a$ mod $8$. A similar isomorphism exists for
-  $\Gamma_2$ and $b$, which completes the proof.
+  order $2^r$ correspond precisely to odd residue classes modulo $8$,
+  or equivalently to the units of the ring $\Z/8\Z$.
+
+  For some $c \in \{\pm 1, \pm 3\}$, there must therefore exist an
+  isomorphism of groups $\phi:\Gamma \to \Z/2^r\Z$ such that
+  \begin{equation*}
+    \pair{x}{y} = \frac{c\phi(x)\phi(y)}{2^r}
+  \end{equation*}
+
+  We must have that $\frac{a}{2^r} = \frac{c\phi(x)^2}{2^r}$. Since
+  $a$ is odd, it represents a unit of $\Z/8\Z$, and hence $\phi(x)^2$
+  is both a unit and a quadratic residue mod $8$. Therefore $\phi(x)^2
+  \equiv 1 \pmod 8$, and $a \equiv c \pmod 8$.
 \end{proof}
+
+We will now show that all of the cyclic generators of 2-groups with
+pairing are realizable as Jacobians of multigraphs. Throughout the
+following, 
 
 \begin{thm} Let $\Gamma \simeq (\Z/2^r\Z,
   \pair{\cdot}{\cdot})$. There exists a graph $G$ such that $\Jac(G)
@@ -1389,272 +1376,175 @@ consider.
 \begin{proof}
   Observe that $\Jac(B_{2^r}) \simeq \AP$ and $\Jac(C_{2^r}) \simeq
   \BP$, where $B_{2^r}$ and $C_{2^r}$ are respectively the banana and
-  cycle graphs on $2^r$ edges.
+  cycle graphs on $2^r$ edges. It remains to find constructions for
+  graphs providing the groups $\CP$ and $\DP$. 
 
-  It remains to find constructions for graphs providing the groups
-  $\CP$ and $\DP$. We consider the cases for even and odd $r$
-  seperately.
+  By Lemma \ref{lem:2group_pairing_mod8}, it suffices to find graphs
+  graphs $G_1$ $G_2$, with $|\Jac(G_1)| = |\Jac(G_2)| = 2^r$, such
+  that for some $\overline{D}_1 \in \Jac(G_1), \overline{D}_2 \in
+  \Jac(G_2)$, we have
+  \begin{align*}
+    \pair{\overline{D}_1}{\overline{D}_1}_1 &= \frac{a}{2^r} \\
+    \pair{\overline{D}_2}{\overline{D}_2}_2 &= \frac{b}{2^r}
+  \end{align*}
+  where $\pair{\cdot}{\cdot}_1$ and $\pair{\cdot}{\cdot}_2$ are
+  respectively the monodromy pairings on $\Jac(G_1)$ and $\Jac(G_2)$,
+  and $a \equiv 3 \pmod 8$, $b \equiv 5 \pmod 8$. 
+  
+  We consider the cases for even and odd $r$ seperately. For odd $r$,
+  let $S = \{1, 2, \frac{2^r - 2}{3}\}$, and let $G_1 = B_S$, $G_2 =
+  C_S$.
+
+  \begin{figure}[H]
+    \begin{center}
+      \begin{tikzpicture}
+        \draw (0,0) to (4,0) ;
+        \draw (0,0) to [out=-30, in=-150] (4,0) ;
+        \draw (0,0) to (.7,.7) ;
+        \draw (3.3,.7) to (4,0) ;
+        \draw [dashed] (.7,.7) to [out=30, in=150] (3.3,.7) ;
+        
+        \draw [fill] (0,0) circle [radius=.1] ;
+        \draw [fill] (4,0) circle [radius=.1] ;
+        \draw [fill] (2,0) circle [radius=.1] ;
+        \draw [fill] (.7,.7) circle [radius=.1] ;
+        \draw [fill] (3.3,.7) circle [radius=.1] ;
+
+        \draw (.25,.45) to  [out=90, in=-90] (2,1.6) ;
+        \draw (3.75,.45) to  [out=90, in=-90] (2,1.6) ;
+
+        \node at (2,1.9) {$\frac{2^{r}-2}{3}$} ;
+
+        \begin{scope}[xshift=6cm]
+          \draw (0:0) [out=45, in=-105] to (60:2) ;
+          \draw (0:0) [out=75, in=-135] to (60:2) ;
+          \draw (0:0) [out=15, in=165] to (0:2) ;
+          \draw (0:0) [out=0, in=180] to (0:2) ;
+          \draw (0:0) [out=-45, in=-135] to (0:2) ;
+          \draw (60:2) to (0:2) ;
+          
+          \draw [fill] (1, -.3) circle [radius=.01] ;
+          \draw [fill] (1, -.2) circle [radius=.01] ;
+          \draw [fill] (1, -.1) circle [radius=.01] ;
+          
+          \draw (.25,-.25) [out=-90, in=90] to (1,-.7) ;
+          \draw (1.75,-.25) [out=-90, in=90] to (1,-.7) ;
+          
+          \draw [fill] (0, 0) circle [radius=.1] ;
+          \draw [fill] (0:2) circle [radius=.1] ;
+          \draw [fill] (60: 2) circle [radius=.1] ;
+
+          \node at (1, -1) {$\frac{2^{r}-2}{3}$} ;
+        \end{scope}
+      \end{tikzpicture}
+    \end{center}
+    \caption{The graphs $B_S$ and $C_S$, for $S = \{1,2,\frac{2^r - 2}{3}\}$}
+  \end{figure}
+
+  Consider a function $f:V(B_S) \to \Z$, given below:
+  
+  \begin{equation*}
+    f(v) = 
+    \begin{cases}
+      0, & v = v_0 \\
+      1, & v = v_{21} \\
+      2, & v = v_0' \\
+      2^n - 4 - j, & v = v_{3j}
+    \end{cases}.
+  \end{equation*}
+
+  Let $D_1 = (v_{31}) - (v_0)$, and check that $\Delta(f) =
+  2^rD_1$. Then $\pair{\overline{D_1}}{\overline{D_1}}_1 =
+  \frac{f(v_{31})}{2^r} = \frac{2^r - 3}{2^r}$, as required.
+
+  Now consider a function $f:V(C_S) \to \Z$, given by
+  \begin{equation*}
+    f(v) = 
+    \begin{cases}
+      0, & v = v_0\\
+      2, & v = v_1\\
+      3, & v = v_2
+    \end{cases}.
+  \end{equation*}
+
+  Let $\overline{D}_2 = (v_2) - (v_0)$, and check that $\Delta(f) =
+  2^rD$, so $\pair{\overline{D}_2}{\overline{D}_2}_2 = \frac{3}{2^r}$,
+  as required.
+
+  For even $r$, let $S = \{1, 1, 1, \frac{2^r - 1}{3}\}$, and again
+  let $G_1 = B_S$ and $G_2 = C_S$. 
+
+  \begin{figure}[H]
+    \begin{center}
+      \begin{tikzpicture}
+
+        \draw (0,0) to (4,0) ;
+        \draw (0,0) to [out=-30, in=-150] (4,0) ;
+        \draw (0,0) to [out=30, in=150] (4,0) ;
+        \draw (0,0) to (.7,.7) ;
+        \draw (3.3,.7) to (4,0) ;
+        \draw [dashed] (.7,.7) to [out=30, in=150] (3.3,.7) ;
+
+        \draw [fill] (0,0) circle [radius=.1] ;
+        \draw [fill] (4,0) circle [radius=.1] ;
+
+        \draw [fill] (.7,.7) circle [radius=.1] ;
+        \draw [fill] (3.3,.7) circle [radius=.1] ;
+
+        \draw (.25,.45) to  [out=90, in=-90] (2,1.6) ;
+        \draw (3.75,.45) to  [out=90, in=-90] (2,1.6) ;
+
+        \node at (2,1.9) {$\frac{2^{r}-1}{3}$} ;
 
 
-  For even $r$, let $S = \{1, 1, 1, \frac{2^r - 1}{3}\}$, and consider
-  the subdivided banana $B_S$ and the generalized cycle graph
-  $C_S$. We claim that $\Jac(B_S) \simeq \CP$ and $\Jac(C_S) \simeq
-  \DP$. 
+        \begin{scope}[xshift=6cm]
+          \draw (0,0) to (0,2) ;
+          \draw (0,0) to (2,0) ;
+          \draw (2,0) to (2,2) ;
+          \draw (0,2) to (2,2) ;
+          \draw (0,2) to [out=-15, in=-165] (2,2) ;
+          \draw (0,2) to [out=45, in=135] (2,2) ;
 
-  By Proposition \ref{prop:banana_pairing}, we see that $\Jac(B_S)$ is
+          \draw [fill] (1, 2.1) circle [radius=.01] ;
+          \draw [fill] (1, 2.2) circle [radius=.01] ;
+          \draw [fill] (1, 2.3) circle [radius=.01] ;
+
+          \draw (.2,2.25) [out=90, in=-90] to (1,2.7) ;
+          \draw (1.8,2.25) [out=90, in=-90] to (1,2.7) ;
+
+          \node at (1, 3) {$\frac{2^{r}-1}{3}$} ;
+
+          \draw [fill] (0,0) circle [radius=.1] ;
+          \draw [fill] (2,2) circle [radius=.1] ;
+          \draw [fill] (2,0) circle [radius=.1] ;
+          \draw [fill] (0,2) circle [radius=.1] ;
+        \end{scope}
+      \end{tikzpicture}
+    \end{center}
+    \caption{The graphs $B_S$ and $C_S$, for $S = \{1, 1, 1, \frac{2^r
+        - 1}{3}\}$}
+  \end{figure}
+
+  For the banana graph, we see that Proposition
+  \ref{prop:banana_pairing} shows immediately that $\Jac(B_S)$ is
   cyclic of order $2^r$, with pairing
   \begin{equation*}
-    \pair{x}{y} = \dfrac{\frac{2^r-1}{3}xy}{2^r}
+    \pair{x}{y} = \dfrac{\frac{2^r-1}{3}xy}{2^r}.
   \end{equation*}
-  For any $r \ge 3$, $\frac{2^r - 1}{3} \equiv 5 \pmod 8$, as required.
-
-  For odd $r$, 
-
-  Case 3a: For $n$ odd take $\left\{1,
-    2,\frac{2^{n}-2}{3}\right\}_{b}$. One can check that the divisor
-  $D=v-w$ where $w$ is a trivalent vertex and $v$ is the adjacent
-  vertex on edge that was subdivided $\frac{2^{n}-2}{3}$ times, has
-  order, by using the slope definition of the monodromy pairing by
-  defining the function such that all slopes are increasing in the
-  direction of $v$ and decreasing from $w$. This results in the linear
-  equations
-  \begin{equation*}
-a+b+c=2^{t}
-  \end{equation*}
-  \begin{equation*}
-a=2b
-  \end{equation*}
-  \begin{equation*}
-a+\left(\frac{2^{n}-2}{3}-1\right)(a+b)=c
-  \end{equation*}
-where $a$ is the slope on the undivided edge, $b$ is the
-slope the edges formed from the edge that was subdivided once, and $c$ is the slope
-on the edge between $v$ and $w$. Solving the equation gives
-\begin{equation*}
-2^{n}a=2^{t}
-\end{equation*}
-Since $t$ is at most $n$ and $t=n$ is the only solution such that $a$
-has nonnegative integer value the order of this element must be
-$2^{n}$. Furthermore, $c=2^{n}-3$, implying that the pairing of $D$
-with itself is $\frac{2^{n}-3}{2^{n}}$ which by
-\ref{lem:2group_pairing_iso} is isomorphic to the $\CP$ pairing.
-
-$c=2^{n}-3$. Thus the pairing is $\frac{2^{n}-3}{2^{n}}$, which is
-isomorphic to $\CP$ by \ref{lem:2group_pairing_iso}.
-
-%C pairing n odd
-\begin{center}
-\begin{tikzpicture}
-
-\draw (0,0) to (4,0) ;
-\draw (0,0) to [out=-30, in=-150] (4,0) ;
-\draw (0,0) to (.7,.7) ;
-\draw (3.3,.7) to (4,0) ;
-\draw [dashed] (.7,.7) to [out=30, in=150] (3.3,.7) ;
-
-\draw [fill] (0,0) circle [radius=.1] ;
-\draw [fill] (4,0) circle [radius=.1] ;
-\draw [fill] (2,0) circle [radius=.1] ;
-\draw [fill] (.7,.7) circle [radius=.1] ;
-\draw [fill] (3.3,.7) circle [radius=.1] ;
-
-\draw (.25,.45) to  [out=90, in=-90] (2,1.6) ;
-\draw (3.75,.45) to  [out=90, in=-90] (2,1.6) ;
-
-\node at (2,1.9) {$\frac{2^{n}-2}{3}$} ;
-
-\end{tikzpicture}
-\end{center}
-    
-Case 3b: For $n$ even take $\left\{1,1,1,
-  \frac{2^{n}-1}{3}\right\}_{b}$. To check that the divisor $D=v-w$
-where $w$ is a trivalent vertex and $v$ is the adjacent vertex on edge
-subdivided $\frac{2^{n}-1}{3}$ times has order $2^{n}$, by using the
-slope definition of the monodromy pairing by defining the function
-such that all slopes are increasing in the direction of $v$ and
-decreasing from $w$.  This gives the linear equations
-\begin{equation*}
-a+b+c+d=2^{t}
-\end{equation*}
-\begin{equation*}
-a=b=c
-\end{equation*}
-\begin{equation*}
-a+\left(\frac{2^{n}-1}{3}-1 \right)(a+b+c)=d
-\end{equation*}
-where $a$ is the slope on one of the undivided edges
-$b$ is the slope on another of the undivided edges,  $c$ is the
-slope on the third undivided edge and $d$ is the slope on
-the edge between $v$ and $w$.
-This results in the equation 
-\begin{equation*}
-2^na=2^t
-\end{equation*}
-Since $t$ is at most $n$ and $t=n$ is the only solution such that $a$ has nonnegative  integer value the order of this element must be $2^{n}$. Furthermore $d=2^{n}-3$ implying that the pairing of $D$ with itself is $\frac{2^{n}-3}{2^{n}}$, which isisomorphic to $\CP$ by  \ref{lem:2group_pairing_iso}.
-
-%C pairing n even
-\begin{center}
-\begin{tikzpicture}
-
-\draw (0,0) to (4,0) ;
-\draw (0,0) to [out=-30, in=-150] (4,0) ;
-\draw (0,0) to [out=30, in=150] (4,0) ;
-\draw (0,0) to (.7,.7) ;
-\draw (3.3,.7) to (4,0) ;
-\draw [dashed] (.7,.7) to [out=30, in=150] (3.3,.7) ;
-
-\draw [fill] (0,0) circle [radius=.1] ;
-\draw [fill] (4,0) circle [radius=.1] ;
-
-\draw [fill] (.7,.7) circle [radius=.1] ;
-\draw [fill] (3.3,.7) circle [radius=.1] ;
-
-\draw (.25,.45) to  [out=90, in=-90] (2,1.6) ;
-\draw (3.75,.45) to  [out=90, in=-90] (2,1.6) ;
-
-\node at (2,1.9) {$\frac{2^{n}-1}{3}$} ;
-
-\end{tikzpicture}
-\end{center}
-    
-    Case 4a: For odd $n$ take $\left\{1, 2,
-\frac{2^{n}-2}{3}\right\}_{c}$. To check that the divisor
-$D=v-w$ where $w$ is the vertex with degree has $\frac{2^{n}+4}{3}$ and
-$v$ is the vertex with degree has $\frac{2^{n}+1}{3}$ has order
-$2^{n}$ one can use the slope definition of the monodromy pairing. Taking the piecewise linear function such that the slopes go away from $w$ and towards $v$ one
-obtains the following linear equations,
-\begin{equation*}
-\frac{2^{n}-2}{3}a+2b=2^{t}
-\end{equation*}
-\begin{equation*}
-a=3b
-\end{equation*}
-where $a$ is slope on set of $\frac{2^{n}-2}{3}$ edges, and
-$b$ is slope on the doubled edges. Since $t$ is at most $n$ and $t=n$ is the only solution such that $b$ has nonnegative integer value the order of this element must be $2^{n}$. This also implies that the pairing of $D$ with itself is $\frac{3}{2^{n}}$, as the equations have solution $a=3$. This pairing is isomorphic to
-$\DP$ by  \ref{lem:2group_pairing_iso}.
-
-%D pairing n odd
-\begin{center}
-\begin{tikzpicture}
-
-\draw (0:0) [out=45, in=-105] to (60:2) ;
-\draw (0:0) [out=75, in=-135] to (60:2) ;
-\draw (0:0) [out=15, in=165] to (0:2) ;
-\draw (0:0) [out=0, in=180] to (0:2) ;
-\draw (0:0) [out=-45, in=-135] to (0:2) ;
-\draw (60:2) to (0:2) ;
-
-\draw [fill] (1, -.3) circle [radius=.01] ;
-\draw [fill] (1, -.2) circle [radius=.01] ;
-\draw [fill] (1, -.1) circle [radius=.01] ;
-
-\draw (.25,-.25) [out=-90, in=90] to (1,-.7) ;
-\draw (1.75,-.25) [out=-90, in=90] to (1,-.7) ;
-
-\draw [fill] (0, 0) circle [radius=.1] ;
-\draw [fill] (0:2) circle [radius=.1] ;
-\draw [fill] (60: 2) circle [radius=.1] ;
-
-\node at (1, -1) {$\frac{2^{n}-2}{3}$} ;
-
-\end{tikzpicture}
-\end{center}
-    
-    Case 4b: For even $n$ take $\left\{1, 1, 1,
-\frac{2^{n}-1}{3}\right\}$. To check that the divisor $D=v-w$,
-where $w$ is one of the vertices with degree $\frac{2^{n}+2}{3}$
-and $v$ is the other vertex with degree $\frac{2^{n}+2}{3}$, has
-order $2^{n}$, use the slope definition of the monodromy pairing. Taking the piecewise linear function such that the slopes are increasing towards $w$ and away from $v$, one arrives at the linear equations
-\begin{equation*}
-b+ \frac{2^{n}-1}{3}a=2^{t}
-\end{equation*}
-\begin{equation*}
-3b=a
-\end{equation*}
-where $a$ is the slope on edge copied $\frac{2^{n}-1}{3}$ times, and $b$
-is slope on the edges that aren't copied. Since $t$ is at most $n$ and $t=n$ is the only solution such that $b$ has nonnegative integer value the order of this element must be $2^{n}$. This also implies that the pairing of $D$ with itself is $\frac{3}{2^{n}}$, as the equations have solution $a=3$. This pairing is isomorphic to
-$\DP$ by  \ref{lem:2group_pairing_iso}.
-
-%D pairing n even
-\begin{center}
-\begin{tikzpicture}
-
-\draw (0,0) to (0,2) ;
-\draw (0,0) to (2,0) ;
-\draw (2,0) to (2,2) ;
-\draw (0,2) to (2,2) ;
-\draw (0,2) to [out=-15, in=-165] (2,2) ;
-\draw (0,2) to [out=45, in=135] (2,2) ;
-
-\draw [fill] (1, 2.1) circle [radius=.01] ;
-\draw [fill] (1, 2.2) circle [radius=.01] ;
-\draw [fill] (1, 2.3) circle [radius=.01] ;
-
-\draw (.2,2.25) [out=90, in=-90] to (1,2.7) ;
-\draw (1.8,2.25) [out=90, in=-90] to (1,2.7) ;
-
-\node at (1, 3) {$\frac{2^{n}-1}{3}$} ;
-
-\draw [fill] (0,0) circle [radius=.1] ;
-\draw [fill] (2,2) circle [radius=.1] ;
-\draw [fill] (2,0) circle [radius=.1] ;
-\draw [fill] (0,2) circle [radius=.1] ;
-
-\end{tikzpicture}
-\end{center}
+  Since $\frac{2^r - 1}{3} \equiv -3 \pmod 8$, this is the required
+  pairing.
+  
+  For the multicycle graph, consider a function $f:V(C_S) \to \Z$,
+  defined by $f(v_i) = i$. Let $D = (v_3) - (v_0)$. Once more, we may
+  check that $\Delta(f) = -2^rD$, and hence that
+  $\pair{\overline{D}}{\overline{D}} = \frac{3}{2^r}$, as
+  required.
 \end{proof}
-
-%C_{4}
-\begin{center}
-\begin{tikzpicture}
-
-\draw (0,0) to (0,2) ;
-\draw (0,0) to (2,0) ;
-\draw (2,0) to (2,2) ;
-\draw (0,2) to (2,2) ;
-
-\draw [fill] (0,0) circle [radius=.1] ;
-\draw [fill] (2,2) circle [radius=.1] ;
-\draw [fill] (2,0) circle [radius=.1] ;
-\draw [fill] (0,2) circle [radius=.1] ;
-
-\end{tikzpicture}
-\end{center}
-
-%B_{4}
-\begin{center}
-\begin{tikzpicture}
-
-\draw (0,0) to [out=10, in=170] (2,0) ;
-\draw (0,0) to [out=-10, in=-170] (2,0) ;
-\draw (0,0) to [out=30, in=150] (2,0) ;
-\draw (0,0) to [out=-30, in=-150] (2,0) ;
-
-\draw [fill] (0,0) circle [radius=.1] ;
-\draw [fill] (2,0) circle [radius=.1] ;
-
-\end{tikzpicture}
-\end{center}
-
-\begin{center}
-\begin{tikzpicture}
-
-\draw (0,0) to [out=30, in=150] (2,0) ;
-\draw (0,0) to [out=-30, in=-150] (2,0) ;
-\draw (2,0) to [out=30, in=150] (4,0) ;
-\draw (2,0) to [out=-30, in=-150] (4,0) ;
-
-\draw [fill] (0,0) circle [radius=.1] ;
-\draw [fill] (2,0) circle [radius=.1] ;
-\draw [fill] (4,0) circle [radius=.1] ;
-
-\end{tikzpicture}
-\end{center}
 
 Each of the above constructions gives a graph with cyclic Jacobian,
 giving four of the six generators for 2-groups with pairing. We have
-few concrete results relating to the remaining two
-generators. However, we may still make the following observation:
+few concrete results concerning the remaining two generators. However,
+we still make the following observation:
 
 \begin{thm}
   For any $k \ge 1$, there is no graph $G$ such that $\Jac(G) \simeq
@@ -1663,30 +1553,53 @@ generators. However, we may still make the following observation:
 \begin{proof}
   This is a result of the characterization of graphs $G$ with $\Jac(G)
   \simeq (\Z/2\Z)^k$, given in Remark
-  \ref{remark:2group_characterize}. We see that any such graph has
-  Jacobian isomorphic to $(\AP)^k$.
+  \ref{remark:2group_characterize}. Since the Jacobian of a cycle
+  always gives rise to the group $\mathcal{A}_2$, any such graph has
+  Jacobian $({A}_2)^k$.
 \end{proof}
 
 This result, combined with our failure to find \emph{any} graph $G$
-that yields the group $\EP$, leads us to make the following:
+that yields the group $\EP$, leads us to make the following conjecture:
 
 \begin{conj}
-  There is no graph $G$ such that $\Jac(G) \simeq \EP$.
+  For any $k \ge 1$, there is no graph $G$ such that $\Jac(G) \simeq
+  (\EP)^k$.
 \end{conj}
 
 We note, however, that there do exist examples of graphs $G$ such that
-for some subgroup $H \subset \Jac(G)$, if $\pair{\cdot}{\cdot}\big|_H$ is
-the monodromy pairing on $\Jac(G)$ restricted to $H$, then $(H,
+for some subgroup $H \subset \Jac(G)$, if $\pair{\cdot}{\cdot}\big|_H$
+is the monodromy pairing on $\Jac(G)$ restricted to $H$, then $(H,
 \pair{\cdot}{\cdot}\big|_H) \simeq \EP$. In particular, take $G =
-B_S$, for $S = \{2, 2, 2\}$. 
+B_S$, for $S = \{2, 2, 2\}$. The Jacobian of this graph is $(\Z2\Z)^2
+\times \Z/3\Z$---this can be seen by applying Theorem
+\ref{thm:subdivide}. Inspection shows that the monodromy pairing
+restricted to the $2$-part of $\Jac(G)$ is indeed the pairing on
+$\mathcal{E}_2$.
 
-[PICTURE GOES HERE, POSSIBLY WITH A GOOD CAPTION EXPLAINING WHY THIS
-HAS THE RIGHT PAIRING]
+\begin{figure}[H]
+  \begin{center}
+  \begin{tikzpicture}
+    \draw (0,0) to [out=30, in=150] 
+    coordinate[pos=0.5] (A) (6,0);
+    \draw (0,0) to [out=-30, in=-150] 
+    coordinate[pos=0.5] (B) (6,0);
+    \draw (0,0) to (6,0);
+    
+    \draw [fill] (A) circle (2pt);
+    \draw [fill] (B) circle (2pt);
+    \draw [fill] (0,0) circle (2pt);
+    \draw [fill] (6,0) circle (2pt);
+    \draw [fill] (3,0) circle (2pt);
+    
+  \end{tikzpicture}
+  \end{center}
+  \caption{The graph $B_S$, for $S = \{2,2,2\}$.}
+\end{figure}
 
 We have even fewer results regarding $\FP$. We note that the complete
-graph $K_4$ is an example of a graph with Jacobian isomorphic to
-$\mathcal{F}_4$, but we were unable to find other examples of graphs
-that provide this pairing.
+graph $K_4$ is a graph with Jacobian isomorphic to $\mathcal{F}_4$,
+but we are unable to find other examples of graphs that provide this
+pairing.
 
 \subsection{Simple graphs}
 As in Section 1, some of the constructions given above are only
@@ -1701,7 +1614,7 @@ simple graphs. However, we observe that such groups do in fact exist:
   integer $k$, there is no simple graph $G$ such that
   \begin{align*}
       \Jac(G) \simeq (\Gamma_\mathfrak{r})^k, \text{ or } \\
-      \Jac(G) \simeq (\Gamma_\mathfrak{r})^k \times \Gamma_\mathfrak{n}
+      \Jac(G) \simeq (\Gamma_\mathfrak{r})^k \times \Gamma_\mathfrak{n}.
   \end{align*}
 \end{thm}
 \begin{proof}
