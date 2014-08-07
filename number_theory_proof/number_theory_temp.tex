@@ -1,0 +1,36 @@
+\documentclass{amsart}
+
+\input{../common/BN_common}
+
+\begin{document}
+
+Our approach will rely on quadratic reciprocity, and it will be
+necessary to consider the cases $p \equiv 1 \pmod 4$ and $p \equiv 3
+\pmod 4$ seperately. We will need to further differentiate between the
+cases $r > 1$ and $r = 1$; it is in the latter case that our results
+rely on the assumption of the Generalized Riemann Hypothesis.
+
+For the $p \equiv 1 \pmod 4$ case, we will need the following
+proposition:
+\begin{prop}
+  \label{prop:q_bound}
+  For any prime $p$ and integer $r > 1$, there exist prime quadratic
+  nonresidues $q_1 \equiv 1 \pmod 4, q_2 \equiv 3 \pmod 4$, such that
+  $q_1$ and $q_2$ are both less than $2\sqrt{p}$.
+\end{prop}
+\begin{proof}
+\input{number_theory_proof}
+\end{proof}
+
+GRH gives us an analagous statement for $r=1$:
+\begin{prop}[Conditional on GRH]
+  \label{prop:q_bound_grh}
+  For any prime $p$, there exists a prime quadratic nonresidue $q
+  \equiv 3 \pmod 4$ such that $q < 2\sqrt{p}$.
+\end{prop}
+\begin{proof}
+  Somehow this follows from a result of Oesterle. Again, I don't
+  understand it.
+\end{proof}
+
+\end{document}
